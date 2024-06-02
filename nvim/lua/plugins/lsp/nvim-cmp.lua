@@ -34,6 +34,7 @@ local opts = { -- Autocompletion
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-path',
         'zbirenbaum/copilot-cmp',
+        'kristijanhusak/vim-dadbod-completion',
     },
     config = function()
         -- See `:help cmp`
@@ -102,6 +103,13 @@ local opts = { -- Autocompletion
                 { name = 'copilot',  group_index = 2 },
             },
         }
+
+        cmp.setup.filetype({ "sql" }, {
+            sources = {
+                { name = "vim-dadbod-completion" },
+                { name = "buffer" },
+            },
+        })
     end,
 }
 
