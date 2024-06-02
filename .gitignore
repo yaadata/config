@@ -1,0 +1,12 @@
+jgit/**
+gcloud/**
+github-copilot/**
+gh/**
+**/node_modules/**
+containers/**
+Autodesk/**
+qBittorrent/**
+iterm2/**
+LazyVimOptions
+zed/**
+**/lazy-lock.json
