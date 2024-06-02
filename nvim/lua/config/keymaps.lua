@@ -15,3 +15,8 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- navigating buffers
+vim.keymap.set('n', '<leader>bn', ':bnext', { desc = '[b]uffer [n]ext' })
+vim.keymap.set('n', '<leader>bp', ':bprev', { desc = '[b]uffer [p]revious' })
+vim.keymap.set('n', '<leader>bd', ':bd <enter>', { desc = '[b]uffer close/[d]elete' })
