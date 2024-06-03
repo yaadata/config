@@ -32,6 +32,7 @@ local opts = {
             },
             highlight = {
                 enable = true,
+                additional_vim_regex_highlighting = false,
             },
             indent = { -- This is optional
                 enable = true,
