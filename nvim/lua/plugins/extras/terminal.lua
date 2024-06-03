@@ -5,7 +5,9 @@ local opts = {
         direction = 'float',
     },
     config = function()
-        require('toggleterm').setup {}
+        require('toggleterm').setup({
+            open_mapping = [[<c-\>]],
+        })
         vim.keymap.set('n', '<leader>tt', ':ToggleTerm<enter>', { desc = 'toggle terminal' })
     end
 }
