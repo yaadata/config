@@ -39,14 +39,16 @@ local opts = {
         }
 
         -- Basic debugging keymaps, feel free to change to your liking!
-        vim.keymap.set('n', '<leader><F5>', dap.continue, { desc = 'Debug: Start/Continue' })
-        vim.keymap.set('n', '<leader><F1>', dap.step_into, { desc = 'Debug: Step Into' })
-        vim.keymap.set('n', '<leader><F2>', dap.step_over, { desc = 'Debug: Step Over' })
-        vim.keymap.set('n', '<leader><F3>', dap.step_out, { desc = 'Debug: Step Out' })
-        vim.keymap.set('n', '<C-b><C-t>', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
+        vim.keymap.set('n', '<C-b>c', dap.continue, { desc = 'Debug: Start/Continue' })
+        vim.keymap.set('n', '<C-b>i', dap.step_into, { desc = 'Debug: Step Into' })
+        vim.keymap.set('n', '<C-b><space>', dap.step_over, { desc = 'Debug: Step Over' })
+        vim.keymap.set('n', '<C-b>o', dap.step_out, { desc = 'Debug: Step Out' })
+        vim.keymap.set('n', '<C-b><C-b>', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
         vim.keymap.set('n', '<C-b><C-c>', function()
             dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
         end, { desc = 'Debug: Set Breakpoint' })
+        vim.keymap.set('n', '<leader>tbp', dap.toggle_breakpoint, { desc = '[T]oggle [B]reak[p]' })
+        vim.keymap.set('n', '<leader>tdu', dapui.toggle, { desc = '[T]oggle [D]ap [U]serInterface' })
 
         -- Dap UI setup
         -- For more information, see |:help nvim-dap-ui|
@@ -71,14 +73,18 @@ local opts = {
         }
 
         -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-        vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
+        vim.keymap.set('n', '<C-b>l', dapui.toggle, { desc = 'Debug: See last session result.' })
 
         dap.listeners.after.event_initialized['dapui_config'] = dapui.open
         dap.listeners.before.event_terminated['dapui_config'] = dapui.close
         dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
         -- Install golang specific config
-        require('dap-go').setup()
+        require('dap-go').setup {
+            delve = {
+                build_flags = { '-tags=integration,unit,endtoendtest,smoke' },
+            }
+        }
     end,
 }
 
