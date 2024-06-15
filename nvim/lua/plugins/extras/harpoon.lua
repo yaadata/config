@@ -27,26 +27,34 @@ local opts = {
             }):find()
         end
 
-        vim.keymap.set("n", "<leader>ho", function() toggle_telescope(harpoon:list()) end,
-            { desc = "Open harpoon window" })
-        vim.keymap.set("n", "<leader>hr", function() harpoon:list():remove() end,
-            { desc = "Remove from harpoon" })
-        vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, {
-            desc = "Add to harpoon",
+        vim.keymap.set("n", "<leader>hho", function() toggle_telescope(harpoon:list()) end,
+            { desc = "[H]arpoon open list" })
+        vim.keymap.set("n", "<leader>hhr", function() harpoon:list():remove() end,
+            { desc = "[H]arpoon [R]emove marker" })
+        vim.keymap.set("n", "<leader>hha", function() harpoon:list():add() end, {
+            desc = "[H]arpon [A]dd marker",
         })
-        vim.keymap.set("n", "<leader>hc", function() harpoon:list():clear() end, {
-            desc = "Clear harpoon",
+        vim.keymap.set("n", "<leader>hhc", function() harpoon:list():clear() end, {
+            desc = "[H]arpoon [C]lear all markers",
         })
-        vim.keymap.set("n", "<leader>hp", function() harpoon:list():prev() end, {
-            desc = "Previous harpoon marker",
+        vim.keymap.set("n", "<leader>hhp", function() harpoon:list():prev() end, {
+            desc = "[H]arpoon [P]revious marker",
         })
-        vim.keymap.set("n", "<leader>hn", function() harpoon:list():next() end, {
-            desc = "Next harpoon marker",
+        vim.keymap.set("n", "<leader>hhn", function() harpoon:list():next() end, {
+            desc = "[H]arpoon [N]ext marker",
         })
-        vim.keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end)
-        vim.keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end)
-        vim.keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end)
-        vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end)
+        vim.keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end, {
+            desc = "[H]arpoon go to marker [1]",
+        })
+        vim.keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end, {
+            desc = "[H]arpoon go to marker [2]",
+        })
+        vim.keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end, {
+            desc = "[H]arpoon go to marker [3]",
+        })
+        vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end, {
+            desc = "[H]arpoon go to marker [4]",
+        })
     end
 }
 
