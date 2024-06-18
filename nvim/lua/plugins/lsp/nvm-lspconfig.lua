@@ -124,6 +124,8 @@ local opts = { -- LSP Configuration & Plugins
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+        -- inlay hints for lsp
+        vim.lsp.inlay_hint.enable()
         -- Enable the following language servers
         --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
         --
@@ -139,13 +141,13 @@ local opts = { -- LSP Configuration & Plugins
                 buildFlags = { "-tags=integration,unit,endtoendtest,smoke" }
             },
             -- pyright = {},
-            rust_analyzer = {
-                completion = {
-                    autoimport = {
-                        enable = true,
-                    },
-                },
-            },
+            -- rust_analyzer = {
+            --     completion = {
+            --         autoimport = {
+            --             enable = true,
+            --         },
+            --     },
+            -- },
             -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
             --
             -- Some languages (like typescript) have entire language plugins that can be useful:
