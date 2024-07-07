@@ -8,7 +8,6 @@ local opts = {
         require('toggleterm').setup({
             open_mapping = [[<c-\>]],
         })
-        vim.keymap.set('n', '<leader>tt', ':ToggleTerm<enter>', { desc = 'toggle terminal' })
     end
 }
 
