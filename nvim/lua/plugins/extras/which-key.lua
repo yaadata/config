@@ -11,6 +11,10 @@ local opts = {          -- Useful plugin to show you pending keybinds.
             ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
             ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
             ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+            ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
+            ['<leader>ms'] = { name = '[M]ini [S]urround', _ = 'which_key_ignore' },
+            ['<leader>l'] = { name = 'Git', _ = 'which_key_ignore' },
+            ['<leader>lt'] = { name = 'toggle', _ = 'which_key_ignore' },
         }
     end,
 }
