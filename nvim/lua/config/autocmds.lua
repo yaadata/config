@@ -20,3 +20,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         require("go.format").gofmt()
     end,
 })
+
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+    callback = function()
+        vim.cmd([[Trouble qflist open]])
+    end,
+})

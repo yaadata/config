@@ -17,6 +17,9 @@ local opts = {
                 settings = {
                     gopls = {
                         usePlaceholders = false,
+                        analyses = {
+                            ST1003 = false,
+                        },
                         buildFlags = { '-tags', 'integration,unit,endtoendtest,smoke' },
                     },
                 },

@@ -1,6 +1,12 @@
 local opts = {
     "folke/trouble.nvim",
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    opts = {
+        win = {
+            type = 'float',
+            position = { 0, -2 },
+            size = { width = 0.3, height = 0.3 },
+        },
+    }, -- for default options, refer to the configuration section for custom setup.
     cmd = "Trouble",
     keys = {
         {
@@ -34,4 +40,10 @@ local opts = {
             desc = "Quickfix List (Trouble)",
         },
     },
+    config = function(_, opts)
+        local trouble = require "trouble"
+        trouble.setup(opts)
+    end
 }
+
+return opts
