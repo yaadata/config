@@ -137,9 +137,16 @@ local opts = { -- LSP Configuration & Plugins
         --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
         local servers = {
             -- clangd = {},
-            gopls = {
-                buildFlags = { "-tags=integration,unit,endtoendtest,smoke" }
-            },
+            -- gopls = {
+            --     settings = {
+            --         completeUnimported = true,
+            --         usePlaceholders = true,
+            --         analyses = {
+            --             unusedparams = true,
+            --         },
+            --         buildFlags = { 'integration', 'endtoendtest', 'smoke' },
+            --     }
+            -- },
             -- pyright = {},
             -- rust_analyzer = {
             --     completion = {
@@ -201,6 +208,9 @@ local opts = { -- LSP Configuration & Plugins
                 end,
             },
         }
+
+        local cfg = require 'go.lsp'.config() -- config() return the go.nvim gopls setup
+        require('lspconfig').gopls.setup(cfg)
     end,
 }
 

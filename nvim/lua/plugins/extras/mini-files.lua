@@ -7,7 +7,7 @@ local opts = {
         local minifiles_toggle = function()
             if not MiniFiles.close() then MiniFiles.open() end
         end
-        vim.keymap.set('n', '<leader>tfe', minifiles_toggle, { desc = '[t]oggle [f]ile [e]ditor' })
+        vim.keymap.set('n', '<leader>fe', minifiles_toggle, { desc = 'toggle [f]ile [e]ditor' })
     end
 }
 

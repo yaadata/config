@@ -11,3 +11,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
         vim.highlight.on_yank()
     end,
 })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    group = vim.api.nvim_create_augroup("GoImport", { clear = true }),
+    pattern = "*.go",
+    callback = function()
+        require("go.format").goimport()
+        require("go.format").gofmt()
+    end,
+})

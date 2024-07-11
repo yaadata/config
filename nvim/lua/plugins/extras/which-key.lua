@@ -14,7 +14,8 @@ local opts = {          -- Useful plugin to show you pending keybinds.
             ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
             ['<leader>ms'] = { name = '[M]ini [S]urround', _ = 'which_key_ignore' },
             ['<leader>l'] = { name = 'Git', _ = 'which_key_ignore' },
-            ['<leader>lt'] = { name = 'toggle', _ = 'which_key_ignore' },
+            ['<leader>t'] = { name = 'dap', _ = 'which_key_ignore' },
+            ['<leader>f'] = { name = 'file', _ = 'which_key_ignore' },
         }
     end,
 }

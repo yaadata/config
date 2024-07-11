@@ -7,7 +7,7 @@ local opts = {
     },
     config = function()
         require("nvim-tree").setup {}
-        vim.keymap.set('n', '<leader>tft', ':NvimTreeToggle<enter>', { desc = '[t]oggle [f]ile tree' })
+        vim.keymap.set('n', '<leader>ft', ':NvimTreeToggle<enter>', { desc = 'toggle [f]ile tree' })
     end,
 }
 

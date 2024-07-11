@@ -21,6 +21,7 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
 
         -- Useful for getting pretty icons, but requires a Nerd Font.
         { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+        { "folke/trouble.nvim" }
     },
     config = function()
         -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -41,18 +42,18 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
         -- This opens a window that shows you all of the keymaps for the current
         -- Telescope picker. This is really useful to discover what Telescope can
         -- do as well as how to actually do it!
-
+        --- trouble
+        local trouble_actions = require("trouble.sources.telescope")
         -- [[ Configure Telescope ]]
         -- See `:help telescope` and `:help telescope.setup()`
         require('telescope').setup {
             -- You can put your default mappings / updates / etc. in here
             --  All the info you're looking for is in `:help telescope.setup()`
             --
-            -- defaults = {
-            --   mappings = {
-            --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-            --   },
-            -- },
+            mappings = {
+                i = { ["<c-t>"] = open_with_trouble },
+                n = { ["<c-t>"] = open_with_trouble },
+            },
             -- pickers = {}
             extensions = {
                 ['ui-select'] = {
@@ -75,6 +76,7 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
         vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
         vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
         vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+        vim.keymap.set('n', '<leader>sx', trouble_actions.open, { desc = '[S]earch [O]pen trouble diagnostics' })
         vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
         vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
