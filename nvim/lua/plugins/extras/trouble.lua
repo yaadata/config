@@ -1,6 +1,7 @@
 local opts = {
     "folke/trouble.nvim",
     opts = {
+        auto_preview = false,
         win = {
             type = 'float',
             position = { 0, -2 },
