@@ -6,7 +6,7 @@ local opts = {
         "antoinemadec/FixCursorHold.nvim",
         "nvim-treesitter/nvim-treesitter",
         'mrcjkb/rustaceanvim',
-        "fredrikaverpil/neotest-golang", -- Installation
+        "fredrikaverpil/neotest-golang",
         "nvim-neo-tree/neo-tree.nvim",
         "nvim-neotest/neotest-plenary",
     },
@@ -93,11 +93,21 @@ local opts = {
         },
     },
     config = function()
+        local cfg = {
+            go = {
+                go_test_args = {
+                    "-v",
+                    "-race",
+                    "-count=1",
+                    "-tags=integration,unit,endtoendtest,smoke",
+                },
+            }
+        }
         require('neotest').setup({
             adapters = {
                 require('neotest-plenary'),
                 require('rustaceanvim.neotest'),
-                require('neotest-golang'),
+                require('neotest-golang')(cfg.go),
             },
             state = {
                 enabled = false,
