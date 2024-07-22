@@ -11,7 +11,7 @@ local opts = {
     config = function()
         require("go").setup {
             lsp_inlay_hints = {
-                enable = true,
+                enable = false,
             },
             lsp_cfg = {
                 settings = {

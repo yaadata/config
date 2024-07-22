@@ -14,7 +14,8 @@ local opts = {
         'jay-babu/mason-nvim-dap.nvim',
 
         -- Add your own debuggers here
-        -- 'leoluz/nvim-dap-go',
+        'leoluz/nvim-dap-go',
+        'theHamsta/nvim-dap-virtual-text',
     },
     keys = {
         { "<leader>tdb", function() require("dap").toggle_breakpoint() end,                                    desc = "toggle [d]ebug [b]reakpoint" },
@@ -87,11 +88,11 @@ local opts = {
         dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
         -- Install golang specific config
-        -- require('dap-go').setup {
-        --     delve = {
-        --         build_flags = { '-tags=integration,unit,endtoendtest,smoke' },
-        --     }
-        -- }
+        require('dap-go').setup {
+            delve = {
+                build_flags = { '-tags=integration,unit,endtoendtest,smoke' },
+            }
+        }
     end,
 }
 

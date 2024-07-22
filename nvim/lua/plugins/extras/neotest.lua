@@ -107,7 +107,9 @@ local opts = {
                 "-tags=integration,unit,endtoendtest,smoke",
             },
             dap_go_opts = {
-                build_flags = { "-tags=integration,unit,endtoendtest,smoke" },
+                delve = {
+                    build_flags = { "-tags=integration,unit,endtoendtest,smoke" },
+                }
             },
         }
         opts.adapters['neotest-plenary'] = {}
