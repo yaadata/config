@@ -14,7 +14,26 @@ local opts = {
         'jay-babu/mason-nvim-dap.nvim',
 
         -- Add your own debuggers here
-        'leoluz/nvim-dap-go',
+        -- 'leoluz/nvim-dap-go',
+    },
+    keys = {
+        { "<leader>tdb", function() require("dap").toggle_breakpoint() end,                                    desc = "toggle [d]ebug [b]reakpoint" },
+        { "<leader>tdB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "[d]ebug [B]reakpoint" },
+        { "<leader>tdc", function() require("dap").continue() end,                                             desc = "[d]ebug [c]ontinue (start here)" },
+        { "<leader>tdC", function() require("dap").run_to_cursor() end,                                        desc = "[d]ebug [C]ursor" },
+        { "<leader>tdg", function() require("dap").goto_() end,                                                desc = "[d]ebug [g]o to line" },
+        { "<leader>tdo", function() require("dap").step_over() end,                                            desc = "[d]ebug step [o]ver" },
+        { "<leader>tdO", function() require("dap").step_out() end,                                             desc = "[d]ebug step [O]ut" },
+        { "<leader>tdi", function() require("dap").step_into() end,                                            desc = "[d]ebug [i]nto" },
+        { "<leader>tdj", function() require("dap").down() end,                                                 desc = "[d]ebug [j]ump down" },
+        { "<leader>tdk", function() require("dap").up() end,                                                   desc = "[d]ebug [k]ump up" },
+        { "<leader>tdl", function() require("dap").run_last() end,                                             desc = "[d]ebug [l]ast" },
+        { "<leader>tdp", function() require("dap").pause() end,                                                desc = "[d]ebug [p]ause" },
+        { "<leader>tdr", function() require("dap").repl.toggle() end,                                          desc = "[d]ebug [r]epl" },
+        { "<leader>tdR", function() require("dap").clear_breakpoints() end,                                    desc = "[d]ebug [R]emove breakpoints" },
+        { "<leader>tds", function() require("dap").session() end,                                              desc = "[d]ebug [s]ession" },
+        { "<leader>tdt", function() require("dap").terminate() end,                                            desc = "[d]ebug [t]erminate" },
+        { "<leader>tdw", function() require("dap.ui.widgets").hover() end,                                     desc = "[d]ebug [w]idgets" },
     },
     config = function()
         local dap = require 'dap'
@@ -37,18 +56,6 @@ local opts = {
                 'codelldb',
             },
         }
-
-        -- Basic debugging keymaps, feel free to change to your liking!
-        vim.keymap.set('n', '<C-b>c', dap.continue, { desc = 'Debug: Start/Continue' })
-        vim.keymap.set('n', '<C-b>i', dap.step_into, { desc = 'Debug: Step Into' })
-        vim.keymap.set('n', '<C-b><space>', dap.step_over, { desc = 'Debug: Step Over' })
-        vim.keymap.set('n', '<C-b>o', dap.step_out, { desc = 'Debug: Step Out' })
-        vim.keymap.set('n', '<C-b><C-b>', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
-        vim.keymap.set('n', '<C-b><C-c>', function()
-            dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-        end, { desc = 'Debug: Set Breakpoint' })
-        vim.keymap.set('n', '<leader>tb', dap.toggle_breakpoint, { desc = '[T]oggle Dap [B]reakpoint' })
-        vim.keymap.set('n', '<leader>tD', dapui.toggle, { desc = '[T]oggle [D]ap UserInterface' })
 
         -- Dap UI setup
         -- For more information, see |:help nvim-dap-ui|
@@ -80,11 +87,11 @@ local opts = {
         dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
         -- Install golang specific config
-        require('dap-go').setup {
-            delve = {
-                build_flags = { '-tags=integration,unit,endtoendtest,smoke' },
-            }
-        }
+        -- require('dap-go').setup {
+        --     delve = {
+        --         build_flags = { '-tags=integration,unit,endtoendtest,smoke' },
+        --     }
+        -- }
     end,
 }
 
