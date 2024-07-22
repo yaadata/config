@@ -48,7 +48,7 @@ local opts = {
             dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
         end, { desc = 'Debug: Set Breakpoint' })
         vim.keymap.set('n', '<leader>tb', dap.toggle_breakpoint, { desc = '[T]oggle Dap [B]reakpoint' })
-        vim.keymap.set('n', '<leader>td', dapui.toggle, { desc = '[T]oggle [D]ap UserInterface' })
+        vim.keymap.set('n', '<leader>tD', dapui.toggle, { desc = '[T]oggle [D]ap UserInterface' })
 
         -- Dap UI setup
         -- For more information, see |:help nvim-dap-ui|
