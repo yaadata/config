@@ -19,5 +19,6 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- navigating buffers
 vim.keymap.set('n', '<leader>bn', ':bnext <enter>', { desc = '[b]uffer [n]ext' })
 vim.keymap.set('n', '<leader>bp', ':bprev <enter>', { desc = '[b]uffer [p]revious' })
-vim.keymap.set('n', '<leader>bd', ':bd <enter>', { desc = '[b]uffer close/[d]elete' })
+vim.keymap.set('n', '<leader>bdc', ':bd <enter>', { desc = '[c]urrent buffer' })
 vim.keymap.set('n', '<leader>bu', ':up <enter>', { desc = '[b]uffer [u]pdate' })
+vim.keymap.set('n', '<leader>bda', ':%bd <enter>', { desc = '[a]ll buffers' })
