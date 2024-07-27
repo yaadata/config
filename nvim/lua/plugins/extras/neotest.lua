@@ -103,7 +103,7 @@ local opts = {
             go_test_args = {
                 "-v",
                 "-race",
-                "-count=1",
+                "-count=10",
                 "-tags=integration,unit,endtoendtest,smoke",
             },
             dap_go_opts = {
