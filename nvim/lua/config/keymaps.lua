@@ -17,10 +17,10 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- navigating buffers
-vim.keymap.set('n', '<leader>bgn', ':bnext <enter>', { desc = '[b]uffer [n]ext' })
-vim.keymap.set('n', '<leader>bgp', ':bprev <enter>', { desc = '[b]uffer [p]revious' })
-vim.keymap.set('n', '<leader>bcd', ':bd <enter>', { desc = '[d]elete/close [c]urrent buffer' })
-vim.keymap.set('n', '<leader>bcw', ':w <enter>', { desc = '[w]rite [c]urrent buffer' })
-vim.keymap.set('n', '<leader>bad', ':%bd <enter>', { desc = '[d]elete/clase [a]ll buffers' })
-vim.keymap.set('n', '<leader>bcq', ':q <enter>', { desc = '[q]uit [c]urrent buffer' })
-vim.keymap.set('n', '<leader>baq', ':quitall <enter>', { desc = '[q]uit all [a]ll buffer' })
+vim.keymap.set('n', '<leader>bgn', ':bnext <enter>', { desc = '[n]ext' })
+vim.keymap.set('n', '<leader>bgp', ':bprev <enter>', { desc = '[p]revious' })
+vim.keymap.set('n', '<leader>bcd', ':bd <enter>', { desc = '[d]elete/close' })
+vim.keymap.set('n', '<leader>bcw', ':w <enter>', { desc = '[w]rite' })
+vim.keymap.set('n', '<leader>bad', ':%bd <enter>', { desc = '[d]elete/close' })
+vim.keymap.set('n', '<leader>bcq', ':q <enter>', { desc = '[q]uit' })
+vim.keymap.set('n', '<leader>baq', ':quitall <enter>', { desc = '[q]uit' })
