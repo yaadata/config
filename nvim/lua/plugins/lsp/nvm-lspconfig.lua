@@ -137,16 +137,16 @@ local opts = { -- LSP Configuration & Plugins
         --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
         local servers = {
             -- clangd = {},
-            -- gopls = {
-            --     settings = {
-            --         completeUnimported = true,
-            --         usePlaceholders = true,
-            --         analyses = {
-            --             unusedparams = true,
-            --         },
-            --         buildFlags = { 'integration', 'endtoendtest', 'smoke' },
-            --     }
-            -- },
+            gopls = {
+                settings = {
+                    completeUnimported = true,
+                    usePlaceholders = true,
+                    analyses = {
+                        unusedparams = true,
+                    },
+                    buildFlags = { 'tags=integration,unit,endtoendtest,smoke' },
+                }
+            },
             -- pyright = {},
             -- rust_analyzer = {
             --     completion = {
@@ -193,9 +193,7 @@ local opts = { -- LSP Configuration & Plugins
         local ensure_installed = vim.tbl_keys(servers or {})
         vim.list_extend(ensure_installed, {
             'stylua', -- Used to format Lua code
-            'gopls',
             'codelldb',
-            'delve',
         })
         require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
