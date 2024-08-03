@@ -43,6 +43,9 @@ local opts = { -- Autocompletion
         luasnip.config.setup {}
 
         cmp.setup {
+            experimental = {
+                ghost_text = false,
+            },
             snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
