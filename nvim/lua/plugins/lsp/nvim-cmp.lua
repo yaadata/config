@@ -53,6 +53,25 @@ local opts = { -- Autocompletion
       },
       completion = { completeopt = 'menu,menuone,noinsert' },
 
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          require('copilot_cmp.comparators').prioritize,
+
+          -- Below is the default comparitor list and order for nvim-cmp
+          cmp.config.compare.offset,
+          -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          cmp.config.compare.recently_used,
+          cmp.config.compare.locality,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
+      },
+
       -- For an understanding of why these mappings were
       -- chosen, you will need to read `:help ins-completion`
       --
@@ -100,10 +119,11 @@ local opts = { -- Autocompletion
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
       sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'path' },
-        { name = 'copilot' },
+        { name = 'nvim_lsp', group_index = 2 },
+        { name = 'luasnip', group_index = 2 },
+        { name = 'path', group_index = 2 },
+        { name = 'copilot', group_index = 2 },
+        { name = 'vim-dadbod-completion', group_index = 2 },
       },
     }
 
