@@ -1,44 +1,68 @@
 local opts = {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function()
-        local configs = require("nvim-treesitter.configs")
-        configs.setup({
-            ensure_installed = {
-                "lua",
-                "vim",
-                "vimdoc",
-                "c",
-                "cpp",
-                "make",
-                "cmake",
-                "python",
-                "rust",
-                "go",
-                "gomod",
-                "gosum",
-                "gowork",
-                "ruby",
-                "typescript",
-                "javascript",
-                "json",
-                "html",
-                "css",
-                "scss",
-                "sql",
-                "proto",
-                "thrift",
-                "markdown",
-            },
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-            },
-            indent = { -- This is optional
-                enable = true,
-            },
-        })
-    end
+  'nvim-treesitter/nvim-treesitter',
+  build = ':TSUpdate',
+  config = function()
+    require('nvim-treesitter.configs').setup {
+      -- Add languages to be installed here that you want installed for treesitter
+      ensure_installed = { 'javascript', 'ruby', 'lua', 'rust', 'typescript', 'vimdoc', 'vim', 'go', 'zig', 'kotlin' },
+      auto_install = true,
+      highlight = { enable = true },
+      indent = { enable = true, disable = { 'python' } },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = '<leader>vti',
+          node_incremental = '<leader>vtn',
+          scope_incremental = '<leader>vts',
+          node_decremental = '<leader>vtd',
+        },
+      },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+          keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ['aa'] = '@parameter.outer',
+            ['ia'] = '@parameter.inner',
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
+          },
+        },
+        move = {
+          enable = true,
+          set_jumps = true, -- whether to set jumps in the jumplist
+          goto_next_start = {
+            [']m'] = '@function.outer',
+            [']]'] = '@class.outer',
+          },
+          goto_next_end = {
+            [']M'] = '@function.outer',
+            [']['] = '@class.outer',
+          },
+          goto_previous_start = {
+            ['[m'] = '@function.outer',
+            ['[['] = '@class.outer',
+          },
+          goto_previous_end = {
+            ['[M'] = '@function.outer',
+            ['[]'] = '@class.outer',
+          },
+        },
+        swap = {
+          enable = true,
+          swap_next = {
+            ['<leader>a'] = '@parameter.inner',
+          },
+          swap_previous = {
+            ['<leader>A'] = '@parameter.inner',
+          },
+        },
+      },
+    }
+  end,
 }
 
 return opts
