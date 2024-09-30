@@ -7,13 +7,13 @@ local opts = {
     'nvim-treesitter/nvim-treesitter',
     'mrcjkb/rustaceanvim',
     'nvim-neotest/neotest-python',
-    -- {
-    --     "fredrikaverpil/neotest-golang", -- Installation
-    --     dependencies = {
-    --         "leoluz/nvim-dap-go",
-    --     },
-    --     version = "0.9.1",
-    -- },
+    {
+      'fredrikaverpil/neotest-golang',
+      dependencies = {
+        'leoluz/nvim-dap-go',
+      },
+      version = '1.2.0',
+    },
     'nvim-neo-tree/neo-tree.nvim',
     'nvim-neotest/neotest-plenary',
   },
@@ -101,19 +101,19 @@ local opts = {
   },
   opts = function(_, opts)
     opts.adapters = opts.adapters or {}
-    -- opts.adapters["neotest-golang"] = {
-    --     go_test_args = {
-    --         "-v",
-    --         "-race",
-    --         "-count=1",
-    --         "-tags=integration,unit,endtoendtest,smoke",
-    --     },
-    --     dap_go_opts = {
-    --         delve = {
-    --             build_flags = { "-tags=integration,unit,endtoendtest,smoke" },
-    --         }
-    --     },
-    -- }
+    opts.adapters['neotest-golang'] = {
+      go_test_args = {
+        '-v',
+        '-race',
+        '-count=1',
+        '-tags=integration,unit,endtoendtest,smoke',
+      },
+      dap_go_opts = {
+        delve = {
+          build_flags = { '-tags=integration,unit,endtoendtest,smoke' },
+        },
+      },
+    }
     opts.adapters['neotest-plenary'] = {}
     opts.adapters['rustaceanvim.neotest'] = {}
     opts.adapters['neotest-python'] = {}
