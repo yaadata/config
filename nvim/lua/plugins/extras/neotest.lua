@@ -12,7 +12,7 @@ local opts = {
       dependencies = {
         'leoluz/nvim-dap-go',
       },
-      version = '1.2.0',
+      commit = '595f81f084fafe30735d3901aa75ac4d3cfffda5',
     },
     'nvim-neo-tree/neo-tree.nvim',
     'nvim-neotest/neotest-plenary',
@@ -100,14 +100,31 @@ local opts = {
     },
   },
   opts = function(_, opts)
+    opts.discovery = {
+      -- Drastically improve performance in ginormous projects by
+      -- only AST-parsing the currently opened buffer.
+      enabled = false,
+      -- Number of workers to parse files concurrently.
+      -- A value of 0 automatically assigns number based on CPU.
+      -- Set to 1 if experiencing lag.
+      concurrent = 1,
+    }
+    opts.running = {
+      -- Run tests concurrently when an adapter provides multiple commands to run.
+      concurrent = true,
+    }
+    opts.summary = {
+      -- Enable/disable animation of icons.
+      animated = false,
+    }
     opts.adapters = opts.adapters or {}
     opts.adapters['neotest-golang'] = {
       go_test_args = {
         '-v',
-        '-race',
         '-count=1',
         '-tags=integration,unit,endtoendtest,smoke',
       },
+      go_list_args = { '-tags=integration,unit,endtoendtest,smoke' },
       dap_go_opts = {
         delve = {
           build_flags = { '-tags=integration,unit,endtoendtest,smoke' },
