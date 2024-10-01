@@ -24,3 +24,6 @@ vim.keymap.set('n', '<leader>bcw', ':w <enter>', { desc = '[w]rite' })
 vim.keymap.set('n', '<leader>bad', ':%bd <enter>', { desc = '[d]elete/close' })
 vim.keymap.set('n', '<leader>bcq', ':q <enter>', { desc = '[q]uit' })
 vim.keymap.set('n', '<leader>baq', ':quitall <enter>', { desc = '[q]uit' })
+
+vim.keymap.set('v', '<leader>b64e', "c<c-r>=system('base64',          @\")<cr><esc>", { desc = 'base64 encode' })
+vim.keymap.set('v', '<leader>b64d', "c<c-r>=system('base64 --decode', @\")<cr><esc>", { desc = 'base64 decode' })
