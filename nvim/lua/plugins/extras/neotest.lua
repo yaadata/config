@@ -119,6 +119,7 @@ local opts = {
     }
     opts.adapters = opts.adapters or {}
     opts.adapters['neotest-golang'] = {
+      testify_enabled = true,
       go_test_args = {
         '-v',
         '-count=1',
