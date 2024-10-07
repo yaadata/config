@@ -1,10 +1,10 @@
 local opts = {
-    'mrcjkb/rustaceanvim',
-    version = '^5', -- Recommended
-    lazy = false,   -- This plugin is already lazy
-    dependencies = {
-        'neovim/nvim-lspconfig',
-    }
+  'mrcjkb/rustaceanvim',
+  tag = 'v5.11.0', -- Recommended
+  lazy = false, -- This plugin is already lazy
+  dependencies = {
+    'neovim/nvim-lspconfig',
+  },
 }
 
 -- optional plugin - dots for crate graph
