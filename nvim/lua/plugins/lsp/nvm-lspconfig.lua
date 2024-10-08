@@ -196,7 +196,6 @@ local opts = { -- LSP Configuration & Plugins
       'codelldb',
       'gopls',
       'delve',
-      'rust_analyzer',
       'markdownlint',
       'terraformls',
     })
