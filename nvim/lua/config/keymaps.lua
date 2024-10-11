@@ -17,8 +17,8 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- navigating buffers
-vim.keymap.set('n', '<leader>bgn', ':bnext <enter>', { desc = '[n]ext' })
-vim.keymap.set('n', '<leader>bgp', ':bprev <enter>', { desc = '[p]revious' })
+vim.keymap.set('n', '<leader>bn', ':bnext <enter>', { desc = '[n]ext' })
+vim.keymap.set('n', '<leader>bp', ':bprev <enter>', { desc = '[p]revious' })
 vim.keymap.set('n', '<leader>bcd', ':bd <enter>', { desc = '[d]elete/close' })
 vim.keymap.set('n', '<leader>bcw', ':w <enter>', { desc = '[w]rite' })
 vim.keymap.set('n', '<leader>bad', ':%bd <enter>', { desc = '[d]elete/close' })
