@@ -20,7 +20,6 @@ local opts = { -- Useful plugin to show you pending keybinds.
       ['<leader>f'] = { name = '[F]ile', _ = 'which_key_ignore' },
       ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },
       ['<leader>ba'] = { name = '[a]ll [b]uffers', _ = 'which_key_ignore' },
-      ['<leader>bc'] = { name = '[c]urrent [b]uffer', _ = 'which_key_ignore' },
       ['<leader>v'] = { name = '[v]isual', _ = 'which_key_ignore' },
       ['<leader>vt'] = { name = '[t]reesitter', _ = 'which_key_ignore' },
     }
