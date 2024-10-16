@@ -213,9 +213,6 @@ local opts = { -- LSP Configuration & Plugins
         end,
       },
     }
-
-    local cfg = require('go.lsp').config() -- config() return the go.nvim gopls setup
-    require('lspconfig').gopls.setup(cfg)
   end,
 }
 

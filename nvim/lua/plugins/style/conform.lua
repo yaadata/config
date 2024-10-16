@@ -1,9 +1,10 @@
 local opts = { -- Autoformat
   'stevearc/conform.nvim',
+  tag = 'v6.1.0',
   lazy = false,
   keys = {
     {
-      '<leader>f',
+      '<leader>bf',
       function()
         require('conform').format { async = true, lsp_fallback = true }
       end,
