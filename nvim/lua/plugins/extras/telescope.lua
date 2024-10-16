@@ -60,6 +60,9 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
+        file_browser = {
+          hidden = true,
+        },
       },
     }
 
