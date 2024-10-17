@@ -14,7 +14,16 @@ local opts = {
     'jay-babu/mason-nvim-dap.nvim',
 
     -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
+    {
+      'leoluz/nvim-dap-go',
+      config = function()
+        require('dap-go').setup {
+          delve = {
+            build_flags = { '-tags=unit,integration,endtoendtest,smoke' },
+          },
+        }
+      end,
+    },
     'theHamsta/nvim-dap-virtual-text',
   },
   keys = {

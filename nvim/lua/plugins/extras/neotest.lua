@@ -13,7 +13,7 @@ local opts = {
       dependencies = {
         'leoluz/nvim-dap-go',
       },
-      commit = '595f81f084fafe30735d3901aa75ac4d3cfffda5',
+      tag = 'v1.3.0',
     },
     'nvim-neo-tree/neo-tree.nvim',
     'nvim-neotest/neotest-plenary',
@@ -119,7 +119,7 @@ local opts = {
     }
     opts.adapters = opts.adapters or {}
     opts.adapters['neotest-golang'] = {
-      testify_enabled = true,
+      testify_enabled = false,
       go_test_args = {
         '-v',
         '-count=1',

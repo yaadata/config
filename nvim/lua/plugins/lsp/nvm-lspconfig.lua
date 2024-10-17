@@ -138,6 +138,7 @@ local opts = { -- LSP Configuration & Plugins
     local servers = {
       -- clangd = {},
       gopls = {
+        cmd = { 'gopls', '--remote=auto' },
         settings = {
           completeUnimported = true,
           usePlaceholders = true,
@@ -145,6 +146,9 @@ local opts = { -- LSP Configuration & Plugins
             unusedparams = true,
           },
           buildFlags = { 'tags=integration,unit,endtoendtest,smoke' },
+        },
+        init_options = {
+          buildFlags = { '-tags=integration,unit,endtoendtest,smoke' },
         },
       },
       -- pyright = {},
@@ -213,6 +217,8 @@ local opts = { -- LSP Configuration & Plugins
         end,
       },
     }
+    local cfg = require('go.lsp').config() -- config() return the go.nvim gopls setup
+    require('lspconfig').gopls.setup(cfg)
   end,
 }
 
