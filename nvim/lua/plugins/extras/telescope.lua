@@ -56,6 +56,13 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
       --  All the info you're looking for is in `:help telescope.setup()`
       --
       -- pickers = {}
+      defaults = {
+        mappings = {
+          i = {
+            ['<C-f>'] = require('telescope.actions').to_fuzzy_refine,
+          },
+        },
+      },
       extensions = {
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
