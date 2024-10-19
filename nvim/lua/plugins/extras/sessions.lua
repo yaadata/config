@@ -7,7 +7,7 @@ local opts = {
     { '<leader>wss', '<cmd>SessionSearch<CR>', desc = 'Session search' },
     { '<leader>wsw', '<cmd>SessionSave<CR>', desc = 'Save session' },
     { '<leader>wst', '<cmd>SessionToggleAutoSave<CR>', desc = 'Toggle autosave' },
-    { '<leader>wsd', '<cmd>SessionDelete<CR>', desc = 'Delete session' },
+    { '<leader>wsx', '<cmd>SessionDelete<CR>', desc = 'Delete session' },
   },
 
   ---enables autocomplete for opts

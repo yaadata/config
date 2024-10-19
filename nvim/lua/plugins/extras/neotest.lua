@@ -83,7 +83,7 @@ local opts = {
       desc = 'Toggle Output Panel',
     },
     {
-      '<leader>tt',
+      '<leader>tx',
       function()
         require('neotest').run.stop()
       end,
