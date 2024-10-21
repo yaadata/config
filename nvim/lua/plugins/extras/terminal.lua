@@ -7,7 +7,7 @@ local opts = {
       open_mapping = [[<c-\>]],
     }
 
-    vim.keymap.set('n', '<leader>wt', ':ToggleTerm<enter>', { desc = 'toggle terminal' })
+    vim.keymap.set('n', '<leader>wt', '<cmd>ToggleTerm<CR>', { desc = 'toggle terminal' })
   end,
 }
 

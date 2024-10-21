@@ -17,19 +17,29 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- navigating buffers
-vim.keymap.set('n', '<leader>bn', ':bnext <enter>', { desc = '[n]ext' })
-vim.keymap.set('n', '<leader>bp', ':bprev <enter>', { desc = '[p]revious' })
-vim.keymap.set('n', '<leader>bx', ':bp<bar>sp<bar>bn<bar>bd<CR>', { desc = '[d]elete/close' })
-vim.keymap.set('n', '<leader>bw', ':w <enter>', { desc = '[w]rite' })
-vim.keymap.set('n', '<leader>bad', ':%bd <enter>', { desc = '[d]elete/close' })
-vim.keymap.set('n', '<leader>bq', ':q! <enter>', { desc = '[q]uit' })
-vim.keymap.set('n', '<leader>baq', ':qall! <enter>', { desc = '[q]uit' })
-vim.keymap.set('n', '<leader>btc', ':tabnew <enter>', { desc = 'create' })
-vim.keymap.set('n', '<leader>btx', ':tabc <enter>', { desc = 'close current tab' })
-vim.keymap.set('n', '<leader>btX', ':tabo <enter>', { desc = 'close all other tabs' })
-vim.keymap.set('n', '<leader>btn', ':tabnext <enter>', { desc = 'next' })
-vim.keymap.set('n', '<leader>btp', ':tabprevious <enter>', { desc = 'previous' })
+vim.keymap.set('n', '<leader>bc', '<cmd>new<CR>', { desc = 'create [n]ew' })
+vim.keymap.set('n', '<leader>bd', "<cmd>echo expand('% p')<CR>", { desc = 'view [d]irectory path' })
+vim.keymap.set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = '[n]ext' })
+vim.keymap.set('n', '<leader>bp', '<cmd>bprev<CR>', { desc = '[p]revious' })
+vim.keymap.set('n', '<leader>bx', '<cmd>bp<bar>sp<bar>bn<bar>bd<CR>', { desc = '[d]elete/close' })
+vim.keymap.set('n', '<leader>bw', '<cmd>w<CR>', { desc = '[w]rite' })
+vim.keymap.set('n', '<leader>bad', '<cmd>%bd<CR>', { desc = '[d]elete/close' })
+vim.keymap.set('n', '<leader>bq', '<cmd>q!<CR>', { desc = '[q]uit' })
+vim.keymap.set('n', '<leader>baq', '<cmd>qall!<CR>', { desc = '[q]uit' })
+vim.keymap.set('n', '<leader>btc', '<cmd>tabnew<CR>', { desc = 'create' })
+vim.keymap.set('n', '<leader>btx', '<cmd>tabc<CR>', { desc = 'close current tab' })
+vim.keymap.set('n', '<leader>btX', '<cmd>tabo<CR>', { desc = 'close all other tabs' })
+vim.keymap.set('n', '<leader>btn', '<cmd>tabnext<CR>', { desc = 'next' })
+vim.keymap.set('n', '<leader>btp', '<cmd>tabprevious<CR>', { desc = 'previous' })
 
 vim.keymap.set('v', '<leader>b64e', "c<c-r>=system('base64',          @\")<cr><esc>", { desc = 'base64 encode' })
 vim.keymap.set('v', '<leader>b64d', "c<c-r>=system('base64 --decode', @\")<cr><esc>", { desc = 'base64 decode' })
 vim.keymap.set('v', '<leader>jq', ":%!jq '.' <enter>", { desc = 'pretty json' })
+
+if vim.g.neovide then
+  vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
+  vim.keymap.set('v', '<D-c>', '"+y') -- Copy
+  vim.keymap.set({ 'n', 'v' }, '<D-v>', '"+P') -- Paste normal mode
+  vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+  vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+end
