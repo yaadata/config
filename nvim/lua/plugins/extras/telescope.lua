@@ -59,6 +59,10 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
       defaults = {
         mappings = {
           i = {
+            ['<C-q>'] = function(prompt_bufnr)
+              require('telescope.actions').smart_send_to_qflist(prompt_bufnr)
+              require('telescope.actions').open_qflist(prompt_bufnr)
+            end,
             ['<C-f>'] = require('telescope.actions').to_fuzzy_refine,
           },
         },
