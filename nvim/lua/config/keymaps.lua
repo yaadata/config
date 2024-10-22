@@ -16,6 +16,20 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- window management
+vim.keymap.set('n', '<leader>wmsv', '<C-w>v<CR>', { desc = 'split window vertical' })
+vim.keymap.set('n', '<leader>wmsh', '<C-w>s<CR>', { desc = 'split window horizontal' })
+
+-- quickfix / location list
+vim.keymap.set('n', '<leader>qo', '<cmd>copen<CR>', { desc = '[O]pen quickfix' })
+vim.keymap.set('n', '<leader>qx', '<cmd>cclose<CR>', { desc = '[C]lose quickfix' })
+vim.keymap.set('n', '<leader>qp', '<cmd>cprevious<CR>', { desc = '[P]revious quickfix' })
+vim.keymap.set('n', '<leader>qn', '<cmd>cnext<CR>', { desc = '[N]ext location list' })
+vim.keymap.set('n', '<leader>qlo', '<cmd>lopen<CR>', { desc = '[O]pen location list' })
+vim.keymap.set('n', '<leader>qlx', '<cmd>lclose<CR>', { desc = '[C]lose location list' })
+vim.keymap.set('n', '<leader>qlp', '<cmd>lprevious<CR>', { desc = '[P]revious location list' })
+vim.keymap.set('n', '<leader>qln', '<cmd>lnext<CR>', { desc = '[N]ext location list' })
+
 -- navigating buffers
 vim.keymap.set('n', '<leader>bc', '<cmd>new<CR>', { desc = 'create [n]ew' })
 vim.keymap.set('n', '<leader>bd', "<cmd>echo expand('% p')<CR>", { desc = 'view [d]irectory path' })
