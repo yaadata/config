@@ -5,10 +5,16 @@ local opts = {
     auto_preview = false,
     win = {
       type = 'split',
-      position = 'right',
-      size = { width = 0.4, height = 0.4 },
+      position = 'bottom',
+      size = { width = 0.4, height = 0.25 },
     },
-  }, -- for default options, refer to the configuration section for custom setup.
+    preview = {
+      type = 'split',
+      relative = 'win',
+      position = 'right',
+      size = 0.3,
+    }, -- for default options, refer to the configuration section for custom setup.
+  },
   cmd = 'Trouble',
   keys = {
     {
