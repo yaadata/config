@@ -24,6 +24,20 @@ local opts = {
       mc.skipCursor '*'
     end)
 
+    -- Add or skip adding a new cursor by matching word/selection
+    vim.keymap.set({ 'n', 'v' }, '<leader>smn', function()
+      mc.matchAddCursor(1)
+    end, { desc = 'match multi-cursor by [n]ext match by regex' })
+    vim.keymap.set({ 'n', 'v' }, '<leader>smN', function()
+      mc.matchAddCursor(-1)
+    end, { desc = 'match multi-cursor by previous match by regex' })
+    vim.keymap.set({ 'n', 'v' }, '<leader>sms', function()
+      mc.matchSkipCursor(1)
+    end, { desc = '[s]skip multi-cursor by next match by regex' })
+    vim.keymap.set({ 'n', 'v' }, '<leader>smS', function()
+      mc.matchSkipCursor(-1)
+    end, { desc = '[s]kip multi-cursor by previous match by regex' })
+
     -- Rotate the main cursor.
     vim.keymap.set({ 'n', 'v' }, '<left>', mc.nextCursor)
     vim.keymap.set({ 'n', 'v' }, '<right>', mc.prevCursor)
