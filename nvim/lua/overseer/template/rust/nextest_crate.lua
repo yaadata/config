@@ -8,6 +8,7 @@ local cfg = {
       cmd = { 'cargo', 'nextest', 'run', module_path },
     }
   end,
+  priority = 3,
   condition = {
     filetype = { 'rust' },
   },

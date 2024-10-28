@@ -12,12 +12,17 @@ local cfg = {
       cmd = cmd,
     }
   end,
+  priority = 2,
   condition = {
     filetype = { 'rust' },
     callback = function(_)
       local uts = require 'overseer.template.rust.utils'
       local fn = uts.get_test_name()
-      return fn ~= nil
+      local res = true
+      if fn == nil then
+        res = false
+      end
+      return res
     end,
   },
 }

@@ -1,6 +1,6 @@
 local cfg = {
   name = 'Cargo (Nex)Test File',
-  builder = function(params)
+  builder = function(_)
     local fs = require 'utils.fs'
     local fn = fs.buffer_filename()
     fn = vim.fn.fnamemodify(fn, ':r')
@@ -9,6 +9,7 @@ local cfg = {
       cmd = { 'cargo', 'nextest', 'run', module_path },
     }
   end,
+  priority = 3,
   condition = {
     filetype = { 'rust' },
   },
