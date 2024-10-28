@@ -5,6 +5,7 @@ local opts = {
     require('overseer').setup {
       templates = {
         'rust',
+        'golang',
       },
     }
     local os = require 'overseer'
