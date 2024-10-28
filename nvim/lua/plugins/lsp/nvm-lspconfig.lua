@@ -10,9 +10,8 @@ local opts = { -- LSP Configuration & Plugins
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     {
       'j-hui/fidget.nvim',
-      opts = {},
-      config = function(opts)
-        require('fidget').setup(opts)
+      config = function(_)
+        require('fidget').setup {}
         vim.notify = require('fidget').notify
       end,
     },
