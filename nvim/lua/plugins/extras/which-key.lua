@@ -25,6 +25,7 @@ local opts = { -- Useful plugin to show you pending keybinds.
       ['<leader>ms'] = { name = '[M]ini [S]urround', _ = 'which_key_ignore' },
       ['<leader>l'] = { name = 'Git', _ = 'which_key_ignore' },
       ['<leader>t'] = { name = '[T]est', _ = 'which_key_ignore' },
+      ['<leader>T'] = { name = '[T]ask Manager', _ = 'which_key_ignore' },
       ['<leader>td'] = { name = '[D]ebug test', _ = 'which_key_ignore' },
       ['<leader>f'] = { name = '[F]ile', _ = 'which_key_ignore' },
       ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },

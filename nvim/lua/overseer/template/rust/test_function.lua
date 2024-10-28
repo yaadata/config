@@ -3,9 +3,9 @@ local cfg = {
   builder = function(params)
     local uts = require 'overseer.template.rust.utils'
     local fn = uts.get_test_name()
-    cmd = { 'cargo', 'test', fn }
+    local cmd = { 'cargo', 'test', fn }
     if fn == nil then
-      vim.notify('no test found', 4)
+      vim.notify('no test found', vim.log.levels.WARN)
       cmd = { fn }
     end
     return {

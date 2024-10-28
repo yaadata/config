@@ -1,10 +1,12 @@
 local cfg = {
   name = 'Cargo (Nex)Test File',
   builder = function(params)
-    local uts = require 'utils.rust_utils'
-    local fn = uts.get_test_name()
+    local fs = require 'utils.fs'
+    local fn = fs.buffer_filename()
+    fn = vim.fn.fnamemodify(fn, ':r')
+    local module_path = string.format('%s::', fn)
     return {
-      cmd = { 'cargo', 'nextest', 'run', '--', fn },
+      cmd = { 'cargo', 'nextest', 'run', module_path },
     }
   end,
   condition = {
