@@ -8,7 +8,14 @@ local opts = { -- LSP Configuration & Plugins
 
     -- Useful status updates for LSP.
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-    { 'j-hui/fidget.nvim', opts = {} },
+    {
+      'j-hui/fidget.nvim',
+      opts = {},
+      config = function(opts)
+        require('fidget').setup(opts)
+        vim.notify = require('fidget').notify
+      end,
+    },
 
     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
