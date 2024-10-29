@@ -12,13 +12,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+local format_sync_grp = vim.api.nvim_create_augroup('GoFormat', {})
 vim.api.nvim_create_autocmd('BufWritePre', {
-  group = vim.api.nvim_create_augroup('GoImport', { clear = true }),
   pattern = '*.go',
   callback = function()
-    require('go.format').goimport()
-    require('go.format').gofmt()
+    require('go.format').goimports()
   end,
+  group = format_sync_grp,
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
