@@ -9,23 +9,23 @@ local opts = {
       },
     }
     local os = require 'overseer'
-    vim.keymap.set({ 'n' }, '<leader>Tt', function()
+    vim.keymap.set({ 'n' }, '<leader>pt', function()
       os.toggle {
         enter = false,
         direction = 'left',
       }
-    end, { desc = '[T]oggle Task List' })
-    vim.keymap.set({ 'n' }, '<leader>Ta', '<cmd>OverseerTaskAction<CR>', { desc = '[A]ction on Task' })
-    vim.keymap.set({ 'n' }, '<leader>Tc', '<cmd>OverseerBuild<CR>', { desc = '[C]reate new task' })
-    vim.keymap.set({ 'n' }, '<leader>Ts', '<cmd>OverseerRun<CR>', { desc = '[S]earch and Run' })
-    vim.keymap.set({ 'n' }, '<leader>Tr', function()
+    end, { desc = '[T]oggle Task Runs' })
+    vim.keymap.set({ 'n' }, '<leader>pa', '<cmd>OverseerTaskAction<CR>', { desc = 'Open [A]ctions' })
+    vim.keymap.set({ 'n' }, '<leader>pc', '<cmd>OverseerBuild<CR>', { desc = '[C]reate new task' })
+    vim.keymap.set({ 'n' }, '<leader>po', '<cmd>OverseerRun<CR>', { desc = '[O]pen tasks' })
+    vim.keymap.set({ 'n' }, '<leader>pp', function()
       local tasks = os.list_tasks { recent_first = true }
       if vim.tbl_isempty(tasks) then
         vim.notify('No tasks found', vim.log.levels.WARN)
       else
         os.run_action(tasks[1], 'restart')
       end
-    end, { desc = '[R]erun Recent Task' })
+    end, { desc = 'Run [P]revious Task' })
   end,
 }
 
