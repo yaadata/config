@@ -25,6 +25,8 @@ local opts = {
     end)
 
     -- Add or skip adding a new cursor by matching word/selection
+    vim.keymap.set({ 'n', 'v' }, '<leader>smA', mc.matchAllAddCursors)
+
     vim.keymap.set({ 'n', 'v' }, '<leader>smn', function()
       mc.matchAddCursor(1)
     end, { desc = 'match multi-cursor by [n]ext match by regex' })
