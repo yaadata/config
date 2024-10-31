@@ -1,5 +1,6 @@
 local go_ts = require 'overseer.template.golang.utils.treesitter.helper'
 local utils = require 'utils.utensils'
+
 M = {}
 
 M.get_test_func_name = function()
@@ -28,7 +29,7 @@ M.get_test_func_name = function()
 end
 
 M.get_testfunc = function()
-  local bufnr = get_test_filebufnr()
+  local bufnr = M.get_test_filebufnr()
 
   -- Note: the buffer may not be loaded yet
   local parser = vim.treesitter.get_parser(bufnr, 'go')
@@ -41,7 +42,7 @@ M.get_testfunc = function()
 
   local test_names = {}
 
-  local get_node_text = vim.treesitter.get_node_text
+  -- local get_node_text = vim.treesitter.get_node_text
   for id, node in query:iter_captures(tree:root(), bufnr, 0, -1) do
     local name = vim.treesitter.query.captures[id] -- name of the capture in the query
     if name == 'test_name' then
