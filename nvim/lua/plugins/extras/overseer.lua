@@ -15,6 +15,7 @@ local opts = {
         direction = 'left',
       }
     end, { desc = '[T]oggle Task Runs' })
+    vim.keymap.set({ 'n' }, '<leader>pr', '@:', { desc = '[R]epeat command' })
     vim.keymap.set({ 'n' }, '<leader>pa', '<cmd>OverseerTaskAction<CR>', { desc = 'Open [A]ctions' })
     vim.keymap.set({ 'n' }, '<leader>pc', '<cmd>OverseerBuild<CR>', { desc = '[C]reate new task' })
     vim.keymap.set({ 'n' }, '<leader>po', '<cmd>OverseerRun<CR>', { desc = '[O]pen tasks' })
