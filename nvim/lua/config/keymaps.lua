@@ -45,7 +45,11 @@ vim.keymap.set('n', '<leader>btx', '<cmd>tabc<CR>', { desc = 'close current tab'
 vim.keymap.set('n', '<leader>btX', '<cmd>tabo<CR>', { desc = 'close all other tabs' })
 vim.keymap.set('n', '<leader>btn', '<cmd>tabnext<CR>', { desc = 'next' })
 vim.keymap.set('n', '<leader>btp', '<cmd>tabprevious<CR>', { desc = 'previous' })
-
+-- yanks on buffers
+vim.keymap.set('n', '<leader>byp', '<cmd>let @+ = expand("%")<CR>', { desc = 'Relative [P]ath' })
+vim.keymap.set('n', '<leader>byP', '<cmd>let @+ = expand("%:p")<CR>', { desc = 'Absolute [P]ath' })
+vim.keymap.set('n', '<leader>byn', '<cmd>let @+ = expand("%:t")<CR>', { desc = '[N]ame' })
+-- base64
 vim.keymap.set('v', '<leader>b64e', "c<c-r>=system('base64',          @\")<cr><esc>", { desc = 'base64 encode' })
 vim.keymap.set('v', '<leader>b64d', "c<c-r>=system('base64 --decode', @\")<cr><esc>", { desc = 'base64 decode' })
 vim.keymap.set('v', '<leader>jq', ":%!jq '.' <enter>", { desc = 'pretty json' })

@@ -24,6 +24,7 @@ local opts = {
           },
         },
       },
+      run_in_floaterm = true,
     }
   end,
 }

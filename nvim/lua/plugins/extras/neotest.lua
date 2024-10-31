@@ -13,7 +13,7 @@ local opts = {
       dependencies = {
         'leoluz/nvim-dap-go',
       },
-      tag = 'v1.3.0',
+      tag = 'v1.4.0',
     },
     'nvim-neo-tree/neo-tree.nvim',
     'nvim-neotest/neotest-plenary',
