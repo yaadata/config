@@ -25,8 +25,6 @@ M.get_build_tags = function()
   end
 end
 
-local function get_test_file_bufnr()
-  local fn = vim.fn.expand '%'
-end
+function M.execute_single_function() end
 
 return M
