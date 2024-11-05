@@ -203,12 +203,12 @@ local opts = {
         build_flags = { '-tags=integration,unit,endtoendtest,smoke' },
       },
     }
-    vim.fn.sign_define('DapBreakpoint', {
-      text = '🔴', -- nerdfonts icon here
-      texthl = 'DapBreakpointSymbol',
-      linehl = 'DapBreakpoint',
-      numhl = 'DapBreakpoint',
-    })
+    -- vim.fn.sign_define('DapBreakpoint', {
+    --   text = '🔴', -- nerdfonts icon here
+    --   texthl = 'DapBreakpointSymbol',
+    --   linehl = 'DapBreakpoint',
+    --   numhl = 'DapBreakpoint',
+    -- })
   end,
 }
 
