@@ -19,6 +19,7 @@ local opts = { -- LSP Configuration & Plugins
     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
     { 'folke/neodev.nvim', opts = {} },
+    'rcarriga/nvim-dap-ui',
   },
   config = function()
     -- Brief aside: **What is LSP?**
@@ -205,7 +206,6 @@ local opts = { -- LSP Configuration & Plugins
       'stylua', -- Used to format Lua code
       'codelldb',
       'gopls',
-      'delve',
       'markdownlint',
       'terraformls',
     })
@@ -225,6 +225,10 @@ local opts = { -- LSP Configuration & Plugins
     }
     local cfg = require('go.lsp').config() -- config() return the go.nvim gopls setup
     require('lspconfig').gopls.setup(cfg)
+
+    require('neodev').setup {
+      library = { plugins = { 'nvim-dap-ui' }, types = true },
+    }
   end,
 }
 
