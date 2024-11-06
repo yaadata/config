@@ -10,10 +10,7 @@ local opts = {
     'nvim-neotest/neotest-python',
     {
       'fredrikaverpil/neotest-golang',
-      dependencies = {
-        'leoluz/nvim-dap-go',
-      },
-      tag = 'v1.4.0',
+      tag = 'v1.5.0',
     },
     'nvim-neo-tree/neo-tree.nvim',
     'nvim-neotest/neotest-plenary',

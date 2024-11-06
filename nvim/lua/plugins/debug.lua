@@ -1,13 +1,14 @@
 local opts = {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
+  tag = '0.8.0',
   -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
 
     -- Required dependency for nvim-dap-ui
-    'nvim-neotest/nvim-nio',
+    { 'nvim-neotest/nvim-nio' },
 
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
@@ -24,6 +25,7 @@ local opts = {
         }
       end,
     },
+    { 'folke/neodev.nvim', opts = {} },
     'theHamsta/nvim-dap-virtual-text',
   },
   keys = {
@@ -192,10 +194,18 @@ local opts = {
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     vim.keymap.set('n', '<C-b>l', dapui.toggle, { desc = 'Debug: See last session result.' })
-
-    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    dap.listeners.before.attach.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.launch.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated.dapui_config = function()
+      dapui.close()
+    end
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close()
+    end
 
     -- Install golang specific config
     require('dap-go').setup {
@@ -209,6 +219,9 @@ local opts = {
     --   linehl = 'DapBreakpoint',
     --   numhl = 'DapBreakpoint',
     -- })
+    require('neodev').setup {
+      library = { plugins = { 'nvim-dap-ui' }, types = true },
+    }
   end,
 }
 

@@ -9,11 +9,6 @@ local opts = { -- LSP Configuration & Plugins
     -- Useful status updates for LSP.
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     'rcarriga/nvim-notify',
-
-    -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-    -- used for completion, annotations and signatures of Neovim apis
-    { 'folke/neodev.nvim', opts = {} },
-    'rcarriga/nvim-dap-ui',
   },
   config = function()
     -- Brief aside: **What is LSP?**
