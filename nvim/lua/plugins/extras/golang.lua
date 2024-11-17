@@ -24,6 +24,7 @@ local opts = {
           },
         },
       },
+      lsp_keymaps = false,
       run_in_floaterm = true,
       floaterm = { -- position
         posititon = 'bottom', -- one of {`top`, `bottom`, `left`, `right`, `center`, `auto`}
