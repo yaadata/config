@@ -5,6 +5,7 @@ local opts = {
   lazy = false,
   opts = {
     transparent_background = true,
+    term_colors = true,
     flavour = 'macchiato',
     background = { -- :h background
       light = 'latte',
@@ -17,6 +18,9 @@ local opts = {
     },
   },
   config = function(_, opts)
+    if vim.g.neovide then
+      opts.transparent_background = false
+    end
     require('catppuccin').setup(opts)
     vim.cmd.colorscheme 'catppuccin'
   end,
