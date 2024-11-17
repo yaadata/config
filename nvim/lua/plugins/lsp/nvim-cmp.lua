@@ -52,7 +52,7 @@ local opts = { -- Autocompletion
         end,
       },
       completion = { completeopt = 'menu,menuone,noinsert' },
-
+      preselect = { cmp.PreselectMode.None },
       sorting = {
         priority_weight = 2,
         comparators = {
