@@ -1,7 +1,7 @@
 local opts = {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  tag = '0.8.0',
+  commit = '29d1f8814fa4fcc194ec574de998a42a22ebbe4a',
   -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI

@@ -1,6 +1,7 @@
 local opts = {
   'stevearc/oil.nvim',
   opts = {},
+  version = 'v2.13.0',
   -- Optional dependencies
   dependencies = { 'nvim-tree/nvim-web-devicons', { 'echasnovski/mini.icons', opts = {} } },
   config = function()
