@@ -11,6 +11,7 @@ local opts = {
   },
   config = function()
     require('noice').setup {
+      transparent = true,
       cmdline = {
         format = {
           cmdline = { icon = '>' },

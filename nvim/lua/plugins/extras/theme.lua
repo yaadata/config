@@ -2,12 +2,18 @@ local opts = {
   'catppuccin/nvim',
   name = 'catppuccin',
   priority = 1000,
+  lazy = false,
   opts = {
     transparent_background = true,
     flavour = 'macchiato',
     background = { -- :h background
       light = 'latte',
       dark = 'mocha',
+    },
+    integrations = {
+      notify = true,
+      noice = true,
+      fidget = true,
     },
   },
   config = function(_, opts)
