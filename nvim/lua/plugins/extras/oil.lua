@@ -6,6 +6,11 @@ local opts = {
   config = function()
     local preview_enabled = false
     require('oil').setup {
+      float = {
+        win_options = {
+          winblend = 0,
+        },
+      },
       keymaps = {
         ['gp'] = {
           desc = 'Toggle Preview',
