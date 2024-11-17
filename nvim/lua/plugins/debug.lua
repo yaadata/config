@@ -135,12 +135,20 @@ local opts = {
       desc = '[d]ebug [s]ession',
     },
     {
-      '<leader>tdt',
+      '<leader>tdT',
       function()
         require('dap').terminate()
       end,
       desc = '[d]ebug [t]erminate',
     },
+    {
+      '<leader>tdt',
+      function()
+        require('dapui').toggle { reset = true }
+      end,
+      desc = '[d]ebug [t]oggle ui',
+    },
+
     {
       '<leader>tdw',
       function()
@@ -206,7 +214,9 @@ local opts = {
     dap.listeners.before.event_exited.dapui_config = function()
       dapui.close()
     end
-
+    dap.listeners.before.disconnect.dapui_config = function()
+      dapui.close()
+    end
     -- Install golang specific config
     require('dap-go').setup {
       delve = {
