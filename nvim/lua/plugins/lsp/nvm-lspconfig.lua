@@ -203,11 +203,40 @@ local opts = { -- LSP Configuration & Plugins
     -- for you, so that they are available from within Neovim.
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
-      'stylua', -- Used to format Lua code
+      'bash-language-server',
+      'black',
+      'buf',
       'codelldb',
+      'css-lsp',
+      'debugpy',
+      'delve',
+      'deno',
+      'eslint-lsp',
+      'go-debug-adapter',
+      'goimports',
+      'golangci-lint',
       'gopls',
+      'gotests',
+      'gotestsum',
+      'graphql-language-service-cli',
+      'html-lsp',
+      'lua-language-server',
       'markdownlint',
-      'terraformls',
+      'markdownlint',
+      'protolint',
+      'pydocstyle',
+      'pyright',
+      'ruby-lsp',
+      'sql-formatter',
+      'sqlfmt',
+      'standardjs',
+      'stylua',
+      'svelte-language-server',
+      'terraform-ls',
+      'ts-standard',
+      'typescript-language-server',
+      'vetur-vls',
+      'yaml-language-server',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
