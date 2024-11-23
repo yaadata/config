@@ -122,6 +122,7 @@ local opts = { -- LSP Configuration & Plugins
     --  By default, Neovim doesn't support everything that is in the LSP specification.
     --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
     --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
+    local nvim_lsp = require 'lspconfig'
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
@@ -149,6 +150,13 @@ local opts = { -- LSP Configuration & Plugins
         init_options = {
           buildFlags = { '-tags=integration,unit,endtoendtest,smoke' },
         },
+      },
+      denols = {
+        root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+      },
+      ts_ls = {
+        root_dir = nvim_lsp.util.root_pattern 'package.json',
+        single_file_support = false,
       },
       -- pyright = {},
       -- rust_analyzer = {
@@ -211,12 +219,12 @@ local opts = { -- LSP Configuration & Plugins
           -- by the server configuration above. Useful when disabling
           -- certain features of an LSP (for example, turning off formatting for tsserver)
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
+          nvim_lsp[server_name].setup(server)
         end,
       },
     }
     local cfg = require('go.lsp').config() -- config() return the go.nvim gopls setup
-    require('lspconfig').gopls.setup(cfg)
+    nvim_lsp.gopls.setup(cfg)
 
     require('neodev').setup {
       library = { plugins = { 'nvim-dap-ui' }, types = true },
