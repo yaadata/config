@@ -1,5 +1,6 @@
 local opts = { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
+  tag = 'v1.0.0',
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for Neovim
     'williamboman/mason.nvim',
@@ -154,8 +155,8 @@ local opts = { -- LSP Configuration & Plugins
       denols = {
         root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
       },
-      ts_ls = {
-        root_dir = nvim_lsp.util.root_pattern 'package.json',
+      tsserver = {
+        root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
         single_file_support = false,
       },
       -- pyright = {},
@@ -229,12 +230,9 @@ local opts = { -- LSP Configuration & Plugins
       'ruby-lsp',
       'sql-formatter',
       'sqlfmt',
-      'standardjs',
       'stylua',
-      'svelte-language-server',
       'terraform-ls',
-      'ts-standard',
-      'typescript-language-server',
+      'tsserver',
       'vetur-vls',
       'yaml-language-server',
     })
@@ -243,6 +241,9 @@ local opts = { -- LSP Configuration & Plugins
     require('mason-lspconfig').setup {
       handlers = {
         function(server_name)
+          if server_name == 'tsserver' then
+            server_name = 'ts_ls'
+          end
           local server = servers[server_name] or {}
           -- This handles overriding only values explicitly passed
           -- by the server configuration above. Useful when disabling
@@ -254,7 +255,6 @@ local opts = { -- LSP Configuration & Plugins
     }
     local cfg = require('go.lsp').config() -- config() return the go.nvim gopls setup
     nvim_lsp.gopls.setup(cfg)
-
     require('neodev').setup {
       library = { plugins = { 'nvim-dap-ui' }, types = true },
     }
