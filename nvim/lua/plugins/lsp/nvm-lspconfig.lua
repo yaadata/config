@@ -155,7 +155,7 @@ local opts = { -- LSP Configuration & Plugins
       denols = {
         root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
       },
-      tsserver = {
+      ts_ls = {
         root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
         single_file_support = false,
       },
@@ -227,12 +227,12 @@ local opts = { -- LSP Configuration & Plugins
       'protolint',
       'pydocstyle',
       'pyright',
-      'ruby-lsp',
+      'ruby_lsp',
       'sql-formatter',
       'sqlfmt',
       'stylua',
       'terraform-ls',
-      'tsserver',
+      'ts_ls',
       'vetur-vls',
       'yaml-language-server',
     })
