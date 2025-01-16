@@ -1,6 +1,6 @@
 local opts = { -- Autoformat
   'stevearc/conform.nvim',
-  tag = 'v8.1.0',
+  tag = 'v8.3.0',
   lazy = false,
   keys = {
     {
