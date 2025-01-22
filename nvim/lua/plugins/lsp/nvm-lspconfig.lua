@@ -159,7 +159,18 @@ local opts = { -- LSP Configuration & Plugins
         root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
         single_file_support = false,
       },
-      -- pyright = {},
+      -- html = {
+      --   format = {
+      --     templating = true,
+      --     wrapLineLength = 120,
+      --     wrapAttributes = 'auto',
+      --   },
+      --   hover = {
+      --     documentation = true,
+      --     references = true,
+      --   },
+      -- },
+      -- -- pyright = {},
       -- rust_analyzer = {
       --     completion = {
       --         autoimport = {
@@ -220,7 +231,7 @@ local opts = { -- LSP Configuration & Plugins
       'gotests',
       'gotestsum',
       'graphql-language-service-cli',
-      'html-lsp',
+      -- 'html-lsp',
       'lua-language-server',
       'markdownlint',
       'markdownlint',
