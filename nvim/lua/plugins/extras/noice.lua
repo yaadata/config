@@ -14,7 +14,7 @@ local opts = {
     require('noice').setup {
       transparent = true,
       cmdline = {
-        view = 'split',
+        view = 'cmdline_popup',
         format = {
           cmdline = { icon = '>' },
           search_down = { icon = '🔍⌄' },
