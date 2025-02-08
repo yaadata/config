@@ -5,7 +5,7 @@ local opts = {
   commit = '886ee73b6d464b2b3e3e6a7ff55ce87feac423a9',
   config = function()
     require('copilot').setup {
-      suggestion = { enabled = false },
+      suggestion = { enabled = true },
       panel = { enabled = false },
       filetypes = {
         yaml = true,
@@ -18,7 +18,6 @@ local opts = {
         cpp = true,
       },
     }
-    vim.cmd 'Copilot disable'
   end,
 }
 
