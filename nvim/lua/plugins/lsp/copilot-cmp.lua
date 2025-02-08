@@ -1,8 +1,8 @@
 local opts = {
-  'zbirenbaum/copilot-cmp',
-  after = { 'copilot.lua' },
+  'zbirenbaum/copilot.lua',
+  cmd = { 'Copilot' },
   config = function()
-    require('copilot_cmp').setup()
+    require('copilot').setup {}
   end,
 }
 
