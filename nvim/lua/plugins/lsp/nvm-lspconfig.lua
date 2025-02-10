@@ -1,6 +1,6 @@
 local opts = { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
-  tag = 'v1.0.0',
+  tag = 'v1.6.0',
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for Neovim
     'williamboman/mason.nvim',
