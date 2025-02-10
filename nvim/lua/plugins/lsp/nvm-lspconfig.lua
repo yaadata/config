@@ -153,7 +153,7 @@ local opts = { -- LSP Configuration & Plugins
       denols = {
         root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
       },
-      tsserver = {
+      ts_ls = {
         root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
         single_file_support = false,
       },
@@ -180,9 +180,6 @@ local opts = { -- LSP Configuration & Plugins
       --
       -- Some languages (like typescript) have entire language plugins that can be useful:
       --    https://github.com/pmizio/typescript-tools.nvim
-      --
-      -- But for many setups, the LSP (`tsserver`) will work just fine
-      -- tsserver = {},
       --
       terraformls = {},
       lua_ls = {
@@ -241,7 +238,7 @@ local opts = { -- LSP Configuration & Plugins
       'sqlfmt',
       'stylua',
       'terraform-ls',
-      'tsserver',
+      'ts_ls',
       'vetur-vls',
       'yaml-language-server',
     })
@@ -250,9 +247,6 @@ local opts = { -- LSP Configuration & Plugins
     require('mason-lspconfig').setup {
       handlers = {
         function(server_name)
-          if server_name == 'tsserver' then
-            server_name = 'ts_ls'
-          end
           local server = servers[server_name] or {}
           local capabilities = require('blink.cmp').get_lsp_capabilities()
           -- This handles overriding only values explicitly passed
