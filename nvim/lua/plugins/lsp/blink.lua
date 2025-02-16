@@ -7,7 +7,7 @@ local opts = { -- Autocompletion
     'fang2hou/blink-copilot',
   },
   event = 'VeryLazy',
-  version = 'v0.12.0',
+  version = 'v0.12.2',
   opts = {
     -- 'default' for mappings similar to built-in completion
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -122,6 +122,7 @@ local opts = { -- Autocompletion
         },
       },
     },
+
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
@@ -154,8 +155,13 @@ local opts = { -- Autocompletion
 
     fuzzy = {
       prebuilt_binaries = {
-        force_version = 'v0.11.0',
+        force_version = 'v0.12.2',
       },
+    },
+  },
+  cmdline = {
+    term = {
+      enabled = false,
     },
   },
   -- Experimental signature help support
