@@ -10,7 +10,7 @@ local opts = {
     'nvim-neotest/neotest-python',
     {
       'fredrikaverpil/neotest-golang',
-      tag = 'v1.5.0',
+      tag = 'v1.10.1',
     },
     'nvim-neo-tree/neo-tree.nvim',
     'nvim-neotest/neotest-plenary',
