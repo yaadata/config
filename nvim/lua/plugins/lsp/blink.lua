@@ -7,7 +7,7 @@ local opts = { -- Autocompletion
     'fang2hou/blink-copilot',
   },
   event = 'VeryLazy',
-  version = 'v0.11.0',
+  version = 'v0.12.0',
   opts = {
     -- 'default' for mappings similar to built-in completion
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -150,8 +150,6 @@ local opts = { -- Autocompletion
           },
         },
       },
-      -- Disable cmdline completions
-      cmdline = {},
     },
 
     fuzzy = {
