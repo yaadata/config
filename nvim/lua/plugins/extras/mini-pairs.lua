@@ -1,9 +1,14 @@
 local opts = {
-    'echasnovski/mini.pairs',
-    version = '*',
-    config = function()
-        require('mini.pairs').setup({})
-    end
+  'echasnovski/mini.pairs',
+  version = '*',
+  config = function()
+    require('mini.pairs').setup {
+      mappings = {
+        ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
+        ['>'] = { action = 'close', pair = '<>', neigh_pattern = '[^\\].' },
+      },
+    }
+  end,
 }
 
 return opts
