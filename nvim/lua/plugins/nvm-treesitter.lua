@@ -29,6 +29,8 @@ local opts = {
             ['if'] = '@function.inner',
             ['ac'] = '@class.outer',
             ['ic'] = '@class.inner',
+            ['ar'] = '@assignment.rhs',
+            ['al'] = '@assignment.lhs',
           },
         },
         move = {
@@ -49,6 +51,18 @@ local opts = {
           goto_previous_end = {
             ['[M'] = '@function.outer',
             ['[]'] = '@class.outer',
+          },
+          goto_next = {
+            [']d'] = '@conditional.outer',
+            [']a'] = '@parameter.outer',
+            [']r'] = '@assignment.rhs',
+            [']l'] = '@assignment.lhs',
+          },
+          goto_previous = {
+            ['[d'] = '@conditional.outer',
+            ['[a'] = '@parameter.outer',
+            ['[r'] = '@assignment.rhs',
+            ['[l'] = '@assignment.lhs',
           },
         },
         swap = {
