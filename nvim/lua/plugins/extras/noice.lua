@@ -9,12 +9,12 @@ local opts = {
     --   If not available, we use `mini` as the fallback
     'rcarriga/nvim-notify',
   },
-  version = 'v4.1.0',
+  version = 'v4.10.0',
   config = function()
     require('noice').setup {
       transparent = true,
       cmdline = {
-        view = 'cmdline_popup',
+        view = 'split',
         format = {
           cmdline = { icon = '>' },
           search_down = { icon = '🔍⌄' },
@@ -23,6 +23,14 @@ local opts = {
           lua = { icon = '☾' },
           help = { icon = '?' },
         },
+      },
+      popupmenu = {
+        enabled = true, -- enables the Noice popupmenu UI
+        ---@type 'nui'|'cmp'
+        backend = 'nui', -- backend to use to show regular cmdline completions
+        ---@type NoicePopupmenuItemKind|false
+        -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
+        kind_icons = {}, -- set to `false` to disable icons
       },
       presets = {
         -- bottom_search = true, -- use a classic bottom cmdline for search
