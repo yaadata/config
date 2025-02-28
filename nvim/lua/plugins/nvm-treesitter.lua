@@ -53,13 +53,13 @@ local opts = {
             ['[]'] = '@class.outer',
           },
           goto_next = {
-            [']d'] = '@conditional.outer',
+            [']i'] = '@conditional.outer',
             [']a'] = '@parameter.outer',
             [']r'] = '@assignment.rhs',
             [']l'] = '@assignment.lhs',
           },
           goto_previous = {
-            ['[d'] = '@conditional.outer',
+            ['[i'] = '@conditional.outer',
             ['[a'] = '@parameter.outer',
             ['[r'] = '@assignment.rhs',
             ['[l'] = '@assignment.lhs',
