@@ -90,9 +90,11 @@ vim.bo.spelllang = 'en_us'
 -- folds
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldtext = ''
+vim.o.foldcolumn = '1'
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
+vim.opt.fillchars = [[eob: ,fold: ,foldopen:▾,foldsep: ,foldclose:▸]]
+vim.opt.foldenable = true
 
 -- golang
 vim.g.go_build_tags = 'integration,test,unit,endtoendtest,smoke'
