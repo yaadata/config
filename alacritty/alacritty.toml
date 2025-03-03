@@ -1,0 +1,9 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/catppuccin_macchiato.toml"
+]
+
+[window]
+  option_as_alt="Both"
+  opacity=0.9
+  startup_mode="fullscreen"
