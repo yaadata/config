@@ -87,6 +87,13 @@ vim.bo.softtabstop = 2
 vim.wo.spell = true
 vim.bo.spelllang = 'en_us'
 
+-- folds
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldtext = ''
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+
 -- golang
 vim.g.go_build_tags = 'integration,test,unit,endtoendtest,smoke'
 vim.g.go_gopls_options = { '-remote=auto' }
