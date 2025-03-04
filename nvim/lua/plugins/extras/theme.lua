@@ -4,6 +4,7 @@ local opts = {
   priority = 1000,
   lazy = false,
   opts = {
+    transparent_background = true, -- disables setting the background color.
     term_colors = true,
     flavour = 'macchiato',
     background = { -- :h background
