@@ -1,6 +1,8 @@
+[general]
 import = [
     "~/.config/alacritty/themes/themes/catppuccin_macchiato.toml"
 ]
+live_config_reload = true
 
 [font]
 size = 11.0
@@ -9,4 +11,5 @@ normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 [window]
   option_as_alt="Both"
   opacity=0.9
-  startup_mode="fullscreen"
+  startup_mode="SimpleFullscreen"
+  decorations="transparent"
