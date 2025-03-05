@@ -216,7 +216,6 @@ local opts = { -- LSP Configuration & Plugins
       'codelldb',
       'css-lsp',
       'debugpy',
-      'delve',
       'deno',
       'eslint-lsp',
       'go-debug-adapter',
