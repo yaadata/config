@@ -1,4 +1,3 @@
-[general]
 import = [
     "~/.config/alacritty/themes/themes/catppuccin_macchiato.toml"
 ]
