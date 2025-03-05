@@ -253,6 +253,12 @@ local opts = {
     dap.listeners.before.launch.dapui_config = function()
       dapui.open()
     end
+    dap.listeners.after.event_terminated.dapui_config = function()
+      dapui.close()
+    end
+    dap.listeners.after.event_exited.dapui_config = function()
+      dapui.close()
+    end
     dap.listeners.before.event_terminated.dapui_config = function()
       dapui.close()
     end
@@ -262,6 +268,7 @@ local opts = {
     dap.listeners.before.disconnect.dapui_config = function()
       dapui.close()
     end
+
     -- Install golang specific config
     require('dap-go').setup {
       delve = {
