@@ -7,6 +7,7 @@ local opts = { -- Useful plugin to show you pending keybinds.
     -- Document existing key chains
     require('which-key').register {
       ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+      ['<leader>cc'] = { name = '[C]opilot', _ = 'which_key_ignore' },
       ['<leader>l'] = { name = '[l]sp', _ = 'which_key_ignore' },
       ['<leader>d'] = { name = '[D]iagnostics', _ = 'which_key_ignore' },
       ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },

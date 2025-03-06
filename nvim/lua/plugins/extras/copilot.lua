@@ -3,6 +3,10 @@ local opts = {
   cmd = 'Copilot',
   event = 'InsertEnter',
   commit = '886ee73b6d464b2b3e3e6a7ff55ce87feac423a9',
+  keys = {
+    { 'cco', '<cmd>Copilot enable<CR>', desc = 'Enable Copilot' },
+    { 'ccx', '<cmd>Copilot disable<CR>', desc = 'Disable Copilot' },
+  },
   config = function()
     require('copilot').setup {
       suggestion = { enabled = false },
@@ -16,6 +20,7 @@ local opts = {
         typescript = true,
         c = true,
         cpp = true,
+        lua = true,
       },
     }
   end,
