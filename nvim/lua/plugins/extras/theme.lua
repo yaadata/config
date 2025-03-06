@@ -16,6 +16,11 @@ local opts = {
       noice = true,
       fidget = true,
     },
+    custom_highlights = function(colors)
+      return {
+        WinSeparator = { fg = colors.surface2 },
+      }
+    end,
   },
   config = function(_, opts)
     require('catppuccin').setup(opts)
