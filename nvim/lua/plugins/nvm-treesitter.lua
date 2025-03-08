@@ -68,10 +68,10 @@ local opts = {
         swap = {
           enable = true,
           swap_next = {
-            ['<leader>a'] = '@parameter.inner',
+            ['<leader>va'] = '@parameter.inner',
           },
           swap_previous = {
-            ['<leader>A'] = '@parameter.inner',
+            ['<leader>vA'] = '@parameter.inner',
           },
         },
       },

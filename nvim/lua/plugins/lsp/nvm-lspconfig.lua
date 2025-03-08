@@ -76,7 +76,7 @@ local opts = { -- LSP Configuration & Plugins
 
         -- Fuzzy find all the symbols in your current workspace.
         --  Similar to document symbols, except searches over your entire project.
-        map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+        map('<leader>lw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace symbols')
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
@@ -84,10 +84,10 @@ local opts = { -- LSP Configuration & Plugins
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+        map('<leader>la', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
         -- Inlay hints
-        map('<leader>ci', function()
+        map('<leader>li', function()
           vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         end, '[C]ode [I]nlay Hints')
 
