@@ -10,7 +10,6 @@ local opts = { -- Useful plugin to show you pending keybinds.
       ['<leader>cc'] = { name = '[C]opilot', _ = 'which_key_ignore' },
       ['<leader>l'] = { name = '[l]sp', _ = 'which_key_ignore' },
       ['<leader>d'] = { name = '[D]iagnostics', _ = 'which_key_ignore' },
-      ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
       ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
       ['<leader>n'] = { name = '[N]otification', _ = 'which_key_ignore' },
       ['<leader>sm'] = { name = '[M]ulti-cursor', _ = 'which_key_ignore' },

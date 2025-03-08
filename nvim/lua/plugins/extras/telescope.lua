@@ -109,11 +109,11 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sql', builtin.loclist, { desc = 'View locList' })
     vim.keymap.set('n', '<leader>sch', builtin.command_history, { desc = '[H]istory' })
     vim.keymap.set('n', '<leader>sco', builtin.commands, { desc = '[O]pen' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+    vim.keymap.set('n', '<leader>s<leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
     vim.keymap.set('n', '<leader>sl', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", { desc = '[S]earch by Live Grep' })
 
     -- Slightly advanced example of overriding default behavior and theme
-    vim.keymap.set('n', '<leader>/', function()
+    vim.keymap.set('n', '<leader>sc', function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
         winblend = 0,

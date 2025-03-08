@@ -25,7 +25,7 @@ local opts = {
     end)
 
     -- Add or skip adding a new cursor by matching word/selection
-    vim.keymap.set({ 'n', 'v' }, '<leader>smA', mc.matchAllAddCursors)
+    vim.keymap.set({ 'n', 'v' }, '<leader>smA', mc.matchAllAddCursors, { desc = 'match all and add cursor' })
 
     vim.keymap.set({ 'n', 'v' }, '<leader>smn', function()
       mc.matchAddCursor(1)
@@ -35,7 +35,8 @@ local opts = {
     end, { desc = 'match multi-cursor by previous match by regex' })
     vim.keymap.set({ 'n', 'v' }, '<leader>sms', function()
       mc.matchSkipCursor(1)
-    end, { desc = '[s]skip multi-cursor by next match by regex' })
+    end, { desc = '[s]kip multi-cursor by next match by regex' })
+
     vim.keymap.set({ 'n', 'v' }, '<leader>smS', function()
       mc.matchSkipCursor(-1)
     end, { desc = '[s]kip multi-cursor by previous match by regex' })
@@ -45,7 +46,7 @@ local opts = {
     vim.keymap.set({ 'n', 'v' }, '<right>', mc.prevCursor)
 
     -- Delete the main cursor.
-    vim.keymap.set({ 'n', 'v' }, '<leader>X', mc.deleteCursor)
+    vim.keymap.set({ 'n', 'v' }, '<leader>smX', mc.deleteCursor, { desc = 'delete cursor' })
 
     -- Add and remove cursors with control + left click.
     vim.keymap.set('n', '<c-leftmouse>', mc.handleMouse)
@@ -71,7 +72,7 @@ local opts = {
     end)
 
     -- Align cursor columns.
-    vim.keymap.set('n', '<leader>a', mc.alignCursors)
+    vim.keymap.set('n', '<leader>sma', mc.alignCursors, { desc = '[a]lign cursors' })
 
     -- Split visual selections by regex.
     vim.keymap.set('v', 'S', mc.splitCursors)
