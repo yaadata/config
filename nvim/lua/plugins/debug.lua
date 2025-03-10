@@ -5,7 +5,7 @@ local opts = {
   -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
-    { 'rcarriga/nvim-dap-ui', commit = 'ffa89839f97bad360e78428d5c740fdad9a0ff02' },
+    { 'rcarriga/nvim-dap-ui', commit = 'bc81f8d3440aede116f821114547a476b082b319' },
 
     -- Required dependency for nvim-dap-ui
     { 'nvim-neotest/nvim-nio' },
