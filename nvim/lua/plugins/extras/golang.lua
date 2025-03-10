@@ -34,6 +34,9 @@ local opts = {
         -- e.g {'#D8DEE9', '#5E81AC', '#88C0D0', '#EBCB8B', '#A3BE8C', '#B48EAD'}
       },
       trouble = true, -- true: use trouble to open quickfix
+      icons = false,
+      dap_debug_keymap = false,
+      dap_debug_gui = false,
     }
   end,
 }
