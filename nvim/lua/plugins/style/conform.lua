@@ -29,6 +29,7 @@ local opts = { -- Autoformat
       -- Conform can also run multiple formatters sequentially
       python = { 'black' },
       go = { 'gofmt', 'goimports' },
+      typescript = { 'eslint_d' },
       --
       -- You can use a sub-list to tell conform to run *until* a formatter
       -- is found.

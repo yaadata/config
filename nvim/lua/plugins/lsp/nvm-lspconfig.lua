@@ -154,8 +154,11 @@ local opts = { -- LSP Configuration & Plugins
         root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
       },
       ts_ls = {
-        root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+        root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc', 'tsconfig.json', 'jsconfig.json', 'package.json', '.git'),
         single_file_support = false,
+        on_attach = function(client, bufnr)
+          client.server_capabilities.documentFormattingProvider = false
+        end,
       },
       -- html = {
       --   format = {
@@ -217,7 +220,6 @@ local opts = { -- LSP Configuration & Plugins
       'css-lsp',
       'debugpy',
       'deno',
-      'eslint-lsp',
       'go-debug-adapter',
       'goimports',
       'golangci-lint',
@@ -232,6 +234,7 @@ local opts = { -- LSP Configuration & Plugins
       'protolint',
       'pydocstyle',
       'pyright',
+      'eslint_d',
       'ruby_lsp',
       'sql-formatter',
       'sqlfmt',
