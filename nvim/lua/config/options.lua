@@ -103,5 +103,8 @@ vim.g.go_fmt_autosave = 0
 vim.g.go_imports_autosave = 0
 vim.g.go_gopls_enabled = 0
 
+-- diagnostics
+vim.diagnostic.config { virtual_text = true }
+
 -- neovide
 vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
