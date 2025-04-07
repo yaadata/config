@@ -5,13 +5,13 @@ local opts = {
   opts = {
     -- add any opts here
     -- for example
-    provider = 'gemini',
-    gemini = {
-      endpoint = 'https://generativelanguage.googleapis.com/v1beta/models',
-      model = 'gemini-2.5-pro-preview-03-25',
+    provider = 'claude',
+    claude = {
+      endpoint = 'https://api.anthropic.com',
+      model = 'claude-3-7-sonnet-20250219',
       timeout = 30000, -- Timeout in milliseconds
       temperature = 0,
-      max_tokens = 210000,
+      max_tokens = 94480,
     },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
