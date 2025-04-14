@@ -1,7 +1,7 @@
 local opts = {
   'yetone/avante.nvim',
   event = 'VeryLazy',
-  version = false, -- Never set this value to "*"! Never!
+  commit = 'e295fe82f0714188615a524604bdaccd266ced35', -- Never set this value to "*"! Never!
   opts = {
     -- add any opts here
     -- for example
@@ -11,7 +11,7 @@ local opts = {
       model = 'claude-3-7-sonnet-20250219',
       timeout = 30000, -- Timeout in milliseconds
       temperature = 0,
-      max_tokens = 94480,
+      max_tokens = 64000,
     },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
