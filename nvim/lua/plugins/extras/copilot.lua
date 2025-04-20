@@ -4,8 +4,8 @@ local opts = {
   event = 'InsertEnter',
   commit = '886ee73b6d464b2b3e3e6a7ff55ce87feac423a9',
   keys = {
-    { '<leader>co', '<cmd>Copilot enable<CR>', desc = 'Enable Copilot' },
-    { '<leader>cx', '<cmd>Copilot disable<CR>', desc = 'Disable Copilot' },
+    { '<leader>cco', '<cmd>Copilot enable<CR>', desc = 'Enable Copilot' },
+    { '<leader>ccx', '<cmd>Copilot disable<CR>', desc = 'Disable Copilot' },
   },
   config = function()
     require('copilot').setup {

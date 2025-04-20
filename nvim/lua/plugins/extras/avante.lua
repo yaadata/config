@@ -13,6 +13,36 @@ local opts = {
       temperature = 0,
       max_tokens = 64000,
     },
+    gemini = {
+      endpoint = 'https://generativelanguage.googleapis.com/v1beta/models',
+      model = 'gemini-2.5-pro-preview-03-25',
+      timeout = 30000, -- Timeout in milliseconds
+      temperature = 0,
+      max_tokens = 64000,
+    },
+    mappings = {
+      ask = '<leader>caa',
+      edit = '<leader>cae',
+      refresh = '<leader>car',
+      focus = '<leader>caf',
+      stop = '<leader>caS',
+      toggle = {
+        default = '<leader>cat',
+        debug = '<leader>cad',
+        hint = '<leader>cah',
+        suggestion = '<leader>cas',
+        repomap = '<leader>caR',
+      },
+      files = {
+        add_current = '<leader>cac', -- Add current buffer to selected files
+        add_all_buffers = '<leader>caB', -- Add all buffer files to selected files
+      },
+      select_model = '<leader>ca?', -- Select model command
+      select_history = '<leader>cah', -- Select history command
+    },
+    selector = {
+      provider = 'telescope',
+    },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = 'make',
