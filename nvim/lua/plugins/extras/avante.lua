@@ -20,6 +20,9 @@ local opts = {
       temperature = 0,
       max_tokens = 64000,
     },
+    behaviour = {
+      use_cwd_as_project_root = true,
+    },
     mappings = {
       ask = '<leader>caa',
       edit = '<leader>cae',
