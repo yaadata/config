@@ -11,6 +11,7 @@ normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 [window]
   option_as_alt="Both"
   opacity=0.85
-  startup_mode="Windowed"
+  startup_mode="SimpleFullscreen"
   decorations="None"
   blur=true
+  padding = { x = 5, y = 0 }
