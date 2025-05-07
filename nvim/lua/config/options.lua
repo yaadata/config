@@ -84,8 +84,8 @@ vim.opt.expandtab = true
 vim.bo.softtabstop = 2
 
 -- spelling
-vim.wo.spell = true
-vim.bo.spelllang = 'en_us'
+vim.opt.spell = true
+vim.opt.spelllang = 'en_us'
 
 -- folds
 vim.opt.foldmethod = 'expr'
