@@ -1,7 +1,7 @@
 local opts = {
   'yetone/avante.nvim',
   event = 'VeryLazy',
-  commit = 'eb1cd44731783024621beafe4e46204cbc9a4320', -- Never set this value to "*"! Never!
+  commit = 'daa0624e508e7e61ad80dc1f80fd705a6e141359', -- Never set this value to "*"! Never!
   opts = {
     -- add any opts here
     -- for example
