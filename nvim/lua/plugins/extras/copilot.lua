@@ -22,6 +22,7 @@ local opts = {
         cpp = true,
         lua = true,
       },
+      vim.cmd 'Copilot disable',
     }
   end,
 }
