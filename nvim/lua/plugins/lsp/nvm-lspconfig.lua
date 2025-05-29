@@ -236,6 +236,7 @@ local opts = { -- LSP Configuration & Plugins
       'pyright',
       'eslint_d',
       'ruby_lsp',
+      'starlark-rust',
       'sql-formatter',
       'sqlfmt',
       'stylua',
