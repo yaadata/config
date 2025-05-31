@@ -153,13 +153,6 @@ local opts = { -- LSP Configuration & Plugins
       denols = {
         root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
       },
-      ts_ls = {
-        root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc', 'tsconfig.json', 'jsconfig.json', 'package.json', '.git'),
-        single_file_support = false,
-        on_attach = function(client, bufnr)
-          client.server_capabilities.documentFormattingProvider = false
-        end,
-      },
       -- html = {
       --   format = {
       --     templating = true,
@@ -241,7 +234,6 @@ local opts = { -- LSP Configuration & Plugins
       'sqlfmt',
       'stylua',
       'terraform-ls',
-      'ts_ls',
       'vetur-vls',
       'yaml-language-server',
     })
