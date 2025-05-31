@@ -12,6 +12,7 @@ local opts = {
           winblend = 0,
         },
       },
+      silence_scp_warning = true,
       keymaps = {
         ['gp'] = {
           desc = 'Toggle Preview',

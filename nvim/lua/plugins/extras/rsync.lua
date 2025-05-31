@@ -1,33 +1,54 @@
 local opts = {
-  'coffebar/transfer.nvim',
-  lazy = true,
-  cmd = { 'TransferInit', 'DiffRemote', 'TransferUpload', 'TransferDownload', 'TransferDirDiff', 'TransferRepeat' },
-  opts = {},
+  'OscarCreator/rsync.nvim',
+  build = 'make',
+  event = 'VimEnter',
+  cmd = { 'RsyncUp', 'RsyncUpFile', 'RsyncDown', 'RsyncDownFile', 'RsyncConfig' },
+  dependencies = {
+    { 'nvim-lua/plenary.nvim' },
+  },
+  config = function()
+    require('rsync').setup {}
+  end,
   keys = {
     {
-      '<leader>rd',
-      '<cmd>TransferDownload<cr>',
-      desc = 'Download from remote server (scp)',
+      '<leader>rda',
+      '<cmd>RsyncDown<cr>',
+      desc = 'Download all files',
     },
     {
-      '<leader>rf',
-      '<cmd>DiffRemote<cr>',
-      desc = 'Diff file with remote server (scp)',
+      '<leader>rdf',
+      '<cmd>RsyncDownFile<cr>',
+      desc = 'Download single file',
     },
     {
-      '<leader>ri',
-      '<cmd>TransferInit<cr>',
-      desc = 'Init/Edit Deployment config',
+      '<leader>rua',
+      '<cmd>RsyncUp<cr>',
+      desc = 'Upload all files',
     },
     {
-      '<leader>rtr',
-      '<cmd>TransferRepeat<cr>',
-      desc = 'Repeat transfer command',
+      '<leader>rdf',
+      '<cmd>RsyncUpFile<cr>',
+      desc = 'Upload single file',
     },
     {
-      '<leader>rtu',
-      '<cmd>TransferUpload<cr>',
-      desc = 'Upload to remote server (scp)',
+      '<leader>rcs',
+      '<cmd>RsyncConfig<cr>',
+      desc = 'View Rsync Config Setting',
+    },
+    {
+      '<leader>rcp',
+      '<cmd>RsyncProjectConfig show<cr>',
+      desc = 'View Project Config',
+    },
+    {
+      '<leader>rcr',
+      '<cmd>RsyncProjectConfig reload<cr>',
+      desc = 'Reload Project Config',
+    },
+    {
+      '<leader>rt',
+      '<cmd>RsyncSaveSync<cr>',
+      desc = 'Toggle Sync on Save',
     },
   },
 }
