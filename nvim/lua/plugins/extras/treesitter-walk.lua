@@ -27,16 +27,16 @@ local opts = {
   config = function(_, opts)
     require('treewalker').setup(opts)
     -- movement
-    vim.keymap.set({ 'n', 'v' }, '<M-k>', '<cmd>Treewalker Up<cr>', { silent = true })
-    vim.keymap.set({ 'n', 'v' }, '<M-j>', '<cmd>Treewalker Down<cr>', { silent = true })
-    vim.keymap.set({ 'n', 'v' }, '<M-h>', '<cmd>Treewalker Left<cr>', { silent = true })
-    vim.keymap.set({ 'n', 'v' }, '<M-l>', '<cmd>Treewalker Right<cr>', { silent = true })
+    vim.keymap.set({ 'n', 'v' }, '<A-S-k>', '<cmd>Treewalker Up<cr>', { silent = true })
+    vim.keymap.set({ 'n', 'v' }, '<A-S-j>', '<cmd>Treewalker Down<cr>', { silent = true })
+    vim.keymap.set({ 'n', 'v' }, '<A-S-h>', '<cmd>Treewalker Left<cr>', { silent = true })
+    vim.keymap.set({ 'n', 'v' }, '<A-S-l>', '<cmd>Treewalker Right<cr>', { silent = true })
 
     -- swapping
-    vim.keymap.set({ 'n', 'v' }, '<M-S-k>', '<cmd>Treewalker SwapUp<cr>', { silent = true })
-    vim.keymap.set({ 'n', 'v' }, '<M-S-j>', '<cmd>Treewalker SwapDown<cr>', { silent = true })
-    vim.keymap.set({ 'n', 'v' }, '<M-S-h>', '<cmd>Treewalker SwapLeft<cr>', { silent = true })
-    vim.keymap.set({ 'n', 'v' }, '<M-S-l>', '<cmd>Treewalker SwapRight<cr>', { silent = true })
+    vim.keymap.set({ 'n', 'v' }, '<C-S-k>', '<cmd>Treewalker SwapUp<cr>', { silent = true })
+    vim.keymap.set({ 'n', 'v' }, '<C-S-j>', '<cmd>Treewalker SwapDown<cr>', { silent = true })
+    vim.keymap.set({ 'n', 'v' }, '<C-S-h>', '<cmd>Treewalker SwapLeft<cr>', { silent = true })
+    vim.keymap.set({ 'n', 'v' }, '<C-S-l>', '<cmd>Treewalker SwapRight<cr>', { silent = true })
   end,
 }
 
