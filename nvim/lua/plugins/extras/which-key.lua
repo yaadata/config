@@ -8,7 +8,6 @@ local opts = { -- Useful plugin to show you pending keybinds.
     require('which-key').register {
       ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
       ['<leader>cc'] = { name = '[C]opilot', _ = 'which_key_ignore' },
-      ['<leader>ca'] = { name = '[A]vante', _ = 'which_key_ignore' },
       ['<leader>l'] = { name = '[l]sp', _ = 'which_key_ignore' },
       ['<leader>le'] = { name = '[E]lixir', _ = 'which_key_ignore' },
       ['<leader>d'] = { name = '[D]iagnostics', _ = 'which_key_ignore' },

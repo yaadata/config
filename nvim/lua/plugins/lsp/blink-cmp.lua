@@ -1,15 +1,11 @@
 local opts = {
   'saghen/blink.compat',
+  -- use v2.* for blink.cmp v1.*
+  version = '2.5.0',
+  -- lazy.nvim will automatically load the plugin when it's required by blink.cmp
   lazy = true,
-  version = 'v1.1.1',
+  -- make sure to set opts so that lazy.nvim calls blink.compat's setup
   opts = {},
-  config = function()
-    -- monkeypatch cmp.ConfirmBehavior for Avante
-    require('cmp').ConfirmBehavior = {
-      Insert = 'insert',
-      Replace = 'replace',
-    }
-  end,
 }
 
 return opts
