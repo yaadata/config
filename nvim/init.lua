@@ -25,7 +25,6 @@ require('lazy').setup({
   { import = 'plugins.extras' },
   { import = 'plugins.extras.mini' },
   { import = 'plugins.extras.git' },
-  { import = 'plugins.extras.code_assistance' },
   { import = 'plugins.language' },
   { import = 'plugins.style' },
   { import = 'plugins.lsp' },

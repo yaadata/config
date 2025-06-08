@@ -4,7 +4,6 @@ local opts = { -- Autocompletion
   dependencies = {
     'rafamadriz/friendly-snippets',
     'kristijanhusak/vim-dadbod-completion',
-    'fang2hou/blink-copilot',
   },
   event = 'VeryLazy',
   version = 'v1.2.0',
@@ -132,23 +131,12 @@ local opts = { -- Autocompletion
         'snippets',
         'buffer',
         'dadbod',
-        'copilot',
       },
       providers = {
         dadbod = {
           name = 'Dadbod',
           module = 'vim_dadbod_completion.blink',
           score_offset = 100,
-        },
-        copilot = {
-          name = 'copilot',
-          module = 'blink-copilot',
-          score_offset = 10,
-          async = true,
-          opts = {
-            max_completions = 3,
-            max_attempts = 4,
-          },
         },
       },
     },
