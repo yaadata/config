@@ -110,4 +110,4 @@ vim.g.go_gopls_enabled = 0
 vim.diagnostic.config { virtual_text = true }
 
 -- neovide
-vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
+vim.opt.exrc = true
