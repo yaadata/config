@@ -50,8 +50,8 @@ vim.keymap.set('n', '<leader>byp', '<cmd>let @+ = expand("%")<CR>', { desc = 'Re
 vim.keymap.set('n', '<leader>byP', '<cmd>let @+ = expand("%:p")<CR>', { desc = 'Absolute [P]ath' })
 vim.keymap.set('n', '<leader>byn', '<cmd>let @+ = expand("%:t")<CR>', { desc = '[N]ame' })
 -- base64
-vim.keymap.set('v', '<leader>b64e', "c<c-r>=system('base64',          @\")<cr><esc>", { desc = 'base64 encode' })
-vim.keymap.set('v', '<leader>b64d', "c<c-r>=system('base64 --decode', @\")<cr><esc>", { desc = 'base64 decode' })
+vim.keymap.set('v', '<leader>b6e', "c<c-r>=system('base64',          @\")<cr><esc>", { desc = 'base64 encode' })
+vim.keymap.set('v', '<leader>b6d', "c<c-r>=system('base64 --decode', @\")<cr><esc>", { desc = 'base64 decode' })
 vim.keymap.set('v', '<leader>jq', ":%!jq '.' <enter>", { desc = 'pretty json' })
 
 if vim.g.neovide then

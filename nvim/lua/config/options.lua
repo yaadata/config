@@ -111,3 +111,5 @@ vim.diagnostic.config { virtual_text = true }
 
 -- neovide
 vim.opt.exrc = true
+-- claude
+vim.env.CLAUDE_CONFIG_DIR = vim.fn.expand '~/.config/claude'
