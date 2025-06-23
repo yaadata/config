@@ -50,6 +50,7 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
 
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
+
     require('telescope').setup {
       -- You can put your default mappings / updates / etc. in here
       --  All the info you're looking for is in `:help telescope.setup()`
@@ -69,8 +70,7 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
         mappings = {
           i = {
             ['<C-q>'] = function(prompt_bufnr)
-              require('telescope.actions').smart_send_to_qflist(prompt_bufnr)
-              require('telescope.actions').open_qflist(prompt_bufnr)
+              require('trouble.sources.telescope').open(prompt_bufnr)
             end,
             ['<C-f>'] = require('telescope.actions').to_fuzzy_refine,
           },
