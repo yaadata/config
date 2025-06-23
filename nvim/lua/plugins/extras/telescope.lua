@@ -70,7 +70,9 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
         mappings = {
           i = {
             ['<C-q>'] = function(prompt_bufnr)
-              require('trouble.sources.telescope').open(prompt_bufnr)
+              require('telescope.actions').smart_send_to_qflist(prompt_bufnr)
+              vim.cmd [[Trouble qflist open]]
+              require('trouble').focus()
             end,
             ['<C-f>'] = require('telescope.actions').to_fuzzy_refine,
           },
