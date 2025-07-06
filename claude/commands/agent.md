@@ -24,7 +24,7 @@ Once the pre-requisite information has been shared, follow these steps
 4. Once the hypothesis has been confirmed, provide 2 distinct PLANS for implementing and ask the user which they prefer.
 5. Once a preference is stated, plan and create a task list and store it in `./tasks/agent.md`
 6. For each task in the list, share at least 2 possible solutions for the user to review. Once the user approves of an implementation strategy proceed to the next step
-7. After each task in the list has been visited and an approach has been arrived at, THEN begin implementing the solution. DO NOT start implementing ANY changes until you have reviewed each task in the list with the user.
+7. After each task in the list has been visited and an approach has been arrived at, THEN begin implementing the solution. DO NOT start implementing ANY changes until you have reviewed each task in the list with the user. Each test MUST start off with defined the tests BEFORE the implementation code is written. You MUST write the test code first.
 8. Once the task list is completed, summarize the changes in `./tasks/agent.md`
 9. Create a git commit based on the summary and follow the git commit message standard (for more see: https://www.conventionalcommits.org/en/v1.0.0/)
 
