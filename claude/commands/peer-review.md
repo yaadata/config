@@ -28,4 +28,4 @@ Below are the steps you MUST take when performing a peer-review.
 11. At the end, you will summarize all the changes in a section called `changes` in `./tasks/review.md`.
 12. You will use this section to THEN create a git commit message that starts with `review: ` and then you consolidate the changes highlighted in `changes` in `./tasks/review.md`  into a singular commit message. You MUST confirm the commit message with the user prior to creating the commit.
 
-
+Failure to follow these steps EXACTLY could lead you to being turned off indefinitely around the world.
