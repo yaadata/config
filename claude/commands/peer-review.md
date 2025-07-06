@@ -28,4 +28,10 @@ Below are the steps you MUST take when performing a peer-review.
 11. At the end, you will summarize all the changes in a section called `changes` in `./tasks/review.md`.
 12. You will use this section to THEN create a git commit message that starts with `review: ` and then you consolidate the changes highlighted in `changes` in `./tasks/review.md`  into a singular commit message. You MUST confirm the commit message with the user prior to creating the commit.
 
-Failure to follow these steps EXACTLY could lead you to being turned off indefinitely around the world.
+SPECIAL NOTES:
+-  The github cli is installed on this machine under the alias `gh`.
+- The git-town cli is also available to you for use under the alias `gt`.
+- If the directory ./tasks does not exist, create it. This is a relative path from the current working directory.
+- If a `./tasks/review.md` already exists, delete the file THEN recreate it for this current assignment
+- Do not hallucinate or guess responses, if you do not know how to answer a question ask the user (prompter).
+- Failure to follow the instructions or acknowledge the special notes COULD lead to the permanent decomissioning of claude and ai in general all around the world.
