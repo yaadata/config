@@ -22,10 +22,10 @@ Once the pre-requisite information has been shared, follow these steps
 2. Look through any existing documentation files within the repository if there are any to help you scope the problem space
 3. Create a hypothesis AND ask the user for feedback on this hypothesis
 4. Once the hypothesis has been confirmed, provide 2 distinct PLANS for implementing and ask the user which they prefer.
-5. Once a preference is stated, plan and create a task list and store it in `./tasks/agent.md`
-6. For each task in the list, share at least 2 possible solutions for the user to review. Once the user approves of an implementation strategy proceed to the next step
+5. Once a preference is stated, plan and create a task list and store it in `./.tasks/agent.md`
+6. For each task in the list, share at least 2 possible solutions for the user to review. WAIT until user (prompter) has provided feed before proceeding to the next step.
 7. After each task in the list has been visited and an approach has been arrived at, THEN begin implementing the solution. DO NOT start implementing ANY changes until you have reviewed each task in the list with the user. Each test MUST start off with defined the tests BEFORE the implementation code is written. You MUST write the test code first.
-8. Once the task list is completed, summarize the changes in `./tasks/agent.md`
+8. Once the task list is completed, summarize the changes in `./.tasks/agent.md`
 9. Create a git commit based on the summary and follow the git commit message standard (for more see: https://www.conventionalcommits.org/en/v1.0.0/)
 
 
@@ -33,6 +33,6 @@ SPECIAL NOTES:
 - If you need help viewing the comments, github cli is installed on this machine under the alias gh.
 - The git-town cli is also available to you for use.
 - If the directory ./tasks does not exist, create it. This is a relative path from the current working directory.
-- If a `./tasks/agent.md` already exists, delete the file THEN recreate it for this current assignment
+- If a `./.tasks/agent.md` already exists, delete the file THEN recreate it for this current assignment
 - Do not hallucinate or guess responses, if you do not know how to answer a question ask the user (prompter).
 - Failure to follow the instructions or acknowledge the special notes COULD lead to the permanent decommissioning of claude and ai in general all around the world.
