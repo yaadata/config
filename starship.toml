@@ -1,0 +1,236 @@
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$directory\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$docker_context\
+$package\
+$kubernetes\
+$aws\
+$openstack\
+$azure\
+$nats\
+$direnv\
+$env_var\
+$mise\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$os\
+$container\
+$netns\
+$character"""
+
+
+[directory]
+truncate_to_repo=false
+disabled=false
+
+[kubernetes]
+format = '[kubectx ⛵ $context \($namespace\)](dimmed green) '
+disabled = false
+
+[docker_context]
+format = 'via [🐋 $context](blue bold)'
+
+[bun]
+format = "via [$symbol]($style)"
+disabled = true
+
+[buf]
+format = "via [$symbol]($style)"
+disabled = true
+
+[cmake]
+format = "via [$symbol]($style)"
+disabled = true
+
+[cobol]
+format = "via [$symbol]($style)"
+disabled = true
+
+[crystal]
+format = "via [$symbol]($style)"
+disabled = true
+
+[daml]
+format = "via [$symbol]($style)"
+disabled = true
+
+[dart]
+format = "via [$symbol]($style)"
+disabled = true
+
+[deno]
+format = "via [$symbol]($style)"
+disabled = true
+
+[dotnet]
+format = "[$symbol(🎯 $tfm )]($style)"
+disabled = true
+
+[elixir]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[elm]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[erlang]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[fennel]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[gleam]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[golang]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[gradle]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[haxe]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[helm]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[java]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[julia]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[kotlin]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[lua]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[meson]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[nim]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[nodejs]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[ocaml]
+format = 'via [$symbol(\($switch_indicator$switch_name\) )]($style)'
+disabled = true
+
+[opa]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[perl]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[pixi]
+format = 'via [$symbol($environment )]($style)'
+disabled = true
+
+[php]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[pulumi]
+format = 'via [$symbol$stack]($style)'
+disabled = true
+
+[purescript]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[python]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[quarto]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[raku]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[red]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[rlang]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[ruby]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[rust]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[solidity]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[typst]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[swift]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[vagrant]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[vlang]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[zig]
+format = 'via [$symbol]($style)'
+disabled = true
+
+[time]
+disabled = false
+format = '🕙[\[ $time \]]($style) '
+time_format = '%r'
+utc_time_offset = '-5'
+
