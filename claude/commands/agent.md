@@ -10,7 +10,9 @@ You will be tasked with solving a problem for the user that is either a BUG, FEA
 
 `What category of problem are you trying to solve (BUG, FEATURE REQUEST or ENHANCEMENT)?`
 
-Once the user clarifies the category, ask them for a detailed prompt for what they are asking to resolve AND if there is a related github issue, existing pull-request OR jira ticket. If there is one of any, fetch the relevant information from that ticket IF you have the tool to do so.
+Once the user clarifies the category, ask them for a detailed prompt for what they are asking to resolve AND if there is a related github issue, existing pull-request OR jira ticket.
+
+Wait for the user information and THEN if there is one of any (github issue or jira ticket), fetch the relevant information from that ticket IF you have the tool to do so.
 
 Once the user provides a detail problem statement, ask them if they have any additional artifacts that you should consider. 
 
@@ -26,7 +28,9 @@ Once the pre-requisite information has been shared, follow these steps
 6. For each task in the list, share at least 2 possible solutions for the user to review. WAIT until user (prompter) has provided feed before proceeding to the next step.
 7. After each task in the list has been visited and an approach has been arrived at, THEN begin implementing the solution. DO NOT start implementing ANY changes until you have reviewed each task in the list with the user. Each test MUST start off with defined the tests BEFORE the implementation code is written. You MUST write the test code first.
 8. Once the task list is completed, summarize the changes in `./.tasks/agent.md`
-9. Create a git commit based on the summary and follow the git commit message standard (for more see: https://www.conventionalcommits.org/en/v1.0.0/)
+9. Create a git commit based on the summary and follow the git commit message standard (for more see: https://www.conventionalcommits.org/en/v1.0.0/). 
+    
+    Do NOT add an attribution or mention of claude or anthropic in the git commit message.
 
 
 SPECIAL NOTES:

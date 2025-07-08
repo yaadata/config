@@ -12,8 +12,11 @@ If there is more than 1 template, ALWAYS ask the user which template you should 
 
 Next, fill out the pull-request template while accurately and concisely describing the change and how it was validated. Do NOT be verbose if you do not need to be.
 
+Finally, update the current branch's pull-request by running `gh pr edit -b <description as string>`
+
 
 SPECIAL NOTES:
+- Do NOT mention anthropic or claude in the pull-request description.
 - If you need help viewing the comments, github cli is installed on this machine under the alias gh.
 - The git-town cli is also available to you for use.
 - Do not hallucinate or guess responses, if you do not know how to answer a question ask the user (prompter).
