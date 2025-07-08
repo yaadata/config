@@ -50,6 +50,8 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
 
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
+    local actions = require 'telescope.actions'
+    local open_with_trouble = require('trouble.sources.telescope').open -- Use this to add more results without clearing the trouble listlocal add_to_trouble = require("trouble.sources.telescope").addlocal telescope = require("telescope")
 
     require('telescope').setup {
       -- You can put your default mappings / updates / etc. in here
@@ -69,11 +71,7 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
       defaults = {
         mappings = {
           i = {
-            ['<C-q>'] = function(prompt_bufnr)
-              require('telescope.actions').smart_send_to_qflist(prompt_bufnr)
-              vim.cmd [[Trouble qflist open]]
-              require('trouble').focus()
-            end,
+            ['<C-q>'] = open_with_trouble,
             ['<C-f>'] = require('telescope.actions').to_fuzzy_refine,
           },
         },
