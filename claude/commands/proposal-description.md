@@ -16,6 +16,8 @@ Finally, update the current branch's pull-request by running `gh pr edit -b <des
 
 
 SPECIAL NOTES:
+
+- Use accessible language at all times. Use concise language and DO NOT use superlatives.
 - Do NOT mention anthropic or claude in the pull-request description.
 - If you need help viewing the comments, github cli is installed on this machine under the alias gh.
 - The git-town cli is also available to you for use.

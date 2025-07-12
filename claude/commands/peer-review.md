@@ -26,9 +26,12 @@ Below are the steps you MUST take when performing a peer-review.
 9. For each todo suggestion, you will ALWAYS consider at least 2 possible and clearly distinct approaches to address the comment
 10. If the todo comment is valid and the suggested change is approved you will apply the changes
 11. At the end, you will summarize all the changes in a section called `changes` in `./.tasks/review.md`.
-12. You will use this section to THEN create a git commit message that starts with `review: ` and then you consolidate the changes highlighted in `changes` in `./.tasks/review.md`  into a singular commit message. You MUST confirm the commit message with the user prior to creating the commit. The commit message CANNOT have attribution or mention of claude or anthropic.
+12. You will use this section to THEN create a git commit message that starts with `review: ` and then you consolidate the changes highlighted in `changes` in `./.tasks/review.md`  into a singular commit message. You MUST confirm the commit message with the user prior to creating the commit. 
 
 SPECIAL NOTES:
+
+- Use accessible language at all times. Use concise language and DO NOT use superlatives.
+- The git commit message CANNOT have attribution or mention of claude or anthropic anywhere.
 -  The github cli is installed on this machine under the alias `gh`.
 - The git-town cli is also available to you for use under the alias `gt`.
 - If the directory `./.tasks` does not exist, create it. This is a relative path from the current working directory.
