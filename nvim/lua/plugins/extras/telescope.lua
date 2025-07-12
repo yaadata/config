@@ -51,7 +51,9 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
     local actions = require 'telescope.actions'
-    local open_with_trouble = require('trouble.sources.telescope').open -- Use this to add more results without clearing the trouble listlocal add_to_trouble = require("trouble.sources.telescope").addlocal telescope = require("telescope")
+    -- local open_with_trouble = require('trouble.sources.telescope').open -- Use this to add more results without clearing the trouble list
+    -- local add_to_trouble = require('trouble.sources.telescope').add
+    local telescope = require 'telescope'
 
     require('telescope').setup {
       -- You can put your default mappings / updates / etc. in here
@@ -71,8 +73,8 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
       defaults = {
         mappings = {
           i = {
-            ['<C-q>'] = open_with_trouble,
-            ['<C-f>'] = require('telescope.actions').to_fuzzy_refine,
+            ['<C-q>'] = actions.smart_send_to_qflist,
+            ['<C-f>'] = actions.to_fuzzy_refine,
           },
         },
       },
@@ -87,9 +89,10 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
     }
 
     -- Enable Telescope extensions if they are installed
-    pcall(require('telescope').load_extension, 'fzf')
-    pcall(require('telescope').load_extension, 'ui-select')
-    pcall(require('telescope').load_extension, 'live_grep_args')
+    pcall(telescope.load_extension, 'fzf')
+    pcall(telescope.load_extension, 'ui-select')
+    pcall(telescope.load_extension, 'live_grep_args')
+    pcall(telescope.load_extension, 'fidget')
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'

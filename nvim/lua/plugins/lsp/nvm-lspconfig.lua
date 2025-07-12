@@ -1,15 +1,11 @@
 local opts = { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
-  tag = 'v1.6.0',
+  tag = 'v2.3.0',
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for Neovim
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-    -- Useful status updates for LSP.
-    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-    'rcarriga/nvim-notify',
   },
   config = function()
     -- Brief aside: **What is LSP?**
@@ -41,6 +37,8 @@ local opts = { -- LSP Configuration & Plugins
     --    That is to say, every time a new file is opened that is associated with
     --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
     --    function will be executed to configure the current buffer
+
+    local builtin = require 'telescope.builtin'
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
@@ -56,27 +54,39 @@ local opts = { -- LSP Configuration & Plugins
         -- Jump to the definition of the word under your cursor.
         --  This is where a variable was first declared, or where a function is defined, etc.
         --  To jump back, press <C-t>.
-        map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+        map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 
         -- Find references for the word under your cursor.
-        map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+        map('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
-        map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+        map('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
 
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
         --  the definition of its *type*, not where it was *defined*.
-        map('<leader>ld', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+        map('<leader>ld', vim.lsp.buf.type_definition, 'Type [D]efinition')
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
-        map('<leader>ls', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+        map('<leader>ls', vim.lsp.buf.document_symbol, '[D]ocument [S]ymbols')
 
         -- Fuzzy find all the symbols in your current workspace.
         --  Similar to document symbols, except searches over your entire project.
-        map('<leader>lw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace symbols')
+        map('<leader>lws', vim.lsp.buf.workspace_symbol, '[W]orkspace symbols')
+
+        -- Add folder to workspace folders list
+        map('<leader>lwa', vim.lsp.buf.add_workspace_folder, '[A]dd [W]orkspace Folder')
+
+        -- Add folder to workspace folders list
+        map('<leader>lwr', vim.lsp.buf.remove_workspace_folder, '[R]emove [W]orkspace Folder')
+
+        -- List workspace folders
+        map('<leader>lwl', vim.lsp.buf.list_workspace_folders, '[L]ist [W]orkspace folders')
+
+        -- format buffer
+        map('<leader>lf', vim.lsp.buf.format, '[F]ormat')
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
@@ -252,8 +262,6 @@ local opts = { -- LSP Configuration & Plugins
         end,
       },
     }
-    local cfg = require('go.lsp').config() -- config() return the go.nvim gopls setup
-    nvim_lsp.gopls.setup(cfg)
     require('neodev').setup {
       library = { plugins = { 'nvim-dap-ui' }, types = true },
     }
