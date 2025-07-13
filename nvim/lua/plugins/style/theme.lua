@@ -22,6 +22,8 @@ local opts = {
         WinSeparator = { fg = colors.surface2 },
         LineNr = { fg = colors.overlay1 },
         CursorLineNr = { fg = colors.flamingo },
+        Visual = { bg = colors.overlay1, style = { 'bold' } }, -- Visual mode selection
+        VisualNOS = { bg = colors.overlay1, style = { 'bold' } },
       }
     end,
   },
