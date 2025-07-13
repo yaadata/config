@@ -11,6 +11,7 @@ local opts = {
       light = 'latte',
       dark = 'mocha',
     },
+
     integrations = {
       notify = true,
       noice = true,
@@ -19,6 +20,8 @@ local opts = {
     custom_highlights = function(colors)
       return {
         WinSeparator = { fg = colors.surface2 },
+        LineNr = { fg = colors.overlay1 },
+        CursorLineNr = { fg = colors.flamingo },
       }
     end,
   },
