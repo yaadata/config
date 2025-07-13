@@ -257,6 +257,7 @@ local opts = { -- LSP Configuration & Plugins
       'terraform-ls',
       'vetur-vls',
       'yaml-language-server',
+      'zls',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
