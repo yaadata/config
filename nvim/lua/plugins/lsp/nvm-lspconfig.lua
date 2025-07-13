@@ -6,6 +6,7 @@ local opts = { -- LSP Configuration & Plugins
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+    { 'jmacadie/telescope-hierarchy.nvim', commit = '2ba4840d8ba9288ca85dc34b01cf946aee0b8fca' },
   },
   config = function()
     -- Brief aside: **What is LSP?**
@@ -37,7 +38,6 @@ local opts = { -- LSP Configuration & Plugins
     --    That is to say, every time a new file is opened that is associated with
     --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
     --    function will be executed to configure the current buffer
-
     local builtin = require 'telescope.builtin'
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -51,17 +51,25 @@ local opts = { -- LSP Configuration & Plugins
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
+        local function on_list(options)
+          vim.fn.setqflist({}, ' ', options)
+          builtin.quickfix()
+        end
         -- Jump to the definition of the word under your cursor.
         --  This is where a variable was first declared, or where a function is defined, etc.
         --  To jump back, press <C-t>.
         map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 
         -- Find references for the word under your cursor.
-        map('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
+        map('gr', function()
+          vim.lsp.buf.references(nil, { on_list = on_list })
+        end, '[G]oto [R]eferences')
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
-        map('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+        map('gI', function()
+          vim.lsp.buf.implementation { on_list = on_list }
+        end, '[G]oto [I]mplementation')
 
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
@@ -79,8 +87,11 @@ local opts = { -- LSP Configuration & Plugins
         -- Add folder to workspace folders list
         map('<leader>lwa', vim.lsp.buf.add_workspace_folder, '[A]dd [W]orkspace Folder')
 
-        -- Add folder to workspace folders list
+        -- Remove folder to workspace folders list
         map('<leader>lwr', vim.lsp.buf.remove_workspace_folder, '[R]emove [W]orkspace Folder')
+
+        map('<leader>lhi', '<cmd>Telescope hierarchy incoming_calls<cr>', '[I]ncoming Calls')
+        map('<leader>lho', '<cmd>Telescope hierarchy outgoing_calls<cr>', '[O]utgoing Calls')
 
         -- List workspace folders
         map('<leader>lwl', vim.lsp.buf.list_workspace_folders, '[L]ist [W]orkspace folders')
