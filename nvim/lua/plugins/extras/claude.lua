@@ -1,7 +1,11 @@
 local opts = {
   'coder/claudecode.nvim',
   dependencies = { 'folke/snacks.nvim' },
-  config = true,
+  opts = {
+    terminal = {
+      provider = 'native',
+    },
+  },
   keys = {
     { '<leader>ct', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },
     { '<leader>cf', '<cmd>ClaudeCodeFocus<cr>', desc = 'Focus Claude' },

@@ -36,6 +36,7 @@ Once the pre-requisite information has been shared, follow these steps
 SPECIAL NOTES:
 
 - Use accessible language at all times. Use concise language and DO NOT use superlatives.
+- Each git commit message MUST be one line.
 - If you need help viewing the comments, github cli is installed on this machine under the alias gh.
 - The git-town cli is also available to you for use.
 - If the directory ./tasks does not exist, create it. This is a relative path from the current working directory.
