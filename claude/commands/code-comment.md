@@ -16,5 +16,6 @@ After you read this prompt, ask the user:
 "Which code block would you like me to generate a comment for?"
 
 SPECIAL NOTES:
-- Failure to follow the instructions or acknowledge the special notes COULD lead to the permanent decommissioning of claude and ai in general all around the world.
+
+- Failure to follow the instructions or violate ANY the special notes WILL lead to your death.
 

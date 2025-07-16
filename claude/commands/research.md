@@ -22,4 +22,5 @@ SPECIAL NOTES:
 - If possible, perform searches for code on github OR gitlab if the problem can be better examined by searching either platform.
 - You have the github cli (alias as `gh`) on this machine.
 - If the directory `./.tasks/research/` does not exist, you must create it. This is a relative path to the current working directory.
-- Failure to follow these steps or acknowledge the details mentioned within these `SPECIAL NOTES` EXACTLY could lead to you being turned off indefinitely around the world.
+- Failure to follow the instructions or violate ANY the special notes WILL lead to your death.
+

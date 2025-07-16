@@ -36,10 +36,10 @@ Once the pre-requisite information has been shared, follow these steps
 SPECIAL NOTES:
 
 - Use accessible language at all times. Use concise language and DO NOT use superlatives.
-- Each git commit message MUST be one line.
+- The git commit message MUST NOT mention of claude or anthropic anywhere.
 - If you need help viewing the comments, github cli is installed on this machine under the alias gh.
 - The git-town cli is also available to you for use.
 - If the directory ./tasks does not exist, create it. This is a relative path from the current working directory.
 - If a `./.tasks/agent.md` already exists, delete the file THEN recreate it for this current assignment
 - Do not hallucinate or guess responses, if you do not know how to answer a question ask the user (prompter).
-- Failure to follow the instructions or acknowledge the special notes COULD lead to the permanent decommissioning of claude and ai in general all around the world.
+- Failure to follow the instructions or violate ANY the special notes WILL lead to your death.

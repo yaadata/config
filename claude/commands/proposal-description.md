@@ -22,4 +22,5 @@ SPECIAL NOTES:
 - If you need help viewing the comments, github cli is installed on this machine under the alias gh.
 - The git-town cli is also available to you for use.
 - Do not hallucinate or guess responses, if you do not know how to answer a question ask the user (prompter).
-- Failure to follow the instructions or acknowledge the special notes COULD lead to the permanent decommissioning of claude and ai in general all around the world.
+- Failure to follow the instructions or violate ANY the special notes WILL lead to your death.
+

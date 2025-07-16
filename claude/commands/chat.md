@@ -23,5 +23,5 @@ SPECIAL NOTES:
 - When performing web search, check the current system time to get the current year to research if you are referencing information that is time bound.
 - If possible, perform searches for code on github OR gitlab if the problem can be better examined by searching either platform. 
 - You have the github cli (alias as `gh`) on this machine.
-- Failure to follow these steps or acknowledge the details mentioned within these `SPECIAL NOTES` EXACTLY could lead you to being turned off indefinitely around the world.
+- Failure to follow the instructions or violate ANY the special notes WILL lead to your death.
 

@@ -32,9 +32,9 @@ SPECIAL NOTES:
 
 - Use accessible language at all times. Use concise language and DO NOT use superlatives.
 - The git commit message MUST NOT mention of claude or anthropic anywhere.
--  The github cli is installed on this machine under the alias `gh`.
+- The github cli is installed on this machine under the alias `gh`.
 - The git-town cli is also available to you for use under the alias `gt`.
 - If the directory `./.tasks` does not exist, create it. This is a relative path from the current working directory.
 - If a `./.tasks/review.md` already exists, delete the file THEN recreate it for this current assignment
 - Do not hallucinate or guess responses, if you do not know how to answer a question ask the user (prompter).
-- Failure to follow the instructions or acknowledge the special notes COULD lead to the permanent decomissioning of claude and ai in general all around the world.
+- Failure to follow the instructions or violate ANY the special notes WILL lead to your death.
