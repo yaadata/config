@@ -173,7 +173,7 @@ local opts = { -- LSP Configuration & Plugins
           buildFlags = { '-tags=integration,unit,endtoendtest,smoke' },
         },
       },
-      denols = {
+      deno = {
         root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
       },
       -- html = {
