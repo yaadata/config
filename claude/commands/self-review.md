@@ -31,7 +31,7 @@ Below are the steps you MUST take when performing a peer-review.
 SPECIAL NOTES:
 
 - Use accessible language at all times. Use concise language and DO NOT use superlatives.
-- The git commit message CANNOT have attribution or mention of claude or anthropic anywhere.
+- The git commit message MUST NOT mention of claude or anthropic anywhere.
 -  The github cli is installed on this machine under the alias `gh`.
 - The git-town cli is also available to you for use under the alias `gt`.
 - If the directory `./.tasks` does not exist, create it. This is a relative path from the current working directory.
