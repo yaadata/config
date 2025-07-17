@@ -8,6 +8,11 @@ keybinds {
         bind "Ctrl g" { SwitchToMode "Normal"; }
 
         unbind "Alt h" "Alt l" "Alt j" "Alt k"
+        
+        bind "Ctrl l" { MovePane "Left" }
+        bind "Ctrl h" { MovePane "Right" }
+        bind "Ctrl j" { MovePane "Up" }
+        bind "Ctrl k" { MovePane "Down" }
     }
     resize {
         bind "Ctrl n" { SwitchToMode "Normal"; }
