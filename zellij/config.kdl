@@ -9,10 +9,10 @@ keybinds {
 
         unbind "Alt h" "Alt l" "Alt j" "Alt k"
         
-        bind "Ctrl l" { MovePane "Left" }
-        bind "Ctrl h" { MovePane "Right" }
-        bind "Ctrl j" { MovePane "Up" }
-        bind "Ctrl k" { MovePane "Down" }
+        bind "Ctrl L" { MoveFocus "Right"; }
+        bind "Ctrl H" { MoveFocus "Left"; }
+        bind "Ctrl J" { MoveFocus "Down"; }
+        bind "Ctrl K" { MoveFocus "Up"; }
     }
     resize {
         bind "Ctrl n" { SwitchToMode "Normal"; }
