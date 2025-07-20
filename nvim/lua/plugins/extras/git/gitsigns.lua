@@ -3,7 +3,6 @@ local opts = {
   opts = {
     on_attach = function(bufnr)
       local gitsigns = require 'gitsigns'
-
       local function map(mode, l, r, opts)
         opts = opts or {}
         opts.buffer = bufnr
@@ -49,6 +48,10 @@ local opts = {
       map('n', '<leader>gD', function()
         gitsigns.diffthis '@'
       end, { desc = 'git [D]iff against last commit' })
+
+      map('n', '<leader>gq', function()
+        gitsigns.setqflist 'all'
+      end, { desc = 'show all hunks in [Q]uickfix list' })
       -- Toggles
       map('n', '<leader>gtb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
       map('n', '<leader>gtD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
