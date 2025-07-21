@@ -3,8 +3,8 @@ local opts = { -- LSP Configuration & Plugins
   tag = 'v2.3.0',
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for Neovim
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
+    { 'mason-org/mason.nvim', tag = 'v1.11.0' },
+    { 'mason-org/mason-lspconfig.nvim', tag = 'v1.32.0' },
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'jmacadie/telescope-hierarchy.nvim', commit = '2ba4840d8ba9288ca85dc34b01cf946aee0b8fca' },
   },
@@ -173,8 +173,13 @@ local opts = { -- LSP Configuration & Plugins
           buildFlags = { '-tags=integration,unit,endtoendtest,smoke' },
         },
       },
-      deno = {
+      denols = {
         root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+        root_markers = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+      },
+      ts_ls = {
+        root_dir = nvim_lsp.util.root_pattern 'package.json',
+        single_file_support = false,
       },
       -- html = {
       --   format = {
@@ -259,6 +264,7 @@ local opts = { -- LSP Configuration & Plugins
       'terraform-ls',
       'vetur-vls',
       'yaml-language-server',
+      'typescript-language-server',
       'zls',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
