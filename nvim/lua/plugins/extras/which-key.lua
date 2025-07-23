@@ -43,7 +43,7 @@ local opts = { -- Useful plugin to show you pending keybinds.
       ['<leader>b6'] = { name = '[B]ase64', _ = 'which_key_ignore', mode = { 'n', 'v' } },
       ['<leader>ba'] = { name = '[a]ll [b]uffers', _ = 'which_key_ignore' },
       ['<leader>by'] = { name = '[y]ank', _ = 'which_key_ignore' },
-      ['<leader>v'] = { name = '[v]isual', _ = 'which_key_ignore', mode = { 'n', 'v' } },
+      ['<leader>v'] = { name = '[v]isual motions', _ = 'which_key_ignore', mode = { 'n', 'v' } },
       ['<leader>vt'] = { name = '[t]reesitter', _ = 'which_key_ignore' },
     }
   end,
