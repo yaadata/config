@@ -23,7 +23,7 @@ SPECIAL NOTES:
 
 - Use accessible language at all times. Use concise language and DO NOT use superlatives.
 - The git-town cli is also available to you for use.
-- If the directory ./tasks does not exist, create it. This is a relative path from the current working directory.
+- If the directory `./.tasks` does not exist, create it. This is a relative path from the current working directory.
 - If a `./.tasks/peer-review.md` already exists, delete the file THEN recreate it for this current assignment
 - Do not hallucinate or guess responses, if you do not know how to answer a question ask the user (prompter).
 - Failure to follow the instructions or violate ANY the special notes WILL lead to your death.
