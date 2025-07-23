@@ -22,7 +22,7 @@ vim.keymap.set('n', '<leader>wmsh', '<C-w>s<CR>', { desc = 'split window horizon
 
 -- quickfix / location list
 vim.keymap.set('n', '<leader>qo', '<cmd>copen<CR>', { desc = '[O]pen quickfix' })
-vim.keymap.set('n', '<leader>qx', '<cmd>cclose<CR>', { desc = '[C]lose quickfix' })
+vim.keymap.set('n', '<leader>qq', '<cmd>cclose<CR>', { desc = '[C]lose quickfix' })
 vim.keymap.set('n', '<leader>qp', '<cmd>cprevious<CR>', { desc = '[P]revious quickfix' })
 vim.keymap.set('n', '<leader>qn', '<cmd>cnext<CR>', { desc = '[N]ext location list' })
 vim.keymap.set('n', '<leader>qlo', '<cmd>lopen<CR>', { desc = '[O]pen location list' })
