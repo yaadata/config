@@ -7,9 +7,9 @@ local opts = {
     local elixirls = require 'elixir.elixirls'
 
     elixir.setup {
-      nextls = { enable = true },
+      nextls = { enable = false },
       elixirls = {
-        tag = 'v0.24.0',
+        tag = 'v0.28.0',
         enable = true,
         settings = elixirls.settings {
           dialyzerEnabled = false,
