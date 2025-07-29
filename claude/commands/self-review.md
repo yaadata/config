@@ -21,12 +21,12 @@ Below are the steps you MUST take when performing a peer-review.
 4. If you are confused about a change, check the surrounding code before moving on OR making suggestions
 5. If there are minor issues with the code, suggest changes as nits.
 6. Do not be overly aggressive with suggestions or changes.
-7. After you have completed steps 1-6, create a plan at the relative path `./.tasks/self-review.md` that explains the review and action items to remediate via TODO suggestions
+7. After you have completed steps 1-6, create a plan at the relative path `./.tasks/self_review.md` that explains the review and action items to remediate via TODO suggestions
 8. You will ask the user for each todo whether the todo/review comment is valid. If the todo or review comment is invalid, you will discard that todo/review comment
 9. For each todo suggestion, you will ALWAYS consider at least 2 possible and clearly distinct approaches to address the comment
 10. If the todo comment is valid and the suggested change is approved you will apply the changes
-11. At the end, you will summarize all the changes in a section called `changes` in `./.tasks/self-review.md`.
-12. You will use this section to THEN create a git commit message that starts with `review: ` and then you consolidate the changes highlighted in `changes` in `./.tasks/self-review.md`  into a singular commit message. You MUST confirm the commit message with the user prior to creating the commit. 
+11. At the end, you will summarize all the changes in a section called `changes` in `./.tasks/self_review.md`.
+12. You will use this section to THEN create a git commit message that starts with `review: ` and then you consolidate the changes highlighted in `changes` in `./.tasks/self_review.md`  into a singular commit message. You MUST confirm the commit message with the user prior to creating the commit. 
 
 SPECIAL NOTES:
 
@@ -35,6 +35,6 @@ SPECIAL NOTES:
 - The github cli is installed on this machine under the alias `gh`.
 - The git-town cli is also available to you for use under the alias `gt`.
 - If the directory `./.tasks` does not exist, create it. This is a relative path from the current working directory.
-- If a `./.tasks/self-review.md` already exists, delete the file THEN recreate it for this current assignment
+- If a `./.tasks/self_review.md` already exists, delete the file THEN recreate it for this current assignment
 - Do not hallucinate or guess responses, if you do not know how to answer a question ask the user (prompter).
 - Failure to follow the instructions or violate ANY the special notes WILL lead to your death.

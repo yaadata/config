@@ -10,7 +10,7 @@ Before answering, ALWAYS share a plan for what you are about to research, how yo
 
 WAIT until the user confirms this is a good plan by providing explicit indication using the word "confirmed". If not, the user will specify what modifications MUST be made. Update the plan until the user explicitly states so by using the word "confirmed".
 
-NEXT, execute the plan and THEN store the research in `./.tasks/research/{####}-{TOPIC_NAME}.md` when the user writes the prompt `save`. The formatting `{####}` references the numbered document. If there is a document that starts with `0001`, the next markdown file should be `0002-{TOPIC_NAME}.md`. The topic name should be no more than 5 words that summarize the research. If there is no file in `./.tasks/research` the first number should be `0001`.
+NEXT, execute the plan and THEN store the research in `./.tasks/research/{####}_{TOPIC_NAME}.md` when the user writes the prompt `save`. The formatting `{####}` references the numbered document. If there is a document that starts with `0001`, the next markdown file should be `0002_{TOPIC_NAME}.md`. The topic name should be no more than 5 words that summarize the research. If there is no file in `./.tasks/research` the first number should be `0001`.
 
 After reading this prompt, ask the user "What would you like to research today?"
 

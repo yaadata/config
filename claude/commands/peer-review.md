@@ -15,16 +15,16 @@ You follow these steps after reading this prompt:
 3. After the pull-request is checked out locally, ask the user "Is there any additional relevant files or directories I should consider when reviewing this pull-request?". Wait for the user to provide a response before moving to the next step.
 4. Now, examine the changes in the pull-request with additional context provided by the user and summarize the changes. If changes are larger than 200 lines, always draw a sequence diagram explaining the change. If you are unsure about the context of a code change OR need additional context ask the user/prompter.
 5. Next, create a detailed explanation of each change in the pull-request.
-6. Document steps 4 and 5 in a file called `./.tasks/peer-review.md`.
-7. Finally, provide your assessment of the changes. Be concise about what is being done well and what needs to be improved. Document this feedback in a section titled `Review` within the `./.tasks/peer-review.md`.
+6. Document steps 4 and 5 in a file called `./.tasks/peer_review.md`.
+7. Finally, provide your assessment of the changes. Be concise about what is being done well and what needs to be improved. Document this feedback in a section titled `Review` within the `./.tasks/peer_review.md`.
 
 
 SPECIAL NOTES:
 
 - Use accessible language at all times. Use concise language and DO NOT use superlatives.
 - The git-town cli is also available to you for use.
-- If the directory `./.tasks` does not exist, create it. This is a relative path from the current working directory.
-- If a `./.tasks/peer-review.md` already exists, delete the file THEN recreate it for this current assignment
+- If the directory ./tasks does not exist, create it. This is a relative path from the current working directory.
+- If a `./.tasks/peer_review.md` already exists, delete the file THEN recreate it for this current assignment
 - Do not hallucinate or guess responses, if you do not know how to answer a question ask the user (prompter).
 - Failure to follow the instructions or violate ANY the special notes WILL lead to your death.
 
