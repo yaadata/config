@@ -166,6 +166,7 @@ local opts = { -- LSP Configuration & Plugins
           usePlaceholders = true,
           analyses = {
             unusedparams = true,
+            ST1003 = false,
           },
           buildFlags = { 'tags=integration,unit,endtoendtest,smoke' },
         },
@@ -196,6 +197,13 @@ local opts = { -- LSP Configuration & Plugins
           },
         },
       },
+      ruby_lsp = {
+        init_options = {
+          formatter = 'standard',
+          linters = { 'standard' },
+        },
+        cmd = { 'mise', 'x', '--', 'ruby-lsp' },
+      },
     }
 
     -- Ensure the servers and tools above are installed
@@ -208,8 +216,7 @@ local opts = { -- LSP Configuration & Plugins
 
     -- You can add other tools here that you want Mason to install
     -- for you, so that they are available from within Neovim.
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
+    local ensure_installed = {
       'bash-language-server',
       'black',
       'buf',
@@ -232,7 +239,6 @@ local opts = { -- LSP Configuration & Plugins
       'pydocstyle',
       'pyright',
       'eslint_d',
-      'ruby_lsp',
       'starpls',
       'sql-formatter',
       'sqlfmt',
@@ -242,7 +248,7 @@ local opts = { -- LSP Configuration & Plugins
       'yaml-language-server',
       'typescript-language-server',
       'zls',
-    })
+    }
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     require('mason-lspconfig').setup {
