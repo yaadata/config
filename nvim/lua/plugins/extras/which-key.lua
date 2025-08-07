@@ -40,6 +40,7 @@ local opts = { -- Useful plugin to show you pending keybinds.
       ['<leader>td'] = { name = '[D]ebug test', _ = 'which_key_ignore' },
       ['<leader>f'] = { name = '[F]ile', _ = 'which_key_ignore', mode = { 'n', 'v' } },
       ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore', mode = { 'n', 'v' } },
+      ['<leader>bo'] = { name = '[O]rder [B]uffer', _ = 'which_key_ignore', mode = { 'n', 'v' } },
       ['<leader>b6'] = { name = '[B]ase64', _ = 'which_key_ignore', mode = { 'n', 'v' } },
       ['<leader>ba'] = { name = '[a]ll [b]uffers', _ = 'which_key_ignore' },
       ['<leader>by'] = { name = '[y]ank', _ = 'which_key_ignore' },

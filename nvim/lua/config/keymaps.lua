@@ -31,20 +31,10 @@ vim.keymap.set('n', '<leader>qlp', '<cmd>lprevious<CR>', { desc = '[P]revious lo
 vim.keymap.set('n', '<leader>qln', '<cmd>lnext<CR>', { desc = '[N]ext location list' })
 
 -- navigating buffers
-vim.keymap.set('n', '<leader>bc', '<cmd>new<CR>', { desc = 'create [n]ew' })
+vim.keymap.set('n', '<leader>bt', '<cmd>:tabnew<CR>', { desc = 'new [t]ab' })
 vim.keymap.set('n', '<leader>bd', "<cmd>echo expand('% p')<CR>", { desc = 'view [d]irectory path' })
-vim.keymap.set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = '[n]ext' })
-vim.keymap.set('n', '<leader>bp', '<cmd>bprev<CR>', { desc = '[p]revious' })
-vim.keymap.set('n', '<leader>bd', '<cmd>bp<bar>sp<bar>bn<bar>bd<CR>', { desc = '[d]elete/close' })
 vim.keymap.set('n', '<leader>bw', '<cmd>w<CR>', { desc = '[w]rite' })
-vim.keymap.set('n', '<leader>bad', '<cmd>%bd<CR>', { desc = '[d]elete/close' })
-vim.keymap.set('n', '<leader>bQ', '<cmd>q!<CR>', { desc = '[q]uit' })
-vim.keymap.set('n', '<leader>baQ', '<cmd>qall!<CR>', { desc = '[q]uit' })
-vim.keymap.set('n', '<leader>btc', '<cmd>tabnew<CR>', { desc = 'create' })
-vim.keymap.set('n', '<leader>btx', '<cmd>tabc<CR>', { desc = 'close current tab' })
-vim.keymap.set('n', '<leader>btX', '<cmd>tabo<CR>', { desc = 'close all other tabs' })
-vim.keymap.set('n', '<leader>btn', '<cmd>tabnext<CR>', { desc = 'next' })
-vim.keymap.set('n', '<leader>btp', '<cmd>tabprevious<CR>', { desc = 'previous' })
+vim.keymap.set('n', '<leader>bQ', '<cmd>q<CR>', { desc = '[q]uit current' })
 -- yanks on buffers
 vim.keymap.set('n', '<leader>byp', '<cmd>let @+ = expand("%")<CR>', { desc = 'Relative [P]ath' })
 vim.keymap.set('n', '<leader>byP', '<cmd>let @+ = expand("%:p")<CR>', { desc = 'Absolute [P]ath' })
