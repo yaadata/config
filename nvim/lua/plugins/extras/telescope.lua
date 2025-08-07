@@ -61,7 +61,15 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
       --
       pickers = {
         find_files = {
-          hidden = true,
+          find_command = {
+            'rg',
+            '--files',
+            '--hidden',
+            '--glob',
+            '!**/.git/*',
+            '--glob',
+            '!**/node_modules/*',
+          },
         },
         grep_string = {
           additional_args = { '--hidden' },
@@ -76,6 +84,21 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
             ['<C-q>'] = actions.smart_send_to_qflist,
             ['<C-f>'] = actions.to_fuzzy_refine,
           },
+        },
+        vimgrep_arguments = {
+          'rg',
+          '--color=never',
+          '--no-heading',
+          '--hidden',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case',
+          '--trim',
+          '--glob',
+          '!**/.git/*',
+          '--glob',
+          '!**/node_modules/*',
         },
       },
       extensions = {
