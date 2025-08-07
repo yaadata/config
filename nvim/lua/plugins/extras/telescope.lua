@@ -81,7 +81,10 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
       defaults = {
         mappings = {
           i = {
-            ['<C-q>'] = actions.smart_send_to_qflist,
+            ['<C-q>'] = function(bufn)
+              actions.smart_send_to_qflist(bufn, '')
+              vim.api.nvim_command 'copen'
+            end,
             ['<C-f>'] = actions.to_fuzzy_refine,
           },
         },

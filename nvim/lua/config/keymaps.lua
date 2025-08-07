@@ -35,6 +35,7 @@ vim.keymap.set('n', '<leader>bt', '<cmd>:tabnew<CR>', { desc = 'new [t]ab' })
 vim.keymap.set('n', '<leader>bd', "<cmd>echo expand('% p')<CR>", { desc = 'view [d]irectory path' })
 vim.keymap.set('n', '<leader>bw', '<cmd>w<CR>', { desc = '[w]rite' })
 vim.keymap.set('n', '<leader>bQ', '<cmd>q<CR>', { desc = '[q]uit current' })
+vim.keymap.set('n', '<leader>baQ', '<cmd>quitall!<CR>', { desc = '[q]uit' })
 -- yanks on buffers
 vim.keymap.set('n', '<leader>byp', '<cmd>let @+ = expand("%")<CR>', { desc = 'Relative [P]ath' })
 vim.keymap.set('n', '<leader>byP', '<cmd>let @+ = expand("%:p")<CR>', { desc = 'Absolute [P]ath' })
