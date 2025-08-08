@@ -7,13 +7,13 @@ local opts = {
     local elixirls = require 'elixir.elixirls'
 
     elixir.setup {
-      nextls = { enable = false },
+      nextls = { enable = true },
       elixirls = {
         tag = 'v0.28.0',
-        enable = true,
+        enable = false,
         settings = elixirls.settings {
           dialyzerEnabled = false,
-          enableTestLenses = false,
+          enableTestLenses = true,
         },
         on_attach = function(client, bufnr)
           vim.keymap.set('n', '<space>fp', ':ElixirFromPipe<cr>', { buffer = true, noremap = true })
