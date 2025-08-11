@@ -1,6 +1,6 @@
 local opts = { -- Autoformat
   'stevearc/conform.nvim',
-  tag = 'v8.3.0',
+  tag = 'v9.0.0',
   lazy = false,
   keys = {
     {
@@ -30,6 +30,8 @@ local opts = { -- Autoformat
       python = { 'black' },
       go = { 'gofmt', 'goimports' },
       typescript = { 'eslint_d' },
+      markdown = { 'deno_fmt' },
+      terraform = { 'terraform_fmt' },
       --
       -- You can use a sub-list to tell conform to run *until* a formatter
       -- is found.
