@@ -1,12 +1,30 @@
+local toggle_key = '<C-c>'
 local opts = {
   'coder/claudecode.nvim',
   dependencies = { 'folke/snacks.nvim' },
+  commit = '985b4b117ea13ec85c92830ecac8f63543dd5ead',
   opts = {
     terminal = {
-      provider = 'native',
+      snacks_win_opts = {
+        position = 'float',
+        width = 0.9,
+        height = 0.9,
+        keys = {
+          claude_hide = {
+            toggle_key,
+            function(self)
+              self:hide()
+            end,
+            mode = 't',
+            desc = 'Hide',
+          },
+        },
+      },
+      provider = 'snacks',
     },
   },
   keys = {
+    { toggle_key, '<cmd>ClaudeCodeFocus<cr>', desc = 'Claude Code', mode = { 'n', 'x' } },
     { '<leader>ct', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },
     { '<leader>cf', '<cmd>ClaudeCodeFocus<cr>', desc = 'Focus Claude' },
     { '<leader>cr', '<cmd>ClaudeCode --resume<cr>', desc = 'Resume Claude' },
