@@ -244,7 +244,6 @@ local opts = { -- LSP Configuration & Plugins
       'go-debug-adapter',
       'goimports',
       'golangci-lint',
-      'gopls',
       'gotests',
       'gotestsum',
       'graphql-language-service-cli',
