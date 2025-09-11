@@ -10,10 +10,7 @@ local opts = {
       preset = 'minimal',
     }
 
-    vim.keymap.set({ 'n', 'v' }, '<leader>dit', function()
-      tid.toggle()
-    end, { desc = 'toggle inline diagnostics' })
-    vim.keymap.set({ 'n', 'v' }, '<leader>dc', function()
+    vim.keymap.set({ 'n', 'v' }, '<leader>lD', function()
       tid.toggle()
     end, { desc = 'toggle inline diagnostics' })
     vim.diagnostic.config { virtual_text = false } -- Only if needed in your configuration, if you already have native LSP diagnostics
