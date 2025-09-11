@@ -15,13 +15,40 @@ local opts = {
         enable = true,
       },
       lsp_cfg = {
+        cmd = { 'gopls' },
+        root_dir = vim.fn.getcwd(),
         settings = {
           gopls = {
-            usePlaceholders = false,
+            workspaceFiles = {
+              '**/BUILD',
+              '**/WORKSPACE',
+              '**/*.{bzl,bazel}',
+            },
+            directoryFilters = {
+              '-bazel-bin',
+              '-bazel-out',
+              '-bazel-testlogs',
+              '-bazel-mux',
+            },
+            gofumpt = true,
+            matcher = 'fuzzy',
+            symbolMatcher = 'fuzzy',
+            codelenses = {
+              gc_details = true,
+              generate = true,
+              regenerate_cgo = true,
+              tidy = true,
+              test = true,
+            },
+            -- local = "github.com/muxinc/mux",
+            completeUnimported = true,
+            usePlaceholders = true,
             analyses = {
+              unusedparams = true,
               ST1003 = false,
             },
-            buildFlags = { '-tags', 'integration,unit,endtoendtest,smoke' },
+            verboseOutput = true,
+            buildFlags = { 'tags=integration,unit,endtoendtest,smoke' },
           },
         },
       },
