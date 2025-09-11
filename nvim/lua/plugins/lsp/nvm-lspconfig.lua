@@ -158,29 +158,12 @@ local opts = { -- LSP Configuration & Plugins
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
-      -- clangd = {},
-      gopls = {
-        cmd = { 'gopls', '--remote=auto' },
-        settings = {
-          completeUnimported = true,
-          usePlaceholders = true,
-          analyses = {
-            unusedparams = true,
-            ST1003 = false,
-          },
-          buildFlags = { 'tags=integration,unit,endtoendtest,smoke' },
-        },
-        init_options = {
-          buildFlags = { '-tags=integration,unit,endtoendtest,smoke' },
-        },
-      },
       denols = {
         root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
         root_markers = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
       },
       ts_ls = {
         root_dir = nvim_lsp.util.root_pattern 'package.json',
-        single_file_support = false,
       },
       starpls = {
         filetypes = { 'bzl', 'bazel', 'sy' },
