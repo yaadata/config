@@ -48,7 +48,6 @@ local opts = {
               ST1003 = false,
             },
             verboseOutput = true,
-            buildFlags = { 'tags=integration,unit,endtoendtest,smoke' },
           },
         },
       },
