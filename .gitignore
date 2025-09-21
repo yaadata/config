@@ -10,3 +10,8 @@ iterm2/**
 LazyVimOptions
 zed/**
 **/lazy-lock.json
+claude/shell-snapshots/**
+dlv/**
+**/private.fish
+**/fish_variables
+**/fish_plugins
