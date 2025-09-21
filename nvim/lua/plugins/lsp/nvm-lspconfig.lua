@@ -221,6 +221,10 @@ local opts = { -- LSP Configuration & Plugins
         },
         cmd = { 'mise', 'x', '--', 'ruby-lsp' },
       },
+      fish_lsp = {
+        root_dir = vim.fn.getcwd(),
+        root_markers = { 'config.fish' },
+      },
     }
 
     -- Ensure the servers and tools above are installed
