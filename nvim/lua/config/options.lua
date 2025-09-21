@@ -91,3 +91,5 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.fillchars = [[eob: ,fold: ,foldopen:▾,foldsep: ,foldclose:▸]]
 vim.opt.foldenable = true
+-- set default shell at all times
+vim.opt.shell = '/bin/zsh'
