@@ -15,3 +15,15 @@ dlv/**
 **/private.fish
 **/fish_variables
 **/fish_plugins
+claude/**
+.claude/**
+.elixir-tools/**
+elixir-ls/** 
+configstore/**
+mise/**
+argocd/**
+raycast/**
+op/**
+uv/**
+.tool-versions
+erl_crash.dump
