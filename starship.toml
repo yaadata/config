@@ -34,7 +34,8 @@ $status\
 $os\
 $container\
 $netns\
-$character"""
+$character\
+${custom.fish}${custom.zsh}"""
 
 
 [directory]
@@ -234,3 +235,10 @@ format = '🕙[\[ $time \]]($style) '
 time_format = '%r'
 utc_time_offset = '-5'
 
+[custom.zsh]
+command = "echo 🚀"
+when = 'test "$STARSHIP_SHELL" = "zsh"'
+
+[custom.fish]
+command = "echo 🐠"
+when = 'test "$STARSHIP_SHELL" = "fish"'
