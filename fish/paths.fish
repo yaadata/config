@@ -11,8 +11,12 @@ fish_add_path ~/go/
 fish_add_path ~/jetbrains/
 
 # ruby
-fish_add_path "$(rbenv prefix)/bin"
+if type -q rbenv
+    fish_add_path "$(rbenv prefix)/bin"
+end
 fish_add_path "~/.cargo/bin"
 
 # yarn
-fish_add_path "$(yarn global bin)"
+if type -q yarn
+    fish_add_path "$(yarn global bin)"
+end
