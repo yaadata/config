@@ -1,18 +1,18 @@
-function gt
-    git-town $argv
-end
+abbr -a gt git-town
 
 function naptime
     pmset sleepnow
 end
 
 function git_town_toggle
-    # Check current alias value using Fish's functions -v
-    if functions -q gt; and string match -q "*git-town_development*" (functions gt)
-        alias gt='git-town'
+    # Check current abbreviation value
+    if abbr -q gt; and string match -q "*git-town_development*" (abbr -s | grep "^gt " | cut -d' ' -f2-)
+        abbr -e gt
+        abbr -a gt git-town
         echo "now running \"production\" version"
     else if test -n "$GIT_TOWN_DEVELOPMENT_PATH"
-        alias gt="$GIT_TOWN_DEVELOPMENT_PATH/git-town_development"
+        abbr -e gt
+        abbr -a gt "$GIT_TOWN_DEVELOPMENT_PATH/git-town_development"
         echo "now running \"local\" version"
     else
         echo "Error: GIT_TOWN_DEVELOPMENT_PATH is not set"
@@ -35,14 +35,14 @@ function toggle_git_town_lineage
 end
 
 # git abbr
-abbr gta "gt append"
-abbr gtb "gt branch"
-abbr gth "gt hack"
-abbr gts "gt sync"
-abbr gtS "gt switch"
-abbr gtss "gt sync -s"
-abbr gtu "gt up"
-abbr gtd "gt down"
+abbr gta "git-town append"
+abbr gtb "git-town branch"
+abbr gth "git-town hack"
+abbr gts "git-town sync"
+abbr gtS "git-town switch"
+abbr gtss "git-town sync -s"
+abbr gtu "git-town up"
+abbr gtd "git-town down"
 
 abbr gtt git_town_toggle
 abbr gl toggle_git_town_lineage
