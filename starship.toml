@@ -35,7 +35,7 @@ $os\
 $container\
 $netns\
 $character\
-${custom.fish}${custom.zsh}"""
+${env_var.SHELL_SYMBOL}"""
 
 
 [directory]
@@ -235,10 +235,7 @@ format = '🕙[\[ $time \]]($style) '
 time_format = '%r'
 utc_time_offset = '-5'
 
-[custom.zsh]
-command = "echo 🚀"
-when = 'test "$STARSHIP_SHELL" = "zsh"'
-
-[custom.fish]
-command = "echo 🐠"
-when = 'test "$STARSHIP_SHELL" = "fish"'
+[env_var.SHELL_SYMBOL]
+variable = "SHELL_SYMBOL"
+format = "[$env_value]($style) "
+style = "bold blue"

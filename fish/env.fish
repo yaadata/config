@@ -1,7 +1,14 @@
-set -Ux EDITOR nvim
+set -gx EDITOR nvim
 
-set -Ux dlv ~/go/bin/dlv
+set -gx dlv ~/go/bin/dlv
 
-set -Ux CLAUDE_CONFIG_DIR ~/.config/claude
+set -gx CLAUDE_CONFIG_DIR ~/.config/claude
 
-set -Ux XXDG_CONFIG_HOME ~/.config
+set -gx XXDG_CONFIG_HOME ~/.config
+
+set -gx KUBECONFIG ~/.kube/config
+
+set -gx GOBIN ~/go/bin
+
+set -gx SHELL_SYMBOL "🐠"
+
