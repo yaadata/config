@@ -8,7 +8,7 @@ local opts = {
       border = 'rounded',
     },
     hint_prefix = '💡 ', -- Panda for parameter, NOTE: for the terminal not support emoji, might crash
-    floating_window = false,
+    floating_window = true,
     floating_window_above_cur_line = false,
   },
   config = function(_, opts)

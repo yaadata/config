@@ -150,7 +150,13 @@ local opts = { -- Autocompletion
     enabled = false,
   },
   -- Experimental signature help support
-  signature = { enabled = true },
+  signature = {
+    enabled = true,
+    trigger = {
+      enabled = true,
+      show_on_insert = true,
+    },
+  },
   opts_extend = { 'sources.default' },
 }
 
