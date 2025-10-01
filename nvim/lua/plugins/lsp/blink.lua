@@ -6,7 +6,7 @@ local opts = { -- Autocompletion
     'kristijanhusak/vim-dadbod-completion',
   },
   event = 'VeryLazy',
-  version = 'v1.2.0',
+  version = 'v1.7.0',
   opts = {
     -- 'default' for mappings similar to built-in completion
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -140,17 +140,14 @@ local opts = { -- Autocompletion
         },
       },
     },
-
-    fuzzy = {
-      prebuilt_binaries = {
-        force_version = 'v1.2.0',
-      },
+  },
+  fuzzy = {
+    prebuilt_binaries = {
+      force_version = 'v1.7.0',
     },
   },
-  cmdline = {
-    term = {
-      enabled = false,
-    },
+  term = {
+    enabled = false,
   },
   -- Experimental signature help support
   signature = { enabled = true },
