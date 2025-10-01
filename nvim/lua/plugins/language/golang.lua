@@ -16,7 +16,9 @@ local opts = {
       },
       lsp_cfg = {
         cmd = { 'gopls' },
-        root_dir = vim.fn.getcwd(),
+        root_dir = function()
+          return vim.fn.getcwd()
+        end,
         settings = {
           gopls = {
             workspaceFiles = {

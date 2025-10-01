@@ -8,8 +8,9 @@ fish_add_path ~/.local/bin/
 
 # golang
 fish_add_path ~/go/
+fish_add_path ~/go/bin/
 fish_add_path ~/jetbrains/
-
+fish_add_path /opt/homebrew/bin/
 # ruby
 if type -q rbenv
     fish_add_path "$(rbenv prefix)/bin"
