@@ -43,6 +43,7 @@ abbr gtS "git-town switch"
 abbr gtss "git-town sync -s"
 abbr gtu "git-town up"
 abbr gtd "git-town down"
+abbr gtdel "git-town delete"
 
 abbr gtt git_town_toggle
 abbr gl toggle_git_town_lineage
