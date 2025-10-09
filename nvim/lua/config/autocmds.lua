@@ -23,3 +23,13 @@ vim.api.nvim_create_user_command('Format', function(args)
   end
   require('conform').format { async = true, lsp_format = 'fallback', range = range }
 end, { range = true })
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = '*',
+  callback = function()
+    local bufname = vim.api.nvim_buf_get_name(0)
+    if bufname:match '^fyler://' then
+      vim.opt_local.spell = false
+    end
+  end,
+})
