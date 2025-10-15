@@ -34,6 +34,8 @@ function toggle_git_town_lineage
     end
 end
 
+alias go /opt/homebrew/bin/go
+
 # git abbr
 abbr gta "git-town append"
 abbr gtb "git-town branch"
