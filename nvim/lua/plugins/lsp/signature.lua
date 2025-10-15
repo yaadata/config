@@ -9,7 +9,7 @@ local opts = {
     },
     hint_prefix = '💡 ', -- Panda for parameter, NOTE: for the terminal not support emoji, might crash
     floating_window = true,
-    floating_window_above_cur_line = false,
+    floating_window_above_cur_line = true,
   },
   config = function(_, opts)
     require('lsp_signature').setup(opts)
