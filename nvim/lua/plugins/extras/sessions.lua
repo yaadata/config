@@ -1,7 +1,7 @@
 local opts = {
   'rmagatti/auto-session',
   lazy = false,
-  commit = '2374591ad5187e6697d9b4a683027ad33771381f',
+  commit = '517a75727d28a4d1ee9c79b56dde239a5408778f',
   keys = {
     -- Will use Telescope if installed or a vim.ui.select picker otherwise
     { '<leader>wss', '<cmd>SessionSearch<CR>', desc = 'Session search' },
@@ -17,7 +17,8 @@ local opts = {
     git_use_branch_name = true,
     git_auto_restore_on_branch_change = true,
     show_auto_restore_notif = true,
-    suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+    auto_delete_empty_sessions = true,
+    purge_after_minutes = 43200,
     -- ⚠️ This will only work if Telescope.nvim is installed
     -- The following are already the default values, no need to provide them if these are already the settings you want.
     session_lens = {
