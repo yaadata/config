@@ -4,10 +4,10 @@ local opts = {
   commit = '517a75727d28a4d1ee9c79b56dde239a5408778f',
   keys = {
     -- Will use Telescope if installed or a vim.ui.select picker otherwise
-    { '<leader>wss', '<cmd>SessionSearch<CR>', desc = 'Session search' },
-    { '<leader>wsw', '<cmd>SessionSave<CR>', desc = 'Save session' },
-    { '<leader>wst', '<cmd>SessionToggleAutoSave<CR>', desc = 'Toggle autosave' },
-    { '<leader>wsx', '<cmd>SessionDelete<CR>', desc = 'Delete session' },
+    { '<leader>wss', '<cmd>AutoSession search<CR>', desc = 'Session search' },
+    { '<leader>wsw', '<cmd>AutoSession save<CR>', desc = 'Save session' },
+    { '<leader>wst', '<cmd>AutoSession toggle<CR>', desc = 'Toggle autosave' },
+    { '<leader>wsx', '<cmd>AutoSession deletePicker<CR>', desc = 'Delete session' },
   },
 
   ---enables autocomplete for opts
