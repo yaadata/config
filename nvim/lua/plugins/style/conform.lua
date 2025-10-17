@@ -31,6 +31,7 @@ local opts = { -- Autoformat
       go = { 'gofmt', 'goimports' },
       typescript = { 'eslint_d' },
       markdown = { 'deno_fmt' },
+      toml = { 'tombi' },
       terraform = { 'terraform_fmt' },
       --
       -- You can use a sub-list to tell conform to run *until* a formatter

@@ -1,9 +1,10 @@
 [keyboard]
-  bindings = [
-    { key = "J",        mods = "Alt",     chars = "\u001bj"                       },
-    { key = "K",        mods = "Alt",     chars = "\u001bk"                       },
-    { key = "H",        mods = "Alt",     chars = "\u001bh"                       },
-    { key = "L",        mods = "Alt",     chars = "\u001bl"                       },
-    { key = "F",        mods = "Alt",     chars = "\u001bf"                       },
-    # etc
-  ] 
+bindings = [
+  { key = "J", mods = "Alt", chars = "\u001bj" },
+  { key = "K", mods = "Alt", chars = "\u001bk" },
+  { key = "H", mods = "Alt", chars = "\u001bh" },
+  { key = "L", mods = "Alt", chars = "\u001bl" },
+  { key = "F", mods = "Alt", chars = "\u001bf" },
+  { key = "U", mods = "Control | Shift", action = "ToggleViMode" },
+  # etc
+]
