@@ -1,6 +1,6 @@
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/catppuccin_macchiato.toml",
+    "~/.config/alacritty/themes/catppuccin_macchiato.toml",
     "~/.config/alacritty/keybindings.toml"
 ]
 live_config_reload = true
