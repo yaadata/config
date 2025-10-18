@@ -34,6 +34,8 @@ local opts = { -- Useful plugin to show you pending keybinds.
       ['<leader>m'] = { name = '[m]ini.nvim', _ = 'which_key_ignore', mode = { 'n', 'v' } },
       ['<leader>ms'] = { name = '[M]ini [S]urround', _ = 'which_key_ignore', mode = { 'n', 'v' } },
       ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore', mode = { 'n', 'v' } },
+      ['<leader>gs'] = { name = 'Search', _ = 'which_key_ignore', mode = { 'n', 'v' } },
+      ['<leader>gh'] = { name = 'Hunk/Buffer', _ = 'which_key_ignore', mode = { 'n', 'v' } },
       ['<leader>gt'] = { name = '[T]oggle', _ = 'which_key_ignore' },
       ['<leader>t'] = { name = '[T]est', _ = 'which_key_ignore' },
       ['<leader>p'] = { name = 'Command [P]alette', _ = 'which_key_ignore' },

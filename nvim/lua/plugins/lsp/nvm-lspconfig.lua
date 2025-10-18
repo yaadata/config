@@ -73,6 +73,12 @@ local opts = { -- LSP Configuration & Plugins
           vim.lsp.buf.implementation { on_list = on_list }
         end, '[G]oto [I]mplementation')
 
+        -- Search through git status and find changes on a per file basis
+        map('<leader>gsd', builtin.git_status, 'Diff/Changes per file')
+
+        -- Search through git stash and find changes on a per file basis
+        map('<leader>gss', builtin.git_stash, '[S]tash items. Apply with <cr>')
+
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
         --  the definition of its *type*, not where it was *defined*.
