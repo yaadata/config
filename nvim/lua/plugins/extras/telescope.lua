@@ -111,6 +111,7 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
         file_browser = {
           hidden = true,
         },
+        fzf = {},
       },
     }
 
