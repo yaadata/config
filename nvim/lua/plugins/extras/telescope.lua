@@ -121,49 +121,68 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
     pcall(telescope.load_extension, 'live_grep_args')
     pcall(telescope.load_extension, 'fidget')
 
+    local map = function(keys, func, desc)
+      vim.keymap.set('n', keys, func, { desc = desc })
+    end
+
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>sh', builtin.search_history, { desc = '[S]earch [H]istory' })
-    vim.keymap.set('n', '<leader>st', builtin.help_tags, { desc = '[S]earch Help [T]ags' })
-    vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-    vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-    vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-    vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader>sz', builtin.spell_suggest, { desc = '[S]pelling Suggestions' })
-    vim.keymap.set('n', '<leader>sqh', builtin.quickfixhistory, { desc = '[H]istory' })
-    vim.keymap.set('n', '<leader>sqo', builtin.quickfix, { desc = '[O]pen quickfix list' })
-    vim.keymap.set('n', '<leader>sql', builtin.loclist, { desc = 'View locList' })
-    vim.keymap.set('n', '<leader>sch', builtin.command_history, { desc = '[H]istory' })
-    vim.keymap.set('n', '<leader>sco', builtin.commands, { desc = '[O]pen' })
-    vim.keymap.set('n', '<leader>s<leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-    vim.keymap.set('n', '<leader>sl', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", { desc = '[S]earch by Live Grep' })
+    local git_diff = require 'utils.diff_picker'
+
+    -- Search through git status and find changes on a per file basis
+    map('<leader>gsd', git_diff.git_status_difftastic_picker, 'Diff')
+
+    -- Search through git commits for a select range of lines in a buffer
+    map('<leader>gsh', builtin.git_bcommits_range, 'Commit history in the current buffer range.')
+
+    map('<leader>gsf', builtin.git_bcommits, 'Commit history for the current file')
+
+    -- Search through git commits and diff results
+    map('<leader>gsc', builtin.git_commits, 'Commits. <c-r>s = soft reset, <c-r>h = hard reset, <c-r>m = mixed reset')
+
+    -- Search through git stash and find changes on a per file basis
+    map('<leader>gss', builtin.git_stash, '[S]tash items. Apply with <cr>')
+    map('<leader>sh', builtin.search_history, '[S]earch [H]istory')
+    map('<leader>st', builtin.help_tags, '[S]earch Help [T]ags')
+    map('<leader>sk', builtin.keymaps, '[S]earch [K]eymaps')
+    map('<leader>sf', builtin.find_files, '[S]earch [F]iles')
+    map('<leader>ss', builtin.builtin, '[S]earch [S]elect Telescope')
+    map('<leader>sw', builtin.grep_string, '[S]earch current [W]ord')
+    map('<leader>sg', builtin.live_grep, '[S]earch by [G]rep')
+    map('<leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
+    map('<leader>sr', builtin.resume, '[S]earch [R]esume')
+    map('<leader>s.', builtin.oldfiles, '[S]earch Recent Files ("." for repeat)')
+    map('<leader>sz', builtin.spell_suggest, '[S]pelling Suggestions')
+    map('<leader>sqh', builtin.quickfixhistory, '[H]istory')
+    map('<leader>sqo', builtin.quickfix, '[O]pen quickfix list')
+    map('<leader>sql', builtin.loclist, 'View locList')
+    map('<leader>sch', builtin.command_history, '[H]istory')
+    map('<leader>sco', builtin.commands, '[O]pen')
+    map('<leader>s<leader>', builtin.buffers, '[ ] Find existing buffers')
+    map('<leader>sl', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", '[S]earch by Live Grep')
 
     -- Slightly advanced example of overriding default behavior and theme
-    vim.keymap.set('n', '<leader>sC', function()
+    map('<leader>sC', function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
         winblend = 0,
         previewer = false,
       })
-    end, { desc = '[/] Fuzzily search in current buffer' })
+    end, '[/] Fuzzily search in current buffer')
 
     -- It's also possible to pass additional configuration options.
     --  See `:help telescope.builtin.live_grep()` for information about particular keys
-    vim.keymap.set('n', '<leader>s/', function()
+    map('<leader>s/', function()
       builtin.live_grep {
         grep_open_files = true,
         prompt_title = 'Live Grep in Open Files',
       }
-    end, { desc = '[S]earch [/] in Open Files' })
+    end, '[S]earch [/] in Open Files')
 
     -- Shortcut for searching your Neovim configuration files
-    vim.keymap.set('n', '<leader>sn', function()
+    map('<leader>sn', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
-    end, { desc = '[S]earch [N]eovim files' })
+    end, '[S]earch [N]eovim files')
 
     require('telescope').load_extension 'ui-select'
   end,
