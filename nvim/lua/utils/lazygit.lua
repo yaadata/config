@@ -17,6 +17,9 @@ M.toggle = function()
       term:toggle(size, direction)
 
       vim.cmd 'set ft=lazygit'
+      vim.keymap.set('t', '<c-_>', function()
+        term:toggle(size, direction)
+      end, { buffer = true })
       vim.keymap.set('t', '<c-\\>', function()
         term:toggle(size, direction)
       end, { buffer = true })
