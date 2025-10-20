@@ -151,7 +151,11 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
     map('<leader>sg', builtin.live_grep, '[S]earch by [G]rep')
     map('<leader>sd', builtin.diagnostics, '[S]earch [D]iagnostics')
     map('<leader>sr', builtin.resume, '[S]earch [R]esume')
-    map('<leader>s.', builtin.oldfiles, '[S]earch Recent Files ("." for repeat)')
+    map('<leader>s.', function()
+      builtin.oldfiles {
+        cwd_only = true,
+      }
+    end, '[S]earch Recent Files ("." for repeat)')
     map('<leader>sz', builtin.spell_suggest, '[S]pelling Suggestions')
     map('<leader>sqh', builtin.quickfixhistory, '[H]istory')
     map('<leader>sqo', builtin.quickfix, '[O]pen quickfix list')

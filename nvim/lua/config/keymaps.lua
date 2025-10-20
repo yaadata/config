@@ -16,6 +16,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- lazygit
+vim.keymap.set('n', '<leader>gg', '<cmd>LazyGitToggle<cr>', { desc = 'LazyGit' })
+
 -- window management
 vim.keymap.set('n', '<leader>wmsv', '<C-w>v<CR>', { desc = 'split window vertical' })
 vim.keymap.set('n', '<leader>wmsh', '<C-w>s<CR>', { desc = 'split window horizontal' })
