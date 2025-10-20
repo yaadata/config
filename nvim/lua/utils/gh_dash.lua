@@ -18,6 +18,9 @@ M.toggle = function()
       dash_term:toggle(size, direction)
 
       vim.cmd 'set ft=dash'
+      vim.keymap.set('t', '<c-_>', function()
+        dash_term:toggle(size, direction)
+      end, { buffer = true })
       vim.keymap.set('t', '<c-\\>', function()
         dash_term:toggle(size, direction)
       end, { buffer = true })
