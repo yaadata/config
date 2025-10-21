@@ -27,6 +27,11 @@ M.toggle = function()
     end
   else
     dash_term:toggle(size, direction)
+    if dash_term:is_open() then
+      vim.fn.timer_start(1, function()
+        vim.cmd 'startinsert!'
+      end)
+    end
   end
 end
 
