@@ -41,7 +41,7 @@ local opts = {
       map('n', '<leader>ghu', gitsigns.undo_stage_hunk, { desc = 'git [u]ndo stage hunk' })
       map('n', '<leader>ghR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
       map('n', '<leader>ghp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
-      map('n', '<leader>ghb', function()
+      map('n', '<leader>gb', function()
         gitsigns.blame_line { full = true }
       end, { desc = 'git [b]lame line' })
       map('n', '<leader>gd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
