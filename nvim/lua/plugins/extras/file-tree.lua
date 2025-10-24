@@ -6,6 +6,7 @@ local opts = {
   },
   version = 'v1.1.0',
   opts = {
+    close_on_select = false,
     icon_provider = 'nvim_web_devicons',
     mappings = {
       ['-'] = 'GotoParent',
