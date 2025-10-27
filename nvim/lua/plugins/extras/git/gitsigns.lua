@@ -1,4 +1,3 @@
-local buffname_toggle_num = 0
 local opts = {
   'lewis6991/gitsigns.nvim',
   commit = '20ad4419564d6e22b189f6738116b38871082332',
