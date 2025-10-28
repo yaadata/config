@@ -1,0 +1,5 @@
+theme = catppuccin-macchiato.conf
+
+window-decoration = "none" 
+
+command = "/bin/zsh"
