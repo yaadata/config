@@ -225,6 +225,7 @@ local opts = { -- LSP Configuration & Plugins
         root_dir = vim.fn.getcwd(),
         root_markers = { 'config.fish' },
       },
+      basedpyright = {},
     }
 
     -- Ensure the servers and tools above are installed
@@ -238,6 +239,7 @@ local opts = { -- LSP Configuration & Plugins
     -- You can add other tools here that you want Mason to install
     -- for you, so that they are available from within Neovim.
     local ensure_installed = {
+      'basedpyright',
       'bash-language-server',
       'black',
       'buf',
@@ -259,6 +261,7 @@ local opts = { -- LSP Configuration & Plugins
       'pydocstyle',
       'pyright',
       'eslint_d',
+      'ruff',
       'starpls',
       'sql-formatter',
       'sqlfmt',

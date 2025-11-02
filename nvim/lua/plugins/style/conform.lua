@@ -27,7 +27,7 @@ local opts = { -- Autoformat
     formatters_by_ft = {
       lua = { 'stylua' },
       -- Conform can also run multiple formatters sequentially
-      python = { 'black' },
+      python = { 'ruff', 'black' },
       go = { 'gofmt', 'goimports' },
       typescript = { 'eslint_d' },
       markdown = { 'deno_fmt' },
