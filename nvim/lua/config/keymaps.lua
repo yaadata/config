@@ -42,9 +42,21 @@ vim.keymap.set('n', '<leader>bs', '<cmd>wa<CR>', { desc = '[s]ave/write all buff
 vim.keymap.set('n', '<leader>bQ', '<cmd>q<CR>', { desc = '[q]uit current' })
 vim.keymap.set('n', '<leader>baQ', '<cmd>quitall!<CR>', { desc = '[q]uit' })
 -- yanks on buffers
-vim.keymap.set('n', '<leader>byp', '<cmd>let @+ = expand("%")<CR>', { desc = 'Relative [P]ath' })
-vim.keymap.set('n', '<leader>byP', '<cmd>let @+ = expand("%:p")<CR>', { desc = 'Absolute [P]ath' })
-vim.keymap.set('n', '<leader>byn', '<cmd>let @+ = expand("%:t")<CR>', { desc = '[N]ame' })
+vim.keymap.set('n', '<leader>byp', function()
+  local filepath = vim.fn.expand '%'
+  vim.fn.setreg('+', filepath) -- write to clipboard register '+'
+  vim.notify('Copied relative path: ' .. filepath, vim.log.levels.INFO)
+end, { desc = 'Relative [P]ath' })
+vim.keymap.set('n', '<leader>byP', function()
+  local filepath = vim.fn.expand '%:p'
+  vim.fn.setreg('+', filepath) -- write to clipboard register '+'
+  vim.notify('Copied absolute path: ' .. filepath, vim.log.levels.INFO)
+end, { desc = 'Absolute [P]ath' })
+vim.keymap.set('n', '<leader>byn', function()
+  local fn = vim.fn.expand '%:t'
+  vim.fn.setreg('+', fn) -- write to clipboard register '+'
+  vim.notify('Copied file name: ' .. fn, vim.log.levels.INFO)
+end, { desc = '[N]ame' })
 -- base64
 vim.keymap.set('v', '<leader>b6e', "c<c-r>=system('base64',          @\")<cr><esc>", { desc = 'base64 encode' })
 vim.keymap.set('v', '<leader>b6d', "c<c-r>=system('base64 --decode', @\")<cr><esc>", { desc = 'base64 decode' })
