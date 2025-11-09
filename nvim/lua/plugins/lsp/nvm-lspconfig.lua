@@ -259,7 +259,6 @@ local opts = { -- LSP Configuration & Plugins
       'markdownlint',
       'protolint',
       'pydocstyle',
-      'pyright',
       'eslint_d',
       'ruff',
       'starpls',
