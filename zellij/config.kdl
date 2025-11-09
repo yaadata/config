@@ -137,6 +137,8 @@ keybinds clear-defaults=true {
     }
     shared {
         bind "Alt f" { ToggleFloatingPanes; }
+        bind "Alt [" { PreviousSwapLayout; }
+        bind "Alt ]" { NextSwapLayout; }
     }
     shared_except "locked" {
         bind "Alt left" { MoveFocusOrTab "left"; }
