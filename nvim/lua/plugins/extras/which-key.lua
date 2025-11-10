@@ -42,6 +42,7 @@ local opts = { -- Useful plugin to show you pending keybinds.
       ['<leader>p'] = { name = 'Command [P]alette', _ = 'which_key_ignore' },
       ['<leader>td'] = { name = '[D]ebug test', _ = 'which_key_ignore' },
       ['<leader>f'] = { name = '[F]ile', _ = 'which_key_ignore', mode = { 'n', 'v' } },
+      ['<leader>fy'] = { name = '[Y]azi', _ = 'which_key_ignore', mode = { 'n', 'v' } },
       ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore', mode = { 'n', 'v' } },
       ['<leader>bc'] = { name = '[C]omment', _ = 'which_key_ignore', mode = { 'n', 'v' } },
       ['<leader>bca'] = { name = 'Arrange-Act-Assert', _ = 'which_key_ignore', mode = { 'n', 'v' } },
