@@ -34,6 +34,40 @@ vim.keymap.set('n', '<leader>qlx', '<cmd>lclose<CR>', { desc = '[C]lose location
 vim.keymap.set('n', '<leader>qlp', '<cmd>lprevious<CR>', { desc = '[P]revious location list' })
 vim.keymap.set('n', '<leader>qln', '<cmd>lnext<CR>', { desc = '[N]ext location list' })
 
+-- testing
+vim.keymap.set('n', '<leader>bca1', function()
+  local text = { '[A]rrange' }
+  local start_line = vim.fn.line '.'
+  vim.api.nvim_put(text, 'l', true, true)
+  -- Select the inserted lines in visual mode
+  local end_line = start_line + #text
+  vim.cmd('normal! ' .. start_line + 1 .. 'GV' .. end_line .. 'G')
+  -- Trigger the gc command
+  vim.cmd 'normal gc'
+end, { desc = 'Insert text "arrange"' })
+
+vim.keymap.set('n', '<leader>bca2', function()
+  local text = { '[A]ct' }
+  local start_line = vim.fn.line '.'
+  vim.api.nvim_put(text, 'l', true, true)
+  -- Select the inserted lines in visual mode
+  local end_line = start_line + #text
+  vim.cmd('normal! ' .. start_line + 1 .. 'GV' .. end_line .. 'G')
+  -- Trigger the gc command
+  vim.cmd 'normal gc'
+end, { desc = 'Insert text "act"' })
+
+vim.keymap.set('n', '<leader>bca3', function()
+  local text = { '[A]ssert' }
+  local start_line = vim.fn.line '.'
+  vim.api.nvim_put(text, 'l', true, true)
+  -- Select the inserted lines in visual mode
+  local end_line = start_line + #text
+  vim.cmd('normal! ' .. start_line + 1 .. 'GV' .. end_line .. 'G')
+  -- Trigger the gc command
+  vim.cmd 'normal gc'
+end, { desc = 'Insert text "assert"' })
+
 -- navigating buffers
 vim.keymap.set('n', '<leader>bt', '<cmd>:tabnew<CR>', { desc = 'new [t]ab' })
 vim.keymap.set('n', '<leader>bd', "<cmd>echo expand('% p')<CR>", { desc = 'view [d]irectory path' })
