@@ -45,6 +45,7 @@ abbr gtu "git-town up"
 abbr gtd "git-town down"
 abbr gtdel "git-town delete"
 
+
 abbr gtt git_town_toggle
 abbr gl toggle_git_town_lineage
 abbr ga "git add"
@@ -77,6 +78,7 @@ abbr gpfl "git push --force-with-lease"
 abbr gpo "git push origin"
 abbr gpll "git pull --rebase"
 abbr greb "git rebase"
+abbr grebn 'git rebase -i HEAD~n'
 abbr grebi "git rebase -i"
 abbr grv "git remote -v"
 abbr gs "git status"
