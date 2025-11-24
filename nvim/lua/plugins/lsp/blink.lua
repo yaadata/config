@@ -1,12 +1,16 @@
+local VERSION = 'v1.8.0'
+
 local opts = { -- Autocompletion
   'saghen/blink.cmp',
   -- optional: provides snippets for the snippet source
   dependencies = {
     'rafamadriz/friendly-snippets',
     'kristijanhusak/vim-dadbod-completion',
+    'giuxtaposition/blink-cmp-copilot',
+    'onsails/lspkind.nvim',
   },
   event = 'VeryLazy',
-  version = 'v1.7.0',
+  version = VERSION,
   opts = {
     -- 'default' for mappings similar to built-in completion
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -102,12 +106,29 @@ local opts = { -- Autocompletion
             kind_icon = {
               ellipsis = false,
               text = function(ctx)
-                local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
-                return kind_icon
+                local icon = ctx.kind_icon
+                if vim.tbl_contains({ 'Path' }, ctx.source_name) then
+                  local dev_icon, _ = require('nvim-web-devicons').get_icon(ctx.label)
+                  if dev_icon then
+                    icon = dev_icon
+                  end
+                else
+                  icon = require('lspkind').symbolic(ctx.kind, {
+                    mode = 'symbol',
+                  })
+                end
+
+                return icon .. ctx.icon_gap
               end,
               -- Optionally, you may also use the highlights from mini.icons
               highlight = function(ctx)
-                local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+                local hl = ctx.kind_hl
+                if vim.tbl_contains({ 'Path' }, ctx.source_name) then
+                  local dev_icon, dev_hl = require('nvim-web-devicons').get_icon(ctx.label)
+                  if dev_icon then
+                    hl = dev_hl
+                  end
+                end
                 return hl
               end,
             },
@@ -127,8 +148,9 @@ local opts = { -- Autocompletion
     sources = {
       default = {
         'lsp',
-        'path',
         'snippets',
+        'copilot',
+        'path',
         'buffer',
         'dadbod',
       },
@@ -138,12 +160,28 @@ local opts = { -- Autocompletion
           module = 'vim_dadbod_completion.blink',
           score_offset = 100,
         },
+        copilot = {
+          name = 'copilot',
+          module = 'blink-cmp-copilot',
+          score_offset = 100,
+          async = true,
+          transform_items = function(_, items)
+            local CompletionItemKind = require('blink.cmp.types').CompletionItemKind
+            local kind_idx = #CompletionItemKind + 1
+            CompletionItemKind[kind_idx] = 'Copilot'
+            for _, item in ipairs(items) do
+              item.kind = kind_idx
+              item.kind_icon = ''
+            end
+            return items
+          end,
+        },
       },
     },
   },
   fuzzy = {
     prebuilt_binaries = {
-      force_version = 'v1.7.0',
+      force_version = VERSION,
     },
   },
   term = {
