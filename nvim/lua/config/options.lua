@@ -91,5 +91,9 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.fillchars = [[eob: ,fold: ,foldopen:▾,foldsep: ,foldclose:▸]]
 vim.opt.foldenable = true
+
+-- copilot
+vim.g.copilot_enabled = false
+
 -- set default shell at all times
 vim.opt.shell = '/bin/bash'

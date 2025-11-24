@@ -2,8 +2,10 @@ local toggle_key = '<C-c>'
 local opts = {
   'coder/claudecode.nvim',
   dependencies = {
-    'folke/snacks.nvim',
-    tag = 'v2.23.0',
+    {
+      'folke/snacks.nvim',
+      tag = 'v2.30.0',
+    },
   },
   tag = 'v0.3.0',
   opts = {
@@ -28,21 +30,21 @@ local opts = {
   },
   keys = {
     { toggle_key, '<cmd>ClaudeCodeFocus<cr>', desc = 'Claude Code', mode = { 'n', 'x' } },
-    { '<leader>ct', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },
-    { '<leader>cf', '<cmd>ClaudeCodeFocus<cr>', desc = 'Focus Claude' },
-    { '<leader>cr', '<cmd>ClaudeCode --resume<cr>', desc = 'Resume Claude' },
-    { '<leader>cc', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },
-    { '<leader>cb', '<cmd>ClaudeCodeAdd %<cr>', desc = 'Add current buffer' },
-    { '<leader>cs', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Send to Claude' },
+    { '<leader>at', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },
+    { '<leader>af', '<cmd>ClaudeCodeFocus<cr>', desc = 'Focus Claude' },
+    { '<leader>ar', '<cmd>ClaudeCode --resume<cr>', desc = 'Resume Claude' },
+    { '<leader>ac', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },
+    { '<leader>ab', '<cmd>ClaudeCodeAdd %<cr>', desc = 'Add current buffer' },
+    { '<leader>as', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Send to Claude' },
     {
-      '<leader>cS',
+      '<leader>aS',
       '<cmd>ClaudeCodeTreeAdd<cr>',
       desc = 'Add file',
       ft = { 'NvimTree', 'neo-tree', 'oil' },
     },
     -- Diff management
-    { '<leader>ca', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
-    { '<leader>cd', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff' },
+    { '<leader>aa', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
+    { '<leader>ad', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff' },
   },
 }
 
