@@ -48,6 +48,13 @@ local opts = {
             analyses = {
               unusedparams = true,
               ST1003 = false,
+              ST1001 = false,
+            },
+            hints = {
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
             },
             verboseOutput = true,
             buildFlags = { '-tags=integration,unit,endtoendtest,smoke' },
