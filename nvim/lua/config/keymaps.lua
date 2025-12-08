@@ -73,7 +73,7 @@ vim.keymap.set('n', '<leader>bt', '<cmd>:tabnew<CR>', { desc = 'new [t]ab' })
 vim.keymap.set('n', '<leader>br', '<cmd>:e!<CR>', { desc = '[r]efresh' })
 vim.keymap.set('n', '<leader>bd', "<cmd>echo expand('% p')<CR>", { desc = 'view [d]irectory path' })
 vim.keymap.set('n', '<leader>bw', '<cmd>w<CR>', { desc = '[w]rite' })
-vim.keymap.set('n', '<leader>bs', '<cmd>wa<CR>', { desc = '[s]ave/write all buffers' })
+vim.keymap.set('n', '<leader>baw', '<cmd>wa<CR>', { desc = '[W]rite all buffers' })
 vim.keymap.set('n', '<leader>bQ', '<cmd>q<CR>', { desc = '[q]uit current' })
 vim.keymap.set('n', '<leader>baQ', '<cmd>quitall!<CR>', { desc = '[q]uit' })
 -- yanks on buffers
