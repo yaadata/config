@@ -4,16 +4,32 @@ local opts = {
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
-  version = 'v1.1.0',
+  commit = '73876e66efafd1f4b76a117f8923484936eb934e',
   opts = {
-    close_on_select = false,
-    git_status = {
-      enabled = false,
-    },
-    icon_provider = 'nvim_web_devicons',
-    mappings = {
-      ['-'] = 'GotoParent',
-      ['_'] = 'SelectSplit',
+    views = {
+      finder = {
+        close_on_select = false,
+        git_status = {
+          enabled = true,
+          symbols = {
+            Added = '',
+            Modified = '',
+            Deleted = '󰆴',
+            Conflict = '',
+            Ignored = '',
+            Renamed = '󰆑',
+          },
+        },
+        icon_provider = 'nvim_web_devicons',
+        icon = {
+          directory_empty = '',
+          directory_expanded = '',
+        },
+        mappings = {
+          ['-'] = 'GotoParent',
+          ['_'] = 'SelectSplit',
+        },
+      },
     },
   },
   keys = {
