@@ -29,6 +29,15 @@ local opts = {
           ['-'] = 'GotoParent',
           ['_'] = 'SelectSplit',
         },
+        win = {
+          kinds = {
+            float = {
+              height = '80%',
+              left = '70%',
+              width = '30%',
+            },
+          },
+        },
       },
     },
   },
@@ -37,7 +46,7 @@ local opts = {
       '<leader>ft',
       function()
         require('fyler').toggle {
-          kind = 'split_left_most',
+          kind = 'float',
         }
       end,
       desc = 'Open File Tree',
@@ -46,8 +55,8 @@ local opts = {
       '<leader>fg',
       function()
         require('fyler').toggle {
+          kind = 'float',
           dir = vim.fs.root(0, '.git'),
-          kind = 'split_left_most',
         }
       end,
       desc = 'Open Nearest Git File Tree',
