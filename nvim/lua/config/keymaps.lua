@@ -35,8 +35,20 @@ vim.keymap.set('n', '<leader>qlp', '<cmd>lprevious<CR>', { desc = '[P]revious lo
 vim.keymap.set('n', '<leader>qln', '<cmd>lnext<CR>', { desc = '[N]ext location list' })
 
 -- testing
+
+vim.keymap.set('n', '<leader>bca0', function()
+  local text = { 'SCENARIO:   ' }
+  local start_line = vim.fn.line '.'
+  vim.api.nvim_put(text, 'l', true, true)
+  -- Select the inserted lines in visual mode
+  local end_line = start_line + #text
+  vim.cmd('normal! ' .. start_line + 1 .. 'GV' .. end_line .. 'G')
+  -- Trigger the gc command
+  vim.cmd 'normal gc'
+end, { desc = 'Insert text "Scenario"' })
+
 vim.keymap.set('n', '<leader>bca1', function()
-  local text = { '[A]rrange' }
+  local text = { '========= [A]rrange =========' }
   local start_line = vim.fn.line '.'
   vim.api.nvim_put(text, 'l', true, true)
   -- Select the inserted lines in visual mode
@@ -47,7 +59,7 @@ vim.keymap.set('n', '<leader>bca1', function()
 end, { desc = 'Insert text "arrange"' })
 
 vim.keymap.set('n', '<leader>bca2', function()
-  local text = { '[A]ct' }
+  local text = { '========= [A]ct     =========' }
   local start_line = vim.fn.line '.'
   vim.api.nvim_put(text, 'l', true, true)
   -- Select the inserted lines in visual mode
@@ -58,7 +70,7 @@ vim.keymap.set('n', '<leader>bca2', function()
 end, { desc = 'Insert text "act"' })
 
 vim.keymap.set('n', '<leader>bca3', function()
-  local text = { '[A]ssert' }
+  local text = { '========= [A]ssert  =========' }
   local start_line = vim.fn.line '.'
   vim.api.nvim_put(text, 'l', true, true)
   -- Select the inserted lines in visual mode
@@ -75,6 +87,7 @@ vim.keymap.set('n', '<leader>bd', "<cmd>echo expand('% p')<CR>", { desc = 'view 
 vim.keymap.set('n', '<leader>bw', '<cmd>w<CR>', { desc = '[w]rite' })
 vim.keymap.set('n', '<leader>baw', '<cmd>wa<CR>', { desc = '[W]rite all buffers' })
 vim.keymap.set('n', '<leader>bQ', '<cmd>q<CR>', { desc = '[q]uit current' })
+vim.keymap.set('n', 'Q', '<cmd>q<CR>', { desc = '[q]uit current' })
 vim.keymap.set('n', '<leader>baQ', '<cmd>quitall!<CR>', { desc = '[q]uit' })
 -- yanks on buffers
 vim.keymap.set('n', '<leader>byp', function()
