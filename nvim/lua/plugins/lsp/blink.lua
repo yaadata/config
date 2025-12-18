@@ -6,7 +6,6 @@ local opts = { -- Autocompletion
   dependencies = {
     'rafamadriz/friendly-snippets',
     'kristijanhusak/vim-dadbod-completion',
-    'giuxtaposition/blink-cmp-copilot',
     'onsails/lspkind.nvim',
   },
   event = 'VeryLazy',
@@ -149,7 +148,6 @@ local opts = { -- Autocompletion
       default = {
         'lsp',
         'snippets',
-        'copilot',
         'path',
         'buffer',
         'dadbod',
@@ -159,22 +157,6 @@ local opts = { -- Autocompletion
           name = 'Dadbod',
           module = 'vim_dadbod_completion.blink',
           score_offset = 100,
-        },
-        copilot = {
-          name = 'copilot',
-          module = 'blink-cmp-copilot',
-          score_offset = 100,
-          async = true,
-          transform_items = function(_, items)
-            local CompletionItemKind = require('blink.cmp.types').CompletionItemKind
-            local kind_idx = #CompletionItemKind + 1
-            CompletionItemKind[kind_idx] = 'Copilot'
-            for _, item in ipairs(items) do
-              item.kind = kind_idx
-              item.kind_icon = ''
-            end
-            return items
-          end,
         },
       },
     },
