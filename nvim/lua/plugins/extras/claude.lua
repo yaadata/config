@@ -14,6 +14,7 @@ local opts = {
         position = 'float',
         width = 0.9,
         height = 0.9,
+        border = 'rounded',
         keys = {
           claude_hide = {
             toggle_key,
