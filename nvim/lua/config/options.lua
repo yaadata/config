@@ -23,6 +23,7 @@ vim.opt.showmode = false
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
+vim.opt.timeoutlen = 250
 
 -- Enable break indent
 vim.opt.breakindent = true
