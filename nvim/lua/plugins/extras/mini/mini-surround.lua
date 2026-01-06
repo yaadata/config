@@ -1,7 +1,7 @@
 local opts = {
-  'echasnovski/mini.surround',
+  'nvim-mini/mini.surround',
   opts = {},
-  commit = '48a9795c9d352c771e1ab5dedab6063c0a2df037',
+  commit = 'cc7b9d0a056b5fa6915ffac1cb91f29bf7c96f69',
   config = function()
     require('mini.surround').setup {
       mappings = {

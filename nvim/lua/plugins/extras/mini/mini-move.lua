@@ -1,6 +1,6 @@
 local opts = {
-  'echasnovski/mini.move',
-  version = '*',
+  'nvim-mini/mini.move',
+  commit = '4d214202d71e0a4066b6288176bbe88f268f9777',
   config = function()
     require('mini.move').setup {
       mappings = {
