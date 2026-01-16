@@ -6,6 +6,8 @@ set -gx CLAUDE_CONFIG_DIR ~/.config/claude
 
 set -gx CLAUDE_CODE_DISABLE_BACKGROUND_TASKS true
 
+set -gx DISABLE_AUTOUPDATER 1
+
 set -gx XDG_CONFIG_HOME ~/.config
 
 set -gx KUBECONFIG ~/.kube/config
