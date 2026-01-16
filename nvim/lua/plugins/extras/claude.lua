@@ -1,13 +1,13 @@
 local toggle_key = '<C-c>'
 local opts = {
-  'coder/claudecode.nvim',
+  'yaadata/claudecode.nvim',
   dependencies = {
     {
       'folke/snacks.nvim',
       tag = 'v2.30.0',
     },
   },
-  commit = '93f8e48b1f6cbf2469b378c20b3df4115252d379',
+  commit = 'cf1641c788def5e44c497e48dc7b9e63aeac95f1',
   opts = {
     terminal = {
       snacks_win_opts = {
