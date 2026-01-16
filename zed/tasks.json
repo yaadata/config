@@ -1,0 +1,33 @@
+[
+  // =========== Lazygit  =========== 
+  {
+    "label": "lazygit",
+    "command": "lazygit",
+    "args": [],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  // =========== Claude Code  =========== 
+  {
+    "label": "Claude Code",
+    "command": "claude",
+    "args": [],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Claude Code (resume)",
+    "command": "claude",
+    "args": ["--resume"],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Claude Code (continue)",
+    "command": "claude",
+    "args": ["--continue"],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false
+  }
+]

@@ -8,7 +8,8 @@ Autodesk/**
 qBittorrent/**
 iterm2/**
 LazyVimOptions
-zed/**
+zed/prompts/**
+zed/conversations/**
 **/lazy-lock.json
 claude/shell-snapshots/**
 dlv/**
