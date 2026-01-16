@@ -1,0 +1,174 @@
+[
+  // ============ BUFFER MANAGEMENT ============
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "space b x": "pane::CloseActiveItem",
+      "space b shift-x": "pane::CloseInactiveItems",
+      "space b a x": "pane::CloseInactiveItems"
+    }
+  },
+
+  // ============ SEARCH & NAVIGATION ============
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "space s f": "file_finder::Toggle",
+      "space s g": "pane::DeploySearch",
+      "space s .": "file_finder::Toggle",
+      "space s r": "search::FocusSearch",
+    }
+  },
+
+  // ============= Terminal =============
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space g g": ["task::Spawn", { "task_name": "lazygit" }]
+    }
+  },
+
+  // ============ LSP (all <leader>l prefixed) ============
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      // symbols
+      "space l s": "outline::Toggle",
+      "space l w s": "project_symbols::Toggle",
+      
+      // actions
+      "space l f": "editor::Format",
+      "space l r": "editor::Rename",
+      "space l a": "editor::ToggleCodeActions",
+      "space l i": "editor::ToggleInlayHints",
+
+      // diagnostics
+      "space l d": "diagnostics::Deploy",
+      "space l d f": "diagnostics::DeployCurrentFile",
+      "space l d w": "diagnostics::ToggleWarnings",
+      "space l d d": "editor::ToggleDiagnostics",
+
+      // navigation (] and [ style, vim-like)
+      "] d": "editor::GoToDiagnostic",
+      "[ d": "editor::GoToPreviousDiagnostic",
+      
+      // navigation (keeping g-prefixed vim conventions)
+      "g shift-d": "editor::GoToDeclaration",
+      "g r": "editor::FindAllReferences",
+      "g shift-i": "editor::GoToImplementation",
+      "g y": "editor::GoToTypeDefinition",
+      "shift-k": "editor::Hover"
+    }
+  },
+
+  // ============ SYNTAX TREE NAVIGATION (partial treewalker) ============
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      // selection-based alternative
+      "alt-shift-j": "editor::SelectSmallerSyntaxNode",
+      "alt-shift-h": "editor::SelectLargerSyntaxNode"
+    }
+  },
+
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "alt-shift-k": "editor::SelectLargerSyntaxNode",
+      "alt-shift-j": "editor::SelectSmallerSyntaxNode"
+    }
+  },
+
+  // ============ GIT (gitsigns equivalent) ============
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      // navigation
+      "] c": "editor::GoToHunk",
+      "[ c": "editor::GoToPreviousHunk",
+      
+      // hunk actions
+      "space g h s": "git::StageAndNext",
+      "space g h r": "git::Restore",
+      "space g h shift-s": "git::StageFile",
+      "space g h u": "git::UnstageAndNext",
+      "space g h shift-r": "git::RestoreFile",
+      "space g h p": "editor::ToggleSelectedDiffHunks",
+      
+      // blame
+      "space g b": "editor::BlameHover",
+      "space g shift-b": "git::Blame",
+      
+      // toggles
+      "space g t b": "editor::ToggleGitBlameInline",
+      "space g t d": "git::Diff"
+    }
+  },
+  
+  // ============ Remote SSH ============
+  {
+    "context": "Workspace && vim_mode == normal",
+    "bindings": {
+      "space r t": "projects::OpenRemote"
+    }
+  },
+
+  // ============ File Tree ============
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "space f t": "workspace::ToggleLeftDock"
+    }
+  },
+  
+  // ============ Claude Code ============ 
+  {
+    "context": "Workspace",
+    "bindings": {
+      // terminal toggle (closest to your <C-c> toggle)
+      "ctrl-c": "workspace::ToggleRightDock",
+      // task spawning
+      "space a t": "workspace::ToggleRightDock",
+      "space a r": ["task::Spawn", { "task_name": "Claude Code (resume)" }],
+      "space a c": ["task::Spawn", { "task_name": "Claude Code (continue)" }]
+    }
+  },
+
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "space a a": "assistant::ToggleFocus",
+      "space a i": "assistant::InlineAssist",
+      // send selection to Claude Code thread
+      "space a s": "agent::AddSelectionToThread",
+      
+      // toggle agent panel
+      "space a t": "workspace::ToggleRightDock"
+    }
+  },
+
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "ctrl-c": "agent::ToggleAgentPane",
+      // new Claude Code thread specifically
+      "space a c": ["task::Spawn", { "task_name": "Claude Code (continue)" }],
+      "ctrl-c": "agent::ToggleAgentPane"
+    }
+  },
+
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      // terminal toggle (closest to your <C-c> toggle)
+      "ctrl-c": "workspace::ToggleRightDock",
+    }
+  },
+
+  {
+    "context": "AgentPanel",
+    "bindings": {
+      "ctrl-c": "workspace::ToggleRightDock"
+    }
+  }
+]
