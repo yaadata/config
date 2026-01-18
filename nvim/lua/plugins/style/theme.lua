@@ -1,5 +1,6 @@
 local opts = {
   'catppuccin/nvim',
+  tag = 'v1.11.0',
   name = 'catppuccin',
   priority = 1000,
   lazy = false,

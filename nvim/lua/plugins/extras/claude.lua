@@ -7,7 +7,7 @@ local opts = {
       tag = 'v2.30.0',
     },
   },
-  tag = 'v0.3.0',
+  commit = '93f8e48b1f6cbf2469b378c20b3df4115252d379',
   opts = {
     terminal = {
       snacks_win_opts = {
