@@ -7,10 +7,12 @@ local opts = {
   config = function()
     local preview_enabled = false
     local oil = require 'oil'
+    local MAX_WIDTH = 0.85
+    local MAX_HEIGHT = 0.75
     oil.setup {
       float = {
-        max_width = 0.85,
-        max_height = 0.75,
+        max_width = MAX_WIDTH,
+        max_height = MAX_HEIGHT,
         border = 'rounded',
         win_options = {
           winblend = 0,
@@ -18,6 +20,7 @@ local opts = {
       },
       silence_scp_warning = true,
       keymaps = {
+        ['q'] = { 'actions.close', mode = 'n' },
         ['gp'] = {
           desc = 'Toggle Preview',
           callback = function()
@@ -30,6 +33,18 @@ local opts = {
             else
               vim.cmd.pclose()
               preview_enabled = false
+              -- removing the preview buffer cuts the width in half,
+              -- we need to resize the existing oil buffer back to its
+              -- original settings
+              local win = vim.api.nvim_get_current_win()
+              local ui = vim.api.nvim_list_uis()[1]
+              vim.api.nvim_win_set_config(win, {
+                relative = 'editor',
+                width = math.floor(ui.width * MAX_WIDTH),
+                height = math.floor(ui.height * MAX_HEIGHT),
+                row = math.floor(ui.height * (1 - MAX_HEIGHT) / 2),
+                col = math.floor(ui.width * (1 - MAX_WIDTH) / 2),
+              })
             end
           end,
         },
