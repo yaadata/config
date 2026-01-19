@@ -23,6 +23,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   { import = 'plugins' },
   { import = 'plugins.extras' },
+  { import = 'plugins.extras.files' },
   { import = 'plugins.extras.git' },
   { import = 'plugins.extras.mini' },
   { import = 'plugins.language' },
