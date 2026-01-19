@@ -1,13 +1,17 @@
 local opts = {
   'stevearc/oil.nvim',
   opts = {},
-  version = 'v2.13.0',
+  commit = 'f55b25e493a7df76371cfadd0ded5004cb9cd48a',
   -- Optional dependencies
   dependencies = { 'nvim-tree/nvim-web-devicons', { 'echasnovski/mini.icons', opts = {} } },
   config = function()
     local preview_enabled = false
-    require('oil').setup {
+    local oil = require 'oil'
+    oil.setup {
       float = {
+        max_width = 0.85,
+        max_height = 0.75,
+        border = 'rounded',
         win_options = {
           winblend = 0,
         },
@@ -37,7 +41,9 @@ local opts = {
         },
       },
     }
-    vim.keymap.set('n', '<leader>fo', '<CMD>Oil<CR>', { desc = 'Open Oil for current directory' })
+    vim.keymap.set('n', '<leader>fo', function()
+      oil.toggle_float()
+    end, { desc = 'Open Oil for current directory' })
   end,
 }
 
