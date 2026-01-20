@@ -7,8 +7,8 @@ local opts = {
   config = function()
     local preview_enabled = false
     local oil = require 'oil'
-    local MAX_WIDTH = 0.85
-    local MAX_HEIGHT = 0.75
+    local MAX_WIDTH = 0.86
+    local MAX_HEIGHT = 0.76
     oil.setup {
       float = {
         max_width = MAX_WIDTH,
@@ -17,6 +17,14 @@ local opts = {
         win_options = {
           winblend = 0,
         },
+        override = function(conf)
+          local ui = vim.api.nvim_list_uis()[1]
+          conf.width = math.floor(ui.width * MAX_WIDTH)
+          conf.height = math.floor(ui.height * MAX_HEIGHT)
+          conf.row = math.floor(ui.height * (1 - MAX_HEIGHT) / 2)
+          conf.col = math.floor(ui.width * (1 - MAX_WIDTH) / 2)
+          return conf
+        end,
       },
       silence_scp_warning = true,
       keymaps = {
