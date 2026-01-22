@@ -44,7 +44,7 @@ local opts = {
             },
             -- local = "github.com/muxinc/mux",
             completeUnimported = true,
-            usePlaceholders = true,
+            usePlaceholders = false,
             analyses = {
               unusedparams = true,
               ST1003 = false,
