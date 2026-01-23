@@ -1,6 +1,7 @@
 local opts = {
   'stevearc/overseer.nvim',
   opts = {},
+  tag = 'v1.6.0',
   config = function()
     require('overseer').setup {
       templates = {
