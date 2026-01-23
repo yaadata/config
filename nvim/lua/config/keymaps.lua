@@ -18,6 +18,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- git
 vim.keymap.set('n', '<leader>gg', '<cmd>LazyGitToggle<cr>', { desc = 'LazyGit' })
+vim.keymap.set('n', '<leader>pk', '<cmd>K9sToggle<cr>', { desc = 'K9s Terminal' })
 vim.keymap.set('n', '<leader>gtd', '<cmd>GHDashToggle<cr>', { desc = 'gh dash extension' })
 
 -- window management
