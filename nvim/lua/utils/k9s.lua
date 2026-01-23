@@ -17,7 +17,7 @@ M.toggle = function()
     if k9s_term then
       k9s_term:toggle(size, direction)
 
-      vim.cmd 'set ft=dash'
+      vim.cmd 'set ft=k9s'
       vim.keymap.set('t', '<c-_>', function()
         k9s_term:toggle(size, direction)
       end, { buffer = true })
