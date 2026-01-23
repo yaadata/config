@@ -36,3 +36,4 @@ vim.api.nvim_create_autocmd('BufEnter', {
 
 vim.api.nvim_create_user_command('LazyGitToggle', require('utils.lazygit').toggle, {})
 vim.api.nvim_create_user_command('GHDashToggle', require('utils.gh_dash').toggle, {})
+vim.api.nvim_create_user_command('K9sToggle', require('utils.k9s').toggle, {})
