@@ -47,6 +47,7 @@ local M = {}
 M.git_status_difftastic_picker = function(opts)
   opts = opts or {}
   opts.previewer = git_difftastic_previewer(opts)
+  opts.cache_picker = false
 
   builtin.git_status(opts)
 end
