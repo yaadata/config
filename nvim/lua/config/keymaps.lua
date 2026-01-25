@@ -83,7 +83,7 @@ end, { desc = 'Insert text "assert"' })
 
 -- navigating buffers
 vim.keymap.set('n', '<leader>bt', '<cmd>:tabnew<CR>', { desc = 'new [t]ab' })
-vim.keymap.set('n', '<leader>br', '<cmd>:e!<CR>', { desc = '[r]efresh' })
+vim.keymap.set('n', '<leader>br', '<cmd>e! | noh<CR>', { desc = '[r]efresh' })
 vim.keymap.set('n', '<leader>bd', "<cmd>echo expand('% p')<CR>", { desc = 'view [d]irectory path' })
 vim.keymap.set('n', '<leader>bw', '<cmd>w<CR>', { desc = '[w]rite' })
 vim.keymap.set('n', '<leader>baw', '<cmd>wa<CR>', { desc = '[W]rite all buffers' })
