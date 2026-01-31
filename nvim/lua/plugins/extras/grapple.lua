@@ -1,5 +1,6 @@
 local opts = {
   'cbochs/grapple.nvim',
+  commit = 'b41ddfc1c39f87f3d1799b99c2f0f1daa524c5f7',
   dependencies = {
     { 'nvim-tree/nvim-web-devicons', lazy = true },
     'nvim-lua/plenary.nvim',

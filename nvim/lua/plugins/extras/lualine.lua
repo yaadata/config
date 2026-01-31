@@ -1,6 +1,6 @@
 local opts = {
-
   'nvim-lualine/lualine.nvim',
+  commit = 'e5459241bde5949305b9583bb4eedf322a2a8e7c',
   dependencies = {
     {
       'nvim-tree/nvim-web-devicons',
