@@ -17,6 +17,7 @@ dlv/**
 **/fish_variables
 **/fish_plugins
 claude/**
+!claude/statusline-command.sh
 .claude/**
 .elixir-tools/**
 elixir-ls/** 
