@@ -1,6 +1,6 @@
 local opts = {
   'yaadata/codex.nvim',
-  commit = 'c9e8b56690a7d1d4e67fd6bc78ac5893b4b5102a',
+  commit = '9ac49c4f7eedb18c0d5d0932b92750a722c081f2',
   config = function()
     require('codex').setup {
       cmd = 'codex',
@@ -8,7 +8,7 @@ local opts = {
       env = {},
       auto_start = false,
       terminal = {
-        provider = 'snacks', -- auto | snacks | native | external | none
+        provider = 'auto', -- auto | snacks | native | external | none
         window = 'float', -- vsplit | hsplit | float
         vsplit = {
           side = 'right', -- left | right
@@ -24,6 +24,11 @@ local opts = {
           border = 'rounded',
           title = ' Codex ',
           title_pos = 'center', -- left | center | right
+        },
+        auto_close = false,
+        keymaps = {
+          toggle = '<C-c>', -- terminal-mode toggle for Codex window
+          close = '<C-x>', -- set a string (e.g. "<C-x>") to close Codex session
         },
       },
       keymaps = {
