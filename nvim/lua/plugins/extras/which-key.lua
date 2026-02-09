@@ -8,6 +8,7 @@ local opts = { -- Useful plugin to show you pending keybinds.
     -- Document existing key chains
     wk.add {
       { '<leader>a', group = '[A]rtificial Intelligence', mode = { 'n', 'v' }, icon = '' },
+      { '<leader>ao', group = '[O]pen AI Codex', mode = { 'n', 'v' }, icon = '' },
       { '<leader>l', group = '[L]sp', icon = '󰅩' },
       { '<leader>lt', group = '[T]oggle', icon = '󰔢' },
       { '<leader>lw', group = '[W]orkspace', icon = '󱂬' },
