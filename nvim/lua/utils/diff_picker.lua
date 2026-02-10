@@ -2,45 +2,126 @@ local builtin = require 'telescope.builtin'
 local pickers = require 'telescope.pickers'
 local finders = require 'telescope.finders'
 local previewers = require 'telescope.previewers'
+local putils = require 'telescope.previewers.utils'
 local from_entry = require 'telescope.from_entry'
 local utils = require 'telescope.utils'
 local conf = require('telescope.config').values
 
 local git_command = utils.__git_command
 
+local function strip_ansi(line)
+  return line:gsub('\27%[[0-9;]*m', '')
+end
+
+local filetype_by_language = {
+  c = 'c',
+  cpp = 'cpp',
+  fish = 'fish',
+  go = 'go',
+  java = 'java',
+  javascript = 'javascript',
+  json = 'json',
+  lua = 'lua',
+  markdown = 'markdown',
+  python = 'python',
+  rust = 'rust',
+  sh = 'sh',
+  shell = 'sh',
+  terraform = 'terraform',
+  text = 'text',
+  toml = 'toml',
+  typescript = 'typescript',
+  yaml = 'yaml',
+}
+
+local function preview_filetype_for_path(path)
+  if not path or path == '' then
+    return 'diff'
+  end
+
+  local ft = vim.filetype.match { filename = path }
+  if ft and ft ~= '' then
+    return ft
+  end
+
+  return 'diff'
+end
+
+local function preview_filetype_for_language(language)
+  language = (language or ''):lower()
+  return filetype_by_language[language] or 'diff'
+end
+
+local function is_difftastic_output(lines)
+  if not lines or #lines == 0 then
+    return false
+  end
+
+  local max_check = math.min(#lines, 40)
+  for i = 1, max_check do
+    if lines[i]:match '^.+%s+%-%-%-%s+%d+/%d+%s+%-%-%-%s+.+$' then
+      return true
+    end
+  end
+
+  return false
+end
+
+local function git_diff_command_for_entry(entry, opts)
+  local command = git_command({ '--no-pager', 'diff' }, opts)
+
+  if entry.status and (entry.status == '??' or entry.status == 'A ') then
+    local p = from_entry.path(entry, true, false)
+    if p == nil or p == '' then
+      return nil
+    end
+    table.insert(command, { '--no-index', '/dev/null' })
+  else
+    table.insert(command, { 'HEAD', '--' })
+  end
+
+  return utils.flatten { utils.flatten(command), entry.value }
+end
+
 local git_difftastic_previewer = function(opts)
-  return previewers.new_termopen_previewer {
+  return previewers.new_buffer_previewer {
     title = 'Git Diff Preview',
 
-    get_command = function(entry)
-      local command = git_command({ '--no-pager', 'diff' }, opts)
-
-      if entry.status and (entry.status == '??' or entry.status == 'A ') then
-        local p = from_entry.path(entry, true, false)
-        if p == nil or p == '' then
-          return
-        end
-        table.insert(command, { '--no-index', '/dev/null' })
-      else
-        table.insert(command, { 'HEAD', '--' })
-      end
-
-      return utils.flatten { utils.flatten(command), entry.value }
+    get_buffer_by_name = function(_, entry)
+      return string.format('%s:%s', entry.status or '', entry.value)
     end,
 
-    scroll_fn = function(self, direction)
-      if not self.state then
+    define_preview = function(self, entry)
+      local cmd = git_diff_command_for_entry(entry, opts)
+      if not cmd then
         return
       end
 
-      local bufnr = self.state.termopen_bufnr
-      -- 0x05 -> <C-e>; 0x19 -> <C-y>
-      local input = direction > 0 and string.char(0x05) or string.char(0x19)
-      local count = math.abs(direction)
+      putils.job_maker(cmd, self.state.bufnr, {
+        value = entry.value,
+        bufname = self.state.bufname,
+        cwd = opts.cwd,
+        callback = function(bufnr, content)
+          if not vim.api.nvim_buf_is_valid(bufnr) then
+            return
+          end
 
-      vim.api.nvim_win_call(vim.fn.bufwinid(bufnr), function()
-        vim.cmd([[normal! ]] .. count .. input)
-      end)
+          if content ~= nil then
+            for i, line in ipairs(content) do
+              content[i] = strip_ansi(line)
+            end
+            vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, content)
+          end
+
+          local lines = content or vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+          local ft = 'diff'
+          if is_difftastic_output(lines) then
+            local path = from_entry.path(entry, false, false) or entry.value
+            ft = preview_filetype_for_path(path)
+          end
+          putils.highlighter(bufnr, ft, opts)
+        end,
+      })
     end,
   }
 end
@@ -53,10 +134,6 @@ M.git_status_difftastic_picker = function(opts)
   opts.cache_picker = false
 
   builtin.git_status(opts)
-end
-
-local function strip_ansi(line)
-  return line:gsub('\27%[[0-9;]*m', '')
 end
 
 local function get_diff_parent_output()
@@ -153,6 +230,14 @@ local function parse_sections(lines)
   return sections
 end
 
+local function preview_filetype_for_section(section)
+  if section and section.file then
+    return preview_filetype_for_path(section.file)
+  end
+
+  return preview_filetype_for_language(section and section.language)
+end
+
 M.git_diff_parent_picker = function(opts)
   opts = opts or {}
 
@@ -194,7 +279,7 @@ M.git_diff_parent_picker = function(opts)
         title = 'Diff Parent Preview',
         define_preview = function(self, entry)
           vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, entry.value.lines)
-          vim.bo[self.state.bufnr].filetype = 'diff'
+          vim.bo[self.state.bufnr].filetype = preview_filetype_for_section(entry.value)
         end,
       },
     })
