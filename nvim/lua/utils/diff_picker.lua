@@ -13,6 +13,14 @@ local function strip_ansi(line)
   return line:gsub('\27%[[0-9;]*m', '')
 end
 
+local function sanitize_ansi_text(text)
+  if not text then
+    return ''
+  end
+
+  return strip_ansi(text):gsub('%f[%[]%[[0-9;]*m', '')
+end
+
 local filetype_by_language = {
   c = 'c',
   cpp = 'cpp',
@@ -138,20 +146,27 @@ end
 
 local function get_diff_parent_output()
   local lines = vim.fn.systemlist { 'git-town', 'diff-parent' }
-  if vim.v.shell_error ~= 0 then
-    return nil, table.concat(lines, '\n')
-  end
 
   for i, line in ipairs(lines) do
     lines[i] = strip_ansi(line)
   end
 
+  local output = table.concat(lines, '\n')
+  if vim.v.shell_error ~= 0 then
+    return nil, output
+  end
+
   return lines, nil
+end
+
+local function is_diff_parent_tty_error(err)
+  local normalized = sanitize_ansi_text(err):lower()
+  return normalized:find('could not open a new tty', 1, true) ~= nil or normalized:find('/dev/tty', 1, true) ~= nil
 end
 
 local function parse_sections(lines)
   local parse_diff_line_numbers = function(line)
-    local left, right = line:match('^%s*([%.%d]+)%s+([%.%d]+)')
+    local left, right = line:match '^%s*([%.%d]+)%s+([%.%d]+)'
     if not left or not right then
       return nil, nil
     end
@@ -189,7 +204,7 @@ local function parse_sections(lines)
   local current = nil
 
   for _, line in ipairs(lines) do
-    local file, page, language = line:match('^(.-)%s+%-%-%-%s+(%d+/%d+)%s+%-%-%-%s+(.*)$')
+    local file, page, language = line:match '^(.-)%s+%-%-%-%s+(%d+/%d+)%s+%-%-%-%s+(.*)$'
 
     if file and page and language then
       if current ~= nil then
@@ -248,7 +263,12 @@ M.git_diff_parent_picker = function(opts)
 
   local lines, err = get_diff_parent_output()
   if lines == nil then
-    vim.notify('git-town diff-parent failed:\n' .. err, vim.log.levels.ERROR)
+    if is_diff_parent_tty_error(err) then
+      vim.notify('git-town not setup. complete setup in terminal first.', vim.log.levels.WARN)
+      return
+    end
+
+    vim.notify('git-town diff-parent failed:\n' .. sanitize_ansi_text(err), vim.log.levels.ERROR)
     return
   end
 
