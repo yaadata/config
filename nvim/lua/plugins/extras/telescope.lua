@@ -130,7 +130,8 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
     local git_diff = require 'utils.diff_picker'
 
     -- Search through git status and find changes on a per file basis
-    map('<leader>gsd', git_diff.git_status_difftastic_picker, 'Diff')
+    map('<leader>gsc', git_diff.git_status_difftastic_picker, 'Diff current changes')
+    map('<leader>gsb', git_diff.git_diff_parent_picker, 'Diff parent with current branch')
 
     -- Search through git commits for a select range of lines in a buffer
     map('<leader>gsh', builtin.git_bcommits_range, 'Commit history in the current buffer range.')
