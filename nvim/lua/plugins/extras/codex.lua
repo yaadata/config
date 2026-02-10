@@ -1,6 +1,6 @@
 local opts = {
   'yaadata/codex.nvim',
-  commit = '9ac49c4f7eedb18c0d5d0932b92750a722c081f2',
+  version = '0.1.0',
   config = function()
     require('codex').setup {
       cmd = 'codex',
@@ -29,6 +29,12 @@ local opts = {
         keymaps = {
           toggle = '<C-c>', -- terminal-mode toggle for Codex window
           close = '<C-x>', -- set a string (e.g. "<C-x>") to close Codex session
+          nav = {
+            left = '<C-h>', -- split windows only; set false to disable
+            down = '<C-j>', -- split windows only; set false to disable
+            up = '<C-k>', -- split windows only; set false to disable
+            right = '<C-l>', -- split windows only; set false to disable
+          },
         },
       },
       keymaps = {
