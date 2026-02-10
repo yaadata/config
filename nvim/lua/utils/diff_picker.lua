@@ -73,6 +73,41 @@ local function get_diff_parent_output()
 end
 
 local function parse_sections(lines)
+  local parse_diff_line_numbers = function(line)
+    local left, right = line:match('^%s*([%.%d]+)%s+([%.%d]+)')
+    if not left or not right then
+      return nil, nil
+    end
+
+    if not left:match '^%d+$' then
+      left = nil
+    end
+    if not right:match '^%d+$' then
+      right = nil
+    end
+
+    return tonumber(left), tonumber(right)
+  end
+
+  local find_section_lnum = function(section_lines)
+    local first_right = nil
+    local first_left = nil
+
+    for i = 2, #section_lines do
+      local left, right = parse_diff_line_numbers(section_lines[i])
+      if left or right then
+        first_right = first_right or right
+        first_left = first_left or left
+
+        if left ~= right then
+          return right or left
+        end
+      end
+    end
+
+    return first_right or first_left or 1
+  end
+
   local sections = {}
   local current = nil
 
@@ -99,6 +134,10 @@ local function parse_sections(lines)
     table.insert(sections, current)
   end
 
+  for _, section in ipairs(sections) do
+    section.lnum = find_section_lnum(section.lines)
+  end
+
   if #sections == 0 and #lines > 0 then
     sections = {
       {
@@ -106,6 +145,7 @@ local function parse_sections(lines)
         page = '1/1',
         language = 'Text',
         lines = lines,
+        lnum = 1,
       },
     }
   end
@@ -142,8 +182,10 @@ M.git_diff_parent_picker = function(opts)
           return {
             value = section,
             ordinal = table.concat({ section.file, section.page, section.language }, ' '),
-            display = string.format('%s (%s) [%s]', section.file, section.page, section.language),
+            display = string.format('%s:%d (%s) [%s]', section.file, section.lnum, section.page, section.language),
             filename = section.file,
+            lnum = section.lnum,
+            col = 1,
           }
         end,
       },
