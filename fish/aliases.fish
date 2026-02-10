@@ -76,6 +76,7 @@ abbr gmc "git merge --continue"
 abbr gp "git push"
 abbr gpfl "git push --force-with-lease"
 abbr gpo "git push origin"
+abbr gplla git_pull_all
 abbr gpll "git pull --rebase"
 abbr greb "git rebase"
 abbr grebn 'git rebase -i HEAD~n'
