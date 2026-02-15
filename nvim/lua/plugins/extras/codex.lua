@@ -1,6 +1,6 @@
 local opts = {
-  'yaadata/codex.nvim',
-  version = '0.2.0',
+  url = 'https://codeberg.org/yaadata/codex.nvim.git',
+  version = '0.2.1',
   config = function()
     require('codex').setup {
       cmd = 'codex',
