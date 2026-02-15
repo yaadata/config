@@ -1,6 +1,6 @@
 local opts = {
   'yaadata/codex.nvim',
-  version = '0.1.1',
+  version = '0.2.0',
   config = function()
     require('codex').setup {
       cmd = 'codex',
@@ -26,9 +26,11 @@ local opts = {
           title_pos = 'center', -- left | center | right
         },
         auto_close = false,
-        startup_timeout_ms = 2000, -- max time to wait for startup readiness before dropping queued sends
-        startup_retry_interval_ms = 50, -- retry interval while waiting for startup readiness
-        startup_grace_ms = 400, -- minimum delay after terminal open before first send
+        startup = {
+          timeout_ms = 2000, -- max time to wait for startup readiness before dropping queued sends
+          retry_interval_ms = 50, -- retry interval while waiting for startup readiness
+          grace_ms = 400, -- minimum delay after terminal open before first send
+        },
         keymaps = {
           toggle = '<C-c>', -- terminal-mode toggle for Codex window
           close = '<C-x>', -- set a string (e.g. "<C-x>") to close Codex session
@@ -44,6 +46,7 @@ local opts = {
         toggle = '<leader>aot',
         open = '<leader>aoo',
         focus = '<leader>aof',
+        close = '<leader>aox',
         send = '<leader>aos',
         add = '<leader>aob',
         resume = '<leader>aor',
