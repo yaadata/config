@@ -7,8 +7,11 @@ local opts = {
   config = function()
     local preview_enabled = false
     local oil = require 'oil'
-    local MAX_WIDTH = 0.86
-    local MAX_HEIGHT = 0.76
+    local MAX_WIDTH = 0.85
+    local MAX_HEIGHT = 0.75
+    local function warn(msg)
+      vim.notify(msg, vim.log.levels.WARN)
+    end
     oil.setup {
       float = {
         max_width = MAX_WIDTH,
@@ -60,6 +63,45 @@ local opts = {
           desc = 'Toggle [H]idden',
           callback = function()
             require('oil').toggle_hidden()
+          end,
+        },
+        ['<M-m>'] = {
+          desc = 'Codex: Mention selected file',
+          mode = 'n',
+          callback = function()
+            local entry = oil.get_cursor_entry()
+            local dir = oil.get_current_dir(0)
+            if not entry or not dir then
+              warn 'Oil: unable to resolve selected file'
+              return
+            end
+            if entry.type == 'directory' then
+              warn 'Oil: selected entry is a directory; use Alt+Shift+M'
+              return
+            end
+
+            local ok, err = require('codex').mention_file(dir .. entry.name)
+            if not ok then
+              warn(string.format('Oil: failed to mention file (%s)', err or 'unknown error'))
+              return
+            end
+          end,
+        },
+        ['<M-S-m>'] = {
+          desc = 'Codex: Mention current directory',
+          mode = 'n',
+          callback = function()
+            local dir = oil.get_current_dir(0)
+            if not dir then
+              warn 'Oil: unable to resolve current directory'
+              return
+            end
+
+            local ok, err = require('codex').mention_directory(dir)
+            if not ok then
+              warn(string.format('Oil: failed to mention directory (%s)', err or 'unknown error'))
+              return
+            end
           end,
         },
       },
