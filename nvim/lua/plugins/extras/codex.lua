@@ -1,5 +1,5 @@
 local opts = {
-  url = 'https://codeberg.org/yaadata/codex.nvim.git',
+  'yaadata/codex.nvim',
   version = '0.4.0',
   cmd = {
     'Codex',
