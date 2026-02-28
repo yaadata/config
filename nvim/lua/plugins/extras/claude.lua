@@ -7,14 +7,13 @@ local opts = {
       tag = 'v2.30.0',
     },
   },
-  commit = 'cf1641c788def5e44c497e48dc7b9e63aeac95f1',
+  commit = '38203423fb8b64c1446d0e22578ec10c25ccaf88',
   opts = {
     terminal = {
       snacks_win_opts = {
-        position = 'float',
-        width = 0.9,
-        height = 0.9,
+        position = 'left',
         border = 'rounded',
+        width = 0.2,
         keys = {
           claude_hide = {
             toggle_key,
@@ -24,6 +23,28 @@ local opts = {
             mode = 't',
             desc = 'Hide',
           },
+          claude_nav_right = {
+            '<C-l>',
+            function(self)
+              if self:is_floating() then
+                return
+              end
+              vim.cmd 'wincmd l'
+            end,
+            mode = 't',
+            desc = 'Move to right buffer',
+          },
+          claude_nav_left = {
+            '<C-h>',
+            function(self)
+              if self:is_floating() then
+                return
+              end
+              vim.cmd 'wincmd h'
+            end,
+            mode = 't',
+            desc = 'Move to left buffer',
+          },
         },
       },
       provider = 'snacks',
@@ -31,21 +52,21 @@ local opts = {
   },
   keys = {
     { toggle_key, '<cmd>ClaudeCodeFocus<cr>', desc = 'Claude Code', mode = { 'n', 'x' } },
-    { '<leader>at', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },
-    { '<leader>af', '<cmd>ClaudeCodeFocus<cr>', desc = 'Focus Claude' },
-    { '<leader>ar', '<cmd>ClaudeCode --resume<cr>', desc = 'Resume Claude' },
-    { '<leader>ac', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },
-    { '<leader>ab', '<cmd>ClaudeCodeAdd %<cr>', desc = 'Add current buffer' },
-    { '<leader>as', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Send to Claude' },
+    { '<leader>aat', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },
+    { '<leader>aaf', '<cmd>ClaudeCodeFocus<cr>', desc = 'Focus Claude' },
+    { '<leader>aar', '<cmd>ClaudeCode --resume<cr>', desc = 'Resume Claude' },
+    { '<leader>aac', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },
+    { '<leader>aas', '<cmd>ClaudeCodeAdd %<cr>', mode = 'n', desc = 'Add current buffer' },
+    { '<leader>aas', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Send Selection to Claude' },
     {
-      '<leader>aS',
+      '<leader>aaS',
       '<cmd>ClaudeCodeTreeAdd<cr>',
       desc = 'Add file',
       ft = { 'NvimTree', 'neo-tree', 'oil' },
     },
     -- Diff management
-    { '<leader>aa', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
-    { '<leader>ad', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff' },
+    { '<leader>aaa', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
+    { '<leader>aad', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff' },
   },
 }
 

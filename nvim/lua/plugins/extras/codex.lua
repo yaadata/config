@@ -1,6 +1,6 @@
 local opts = {
   'yaadata/codex.nvim',
-  version = '0.4.0',
+  version = '0.4.1',
   cmd = {
     'Codex',
     'CodexFocus',
@@ -150,7 +150,7 @@ local opts = {
       window = 'vsplit', -- vsplit | hsplit | float
       vsplit = {
         side = 'right', -- left | right
-        size_pct = 40, -- 10-90
+        size_pct = 20, -- 10-90
       },
       hsplit = {
         side = 'bottom', -- top | bottom
@@ -177,6 +177,17 @@ local opts = {
           down = '<C-j>', -- split windows only; set false to disable
           up = '<C-k>', -- split windows only; set false to disable
           right = '<C-l>', -- split windows only; set false to disable
+        },
+      },
+      provider_opts = {
+        snacks = {
+          win = {
+            title = ' Openai Codex ',
+            title_pos = 'center',
+            wo = {
+              winbar = ' Openai Codex ',
+            },
+          },
         },
       },
     },

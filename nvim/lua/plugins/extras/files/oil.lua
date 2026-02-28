@@ -80,9 +80,39 @@ local opts = {
               return
             end
 
-            local ok, err = require('codex').mention_file(dir .. entry.name)
+            local ok, err = require('codex').mention_file(dir .. entry.name, {
+              post_execute = function(callback_ok, _)
+                if callback_ok then
+                  vim.defer_fn(function()
+                    oil.toggle_float(dir)
+                  end, 1000)
+                end
+              end,
+            })
             if not ok then
               warn(string.format('Oil: failed to mention file (%s)', err or 'unknown error'))
+              return
+            end
+          end,
+        },
+        ['s'] = {
+          desc = 'Codex: send selected file `@`',
+          mode = 'n',
+          callback = function()
+            local entry = oil.get_cursor_entry()
+            local dir = oil.get_current_dir(0)
+            if not entry or not dir then
+              warn 'Oil: unable to resolve selected file'
+              return
+            end
+            if entry.type == 'directory' then
+              warn 'Oil: selected entry is a directory; use Alt+Shift+M'
+              return
+            end
+            local fp = dir .. entry.oname
+            local ok, err = require('codex').send_buffer { path = fp, focus = false }
+            if not ok then
+              warn(string.format('Oil: failed to inline send file path (%s)', err or 'unknown error'))
               return
             end
           end,
@@ -97,7 +127,15 @@ local opts = {
               return
             end
 
-            local ok, err = require('codex').mention_directory(dir)
+            local ok, err = require('codex').mention_directory(dir, {
+              post_execute = function(callback_ok, _)
+                if callback_ok then
+                  vim.defer_fn(function()
+                    oil.toggle_float(dir)
+                  end, 1000)
+                end
+              end,
+            })
             if not ok then
               warn(string.format('Oil: failed to mention directory (%s)', err or 'unknown error'))
               return
