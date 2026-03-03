@@ -109,7 +109,7 @@ local opts = {
               warn 'Oil: selected entry is a directory; use Alt+Shift+M'
               return
             end
-            local fp = dir .. entry.oname
+            local fp = dir .. entry.name
             local ok, err = require('codex').send_buffer { path = fp, focus = false }
             if not ok then
               warn(string.format('Oil: failed to inline send file path (%s)', err or 'unknown error'))
