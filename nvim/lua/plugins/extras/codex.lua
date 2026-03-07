@@ -1,6 +1,6 @@
 local opts = {
   'yaadata/codex.nvim',
-  version = '0.4.1',
+  version = '0.5.0',
   cmd = {
     'Codex',
     'CodexFocus',
@@ -147,52 +147,64 @@ local opts = {
     },
     terminal = {
       provider = 'auto', -- auto | snacks | native | external | none
-      window = 'vsplit', -- vsplit | hsplit | float
-      vsplit = {
-        side = 'right', -- left | right
-        size_pct = 20, -- 10-90
-      },
-      hsplit = {
-        side = 'bottom', -- top | bottom
-        size_pct = 30, -- 10-90
-      },
-      float = {
-        width_pct = 90, -- 10-100
-        height_pct = 90, -- 10-100
-        border = 'rounded',
-        title = ' Codex ',
-        title_pos = 'center', -- left | center | right
-      },
-      auto_close = false,
+      auto_close = true,
       startup = {
         timeout_ms = 2000, -- max time to wait for startup readiness before dropping queued sends
         retry_interval_ms = 50, -- retry interval while waiting for startup readiness
-        grace_ms = 400, -- minimum delay after terminal open before first send
-      },
-      keymaps = {
-        toggle = '<C-c>', -- terminal-mode toggle for Codex window
-        close = '<C-x>', -- set a string (e.g. "<C-x>") to close Codex session
-        nav = {
-          left = '<C-h>', -- split windows only; set false to disable
-          down = '<C-j>', -- split windows only; set false to disable
-          up = '<C-k>', -- split windows only; set false to disable
-          right = '<C-l>', -- split windows only; set false to disable
-        },
+        grace_ms = 800, -- minimum delay after terminal open before first send
       },
       provider_opts = {
         snacks = {
           win = {
             title = ' Openai Codex ',
+            position = 'right',
             title_pos = 'center',
+            width = 0.25,
             wo = {
               winbar = ' Openai Codex ',
             },
+            border = 'rounded',
+            footer_keys = true,
+          },
+        },
+        native = {
+          vsplit = {
+            side = 'right', -- left | right
+            size_pct = 20, -- 10-90
+          },
+          hsplit = {
+            side = 'bottom', -- top | bottom
+            size_pct = 30, -- 10-90
+          },
+          float = {
+            width_pct = 90, -- 10-100
+            height_pct = 90, -- 10-100
+            border = 'rounded',
+            title = ' Codex ',
+            title_pos = 'center', -- left | center | right
           },
         },
       },
     },
   },
   config = function(_, opts)
+    local km = require('codex.keymaps').builtins
+    opts.terminal.keymaps = {
+      ['<C-c>'] = { mode = { 't', 'n' }, action = km.toggle },
+      ['<C-n>'] = {
+        mode = { 't', 'n' },
+        action = function()
+          vim.cmd 'stopinsert'
+        end,
+        desc = 'normal mode',
+      },
+      ['<M-BS>'] = { mode = { 't', 'n' }, action = km.clear_input },
+      ['<C-x>'] = { mode = { 't', 'n' }, action = km.close },
+      ['<C-h>'] = { mode = { 't', 'n' }, action = km.nav_left },
+      ['<C-j>'] = { mode = { 't', 'n' }, action = km.nav_down },
+      ['<C-k>'] = { mode = { 't', 'n' }, action = km.nav_up },
+      ['<C-l>'] = { mode = { 't', 'n' }, action = km.nav_right },
+    }
     require('codex').setup(opts)
   end,
 }
