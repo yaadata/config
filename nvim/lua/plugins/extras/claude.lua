@@ -13,7 +13,7 @@ local opts = {
       snacks_win_opts = {
         position = 'left',
         border = 'rounded',
-        width = 0.2,
+        width = 0.25,
         keys = {
           claude_hide = {
             toggle_key,
