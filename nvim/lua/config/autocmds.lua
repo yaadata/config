@@ -52,6 +52,17 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
+vim.api.nvim_create_user_command('CodexCopy', function()
+  local codex = require 'codex'
+  codex.execute_slash_command { command = 'copy' }
+  vim.defer_fn(function()
+    codex.unfocus()
+  end, 600)
+end, {
+  desc = 'Run Codex /copy in the active session',
+  nargs = 0,
+})
+
 vim.api.nvim_create_user_command('LazyGitToggle', require('utils.lazygit').toggle, {})
 vim.api.nvim_create_user_command('GHDashToggle', require('utils.gh_dash').toggle, {})
 vim.api.nvim_create_user_command('K9sToggle', require('utils.k9s').toggle, {})

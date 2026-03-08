@@ -1,22 +1,16 @@
 local opts = {
   'yaadata/codex.nvim',
-  version = '0.5.0',
+  version = '0.6.0',
   cmd = {
     'Codex',
     'CodexFocus',
     'CodexClose',
     'CodexClearInput',
-    'CodexSend',
-    'CodexAddBuffer',
+    'CodexSendSelection',
+    'CodexSendFile',
     'CodexMentionFile',
     'CodexMentionDirectory',
     'CodexResume',
-    'CodexModel',
-    'CodexStatus',
-    'CodexPermissions',
-    'CodexCompact',
-    'CodexReview',
-    'CodexDiff',
   },
   keys = {
     {
@@ -54,7 +48,7 @@ local opts = {
     {
       '<leader>aos',
       function()
-        require('codex').send_buffer()
+        require('codex').send_file()
       end,
       desc = 'Codex: Add current buffer',
       mode = 'n',
@@ -70,8 +64,11 @@ local opts = {
     {
       '<leader>aom',
       function()
-        require('codex').mention_file()
-        require('codex').focus()
+        local codex = require 'codex'
+        codex.mention_file()
+        vim.defer_fn(function()
+          codex.unfocus()
+        end, 350)
       end,
       desc = 'Codex: Mention current file',
       mode = { 'n', 'v' },
@@ -79,7 +76,13 @@ local opts = {
     {
       '<leader>aoM',
       function()
-        require('codex').mention_directory()
+        local codex = require 'codex'
+        codex.mention_directory()
+        vim.defer_fn(function()
+          if codex.is_focused() then
+            codex.unfocus()
+          end
+        end, 350)
       end,
       desc = 'Codex: Mention current directory',
       mode = { 'n', 'v' },
@@ -87,7 +90,7 @@ local opts = {
     {
       '<leader>aoi',
       function()
-        require('codex').show_status()
+        require('codex').execute_slash_command { command = 'status' }
       end,
       desc = 'Codex: Show status',
       mode = { 'n', 'v' },
@@ -101,35 +104,17 @@ local opts = {
       mode = { 'n', 'v' },
     },
     {
-      '<leader>aop',
-      function()
-        require('codex').show_permissions()
-      end,
-      desc = 'Codex: Permissions',
-      mode = { 'n', 'v' },
-    },
-    {
       '<leader>aoc',
       function()
-        require('codex').compact()
+        local codex = require 'codex'
+        codex.execute_slash_command { command = 'copy' }
+        vim.defer_fn(function()
+          if codex.is_focused() then
+            codex.unfocus()
+          end
+        end, 300)
       end,
-      desc = 'Codex: Compact context',
-      mode = { 'n', 'v' },
-    },
-    {
-      '<leader>aoR',
-      function()
-        require('codex').review()
-      end,
-      desc = 'Codex: Review changes',
-      mode = { 'n', 'v' },
-    },
-    {
-      '<leader>aod',
-      function()
-        require('codex').show_diff()
-      end,
-      desc = 'Codex: Show diff',
+      desc = 'Codex: Copy Latest Response',
       mode = { 'n', 'v' },
     },
   },
@@ -146,7 +131,7 @@ local opts = {
       verbose = true,
     },
     terminal = {
-      provider = 'auto', -- auto | snacks | native | external | none
+      provider = 'auto',
       auto_close = true,
       startup = {
         timeout_ms = 2000, -- max time to wait for startup readiness before dropping queued sends
@@ -168,6 +153,7 @@ local opts = {
           },
         },
         native = {
+          window = 'vsplit',
           vsplit = {
             side = 'right', -- left | right
             size_pct = 20, -- 10-90
@@ -175,13 +161,6 @@ local opts = {
           hsplit = {
             side = 'bottom', -- top | bottom
             size_pct = 30, -- 10-90
-          },
-          float = {
-            width_pct = 90, -- 10-100
-            height_pct = 90, -- 10-100
-            border = 'rounded',
-            title = ' Codex ',
-            title_pos = 'center', -- left | center | right
           },
         },
       },
@@ -199,6 +178,7 @@ local opts = {
         desc = 'normal mode',
       },
       ['<M-BS>'] = { mode = { 't', 'n' }, action = km.clear_input },
+      ['<C-g>'] = { mode = { 't', 'n' }, action = km.unfocus },
       ['<C-x>'] = { mode = { 't', 'n' }, action = km.close },
       ['<C-h>'] = { mode = { 't', 'n' }, action = km.nav_left },
       ['<C-j>'] = { mode = { 't', 'n' }, action = km.nav_down },

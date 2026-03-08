@@ -71,12 +71,14 @@ local opts = {
               warn 'Oil: selected entry is a directory; use Alt+Shift+M'
               return
             end
-
             local ok, err = require('codex').mention_file(dir .. entry.name)
             if not ok then
               warn(string.format('Oil: failed to mention file (%s)', err or 'unknown error'))
               return
             end
+            vim.defer_fn(function()
+              oil.toggle_float(dir)
+            end, 500)
           end,
         },
         ['<A-S-m>'] = {
@@ -94,10 +96,13 @@ local opts = {
               warn(string.format('Oil: failed to mention directory (%s)', err or 'unknown error'))
               return
             end
+            vim.defer_fn(function()
+              oil.toggle_float(dir)
+            end, 500)
           end,
         },
         ['<A-s>'] = {
-          desc = 'Codex: send selected file `@`',
+          desc = 'Codex: send selected file `@reference`',
           mode = 'n',
           callback = function()
             local entry = oil.get_cursor_entry()
@@ -111,7 +116,7 @@ local opts = {
               return
             end
             local fp = dir .. entry.name
-            local ok, err = require('codex').send_buffer { path = fp, focus = false }
+            local ok, err = require('codex').send_file { path = fp, focus = false }
             if not ok then
               warn(string.format('Oil: failed to inline send file path (%s)', err or 'unknown error'))
               return
