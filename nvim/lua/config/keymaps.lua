@@ -36,8 +36,9 @@ vim.keymap.set('n', '<leader>qlp', '<cmd>lprevious<CR>', { desc = '[P]revious lo
 vim.keymap.set('n', '<leader>qln', '<cmd>lnext<CR>', { desc = '[N]ext location list' })
 
 -- testing
+vim.keymap.set({ 'n', 'x' }, '<leader>bpl', '"0p', { desc = 'Paste last yank (after)' })
 
-vim.keymap.set('n', '<leader>bca0', function()
+vim.keymap.set('n', '<leader>bpca0', function()
   local text = { 'SCENARIO:   ' }
   local start_line = vim.fn.line '.'
   vim.api.nvim_put(text, 'l', true, true)
@@ -48,7 +49,7 @@ vim.keymap.set('n', '<leader>bca0', function()
   vim.cmd 'normal gc'
 end, { desc = 'Insert text "Scenario"' })
 
-vim.keymap.set('n', '<leader>bca1', function()
+vim.keymap.set('n', '<leader>bpca1', function()
   local text = { '========= [A]rrange =========' }
   local start_line = vim.fn.line '.'
   vim.api.nvim_put(text, 'l', true, true)
@@ -59,7 +60,7 @@ vim.keymap.set('n', '<leader>bca1', function()
   vim.cmd 'normal gc'
 end, { desc = 'Insert text "arrange"' })
 
-vim.keymap.set('n', '<leader>bca2', function()
+vim.keymap.set('n', '<leader>bpca2', function()
   local text = { '========= [A]ct     =========' }
   local start_line = vim.fn.line '.'
   vim.api.nvim_put(text, 'l', true, true)
@@ -70,7 +71,7 @@ vim.keymap.set('n', '<leader>bca2', function()
   vim.cmd 'normal gc'
 end, { desc = 'Insert text "act"' })
 
-vim.keymap.set('n', '<leader>bca3', function()
+vim.keymap.set('n', '<leader>bpca3', function()
   local text = { '========= [A]ssert  =========' }
   local start_line = vim.fn.line '.'
   vim.api.nvim_put(text, 'l', true, true)
