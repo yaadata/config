@@ -57,7 +57,7 @@ local opts = {
             require('oil').toggle_hidden()
           end,
         },
-        ['<M-m>'] = {
+        ['<A-m>'] = {
           desc = 'Codex: Mention selected file',
           mode = 'n',
           callback = function()
@@ -72,22 +72,31 @@ local opts = {
               return
             end
 
-            local ok, err = require('codex').mention_file(dir .. entry.name, {
-              post_execute = function(callback_ok, _)
-                if callback_ok then
-                  vim.defer_fn(function()
-                    oil.toggle_float(dir)
-                  end, 1000)
-                end
-              end,
-            })
+            local ok, err = require('codex').mention_file(dir .. entry.name)
             if not ok then
               warn(string.format('Oil: failed to mention file (%s)', err or 'unknown error'))
               return
             end
           end,
         },
-        ['s'] = {
+        ['<A-S-m>'] = {
+          desc = 'Codex: Mention current directory',
+          mode = 'n',
+          callback = function()
+            local dir = oil.get_current_dir(0)
+            if not dir then
+              warn 'Oil: unable to resolve current directory'
+              return
+            end
+
+            local ok, err = require('codex').mention_directory(dir)
+            if not ok then
+              warn(string.format('Oil: failed to mention directory (%s)', err or 'unknown error'))
+              return
+            end
+          end,
+        },
+        ['<A-s>'] = {
           desc = 'Codex: send selected file `@`',
           mode = 'n',
           callback = function()
@@ -107,31 +116,7 @@ local opts = {
               warn(string.format('Oil: failed to inline send file path (%s)', err or 'unknown error'))
               return
             end
-          end,
-        },
-        ['<M-S-m>'] = {
-          desc = 'Codex: Mention current directory',
-          mode = 'n',
-          callback = function()
-            local dir = oil.get_current_dir(0)
-            if not dir then
-              warn 'Oil: unable to resolve current directory'
-              return
-            end
-
-            local ok, err = require('codex').mention_directory(dir, {
-              post_execute = function(callback_ok, _)
-                if callback_ok then
-                  vim.defer_fn(function()
-                    oil.toggle_float(dir)
-                  end, 1000)
-                end
-              end,
-            })
-            if not ok then
-              warn(string.format('Oil: failed to mention directory (%s)', err or 'unknown error'))
-              return
-            end
+            vim.notify(string.format('sent @%s to codex.nvim', fp))
           end,
         },
       },
