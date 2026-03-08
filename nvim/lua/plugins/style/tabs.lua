@@ -48,7 +48,7 @@ local opts = {
     map('n', '<leader>bX', '<Cmd>BufferCloseAllButCurrent<CR>', options)
     map('n', '<leader>bax', '<Cmd>BufferCloseAllButCurrent<CR>', options)
     -- Pin/unpin buffer
-    map('n', '<leader>bP', '<Cmd>BufferPin<CR>', options)
+    map('n', '<leader>boP', '<Cmd>BufferPin<CR>', options)
     -- Wipeout buffer
     --                 :BufferWipeout
 
@@ -60,14 +60,14 @@ local opts = {
     --                 :BufferCloseBuffersRight
 
     -- Magic buffer-picking mode
-    map('n', '<leader>bp', '<Cmd>BufferPick<CR>', options)
+    map('n', '<leader>bop', '<Cmd>BufferPick<CR>', options)
 
     -- Sort automatically by...
-    map('n', '<Space>bob', '<Cmd>BufferOrderByBufferNumber<CR>', options)
-    map('n', '<Space>bon', '<Cmd>BufferOrderByName<CR>', options)
-    map('n', '<Space>bod', '<Cmd>BufferOrderByDirectory<CR>', options)
-    map('n', '<Space>bol', '<Cmd>BufferOrderByLanguage<CR>', options)
-    map('n', '<Space>bow', '<Cmd>BufferOrderByWindowNumber<CR>', options)
+    map('n', '<leader>bob', '<Cmd>BufferOrderByBufferNumber<CR>', options)
+    map('n', '<leader>bon', '<Cmd>BufferOrderByName<CR>', options)
+    map('n', '<leader>bod', '<Cmd>BufferOrderByDirectory<CR>', options)
+    map('n', '<leader>bol', '<Cmd>BufferOrderByLanguage<CR>', options)
+    map('n', '<leader>bow', '<Cmd>BufferOrderByWindowNumber<CR>', options)
   end,
 }
 
