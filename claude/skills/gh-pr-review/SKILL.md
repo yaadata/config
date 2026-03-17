@@ -9,7 +9,7 @@ allowed-tools: Bash(gh *), Read, Grep, Glob, Bash(git-town *), Bash(git *), Bash
 
 1. View the pull-request using
    ```bash
-   gh pr view $ARGUMENT[0]
+   gh pr view $ARGUMENTS[0]
    ```
 2. Gather the following information
    - git remote
@@ -24,7 +24,7 @@ allowed-tools: Bash(gh *), Read, Grep, Glob, Bash(git-town *), Bash(git *), Bash
    this skill cannot be used.
 3. Check out the pull-request and examine it locally
    ```bash
-   gh pr checkout $ARGUMENT[0]
+   gh pr checkout $ARGUMENTS[0]
    ```
 4. Using either the lsp tool or grep, find related code and tests that may
    interact with this diff. Note: not every pull-request may have an associated

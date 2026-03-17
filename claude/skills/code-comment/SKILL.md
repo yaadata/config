@@ -25,6 +25,6 @@ Guidelines
    that no action is needed.
 2. If a comment to a code block is a method/function, you MUST ask the user
    "Should I document the code with an example code snippet in the comments?".
-   If the user says yes, you.
+   If the user says yes, include a usage example in the documentation comment.
 3. You must follow the documentation conventions of that language. Always inform
    the user what documentation style you are using.

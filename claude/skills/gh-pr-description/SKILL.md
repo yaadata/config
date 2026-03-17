@@ -7,7 +7,7 @@ allowed-tools: Bash(gh *), Read, Grep, Glob, Bash(git-town *), Bash(git *), Bash
 
 1. View the pull-request using
    ```bash
-   gh pr view $ARGUMENT[0]
+   gh pr view $ARGUMENTS[0]
    ```
 2. Gather the following information
    - git remote
@@ -23,7 +23,7 @@ allowed-tools: Bash(gh *), Read, Grep, Glob, Bash(git-town *), Bash(git *), Bash
 
 3. Check out the pull-request and examine it locally
    ```bash
-   gh pr checkout $ARGUMENT[0]
+   gh pr checkout $ARGUMENTS[0]
    ```
 
 4. Using either the lsp tool or grep, find related code and tests that may
@@ -70,5 +70,5 @@ allowed-tools: Bash(gh *), Read, Grep, Glob, Bash(git-town *), Bash(git *), Bash
 9. Update the pull-request description following the pull-request template by
    running the following command
    ```bash
-   gh pr edit $ARGUMENT[0] -f ./.local.docs/change-description/{github_pull_request_number}_{git_branch_name_with_forward_slashes_replaced_with_underscore}/DESCRIPTION.md
+   gh pr edit $ARGUMENTS[0] --body-file ./.local.docs/change-description/{github_pull_request_number}_{git_branch_name_with_forward_slashes_replaced_with_underscore}/DESCRIPTION.md
    ```
