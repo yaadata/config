@@ -18,7 +18,8 @@ dlv/**
 **/fish_plugins
 claude/**
 !claude/statusline-command.sh
-.claude/**
+!/claude/skills/
+!/claude/skills/**
 .elixir-tools/**
 elixir-ls/** 
 configstore/**
