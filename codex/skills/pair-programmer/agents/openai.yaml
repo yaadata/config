@@ -1,0 +1,7 @@
+interface:
+  display_name: "Pair Programmer"
+  short_description: "Guide implementation without editing"
+  default_prompt: "Use $pair-programmer to walk me through implementing this plan without making code edits."
+
+policy:
+  allow_implicit_invocation: false
