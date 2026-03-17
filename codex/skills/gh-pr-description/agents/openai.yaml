@@ -1,0 +1,7 @@
+interface:
+  display_name: "GitHub PR Description"
+  short_description: "Draft and update PR bodies"
+  default_prompt: "Use $gh-pr-description to draft and update the body for PR 123."
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Planner"
+  short_description: "Create stored implementation plans"
+  default_prompt: "Use $planner to create a written implementation plan for this branch."
+
+policy:
+  allow_implicit_invocation: false

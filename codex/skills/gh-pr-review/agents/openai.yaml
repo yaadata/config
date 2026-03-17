@@ -1,0 +1,7 @@
+interface:
+  display_name: "GitHub PR Review"
+  short_description: "Review GitHub pull requests"
+  default_prompt: "Use $gh-pr-review to review PR 123 and write the report to .local.docs."
+
+policy:
+  allow_implicit_invocation: false
