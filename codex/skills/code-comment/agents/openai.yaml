@@ -1,0 +1,7 @@
+interface:
+  display_name: "Code Comment"
+  short_description: "Add concise code comments"
+  default_prompt: "Use $code-comment to add concise documentation comments to this code."
+
+policy:
+  allow_implicit_invocation: false
