@@ -58,6 +58,7 @@ local opts = {
     { '<leader>aac', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },
     { '<leader>aas', '<cmd>ClaudeCodeAdd %<cr>', mode = 'n', desc = 'Add current buffer' },
     { '<leader>aas', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Send Selection to Claude' },
+    { '<leader>aax', '<cmd>ClaudeCodeClose<cr>', mode = 'n', desc = 'Close Claude' },
     {
       '<leader>aaS',
       '<cmd>ClaudeCodeTreeAdd<cr>',

@@ -1,6 +1,6 @@
 local opts = {
   'folke/trouble.nvim',
-  tag = 'v3.6.0',
+  tag = 'v3.7.1',
   opts = {
     auto_preview = true,
     win = {

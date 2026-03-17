@@ -1,5 +1,6 @@
 local opts = {
   'nvim-treesitter/nvim-treesitter',
+  version = 'v0.10.0',
   build = ':TSUpdate',
   config = function()
     require('nvim-treesitter.configs').setup {

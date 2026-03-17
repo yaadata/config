@@ -1,6 +1,7 @@
 local opts = {
   'jake-stewart/multicursor.nvim',
   branch = '1.0',
+  commit = '811681faf44d8031685614cc00a148cd3ece697c',
   config = function()
     local mc = require 'multicursor-nvim'
 

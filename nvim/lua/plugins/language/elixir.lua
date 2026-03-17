@@ -1,6 +1,6 @@
 local opts = {
   'elixir-tools/elixir-tools.nvim',
-  version = '*',
+  version = 'v0.18.0',
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
     local elixir = require 'elixir'

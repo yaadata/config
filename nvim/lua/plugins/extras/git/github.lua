@@ -1,6 +1,6 @@
 local opts = {
   'Almo7aya/openingh.nvim',
-
+  commit = '7cc8c897cb6b34d8ed28e99d95baccef609ed251',
   init = function()
     vim.g.openingh_copy_to_register = true
   end,

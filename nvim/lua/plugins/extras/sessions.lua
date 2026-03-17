@@ -1,7 +1,10 @@
 local opts = {
   'rmagatti/auto-session',
   lazy = false,
-  commit = '517a75727d28a4d1ee9c79b56dde239a5408778f',
+  commit = '62437532b38495551410b3f377bcf4aaac574ebe',
+  init = function()
+    vim.opt.sessionoptions:append 'globals'
+  end,
   keys = {
     -- Will use Telescope if installed or a vim.ui.select picker otherwise
     { '<leader>wss', '<cmd>AutoSession search<CR>', desc = 'Session search' },
@@ -16,6 +19,11 @@ local opts = {
     show_auto_restore_notif = true,
     auto_delete_empty_sessions = true,
     purge_after_minutes = 43200,
+    pre_save_cmds = {
+      function()
+        vim.api.nvim_exec_autocmds('User', { pattern = 'SessionSavePre' })
+      end,
+    },
     -- ⚠️ This will only work if Telescope.nvim is installed
     -- The following are already the default values, no need to provide them if these are already the settings you want.
     session_lens = {

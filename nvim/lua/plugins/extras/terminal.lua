@@ -1,6 +1,6 @@
 local opts = {
   'akinsho/toggleterm.nvim',
-  version = '*',
+  commit = '9a88eae817ef395952e08650b3283726786fb5fb',
   config = function(opts)
     require('toggleterm').setup {
       direction = 'float',
