@@ -1,5 +1,6 @@
 local opts = {
   'OscarCreator/rsync.nvim',
+  commit = '70be22f23eee7879ebd1bc01de077eca77bdb680',
   build = 'make',
   event = 'VimEnter',
   cmd = { 'RsyncUp', 'RsyncUpFile', 'RsyncDown', 'RsyncDownFile', 'RsyncConfig' },

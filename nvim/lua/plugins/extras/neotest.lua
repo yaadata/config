@@ -1,6 +1,6 @@
 local opts = {
   'nvim-neotest/neotest',
-  version = 'v5.4.0',
+  version = 'v5.13.4',
   dependencies = {
     'nvim-neotest/nvim-nio',
     'nvim-lua/plenary.nvim',

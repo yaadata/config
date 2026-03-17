@@ -1,6 +1,6 @@
 local opts = {
   'aaronik/treewalker.nvim',
-  commit = '86ae3cf9896b43f3cfa35b962428f32fed8b5ee8',
+  commit = '3d5148e160ed9728b3275d37d06ea028cef5f43b',
   -- The following options are the defaults.
   -- Treewalker aims for sane defaults, so these are each individually optional,
   -- and setup() does not need to be called, so the whole opts block is optional as well.

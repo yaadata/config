@@ -5,7 +5,7 @@ local opts = {
     'folke/trouble.nvim',
     'nvim-telescope/telescope.nvim',
   },
-  tag = 'v1.4.0',
+  tag = 'v1.5.0',
   opts = {
     -- your configuration comes here
     -- or leave it empty to use the default settings
