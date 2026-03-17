@@ -12,7 +12,7 @@ local opts = {
   },
 
   init = function()
-    -- Your DBUI configuration
+    -- Enable Nerd Font icons in DBUI buffers and the connection tree.
     vim.g.db_ui_use_nerd_fonts = 1
   end,
 }
