@@ -34,64 +34,6 @@ local opts = {
           node_decremental = '<leader>vtd',
         },
       },
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-          keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
-            ['aa'] = '@parameter.outer',
-            ['ia'] = '@parameter.inner',
-            ['af'] = '@function.outer',
-            ['if'] = '@function.inner',
-            ['ac'] = '@class.outer',
-            ['ic'] = '@class.inner',
-            ['ar'] = '@assignment.rhs',
-            ['al'] = '@assignment.lhs',
-          },
-        },
-        move = {
-          enable = true,
-          set_jumps = true, -- whether to set jumps in the jumplist
-          goto_next_start = {
-            [']m'] = '@function.outer',
-            [']]'] = '@class.outer',
-          },
-          goto_next_end = {
-            [']M'] = '@function.outer',
-            [']['] = '@class.outer',
-          },
-          goto_previous_start = {
-            ['[m'] = '@function.outer',
-            ['[['] = '@class.outer',
-          },
-          goto_previous_end = {
-            ['[M'] = '@function.outer',
-            ['[]'] = '@class.outer',
-          },
-          goto_next = {
-            [']i'] = '@conditional.outer',
-            [']a'] = '@parameter.outer',
-            [']r'] = '@assignment.rhs',
-            [']l'] = '@assignment.lhs',
-          },
-          goto_previous = {
-            ['[i'] = '@conditional.outer',
-            ['[a'] = '@parameter.outer',
-            ['[r'] = '@assignment.rhs',
-            ['[l'] = '@assignment.lhs',
-          },
-        },
-        swap = {
-          enable = true,
-          swap_next = {
-            ['<leader>vta'] = '@parameter.inner',
-          },
-          swap_previous = {
-            ['<leader>vtA'] = '@parameter.inner',
-          },
-        },
-      },
     }
   end,
 }
