@@ -1,0 +1,7 @@
+interface:
+  display_name: "Code Explorer"
+  short_description: "Explore codepaths and explain wiring"
+  default_prompt: "Use $code-explorer to inspect this path, trace the relevant codepath, and write an exploration note."
+
+policy:
+  allow_implicit_invocation: false
