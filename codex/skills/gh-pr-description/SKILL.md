@@ -1,6 +1,6 @@
 ---
 name: gh-pr-description
-description: Summarize a GitHub pull request, draft a PR body that matches the repo template, store it under .local.docs, and optionally update the PR with gh. Use this when the user wants a PR description created or refreshed from the actual diff.
+description: Summarize a GitHub pull request, draft a PR body that matches the repo template, store it under .local/docs, and optionally update the PR with gh. Use this when the user wants a PR description created or refreshed from the actual diff.
 ---
 
 # GitHub PR Description

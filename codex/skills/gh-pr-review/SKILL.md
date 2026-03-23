@@ -1,6 +1,6 @@
 ---
 name: gh-pr-review
-description: Review a GitHub pull request from gh, inspect related code and tests, and write a structured review file under .local.docs. Use this when the user wants an offline or pre-submit PR review grounded in the checked-out code.
+description: Review a GitHub pull request from gh, inspect related code and tests, and write a structured review file under .local/docs. Use this when the user wants an offline or pre-submit PR review grounded in the checked-out code.
 ---
 
 # GitHub PR Review
