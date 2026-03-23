@@ -16,6 +16,7 @@ dlv/**
 **/private.fish
 **/fish_variables
 **/fish_plugins
+gws/**
 claude/**
 .claude/**
 !claude/statusline-command.sh
