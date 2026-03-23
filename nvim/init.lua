@@ -25,6 +25,7 @@ require('lazy').setup({
   { import = 'plugins.language' },
   { import = 'plugins.style' },
   { import = 'plugins.lsp' },
+  { import = 'plugins.treesitter' },
   { import = 'plugins.coding_assistant' },
   { import = 'plugins.files' },
   { import = 'plugins.git' },
