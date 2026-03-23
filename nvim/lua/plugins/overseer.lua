@@ -1,7 +1,7 @@
 local opts = {
-  'stevearc/overseer.nvim',
+  'yaadata/overseer.nvim',
   opts = {},
-  tag = 'v2.1.0',
+  branch = 'patch-system-crash',
   config = function()
     require('overseer').setup {
       templates = {
