@@ -17,9 +17,13 @@ Review local changes and store the review in the repo.
    `{HASH} "{top level commit message}"`
 3. Gather the relevant diff with git.
 4. Inspect related code and existing tests before writing the review.
-5. If the diff is at least 75 non-test lines, include a sequence diagram section.
+5. If the diff is at least 75 non-test lines, include a sequence diagram
+   section.
 6. Write the review to:
-   `./.local.docs/commit-review/{NNN}_{short-hash-or-uncommitted}/REVIEW.md`
+   `./.local/docs/commit-review/{NNNN}_{short-hash-or-uncommitted}/REVIEW.md`
+
+   Determine `NNNN` by checking the last file sorted in alpha-numerical order
+   and increase the value by 1.
 
 ## Review Format
 

@@ -20,8 +20,15 @@ Ask the user which mode they want:
 
 1. Gather enough repo context before planning.
 2. Clarify goal, success criteria, constraints, and important tradeoffs.
-3. Write the plan to:
-   `./.local.docs/plans/{branch-with-slashes-replaced}/PLAN.md`
+3. Write the plan artifact to:
+   `./.local/docs/plans/{branch-with-slashes-replaced}/{NNNN}_PLAN.md`
+
+   Determine `NNNN` by scanning the target branch directory for existing files
+   matching `*_PLAN.md` and incrementing the highest 4-digit prefix, starting at
+   `0001`.
+
+   Use the same number in the document title:
+
 4. The plan must include:
    - problem statement
    - code references
@@ -30,22 +37,26 @@ Ask the user which mode they want:
 
 ## Critique
 
-1. Read the existing `PLAN.md`.
+1. Read the existing `{NNNN}_PLAN.md`.
 2. Review it as a staff engineer focused on security, maintainability, and
    extensibility.
 3. Call out reused patterns that are already weak, not only new issues.
 4. Write the critique to:
-   `./.local.docs/plans/{branch-with-slashes-replaced}/CRITIQUE.md`
+   `./.local/docs/plans/{branch-with-slashes-replaced}/{NNNN}_CRITIQUE.md`
+
+   `NNNN` in `{NNNN}_CRITIQUE.md` is the same value as in `{NNNN}_PLAN.md` that
+   is being critiqued
 
 ## Revise
 
-1. Read the existing `CRITIQUE.md`.
+1. Read the existing `{NNNN}_CRITIQUE.md`.
 2. For each critique, provide a rebuttal if needed and rank it LOW, MEDIUM, or
    HIGH.
 3. Walk through the critiques in order and ask the user whether to modify the
    plan for each one.
-4. Update:
-   `./.local.docs/plans/{branch-with-slashes-replaced}/PLAN.md`
+4. Update: `./.local/docs/plans/{branch-with-slashes-replaced}/{NNNN}_PLAN.md`
+
+   `NNNN` in `{NNNN}_PLAN.md` is the same value as in `{NNNN}_CRITIQUE.md`
 
 ## Rules
 

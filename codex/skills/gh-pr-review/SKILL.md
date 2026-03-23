@@ -9,8 +9,7 @@ Review a GitHub PR and store the review in the repo.
 
 ## Workflow
 
-1. Read the PR with:
-   `gh pr view <pr-number>`
+1. Read the PR with: `gh pr view <pr-number>`
 2. Gather:
    - git remote
    - PR author
@@ -20,12 +19,11 @@ Review a GitHub PR and store the review in the repo.
    stop and explain that this skill cannot be used from this checkout.
 4. Before any checkout, inspect the worktree. If local changes would be
    disturbed, stop and ask the user how to proceed.
-5. Check out the PR locally with:
-   `gh pr checkout <pr-number>`
+5. Check out the PR locally with: `gh pr checkout <pr-number>`
 6. Inspect related code and tests.
 7. If the diff is at least 75 non-test lines, prepare a sequence diagram.
 8. Write the review to:
-   `./.local.docs/reviews/{pr-number}_{branch-with-slashes-replaced}/REVIEW.md`
+   `./.local/docs/reviews/{pr-number}_{branch-with-slashes-replaced}/REVIEW.md`
 
 ## Review Format
 

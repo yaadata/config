@@ -9,8 +9,7 @@ Draft and optionally publish a pull request description for a GitHub PR.
 
 ## Workflow
 
-1. Read the PR with:
-   `gh pr view <pr-number>`
+1. Read the PR with: `gh pr view <pr-number>`
 2. Gather:
    - git remote
    - PR author
@@ -20,8 +19,7 @@ Draft and optionally publish a pull request description for a GitHub PR.
    stop and explain that this skill cannot be used from this checkout.
 4. Before any checkout, inspect the worktree. If local changes would be
    disturbed, stop and ask the user how to proceed.
-5. Check out the PR locally with:
-   `gh pr checkout <pr-number>`
+5. Check out the PR locally with: `gh pr checkout <pr-number>`
 6. Inspect related code and tests.
 7. Look for a PR template in:
    - `./docs/`
@@ -37,7 +35,7 @@ Draft and optionally publish a pull request description for a GitHub PR.
 10. If the diff is at least 75 non-test lines, add a collapsed sequence diagram
     section.
 11. Write the draft to:
-    `./.local.docs/change-description/{pr-number}_{branch-with-slashes-replaced}/DESCRIPTION.md`
+    `./.local/docs/change-description/{pr-number}_{branch-with-slashes-replaced}/DESCRIPTION.md`
 12. Show the draft to the user and ask for feedback before updating the PR.
 13. If the user approves, run:
     `gh pr edit <pr-number> --body-file <description-path>`
