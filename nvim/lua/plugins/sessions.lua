@@ -19,6 +19,7 @@ local opts = {
     show_auto_restore_notif = true,
     auto_delete_empty_sessions = true,
     purge_after_minutes = 43200,
+    bypass_save_filetypes = { 'alpha' }, -- don't save alpha as a session
     pre_save_cmds = {
       function()
         vim.api.nvim_exec_autocmds('User', { pattern = 'SessionSavePre' })
