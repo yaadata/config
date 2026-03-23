@@ -1,79 +1,81 @@
 ---
 name: gh-pr-review
-description: review a pull-requested hosted on github
+description: Review a GitHub pull request from gh, inspect related code and tests, and write a structured review file under .local/docs. Use this when the user wants an offline or pre-submit PR review grounded in the checked-out code.
 user-invocable: true
 context: fork
 agent: Explore
 allowed-tools: Bash(gh *), Read, Grep, Glob, Bash(git-town *), Bash(git *), Bash(mkdir -p *)
 ---
 
-1. View the pull-request using
-   ```bash
-   gh pr view $ARGUMENTS[0]
-   ```
-2. Gather the following information
+# GitHub PR Review
+
+Review a GitHub PR and store the review in the repo.
+
+## Workflow
+
+1. Read the PR with:
+   `gh pr view <pr-number>`
+2. Gather:
    - git remote
-   - pull-request
-     - author
-     - title
-     - diff
+   - PR author
+   - PR title
+   - PR diff
+3. Validate that the current repo remote matches the PR remote. If it does not,
+   stop and explain that this skill cannot be used from this checkout.
+4. Before any checkout, inspect the worktree. If local changes would be
+   disturbed, stop and ask the user how to proceed.
+5. Check out the PR locally with:
+   `gh pr checkout <pr-number>`
+6. Inspect related code and tests.
+7. If the diff is at least 75 non-test lines, prepare a sequence diagram.
+8. Write the review to:
+   `./.local/docs/reviews/{pr-number}_{branch-with-slashes-replaced}/REVIEW.md`
 
-   Using this information, validate that the current working directory has the
-   same git remote pointing to the pull-request. If we do NOT have the git
-   remote belonging to this pull-request, fail error and let the user know that
-   this skill cannot be used.
-3. Check out the pull-request and examine it locally
-   ```bash
-   gh pr checkout $ARGUMENTS[0]
-   ```
-4. Using either the lsp tool or grep, find related code and tests that may
-   interact with this diff. Note: not every pull-request may have an associated
-   test change.
-5. If diff is more than 75 lines of code (not including tests), prepare a
-   sequence diagram of the change.
-6. Check that the following directory path exists
-   `./.local.docs/reviews/{pull_request_number}_{git_branch_name_with_forward_slashes_replaced_with_underscore}/`
-7. Write your review here
-   `./.local.docs/reviews/{pull_request_number}_{git_branch_name_with_forward_slashes_replaced_with_underscore}/REVIEW.md`
+## Review Format
 
-   With the following format:
+Use this exact structure:
 
-   ```md
-   ## Context
+```markdown
+## Context
 
-   Pull-Request: {url of pull-request}
+Pull-Request: {url}
 
-   Pull-Request Title: {title of pull-request}
+Pull-Request Title: {title}
 
-   Pull-Request Author: {pull-request author username}
+Pull-Request Author: {author}
 
-   ## Review
+## Review
 
-   ### Sequence Diagram
+### Sequence Diagram
 
-   <!-- Include if Diff is greater than or equal to 75 lines (not including tests)-->
+<!-- Include only when the diff is at least 75 non-test lines -->
 
-   ### Description
+### Description
 
-   <!-- Describe the change and explain the sequence diagram if there is one to provide more clarity-->
+<!-- Describe the change and explain the sequence diagram if present -->
 
-   ### Test Coverage
+### Test Coverage
 
-   <!-- If the change includes changes to code find existing tests prior to the pull-requests or in this pull-request that validates this change-->
+<!-- Describe tests that validate the change, including pre-existing tests -->
 
-   ### Positives
+### Positives
 
-   <!-- Describe the strengths of this change-->
+<!-- Strengths of the change -->
 
-   ### Negatives
+### Negatives
 
-   <!-- Describe the gaps in implementation and rank them in severity. GAPS are merge blockers-->
+<!-- Gaps in implementation, ranked by severity. Gaps are merge blockers -->
 
-   ### Nits
+### Nits
 
-   <!-- Mention any nits that are non blocking to merging this change-->
+<!-- Non-blocking feedback -->
 
-   ## Verdict
+## Verdict
 
-   <!-- Give your final verdict and reference earlier parts of this document-->
-   ```
+<!-- Final verdict with references to the earlier sections -->
+```
+
+## Rules
+
+- Lead with findings, risks, and missing coverage.
+- Keep the review grounded in the checked-out code, not only the patch view.

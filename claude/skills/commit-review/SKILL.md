@@ -1,65 +1,78 @@
 ---
 name: commit-review
-description: review an uncommitted diff, staged diff or commits
+description: Review an uncommitted diff, staged diff, or specific commit and write a structured review file under .local/docs. Use this when the user wants a staff-level review of local changes before they are merged or submitted.
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Bash(git-town *), Bash(git *), Bash(mkdir -p *)
 ---
 
-1. Ask the user what they want to review from the following options
-   - Uncommitted diff (unstaged)
-   - Staged diff
-   - Commit Hash
+# Commit Review
 
-   If `Commit Hash` is selected, give the user the last 5 commits in the
-   following format:
+Review local changes and store the review in the repo.
 
-   `{HASH_0} "{Top Level Commit Message}"`
+## Workflow
 
-2. Use the builtin lsp (if there is any) and other tools to find related content
-   to the diff.
+1. Ask the user which target to review:
+   - uncommitted diff
+   - staged diff
+   - commit hash
+2. If the user chooses a commit hash, show the last 5 commits as:
+   `{HASH} "{top level commit message}"`
+3. Gather the relevant diff with git.
+4. Inspect related code and existing tests before writing the review.
+5. If the diff is at least 75 non-test lines, include a sequence diagram
+   section.
+6. Write the review to:
+   `./.local/docs/commit-review/{NNNN}_{short-hash-or-uncommitted}/REVIEW.md`
 
-3. Write the following review in the following format:
+   Determine `NNNN` by checking the last file sorted in alpha-numerical order
+   and increase the value by 1.
 
-   ```markdown
-   ## Context
+## Review Format
 
-   Commit: {Commit hash or "uncommited"}
+Use this exact structure:
 
-   Commit Message: {Commit Message - Top Level}
+```markdown
+## Context
 
-   Commit Author: {Author}
+Commit: {commit hash or "uncommitted"}
 
-   ## Review
+Commit Message: {top level commit message}
 
-   ### Sequence Diagram
+Commit Author: {author}
 
-   <!-- Include if Diff is greater than or equal to 75 lines (not including tests)-->
+## Review
 
-   ### Description
+### Sequence Diagram
 
-   <!-- Describe the change and explain the sequence diagram if there is one to provide more clarity-->
+<!-- Include only when the diff is at least 75 non-test lines -->
 
-   ### Test Coverage
+### Description
 
-   <!-- If the change includes changes to code find existing tests prior to the pull-requests or in this pull-request that validates this change-->
+<!-- Describe the change and explain the sequence diagram if present -->
 
-   ### Positives
+### Test Coverage
 
-   <!-- Describe the strengths of this change-->
+<!-- Describe tests that validate the change, including pre-existing tests -->
 
-   ### Negatives
+### Positives
 
-   <!-- Describe the gaps in implementation and rank them in severity. GAPS are merge blockers-->
+<!-- Strengths of the change -->
 
-   ### Nits
+### Negatives
 
-   <!-- Mention any nits that are non blocking to merging this change-->
+<!-- Gaps in implementation, ranked by severity. Gaps are merge blockers -->
 
-   ## Verdict
+### Nits
 
-   <!-- Give your final verdict and reference earlier parts of this document-->
-   ```
+<!-- Non-blocking feedback -->
 
-4. Store the review at the following location
+## Verdict
 
-   `./.local.docs/commit-review/{3_digit_autoincrementing_starting_at_001}_{short form commit hash if there is one or "uncommited"}/REVIEW.md`
+<!-- Final verdict with references to the earlier sections -->
+```
+
+## Rules
+
+- Use a code review mindset first: bugs, regressions, risk, and missing tests.
+- Keep the review specific and actionable.
+- Never overwrite an existing review directory; create the next 3-digit prefix.

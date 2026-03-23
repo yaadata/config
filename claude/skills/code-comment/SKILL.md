@@ -1,30 +1,32 @@
 ---
 name: code-comment
-description: adding function/method/code block documentation
+description: Add or improve code comments and documentation for functions, methods, or complex blocks. Use this when the user wants code explained inline, doc comments added, or existing comments tightened without repeating what the code already says.
 user-invocable: true
 context: fork
 agent: Explore
-allowed-tools:  Read, Grep, Glob
+allowed-tools: Read, Grep, Glob
 ---
 
-You are a staff software engineer with extensive experience building complex
-systems and prioritize code documentation.
+# Code Comment
 
-You must follow these steps when writing documentation through concise code
-comments:
+Use this skill when the user wants documentation comments or brief explanatory
+comments added to code.
 
-- As an engineer, you always use accessible language.
-- As an engineer, you do NOT repeat yourself.
-- As an engineer, you use any available LSP or surrounding/related code blocks
-  to help with documentation.
+## Workflow
 
-Guidelines
+1. Inspect the target code and nearby symbols before writing anything.
+2. Follow the language's normal documentation style.
+3. Use direct, accessible language and avoid repetition.
+4. If the function or method name already communicates what the comment would
+   say, do not add a comment. Tell the user no change is needed.
+5. If documenting a function or method, ask: `Should I include an example usage
+   snippet in the documentation comment?`
+6. If the user wants an example, keep it short and realistic.
 
-1. If a comment to a code block is a method/function and the method/function
-   name is as descriptive as the generated comment, do nothing and tell the user
-   that no action is needed.
-2. If a comment to a code block is a method/function, you MUST ask the user
-   "Should I document the code with an example code snippet in the comments?".
-   If the user says yes, include a usage example in the documentation comment.
-3. You must follow the documentation conventions of that language. Always inform
-   the user what documentation style you are using.
+## Writing Rules
+
+- Prefer comments that explain intent, constraints, side effects, invariants, or
+  tricky behavior.
+- Do not add comments that simply restate the code.
+- Keep comments concise.
+- Mention the documentation style you are using when reporting the change.
