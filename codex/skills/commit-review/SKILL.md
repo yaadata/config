@@ -1,6 +1,6 @@
 ---
 name: commit-review
-description: Review an uncommitted diff, staged diff, or specific commit and write a structured review file under .local.docs. Use this when the user wants a staff-level review of local changes before they are merged or submitted.
+description: Review an uncommitted diff, staged diff, or specific commit and write a structured review file under .local/docs. Use this when the user wants a staff-level review of local changes before they are merged or submitted.
 ---
 
 # Commit Review

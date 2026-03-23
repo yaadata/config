@@ -1,6 +1,6 @@
 ---
 name: planner
-description: Create, critique, revise, and store implementation plans under .local.docs/plans for the current branch. Use this when the user wants a reusable written plan artifact, not just an in-chat outline.
+description: Create, critique, revise, and store implementation plans under .local/docs/plans for the current branch. Use this when the user wants a reusable written plan artifact, not just an in-chat outline.
 ---
 
 # Planner
