@@ -1,6 +1,6 @@
 local opts = {
   'yaadata/codex.nvim',
-  version = '0.6.0',
+  version = '0.6.1',
   cmd = {
     'Codex',
     'CodexFocus',
@@ -144,7 +144,7 @@ local opts = {
             title = ' Openai Codex ',
             position = 'right',
             title_pos = 'center',
-            width = 0.25,
+            width = 0.30,
             wo = {
               winbar = ' Openai Codex ',
             },
@@ -156,7 +156,7 @@ local opts = {
           window = 'vsplit',
           vsplit = {
             side = 'right', -- left | right
-            size_pct = 20, -- 10-90
+            size_pct = 30, -- 10-90
           },
           hsplit = {
             side = 'bottom', -- top | bottom
