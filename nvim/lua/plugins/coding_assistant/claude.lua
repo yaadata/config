@@ -56,8 +56,28 @@ local opts = {
     { '<leader>aaf', '<cmd>ClaudeCodeFocus<cr>', desc = 'Focus Claude' },
     { '<leader>aar', '<cmd>ClaudeCode --resume<cr>', desc = 'Resume Claude' },
     { '<leader>aac', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },
-    { '<leader>aas', '<cmd>ClaudeCodeAdd %<cr>', mode = 'n', desc = 'Add current buffer' },
-    { '<leader>aas', '<cmd>ClaudeCodeSend<cr>', mode = 'v', desc = 'Send Selection to Claude' },
+    {
+      '<leader>aas',
+      function()
+        vim.cmd 'ClaudeCodeAdd %'
+        vim.schedule(function()
+          vim.cmd 'ClaudeCodeFocus'
+        end)
+      end,
+      mode = 'n',
+      desc = 'Add current buffer',
+    },
+    {
+      '<leader>aas',
+      function()
+        vim.cmd 'ClaudeCodeSend'
+        vim.schedule(function()
+          vim.cmd 'ClaudeCodeFocus'
+        end)
+      end,
+      mode = 'v',
+      desc = 'Send Selection to Claude',
+    },
     { '<leader>aax', '<cmd>ClaudeCodeClose<cr>', mode = 'n', desc = 'Close Claude' },
     {
       '<leader>aaS',
