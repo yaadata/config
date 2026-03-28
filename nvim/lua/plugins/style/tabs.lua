@@ -45,6 +45,8 @@ local opts = {
 
     -- Close buffer
     map('n', '<leader>bx', '<Cmd>BufferClose<CR>', options)
+    map('n', '<leader>bx', '<Cmd>BufferClose<CR>', options)
+    map('n', 'X', '<Cmd>BufferClose<CR>', options)
     map('n', '<leader>bX', '<Cmd>BufferCloseAllButCurrent<CR>', options)
     map('n', '<leader>bax', '<Cmd>BufferCloseAllButCurrent<CR>', options)
     -- Pin/unpin buffer
