@@ -181,6 +181,7 @@ local opts = { -- LSP Configuration & Plugins
       'graphql-language-service-cli',
       -- 'html-lsp',
       'markdownlint',
+      'pkl-lsp',
       'protolint',
       'pydocstyle',
       'pyright',
