@@ -3,8 +3,8 @@ local opts = { -- LSP Configuration & Plugins
   tag = 'v2.3.0',
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for Neovim
-    { 'mason-org/mason.nvim', tag = 'v1.11.0' },
-    { 'mason-org/mason-lspconfig.nvim', tag = 'v1.32.0' },
+    { 'mason-org/mason.nvim', tag = 'v2.2.1', opts = {} },
+    { 'mason-org/mason-lspconfig.nvim', tag = 'v2.1.0' },
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'jmacadie/telescope-hierarchy.nvim', commit = '2ba4840d8ba9288ca85dc34b01cf946aee0b8fca' },
   },
@@ -144,94 +144,35 @@ local opts = { -- LSP Configuration & Plugins
       end,
     })
 
-    -- LSP servers and clients are able to communicate to each other what features they support.
-    --  By default, Neovim doesn't support everything that is in the LSP specification.
-    --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-    --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-    local nvim_lsp = require 'lspconfig'
-
-    -- Enable the following language servers
-    --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-    --
-    --  Add any additional override configuration in the following tables. Available keys are:
-    --  - cmd (table): Override the default command used to start the server
-    --  - filetypes (table): Override the default list of associated filetypes for the server
-    --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-    --  - settings (table): Override the default settings passed when initializing the server.
-    --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-    local servers = {
-      denols = {
-        root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
-        root_markers = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
-      },
-      ts_ls = {
-        root_dir = nvim_lsp.util.root_pattern 'package.json',
-      },
-      starpls = {
-        filetypes = { 'bzl', 'bazel', 'sy' },
-      },
-      terraformls = {},
-      lua_ls = {
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = 'Replace',
-            },
-            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            -- diagnostics = { disable = { 'missing-fields' } },
-            runtime = {
-              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-              version = 'LuaJIT',
-              path = vim.split(package.path, ';'),
-            },
-            diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = { 'vim' },
-            },
-            workspace = {
-              -- Make the server aware of Neovim runtime files and plugins
-              library = vim.api.nvim_get_runtime_file('', true),
-              checkThirdParty = false,
-            },
-            telemetry = {
-              enable = false,
-            },
-          },
-        },
-      },
-      ruby_lsp = {
-        init_options = {
-          formatter = 'standard',
-          linters = { 'standard' },
-        },
-        cmd = { 'mise', 'x', '--', 'ruby-lsp' },
-      },
-      fish_lsp = {
-        root_dir = vim.fn.getcwd(),
-        root_markers = { 'config.fish' },
-      },
-      basedpyright = {},
+    -- These servers are installed by Mason and enabled via Neovim's native
+    -- `vim.lsp.config()` / `vim.lsp.enable()` flow.
+    local lsp_servers = {
+      'gopls',
+      'denols',
+      'ts_ls',
+      'starpls',
+      'terraformls',
+      'lua_ls',
+      'ruby_lsp',
+      'fish_lsp',
+      'basedpyright',
     }
 
-    -- Ensure the servers and tools above are installed
-    --  To check the current status of installed tools and/or manually install
-    --  other tools, you can run
-    --    :Mason
-    --
-    --  You can press `g?` for help in this menu.
-    require('mason').setup()
+    -- Apply blink.cmp capabilities to every LSP config, including server
+    -- overrides provided by local `lsp/*.lua` files.
+    vim.lsp.config('*', {
+      capabilities = require('blink.cmp').get_lsp_capabilities(),
+    })
 
     -- You can add other tools here that you want Mason to install
     -- for you, so that they are available from within Neovim.
     local ensure_installed = {
-      'basedpyright',
       'bash-language-server',
       'black',
       'buf',
       'codelldb',
       'css-lsp',
       'debugpy',
-      'deno',
       'go-debug-adapter',
       'goimports',
       'golangci-lint',
@@ -239,41 +180,28 @@ local opts = { -- LSP Configuration & Plugins
       'gotestsum',
       'graphql-language-service-cli',
       -- 'html-lsp',
-      'lua-language-server',
-      'markdownlint',
       'markdownlint',
       'protolint',
       'pydocstyle',
       'pyright',
       'eslint_d',
       'ruff',
-      'starpls',
       'sql-formatter',
       'sqlfmt',
       'stylua',
-      'terraform-ls',
       'vetur-vls',
       'yaml-language-server',
-      'typescript-language-server',
       'zls',
     }
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-    require('mason-lspconfig').setup {
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          local capabilities = require('blink.cmp').get_lsp_capabilities()
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for tsserver)
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          nvim_lsp[server_name].setup(server)
-        end,
-      },
-    }
     require('neodev').setup {
       library = { plugins = { 'nvim-dap-ui' }, types = true },
+    }
+
+    require('mason-lspconfig').setup {
+      ensure_installed = lsp_servers,
+      automatic_enable = true,
     }
   end,
 }

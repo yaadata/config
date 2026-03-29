@@ -22,6 +22,7 @@ claude/**
 !claude/statusline-command.sh
 !/claude/skills/
 !/claude/skills/**
+**/.local/docs/**
 .elixir-tools/**
 elixir-ls/** 
 configstore/**
