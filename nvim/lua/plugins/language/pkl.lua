@@ -4,10 +4,6 @@ local opts = {
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
   },
-  build = function()
-    require('pkl-neovim').init()
-    vim.cmd 'TSInstall pkl'
-  end,
   config = function()
     local config = {
       start_command = { 'pkl-lsp' },
