@@ -3,6 +3,11 @@ local opts = {
   version = 'v0.10.0',
   build = ':TSUpdate',
   config = function()
+    -- `pkl` is provided by apple/pkl-neovim, not nvim-treesitter itself.
+    pcall(function()
+      require('pkl-neovim').init()
+    end)
+
     require('nvim-treesitter.configs').setup {
       -- Add languages to be installed here that you want installed for treesitter
       ensure_installed = {
@@ -21,6 +26,7 @@ local opts = {
         'elixir',
         'eex',
         'heex',
+        'pkl',
       },
       auto_install = true,
       highlight = { enable = true },

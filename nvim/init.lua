@@ -22,13 +22,13 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   { import = 'plugins' },
-  { import = 'plugins.language' },
-  { import = 'plugins.style' },
+  { import = 'plugins.git' },
+  { import = 'plugins.files' },
   { import = 'plugins.treesitter' },
+  { import = 'plugins.style' },
   { import = 'plugins.ide' },
   { import = 'plugins.coding_assistant' },
-  { import = 'plugins.files' },
-  { import = 'plugins.git' },
+  { import = 'plugins.language' },
   { import = 'plugins.mini' },
 }, {
   ui = {
