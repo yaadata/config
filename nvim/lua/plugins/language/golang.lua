@@ -14,26 +14,7 @@ local opts = {
       lsp_inlay_hints = {
         enable = true,
       },
-      lsp_cfg = {
-        settings = {
-          gopls = {
-            completeUnimported = true,
-            usePlaceholders = false,
-            analyses = {
-              unusedparams = true,
-              ST1003 = false,
-              ST1001 = false,
-            },
-            hints = {
-              compositeLiteralFields = true,
-              compositeLiteralTypes = true,
-              parameterNames = true,
-              rangeVariableTypes = true,
-            },
-            buildFlags = { '-tags', 'integration,unit,endtoendtest,smoke' },
-          },
-        },
-      },
+      lsp_cfg = false,
       lsp_keymaps = false,
       run_in_floaterm = true,
       floaterm = { -- position
@@ -47,6 +28,8 @@ local opts = {
       dap_debug_keymap = false,
       dap_debug_gui = false,
     }
+
+    vim.lsp.config('gopls', dofile(vim.fn.stdpath 'config' .. '/lsp/gopls.lua'))
   end,
 }
 return opts
