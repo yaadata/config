@@ -14,53 +14,7 @@ local opts = {
       lsp_inlay_hints = {
         enable = true,
       },
-      lsp_cfg = {
-        cmd = { 'gopls' },
-        root_dir = function()
-          return vim.fn.getcwd()
-        end,
-        settings = {
-          gopls = {
-            workspaceFiles = {
-              '**/BUILD',
-              '**/WORKSPACE',
-              '**/*.{bzl,bazel}',
-            },
-            directoryFilters = {
-              '-bazel-bin',
-              '-bazel-out',
-              '-bazel-testlogs',
-              '-bazel-mux',
-            },
-            gofumpt = true,
-            matcher = 'fuzzy',
-            symbolMatcher = 'fuzzy',
-            codelenses = {
-              gc_details = true,
-              generate = true,
-              regenerate_cgo = true,
-              tidy = true,
-              test = true,
-            },
-            -- local = "github.com/muxinc/mux",
-            completeUnimported = true,
-            usePlaceholders = false,
-            analyses = {
-              unusedparams = true,
-              ST1003 = false,
-              ST1001 = false,
-            },
-            hints = {
-              compositeLiteralFields = true,
-              compositeLiteralTypes = true,
-              parameterNames = true,
-              rangeVariableTypes = true,
-            },
-            verboseOutput = true,
-            buildFlags = { '-tags=integration,unit,endtoendtest,smoke' },
-          },
-        },
-      },
+      lsp_cfg = false,
       lsp_keymaps = false,
       run_in_floaterm = true,
       floaterm = { -- position
@@ -74,6 +28,8 @@ local opts = {
       dap_debug_keymap = false,
       dap_debug_gui = false,
     }
+
+    vim.lsp.config('gopls', dofile(vim.fn.stdpath 'config' .. '/lsp/gopls.lua'))
   end,
 }
 return opts
