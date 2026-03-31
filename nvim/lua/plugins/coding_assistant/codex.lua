@@ -1,6 +1,6 @@
 local opts = {
   'yaadata/codex.nvim',
-  version = '1.0.0-rc1',
+  version = '1.0.0',
   cmd = {
     'Codex',
     'CodexFocus',
