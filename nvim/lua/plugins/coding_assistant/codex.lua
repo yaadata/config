@@ -107,6 +107,17 @@ local opts = {
       '<leader>aoc',
       function()
         local codex = require 'codex'
+        codex.send_selection()
+        codex.send '$code-comment the current selection '
+        codex.submit_input()
+      end,
+      desc = 'Codex: Add Code Coment',
+      mode = { 'v' },
+    },
+    {
+      '<leader>aoc',
+      function()
+        local codex = require 'codex'
         codex.execute_slash_command { command = 'copy' }
         vim.defer_fn(function()
           if codex.is_focused() then
@@ -115,7 +126,7 @@ local opts = {
         end, 300)
       end,
       desc = 'Codex: Copy Latest Response',
-      mode = { 'n', 'v' },
+      mode = { 'n' },
     },
   },
   opts = {
