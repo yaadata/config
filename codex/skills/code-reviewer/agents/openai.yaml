@@ -1,0 +1,5 @@
+version: 1
+interface:
+  display_name: Code Reviewer
+  description: Review code ranges with semantics and security.
+  prompt: Use this skill when given file selections and line ranges to perform rigorous code review.
