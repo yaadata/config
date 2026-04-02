@@ -98,16 +98,35 @@ local opts = {
     {
       '<leader>aor',
       function()
+        local codex = require 'codex'
+        local ok, err = codex.send_selection()
+        if not ok then
+          vim.notify(('Codex: failed to collect selection%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
+          return
+        end
+        codex.send '$code-review the current selection '
+        codex.submit_input()
+      end,
+      desc = 'Codex: Review Code',
+      mode = { 'v' },
+    },
+    {
+      '<leader>aor',
+      function()
         require('codex').resume()
       end,
       desc = 'Codex: Resume session',
-      mode = { 'n', 'v' },
+      mode = { 'n' },
     },
     {
       '<leader>aoc',
       function()
         local codex = require 'codex'
-        codex.send_selection()
+        local ok, err = codex.send_selection()
+        if not ok then
+          vim.notify(('Codex: failed to collect selection%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
+          return
+        end
         codex.send '$code-comment the current selection '
         codex.submit_input()
       end,
