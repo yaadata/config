@@ -25,6 +25,20 @@ vim.keymap.set('n', '<leader>gtd', '<cmd>GHDashToggle<cr>', { desc = 'gh dash ex
 vim.keymap.set('n', '<leader>wmsv', '<C-w>v<CR>', { desc = 'split window vertical' })
 vim.keymap.set('n', '<leader>wmsh', '<C-w>s<CR>', { desc = 'split window horizontal' })
 
+local wr = require 'utils.window_resize'
+vim.keymap.set('n', '<C-S-Left>', function()
+  wr.move_left(2)
+end, { desc = 'resize buffer to the right' })
+vim.keymap.set('n', '<C-S-Right>', function()
+  wr.move_right(2)
+end, { desc = 'resize buffer to the left' })
+vim.keymap.set('n', '<C-S-Up>', function()
+  wr.move_up(1)
+end, { desc = 'increase size upward' })
+vim.keymap.set('n', '<C-S-Down>', function()
+  wr.move_down(1)
+end, { desc = 'decrease size down' })
+
 -- quickfix / location list
 vim.keymap.set('n', '<leader>qo', '<cmd>copen<CR>', { desc = '[O]pen quickfix' })
 vim.keymap.set('n', '<leader>qq', '<cmd>cclose<CR>', { desc = '[C]lose quickfix' })
