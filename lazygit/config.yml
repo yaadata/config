@@ -74,9 +74,9 @@ customCommands:
     output: log
   - key: "S"
     context: "localBranches"
-    description: "Git-Town Skip (skip branch with merge conflicts when syncing)"
+    description: "Git-Town Sync (syncing branch)"
     command: "git-town skip"
-    loadingText: "Skiping"
+    loadingText: "Syncing"
     output: log
   - key: "G"
     context: "files"
