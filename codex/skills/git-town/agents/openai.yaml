@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Town"
+  short_description: "Git Town command summaries and how-to guides."
+  default_prompt: "Use this skill to choose and execute git-town commands safely with concise summaries and per-command how-to files."
