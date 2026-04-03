@@ -6,8 +6,30 @@ gui:
 customCommands:
   - key: "Y"
     context: "global"
-    description: "Git-Town sYnc"
+    description: "Git-Town sync all"
     command: "git-town sync --all"
+    loadingText: "Syncing"
+    output: log
+  - key: "S"
+    context: "localBranches"
+    description: "Git-Town Sync (syncing branch)"
+    command: >-
+      bash -c '
+        current_branch="$1"
+        target_branch="$2"
+
+        if [ "$current_branch" = "$target_branch" ]; then
+          exec git-town sync --push
+        fi
+
+        restore_branch() {
+          git switch "$current_branch"
+        }
+
+        git switch "$target_branch" || exit 1
+        trap restore_branch EXIT
+        git-town sync --push
+      ' _ "{{.CheckedOutBranch.Name}}" "{{.SelectedLocalBranch.Name}}"
     loadingText: "Syncing"
     output: log
   - key: "U"
@@ -71,12 +93,6 @@ customCommands:
         key: "BranchName"
     command: "git-town prepend {{.Form.BranchName}}"
     loadingText: "Prepending"
-    output: log
-  - key: "S"
-    context: "localBranches"
-    description: "Git-Town Sync (syncing branch)"
-    command: "git-town skip"
-    loadingText: "Syncing"
     output: log
   - key: "G"
     context: "files"
