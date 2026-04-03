@@ -198,6 +198,7 @@ local opts = {
   },
   config = function(_, opts)
     local km = require('codex.keymaps').builtins
+    local wr = require 'utils.window_resize'
     opts.terminal.keymaps = {
       ['<C-c>'] = { mode = { 't', 'n' }, action = km.toggle },
       ['<C-n>'] = {
@@ -214,6 +215,34 @@ local opts = {
       ['<C-j>'] = { mode = { 't', 'n' }, action = km.nav_down },
       ['<C-k>'] = { mode = { 't', 'n' }, action = km.nav_up },
       ['<C-l>'] = { mode = { 't', 'n' }, action = km.nav_right },
+      ['<C-S-Left>'] = {
+        mode = { 't', 'n' },
+        action = function()
+          wr.move_left(2)
+        end,
+        desc = 'resize buffer to the right',
+      },
+      ['<C-S-Right>'] = {
+        mode = { 't', 'n' },
+        action = function()
+          wr.move_right(2)
+        end,
+        desc = 'resize buffer to the left',
+      },
+      ['<C-S-Up>'] = {
+        mode = { 't', 'n' },
+        action = function()
+          wr.move_up(1)
+        end,
+        desc = 'increase size upward',
+      },
+      ['<C-S-Down>'] = {
+        mode = { 't', 'n' },
+        action = function()
+          wr.move_down(1)
+        end,
+        desc = 'decrease size down',
+      },
     }
     require('codex').setup(opts)
   end,
