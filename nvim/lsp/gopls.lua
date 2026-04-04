@@ -8,14 +8,15 @@ return vim.tbl_deep_extend('force', cfg, {
   settings = {
     gopls = {
       gofumpt = true,
-      matcher = 'fuzzy',
-      symbolMatcher = 'fuzzy',
+      matcher = 'Fuzzy',
+      symbolMatcher = 'FastFuzzy',
       codelenses = {
-        gc_details = true,
         generate = true,
         regenerate_cgo = true,
+        run_govulncheck = true,
         tidy = true,
-        test = true,
+        upgrade_dependency = true,
+        vendor = true,
       },
       completeUnimported = true,
       usePlaceholders = true,
@@ -34,8 +35,5 @@ return vim.tbl_deep_extend('force', cfg, {
       verboseOutput = true,
       buildFlags = { '-tags=integration,unit,endtoendtest,smoke' },
     },
-  },
-  init_options = {
-    buildFlags = { '-tags=integration,unit,endtoendtest,smoke' },
   },
 })

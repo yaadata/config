@@ -201,8 +201,10 @@ local opts = { -- LSP Configuration & Plugins
 
     require('mason-lspconfig').setup {
       ensure_installed = lsp_servers,
-      automatic_enable = true,
+      automatic_enable = false,
     }
+
+    vim.lsp.enable(lsp_servers)
   end,
 }
 
