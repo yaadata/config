@@ -2,6 +2,15 @@ local opts = {
   'goolord/alpha-nvim',
   commit = 'a9d8fb72213c8b461e791409e7feabb74eb6ce73',
   event = 'VimEnter',
+  keys = {
+    {
+      '<leader>wd',
+      function()
+        vim.cmd 'Alpha'
+      end,
+      desc = 'Workspace Dashboard',
+    },
+  },
   config = function()
     local alpha = require 'alpha'
     local dashboard = require 'alpha.themes.dashboard'
