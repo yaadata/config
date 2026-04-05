@@ -6,7 +6,17 @@ local opts = {
     'NvimWebDeviconsHiTest',
   },
   config = function()
-    require('nvim-web-devicons').setup()
+    require('nvim-web-devicons').setup {
+      override = {
+        pkl = {
+          icon = '󰫽', -- pick a Nerd Font glyph
+          color = '#00FFFF',
+          cterm_color = '66',
+          name = 'pkl',
+        },
+      },
+      default = true,
+    }
   end,
 }
 

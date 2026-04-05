@@ -3,7 +3,9 @@ local opts = {
   opts = {},
   commit = 'f55b25e493a7df76371cfadd0ded5004cb9cd48a',
   -- Optional dependencies
-  dependencies = { 'nvim-tree/nvim-web-devicons', { 'echasnovski/mini.icons', opts = {} } },
+  dependencies = {
+    'echasnovski/mini.icons',
+  },
   config = function()
     local preview_enabled = false
     local oil = require 'oil'

@@ -18,6 +18,13 @@ local opts = { -- Autoformat
   },
   opts = {
     notify_on_error = false,
+    formatters = {
+      pkl = {
+        command = 'pkl',
+        args = { 'format', '-w', '$FILENAME' },
+        stdin = false,
+      },
+    },
     format_on_save = function(bufnr)
       -- Disable with a global or buffer-local variable
       if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
@@ -41,6 +48,7 @@ local opts = { -- Autoformat
       markdown = { 'deno_fmt' },
       toml = { 'tombi' },
       terraform = { 'terraform_fmt' },
+      pkl = { 'pkl' },
       --
       -- You can use a sub-list to tell conform to run *until* a formatter
       -- is found.
