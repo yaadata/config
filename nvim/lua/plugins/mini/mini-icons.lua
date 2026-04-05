@@ -1,8 +1,16 @@
 local opts = {
   'nvim-mini/mini.icons',
-  commit = 'efc85e42262cd0c9e1fdbf806c25cb0be6de115c',
+  version = 'v0.17.0',
+  enabled = true,
   config = function()
-    require('mini.icons').setup {}
+    require('mini.icons').setup {
+      extension = {
+        ['pkl'] = {
+          glyph = '󰫽',
+          hl = 'MiniIconsCyan',
+        },
+      },
+    }
   end,
 }
 
