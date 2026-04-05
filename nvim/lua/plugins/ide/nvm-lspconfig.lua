@@ -178,6 +178,7 @@ local opts = { -- LSP Configuration & Plugins
       'golangci-lint',
       'gotests',
       'gotestsum',
+      'tombi',
       'graphql-language-service-cli',
       -- 'html-lsp',
       'markdownlint',
