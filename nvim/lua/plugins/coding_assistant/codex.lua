@@ -209,7 +209,7 @@ local opts = {
         desc = 'normal mode',
       },
       ['<M-BS>'] = { mode = { 't', 'n' }, action = km.clear_input },
-      ['<C-g>'] = { mode = { 't', 'n' }, action = km.unfocus },
+      ['<C-G>'] = { mode = { 't', 'n' }, action = km.unfocus },
       ['<C-x>'] = { mode = { 't', 'n' }, action = km.close },
       ['<C-h>'] = { mode = { 't', 'n' }, action = km.nav_left },
       ['<C-j>'] = { mode = { 't', 'n' }, action = km.nav_down },
