@@ -80,19 +80,15 @@ customCommands:
     output: log
   - key: "p"
     context: "localBranches"
-    description: "Git-Town Propose (creates a pull request)"
-    command: "git-town propose"
+    description: "create github pull-request"
+    command: "gh pr create -w"
     loadingText: "Creating pull request"
     output: log
   - key: "P"
     context: "localBranches"
-    description: "Git-Town Prepend (creates a branch between the curent branch and its parent)"
-    prompts:
-      - type: "input"
-        title: "Enter name of the for child branch between '{{.CheckedOutBranch.Name}}' and its parent"
-        key: "BranchName"
-    command: "git-town prepend {{.Form.BranchName}}"
-    loadingText: "Prepending"
+    description: "view github pull-request"
+    command: "gh pr view -w"
+    loadingText: "Creating pull request"
     output: log
   - key: "G"
     context: "files"
