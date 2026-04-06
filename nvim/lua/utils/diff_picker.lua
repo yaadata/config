@@ -165,6 +165,33 @@ local function is_diff_parent_tty_error(err)
 end
 
 local function parse_sections(lines)
+  local trim = function(value)
+    if not value then
+      return value
+    end
+    return (value:gsub('^%s+', ''):gsub('%s+$', ''))
+  end
+
+  local parse_section_header = function(line)
+    if line:match '^%s' then
+      return nil, nil, nil
+    end
+
+    local file, page, language = line:match '^(.-)%s+%-%-%-%s+(%d+/%d+)%s+%-%-%-%s+(.*)$'
+    if file and page and language then
+      return trim(file), page, trim(language)
+    end
+
+    -- Some git-town/difftastic outputs omit page markers and use:
+    -- <file> --- <language>
+    file, language = line:match '^(.-)%s+%-%-%-%s+(.*)$'
+    if file and language and file ~= '' and language ~= '' then
+      return trim(file), '1/1', trim(language)
+    end
+
+    return nil, nil, nil
+  end
+
   local parse_diff_line_numbers = function(line)
     local left, right = line:match '^%s*([%.%d]+)%s+([%.%d]+)'
     if not left or not right then
@@ -204,7 +231,7 @@ local function parse_sections(lines)
   local current = nil
 
   for _, line in ipairs(lines) do
-    local file, page, language = line:match '^(.-)%s+%-%-%-%s+(%d+/%d+)%s+%-%-%-%s+(.*)$'
+    local file, page, language = parse_section_header(line)
 
     if file and page and language then
       if current ~= nil then
