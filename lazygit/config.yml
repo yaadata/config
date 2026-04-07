@@ -88,7 +88,7 @@ customCommands:
     context: "localBranches"
     description: "view github pull-request"
     command: "gh pr view -w"
-    loadingText: "Creating pull request"
+    loadingText: "Opening Pull-Request"
     output: log
   - key: "G"
     context: "files"
