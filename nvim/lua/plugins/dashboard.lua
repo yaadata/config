@@ -54,12 +54,13 @@ local opts = {
     local buttons = {
       type = 'group',
       val = {
+        dashboard.button('f', '  Search & Find File', '<cmd>Telescope find_files<CR>'),
+        dashboard.button('r', '  Search Recent Files', '<cmd>Telescope oldfiles cwd_only=true<CR>'),
+        dashboard.button('s', '  Search By Grep', '<cmd>Telescope live_grep cwd_only=true<CR>'),
         dashboard.button('d', '  Session Delete', '<cmd>AutoSession deletePicker <CR>'),
+        dashboard.button('S', '  Session Search', '<cmd>AutoSession search <CR>'),
         dashboard.button('e', '  New File', '<cmd>ene<CR>'),
-        dashboard.button('f', '  Find File', '<cmd>Telescope find_files<CR>'),
         dashboard.button('g', '  LazyGit', '<cmd>LazyGitToggle<cr>'),
-        dashboard.button('r', '  Recent Files', '<cmd>Telescope oldfiles cwd_only=true<CR>'),
-        dashboard.button('s', '  Session Search', '<cmd>AutoSession search <CR>'),
         dashboard.button('q', '  Quit', '<cmd>qa<CR>'),
       },
       opts = { spacing = 1 },
