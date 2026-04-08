@@ -1,0 +1,33 @@
+[core]
+	editor = nvim
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+[difftool]
+    # Run the difftool immediately, don't ask 'are you sure' each time.
+    prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+    # Use a pager if the difftool output is larger than one screenful,
+    # consistent with the behaviour of `git diff`.
+    difftool = true
+[alias]
+	append = town append
+	compress = town compress
+	dft = difftool --tool=difftastic --no-prompt
+	diff-parent = town diff-parent
+	hack = town hack
+	delete = town delete
+	prepend = town prepend
+	propose = town propose
+	rename = town rename
+	set-parent = town set-parent
+	sync = town sync
+[git-town]
+	proposal-breadcrumb = stacks
