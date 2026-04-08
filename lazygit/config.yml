@@ -10,27 +10,15 @@ customCommands:
     command: "git-town sync --all"
     loadingText: "Syncing"
     output: log
-  - key: "S"
+  - key: "f"
     context: "localBranches"
-    description: "Git-Town Sync (syncing branch)"
+    description: "Fetch Branch"
     command: >-
       bash -c '
-        current_branch="$1"
-        target_branch="$2"
-
-        if [ "$current_branch" = "$target_branch" ]; then
-          exec git-town sync --push
-        fi
-
-        restore_branch() {
-          git switch "$current_branch"
-        }
-
-        git switch "$target_branch" || exit 1
-        trap restore_branch EXIT
-        git-town sync --push
-      ' _ "{{.CheckedOutBranch.Name}}" "{{.SelectedLocalBranch.Name}}"
-    loadingText: "Syncing"
+        target_branch="$1"
+        git fetch origin +"$target_branch":"$target_branch"
+      ' _ "{{.SelectedLocalBranch.Name}}"
+    loadingText: "Fetching...."
     output: log
   - key: "U"
     context: "global"
@@ -70,25 +58,25 @@ customCommands:
     output: log
   - key: "K"
     context: "localBranches"
-    description: "Git-Town Delete (deletes the current feature branch and sYnc)"
+    description: "Git-Town Delete (deletes the current feature branch and sync)"
     command: "git-town delete"
     prompts:
       - type: "confirm"
         title: "Delete current feature branch"
         body: "Are you sure you want to delete the current feature branch?"
-    loadingText: "Deleting Feature Branch"
+    loadingText: "Deleting..."
     output: log
   - key: "p"
     context: "localBranches"
     description: "create github pull-request"
     command: "gh pr create -w"
-    loadingText: "Creating pull request"
+    loadingText: "Creating..."
     output: log
   - key: "P"
     context: "localBranches"
     description: "view github pull-request"
     command: "gh pr view -w"
-    loadingText: "Opening Pull-Request"
+    loadingText: "Opening..."
     output: log
   - key: "G"
     context: "files"
