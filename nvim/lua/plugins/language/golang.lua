@@ -3,9 +3,8 @@ local opts = {
   dependencies = {
     'ray-x/guihua.lua',
     'neovim/nvim-lspconfig',
-    'nvim-treesitter/nvim-treesitter',
   },
-  version = 'v0.10.4',
+  commit = 'dcffbd33d04781c10c4246929c07e90a07689358',
   event = { 'CmdlineEnter' },
   ft = { 'go', 'gomod' },
   build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
@@ -25,6 +24,7 @@ local opts = {
       },
       trouble = true, -- true: use trouble to open quickfix
       icons = false,
+      textobjects = false,
       dap_debug_keymap = false,
       dap_debug_gui = false,
     }
