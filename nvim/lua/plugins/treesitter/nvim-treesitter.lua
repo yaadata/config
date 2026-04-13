@@ -17,6 +17,7 @@ local parsers = {
   'pkl',
   'yaml',
   'helm',
+  'make',
 }
 
 local opts = {
