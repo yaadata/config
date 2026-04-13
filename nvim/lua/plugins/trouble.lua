@@ -1,6 +1,6 @@
 local opts = {
   'folke/trouble.nvim',
-  tag = 'v3.7.1',
+  commit = 'bd67efe408d4816e25e8491cc5ad4088e708a69a',
   opts = {
     auto_preview = true,
     win = {
@@ -50,6 +50,7 @@ local opts = {
   },
   config = function(_, opts)
     local trouble = require 'trouble'
+
     trouble.setup(opts)
   end,
 }
