@@ -15,6 +15,7 @@ local parsers = {
   'eex',
   'heex',
   'pkl',
+  'make',
 }
 
 local opts = {
