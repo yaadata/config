@@ -164,6 +164,11 @@ local opts = { -- LSP Configuration & Plugins
       capabilities = require('blink.cmp').get_lsp_capabilities(),
     })
 
+    for _, path in ipairs(vim.fn.glob(vim.fn.stdpath 'config' .. '/lsp/*.lua', false, true)) do
+      local name = vim.fn.fnamemodify(path, ':t:r')
+      vim.lsp.config(name, dofile(path))
+    end
+
     -- You can add other tools here that you want Mason to install
     -- for you, so that they are available from within Neovim.
     local ensure_installed = {
@@ -194,6 +199,7 @@ local opts = { -- LSP Configuration & Plugins
       'vetur-vls',
       'yaml-language-server',
       'zls',
+      'starpls',
     }
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

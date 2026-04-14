@@ -28,8 +28,6 @@ local opts = {
       dap_debug_keymap = false,
       dap_debug_gui = false,
     }
-
-    vim.lsp.config('gopls', dofile(vim.fn.stdpath 'config' .. '/lsp/gopls.lua'))
   end,
 }
 return opts
