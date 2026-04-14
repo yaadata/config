@@ -23,6 +23,7 @@ local parsers = {
   'fish',
   'zsh',
   'bash',
+  'toml',
 }
 
 local opts = {
