@@ -21,6 +21,8 @@ local parsers = {
   'fish',
   'zsh',
   'bash',
+  'yaml',
+  'helm',
 }
 
 local opts = {
