@@ -15,6 +15,8 @@ local parsers = {
   'eex',
   'heex',
   'pkl',
+  'yaml',
+  'helm',
 }
 
 local opts = {
