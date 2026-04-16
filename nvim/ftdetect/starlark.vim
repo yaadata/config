@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.sy set filetype=star
+au BufRead,BufNewFile *.sy set filetype=starlark
