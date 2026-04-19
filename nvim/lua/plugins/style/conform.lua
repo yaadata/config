@@ -1,19 +1,19 @@
 local opts = { -- Autoformat
   'stevearc/conform.nvim',
-  tag = 'v9.0.0',
+  tag = 'v9.1.0',
   lazy = false,
   keys = {
     {
       '<leader>bf',
       function()
-        -- Disable with a global or buffer-local variable
-        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-          return
-        end
-        require('conform').format { async = true, lsp_fallback = true }
+        vim.b.disable_autoformat = not vim.b.disable_autoformat
+
+        local status = vim.b.disable_autoformat and 'disabled' or 'enabled'
+        local scope = vim.g.disable_autoformat and ' for this buffer (global autoformat is still disabled)' or ' for this buffer'
+        vim.notify('Autoformat ' .. status .. scope)
       end,
       mode = '',
-      desc = '[F]ormat buffer',
+      desc = 'Toggle [F]ormat',
     },
   },
   opts = {
