@@ -1,4 +1,5 @@
 local parsers = {
+  'gitcommit',
   'javascript',
   'ruby',
   'lua',
@@ -12,10 +13,14 @@ local parsers = {
   'zig',
   'kotlin',
   'elixir',
+  'gleam',
   'eex',
   'heex',
   'pkl',
   'make',
+  'fish',
+  'zsh',
+  'bash',
 }
 
 local opts = {
