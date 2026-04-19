@@ -38,15 +38,14 @@ alias go /opt/homebrew/bin/go
 
 # git abbr
 abbr gta "git-town append"
-abbr gtb "git-town branch"
+abbr gtc "git-town continue"
 abbr gth "git-town hack"
+abbr gtb "git-town switch"
 abbr gts "git-town sync"
-abbr gtS "git-town switch"
 abbr gtss "git-town sync -s"
 abbr gtu "git-town up"
 abbr gtd "git-town down"
 abbr gtdel "git-town delete"
-
 
 abbr gtt git_town_toggle
 abbr gl toggle_git_town_lineage
@@ -105,7 +104,7 @@ function vi
 end
 
 # containers and infra
-abbr k "kubectl"
+abbr k 'kubectl'
 # kubectl abbreviations for fish shell
 
 # Execute a kubectl command against all namespaces
