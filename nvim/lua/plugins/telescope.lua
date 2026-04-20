@@ -167,7 +167,7 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
     map('<leader>sl', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", '[S]earch by Live Grep')
 
     -- Slightly advanced example of overriding default behavior and theme
-    map('<leader>sC', function()
+    map('<leader>sb', function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
         winblend = 0,
