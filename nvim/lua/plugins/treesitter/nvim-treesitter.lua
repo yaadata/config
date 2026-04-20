@@ -23,6 +23,8 @@ local parsers = {
   'bash',
   'yaml',
   'helm',
+  'gomod',
+  'gosum',
 }
 
 local opts = {
