@@ -24,6 +24,9 @@ local parsers = {
   'zsh',
   'bash',
   'toml',
+  'sql',
+  'yaml',
+  'json',
 }
 
 local opts = {
