@@ -24,6 +24,7 @@ local opts = { -- Useful plugin to show you pending keybinds.
       { '<leader>rc', group = '[C]onfig', icon = '' },
       { '<leader>sm', group = '[M]ulti-cursor', mode = { 'n', 'v' } },
       { '<leader>sq', group = '[Q]uickfix', icon = '󰁨' },
+      { '<leader>sx', group = 'Find and Replace', mode = { 'n', 'v' }, icon = '' },
       { '<leader>st', group = '[T]odo', icon = '' },
       { '<leader>sc', group = '[C]ommands', icon = '' },
       { '<leader>w', group = '[W]orkspace', icon = '󱂬' },
