@@ -17,7 +17,6 @@ local parsers = {
   'eex',
   'heex',
   'pkl',
-  'yaml',
   'helm',
   'make',
   'fish',
@@ -27,6 +26,9 @@ local parsers = {
   'sql',
   'yaml',
   'json',
+  'helm',
+  'gomod',
+  'gosum',
 }
 
 local opts = {
