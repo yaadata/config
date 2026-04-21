@@ -16,7 +16,11 @@ vim.g.go_imports_autosave = 0
 vim.g.go_gopls_enabled = 0
 
 -- diagnostics
-vim.diagnostic.config { virtual_text = true }
+vim.diagnostic.config {
+  virtual_text = true,
+  signs = false,
+  underline = false,
+}
 
 -- neovide
 vim.opt.exrc = true
