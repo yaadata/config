@@ -1,13 +1,13 @@
 local opts = {
-  'rmagatti/auto-session',
+  'yaadata/auto-session',
   lazy = false,
-  commit = '62437532b38495551410b3f377bcf4aaac574ebe',
   init = function()
     vim.opt.sessionoptions:append 'globals'
   end,
   keys = {
     -- Will use Telescope if installed or a vim.ui.select picker otherwise
     { '<leader>wss', '<cmd>AutoSession search<CR>', desc = 'Session search' },
+    { '<leader>wsr', '<cmd>AutoSession restore<CR>', desc = 'Session search' },
     { '<leader>wsw', '<cmd>AutoSession save<CR>', desc = 'Save session' },
     { '<leader>wst', '<cmd>AutoSession toggle<CR>', desc = 'Toggle autosave' },
     { '<leader>wsx', '<cmd>AutoSession deletePicker<CR>', desc = 'Delete session' },
