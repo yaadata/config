@@ -18,7 +18,8 @@ local opts = {
   ---@type AutoSession.Config
   opts = {
     git_use_branch_name = true,
-    git_auto_restore_on_branch_change = true,
+    git_auto_restore_on_branch_change = false,
+    lsp_stop_on_restore = true,
     show_auto_restore_notif = true,
     auto_delete_empty_sessions = true,
     purge_after_minutes = 43200,
