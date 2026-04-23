@@ -31,7 +31,7 @@ local opts = {
       desc = '[S]earch Replace in [P]roject',
     },
     {
-      '<leader>sxf',
+      '<leader>sxb',
       function()
         local path = current_file_path()
         if not path then
@@ -44,7 +44,7 @@ local opts = {
           },
         }
       end,
-      desc = '[S]earch Replace in Current [F]ile',
+      desc = '[S]earch Replace in Current File [B]uffer',
     },
     {
       '<leader>sxd',
