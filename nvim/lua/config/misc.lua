@@ -17,9 +17,9 @@ vim.g.go_gopls_enabled = 0
 
 -- diagnostics
 vim.diagnostic.config {
-  virtual_text = true,
-  signs = false,
-  underline = false,
+  virtual_text = false,
+  signs = true,
+  underline = true,
 }
 
 -- neovide
