@@ -31,12 +31,19 @@ local parsers = {
 
   -- Web
   'css',
+  'graphql',
   'html',
+  'javascript',
   'jsdoc',
   'json',
+  'json5',
+  'jsx',
   'scss',
+  'svelte',
   'tsx',
   'typescript',
+  'vue',
+  'yaml',
 
   -- IaC
   'hcl',
