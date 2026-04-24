@@ -34,7 +34,6 @@ local parsers = {
   'html',
   'jsdoc',
   'json',
-  'jsonc',
   'scss',
   'tsx',
   'typescript',
