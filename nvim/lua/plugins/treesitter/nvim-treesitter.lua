@@ -6,18 +6,25 @@ local parsers = {
   'gitignore',
   'git_rebase',
 
+  -- Golang
+  'go',
+  'gomod',
+  'gosum',
+  'gotmpl',
+  'gowork',
+
   -- Languages
   'c',
   'cpp',
   'cuda',
   'elixir',
   'gleam',
-  'go',
   'java',
   'javascript',
   'kotlin',
   'lua',
   'python',
+  'ron',
   'ruby',
   'rust',
   'zig',
@@ -32,6 +39,10 @@ local parsers = {
   'tsx',
   'typescript',
 
+  -- IaC
+  'hcl',
+  'terraform',
+
   -- Shell and build
   'bash',
   'cmake',
@@ -44,8 +55,6 @@ local parsers = {
 
   -- Templates and config
   'eex',
-  'gomod',
-  'gosum',
   'heex',
   'helm',
   'pkl',
