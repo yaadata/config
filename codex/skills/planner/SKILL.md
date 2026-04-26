@@ -62,4 +62,5 @@ Ask the user which mode they want:
 
 - Keep plans implementation-ready.
 - Prefer concrete decisions over open-ended brainstorming.
-- Store the artifact in the repo before concluding the task.
+- If operating in PLAN mode, store the artifact after the user exits PLAN mode.
+- Otherwise, store the artifact in the repo before concluding the task.
