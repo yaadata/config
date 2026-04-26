@@ -3,6 +3,18 @@ local opts = {
   commit = 'bd67efe408d4816e25e8491cc5ad4088e708a69a',
   opts = {
     auto_preview = true,
+    modes = {
+      diagnostics = {
+        filter = {
+          ['not'] = {
+            any = {
+              { severity = vim.diagnostic.severity.INFO },
+              { ft = { 'markdown', 'text' } },
+            },
+          },
+        },
+      },
+    },
     win = {
       type = 'split',
       position = 'bottom',
