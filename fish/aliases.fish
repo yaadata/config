@@ -37,8 +37,10 @@ end
 # git abbr
 abbr gta "git-town append"
 abbr gtc "git-town continue"
+abbr gtb "git-town branch"
 abbr gth "git-town hack"
-abbr gtb "git-town switch"
+abbr gtp "git-town propose"
+abbr gtsb "git-town switch"
 abbr gts "git-town sync"
 abbr gtss "git-town sync -s"
 abbr gtu "git-town up"
