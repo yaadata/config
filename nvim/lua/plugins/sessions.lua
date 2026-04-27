@@ -6,11 +6,11 @@ local opts = {
   end,
   keys = {
     -- Will use Telescope if installed or a vim.ui.select picker otherwise
-    { '<leader>wss', '<cmd>AutoSession search<CR>', desc = 'Session search' },
-    { '<leader>wsr', '<cmd>AutoSession restore<CR>', desc = 'Session search' },
-    { '<leader>wsw', '<cmd>AutoSession save<CR>', desc = 'Save session' },
+    { '<leader>wss', '<cmd>AutoSession search<CR>', desc = 'Search' },
+    { '<leader>wsr', '<cmd>AutoSession restore<CR>', desc = 'Restore' },
+    { '<leader>wsw', '<cmd>AutoSession save<CR>', desc = 'Save' },
     { '<leader>wst', '<cmd>AutoSession toggle<CR>', desc = 'Toggle autosave' },
-    { '<leader>wsx', '<cmd>AutoSession deletePicker<CR>', desc = 'Delete session' },
+    { '<leader>wsx', '<cmd>AutoSession deletePicker<CR>', desc = 'Delete Picker' },
   },
 
   ---enables autocomplete for opts
