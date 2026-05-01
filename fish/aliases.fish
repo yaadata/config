@@ -15,8 +15,7 @@ function git_town_toggle
         abbr -a gt "$GIT_TOWN_DEVELOPMENT_PATH/git-town_development"
         echo "now running \"local\" version"
     else
-        echo "Error: GIT_TOWN_DEVELOPMENT_PATH is not set"
-        return 1
+        echo "Error: GIT_TOWN_DEVELOPMENT_PATH is not set" return 1
     end
 end
 
@@ -278,3 +277,7 @@ end
 # vault
 abbr vl "vault login -method=oidc"
 abbr vtl "vault token lookup"
+
+# starship
+abbr sst "toggle_starship_transience"
+abbr operations "toggle_starship_operations_profile"
