@@ -15,3 +15,5 @@ set -gx GOBIN ~/go/bin
 set -gx SHELL_SYMBOL "🐠"
 
 set -gx SHELL /opt/homebrew/bin/fish
+
+set -gx GPG_TTY (tty)
