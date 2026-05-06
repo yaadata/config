@@ -22,20 +22,48 @@ $openstack\
 $kubernetes\
 $cmd_duration\
 $netns\
-$custom\
 $status\
 $line_break\
 $character\
 $time\
 ${env_var.SHELL_SYMBOL}"""
 
+[profiles]
+operations = """
+$os\
+$username\
+$hostname\
+[\\[MODE: OPERATIONS\\]  ](bold red)\
+$env_var\
+$jobs\
+$battery\
+$docker_context\
+$package\
+$mise\
+$aws\
+$openstack\
+${custom.kubernetes_operations}\
+$cmd_duration\
+$status\
+$line_break\
+$character\
+$time\
+${env_var.SHELL_SYMBOL}\
+"""
+
 [directory]
 truncate_to_repo = false
 disabled = false
 
 [kubernetes]
-format = '[kubectx ⛵ $context \($namespace\)](bright-cyan) '
+format = '[kubectx ⛵ \(namespace=$namespace\)](bright-cyan) '
 disabled = false
+
+[custom.kubernetes_operations]
+command = "out=$(kubectl config view --minify --output 'jsonpath={.contexts[0].name}{\"\\t\"}{.contexts[0].context.namespace}'); ctx=${out%%	*}; ns=${out#*	}; printf '%s (%s)' \"$ctx\" \"${ns:-default}\""
+when = "kubectl config current-context"
+format = '[kubectx ⛵ $output](bright-cyan) '
+shell = ["sh"]
 
 [docker_context]
 format = "via [🐋 $context](blue bold)"
