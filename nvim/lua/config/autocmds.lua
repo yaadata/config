@@ -42,11 +42,14 @@ end, {
   desc = 'Re-enable autoformat-on-save',
 })
 
-vim.api.nvim_create_autocmd('BufEnter', {
-  pattern = '*',
+vim.api.nvim_create_autocmd('OptionSet', {
+  desc = 'Keep spellcheck disabled in special buffers',
+  group = vim.api.nvim_create_augroup('spell-disabled-filetypes', { clear = true }),
+  pattern = 'spell',
   callback = function()
     local bufname = vim.api.nvim_buf_get_name(0)
-    if bufname:match '^fyler://' then
+    local buftype = vim.bo.buftype
+    if bufname:match '^fyler://' or buftype == 'terminal' then
       vim.opt_local.spell = false
     end
   end,
