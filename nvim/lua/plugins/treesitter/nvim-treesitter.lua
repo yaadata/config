@@ -58,6 +58,7 @@ local parsers = {
   'ninja',
   'starlark',
   'zsh',
+  'just',
 
   -- Templates and config
   'eex',
