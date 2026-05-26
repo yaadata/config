@@ -35,16 +35,24 @@ Act like `grill-me`:
    - public interfaces, schemas, commands, configuration, or user-visible behavior
    - failure modes, edge cases, migration needs, and rollout concerns
    - test and validation strategy
-4. For large, risky, cross-cutting, or multi-subsystem changes, ask whether to include atomic commits.
-5. When atomic commits are included, describe each commit with:
+4. During test and validation strategy, always ask whether implementation should use `$code:tdd`:
+   - use `$code:tdd` for implementation
+   - do not use TDD
+   - use TDD only for selected behavior slices
+5. When TDD is selected for all or part of the implementation, include:
+   - behavior slices that should use red-green loops
+   - likely test entry points when discoverable from local code
+   - behavior slices explicitly marked no-test with substitute validation
+6. For large, risky, cross-cutting, or multi-subsystem changes, ask whether to include atomic commits.
+7. When atomic commits are included, describe each commit with:
    - single purpose
    - expected files or areas
    - validation for that commit
    - review boundary
-6. Present the completed plan in chat.
-7. Ask the user to accept the plan.
-8. Only after acceptance, write the artifact.
-9. After the accepted artifact is written, ask interactively whether to invoke `$code:pair` for guided no-edit implementation.
+8. Present the completed plan in chat.
+9. Ask the user to accept the plan.
+10. Only after acceptance, write the artifact.
+11. After the accepted artifact is written, ask interactively which implementation handoff to use.
 
 ## Artifact Timing
 
@@ -55,18 +63,22 @@ Artifact generation happens only after:
 1. the final plan has been presented to the user, and
 2. the user explicitly accepts it.
 
-If the active collaboration mode prevents file writes, present the final plan and defer artifact creation until the user exits that mode or asks to implement the accepted plan. After leaving that mode and writing the deferred artifact, always ask whether to invoke `$code:pair`.
+If the active collaboration mode prevents file writes, present the final plan and defer artifact creation until the user exits that mode or asks to implement the accepted plan. After leaving that mode and writing the deferred artifact, always ask which implementation handoff to use.
 
-## Pair Handoff
+## Implementation Handoff
 
 After writing an accepted plan artifact, ask one interactive decision:
 
+- Invoke `$code:tdd` for direct red-green implementation
 - Invoke `$code:pair` for guided no-edit implementation
+- Invoke `$code:pair + $code:tdd` for guided pairing with TDD discipline
 - Stop after writing the plan artifact
 
-Use interactive selection when available. Recommend invoking `$code:pair`.
+Use interactive selection when available.
 
-Do not invoke `$code:pair` silently. The handoff is optional, but the question is required after artifact creation, including when artifact creation was deferred until after Plan Mode.
+When TDD was selected in the accepted plan and the user has not indicated they want Codex to implement directly, recommend `$code:pair + $code:tdd`. When TDD was selected and the user wants Codex to implement directly, recommend `$code:tdd`. When TDD was not selected, recommend `$code:pair`.
+
+Do not invoke any implementation skill silently. The handoff is optional, but the question is required after artifact creation, including when artifact creation was deferred until after Plan Mode. If the user selects a TDD-aware handoff, invoke `$code:tdd` with the accepted plan path and the recorded TDD decisions.
 
 ## Artifact Path
 
@@ -84,6 +96,7 @@ The final plan should be concise but implementation-ready. Include:
 - Key changes
 - Public interfaces or behavior changes
 - Implementation sequence
+- TDD decision and behavior slices, when applicable
 - Atomic commits, when applicable
 - Test and validation plan
 - Assumptions and defaults chosen
