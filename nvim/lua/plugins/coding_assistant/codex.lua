@@ -22,6 +22,14 @@ local opts = {
       mode = { 'n', 'v' },
     },
     {
+      '<C-c>',
+      function()
+        require('codex').toggle()
+      end,
+      desc = 'Codex: Toggle terminal',
+      mode = { 'n', 'v' },
+    },
+    {
       '<leader>aoo',
       function()
         require('codex').open(true)
@@ -186,7 +194,7 @@ local opts = {
           window = 'vsplit',
           vsplit = {
             side = 'right', -- left | right
-            size_pct = 30, -- 10-90
+            size_pct = 33, -- 10-90
           },
           hsplit = {
             side = 'bottom', -- top | bottom
