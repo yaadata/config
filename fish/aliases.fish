@@ -4,7 +4,7 @@ function naptime
     pmset sleepnow
 end
 
-function gitworktree --description "Check out a remote branch as a git worktree"
+function gitworktree-checkout-remote --description "Check out a remote branch as a git worktree"
     set branch $argv[1]
 
     if test -z "$branch"
@@ -21,6 +21,22 @@ function gitworktree --description "Check out a remote branch as a git worktree"
     or return $status
 
     git worktree add -b "$branch" "$path" "origin/$branch"
+end
+
+function gitworktree-create --description "Create a local branch as a git worktree"
+    set branch $argv[1]
+
+    if test -z "$branch"
+        echo "usage: gwtl <branch>"
+        return 1
+    end
+
+    set org (gh repo view --json owner --jq .owner.login)
+    set repo (gh repo view --json name --jq .name)
+    set safe_branch (string replace -a / __ $branch)
+    set path "$HOME/.git-worktrees/$org/$repo/$safe_branch"
+
+    git worktree add -b "$branch" "$path"
 end
 
 function git_town_toggle
@@ -65,6 +81,9 @@ abbr gtu "git-town up"
 abbr gtd "git-town down"
 abbr gtdel "git-town delete"
 
+
+abbr gwr gitworktree-checkout-remote
+abbr gwc gitworktree-create
 abbr gtt git_town_toggle
 abbr gl toggle_git_town_lineage
 abbr ga "git add"
