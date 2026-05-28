@@ -4,6 +4,25 @@ function naptime
     pmset sleepnow
 end
 
+function gitworktree --description "Check out a remote branch as a git worktree"
+    set branch $argv[1]
+
+    if test -z "$branch"
+        echo "usage: gwtr <remote-branch>"
+        return 1
+    end
+
+    set org (gh repo view --json owner --jq .owner.login)
+    set repo (gh repo view --json name --jq .name)
+    set safe_branch (string replace -a / __ $branch)
+    set path "$HOME/.git-worktrees/$org/$repo/$safe_branch"
+
+    git fetch origin "$branch"
+    or return $status
+
+    git worktree add -b "$branch" "$path" "origin/$branch"
+end
+
 function git_town_toggle
     # Check current abbreviation value
     if abbr -q gt; and string match -q "*git-town_development*" (abbr -s | grep "^gt " | cut -d' ' -f2-)
