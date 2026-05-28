@@ -42,11 +42,11 @@ end, {
   desc = 'Re-enable autoformat-on-save',
 })
 
-vim.api.nvim_create_autocmd('BufEnter', {
+vim.api.nvim_create_autocmd('BufAdd', {
   pattern = '*',
   callback = function()
     local bufname = vim.api.nvim_buf_get_name(0)
-    if bufname:match '^fyler://' then
+    if bufname:match '^fyler://' or bufname:match '^term://' then
       vim.opt_local.spell = false
     end
   end,

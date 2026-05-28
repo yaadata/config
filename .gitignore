@@ -33,3 +33,9 @@ op/**
 uv/**
 .tool-versions
 erl_crash.dump
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+.beads/
