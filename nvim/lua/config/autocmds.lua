@@ -42,11 +42,16 @@ end, {
   desc = 'Re-enable autoformat-on-save',
 })
 
-vim.api.nvim_create_autocmd('BufAdd', {
-  pattern = '*',
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'help', 'qf', 'gitcommit', 'oil', 'fyler' },
   callback = function()
-    local bufname = vim.api.nvim_buf_get_name(0)
-    if bufname:match '^fyler://' then
+    vim.opt_local.spell = false
+  end,
+})
+
+vim.api.nvim_create_autocmd('TermOpen', {
+  callback = function(args)
+    if vim.bo[args.buf].buftype == 'terminal' then
       vim.opt_local.spell = false
     end
   end,
