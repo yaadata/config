@@ -1,6 +1,6 @@
 local opts = {
   'mrcjkb/rustaceanvim',
-  tag = 'v9.0.1', -- Recommended
+  tag = 'v9.0.5', -- Recommended
   lazy = false, -- This plugin is already lazy
   dependencies = {
     'neovim/nvim-lspconfig',
