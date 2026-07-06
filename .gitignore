@@ -28,11 +28,12 @@ configstore/**
 mise/**
 argocd/**
 raycast/**
+raycast-x/**
 op/**
 uv/**
 .tool-versions
 erl_crash.dump
-
+bk.yaml
 # Beads / Dolt files (added by bd init)
 .dolt/
 *.db
