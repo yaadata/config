@@ -24,6 +24,7 @@ local parsers = {
   'kotlin',
   'lua',
   'python',
+  'starlark',
   'ron',
   'ruby',
   'rust',

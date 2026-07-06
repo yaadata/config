@@ -158,6 +158,7 @@ local opts = { -- LSP Configuration & Plugins
       'ruby_lsp',
       'fish_lsp',
       'basedpyright',
+      'expert',
     }
 
     -- Apply blink.cmp capabilities to every LSP config, including server

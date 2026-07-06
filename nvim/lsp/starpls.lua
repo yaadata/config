@@ -1,3 +1,3 @@
 return {
-  filetypes = { 'bzl', 'bazel', 'sy', 'starlark', 'star' },
+  filetypes = { 'bzl', 'bazel', 'sy', 'starlark', 'star', 'Tiltfile' },
 }
