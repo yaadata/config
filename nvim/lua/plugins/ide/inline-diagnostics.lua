@@ -12,7 +12,10 @@ local opts = {
 
     vim.keymap.set({ 'n', 'v' }, '<leader>ltd', function()
       tid.toggle()
-    end, { desc = 'toggle inline diagnostics' })
+
+      local underline_enabled = vim.diagnostic.config().underline ~= false
+      vim.diagnostic.config { underline = not underline_enabled }
+    end, { desc = 'toggle inline diagnostics and underlines' })
   end,
 }
 
