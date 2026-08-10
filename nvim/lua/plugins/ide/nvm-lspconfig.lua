@@ -195,7 +195,6 @@ local opts = { -- LSP Configuration & Plugins
       'pkl-lsp',
       'protolint',
       'pydocstyle',
-      'pyright',
       'eslint_d',
       'ruff',
       'sql-formatter',
