@@ -157,7 +157,7 @@ local opts = { -- LSP Configuration & Plugins
       'lua_ls',
       'ruby_lsp',
       'fish_lsp',
-      'basedpyright',
+      'ty',
       'expert',
     }
 
