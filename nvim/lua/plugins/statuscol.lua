@@ -1,7 +1,6 @@
 local opts = {
   'tamton-aquib/staline.nvim',
   config = function()
-    vim.opt.laststatus = 2
     vim.opt.showtabline = 2
     vim.opt.termguicolors = true
     require('stabline').setup {
