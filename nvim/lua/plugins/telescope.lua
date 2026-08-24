@@ -65,6 +65,7 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
             'rg',
             '--files',
             '--hidden',
+            '--no-ignore-vcs',
             '--glob',
             '!**/.git/*',
             '--glob',
