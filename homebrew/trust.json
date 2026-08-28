@@ -6,5 +6,9 @@
     "derailed/k9s/k9s",
     "elixir-tools/tap/next-ls",
     "hashicorp/tap/vault"
+  ],
+  "trustedtaps": [
+    "charmbracelet/tap",
+    "jstkdng/programs"
   ]
 }
