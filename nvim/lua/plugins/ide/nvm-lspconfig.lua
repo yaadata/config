@@ -151,6 +151,7 @@ local opts = { -- LSP Configuration & Plugins
       'denols',
       'ts_ls',
       'starpls',
+      'taplo',
       'terraformls',
       'yamlls',
       'helm_ls',
