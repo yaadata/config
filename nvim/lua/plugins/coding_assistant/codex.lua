@@ -1,6 +1,7 @@
 local opts = {
   'yaadata/codex.nvim',
   version = '1.0.0',
+  dev = true,
   cmd = {
     'Codex',
     'CodexFocus',
@@ -11,6 +12,7 @@ local opts = {
     'CodexMentionFile',
     'CodexMentionDirectory',
     'CodexResume',
+    'CodexSendSkill',
   },
   keys = {
     {
@@ -95,6 +97,7 @@ local opts = {
       desc = 'Codex: Mention current directory',
       mode = { 'n', 'v' },
     },
+
     {
       '<leader>aoi',
       function()
@@ -135,7 +138,10 @@ local opts = {
           vim.notify(('Codex: failed to collect selection%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
           return
         end
-        codex.send '$code-comment the current selection '
+        codex.send_skill {
+          plugin = 'code',
+          name = 'comment',
+        }
         codex.submit_input()
       end,
       desc = 'Codex: Add Code Coment',
