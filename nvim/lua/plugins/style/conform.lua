@@ -42,6 +42,7 @@ local opts = { -- Autoformat
     formatters_by_ft = {
       lua = { 'stylua' },
       -- Conform can also run multiple formatters sequentially
+      rust = { 'rustfmt' },
       python = { 'ruff', 'black' },
       go = { 'gofmt', 'goimports' },
       typescript = { 'eslint_d' },
