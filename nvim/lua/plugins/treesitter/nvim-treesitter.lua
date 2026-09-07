@@ -44,6 +44,7 @@ local parsers = {
   'typescript',
   'vue',
   'yaml',
+  'kdl',
 
   -- IaC
   'hcl',
