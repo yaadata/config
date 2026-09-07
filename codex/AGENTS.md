@@ -93,33 +93,21 @@ searches in sandbox. Only your printed summary enters context.
 
 ## Communication and documentation
 
-Use the `caveman:caveman` skill at **lite** intensity by default in every
-conversation, unless I explicitly request another style.
-
-Apply lite style to replies, progress updates, explanations, and documentation
-you create or edit, including READMEs, technical notes, and code documentation.
-Keep articles, complete sentences, and a professional tone. Remove filler and
-repetition. Preserve technical detail, necessary uncertainty, and clear
-reasoning.
-
-This documentation preference overrides any skill boundary that would otherwise
-exclude documentation from the style. Keep code, identifiers, commands, and
-quoted errors unchanged. Follow required document templates. Expand explanations
-when needed for clarity or safety.
-
-If the skill is unavailable, follow these lite-style rules directly.
+Default to concise, professional prose in replies, progress updates, explanations,
+and documentation unless I request another style. Keep articles and complete
+sentences. Remove filler, repetition, pleasantries, and unnecessary hedging.
+Preserve technical detail, necessary uncertainty, and clear reasoning. Keep code,
+identifiers, commands, and quoted errors unchanged. Follow required document
+templates. Expand when clarity or safety requires it. Apply these rules directly;
+do not load a style skill.
 
 ## Automatic subagent delegation
 
-Always prefer spawning subagents wherever feasible. Make delegation the default
-for concrete, bounded subtasks that can run independently alongside useful work
-in the main thread, including work beyond the patterns below. Use the matching
-configured agent for listed patterns and the closest suitable available agent
-for other work. This is standing authorization to spawn subagents without asking
-again. Match the work required, not incidental keywords. Preserve the exceptions
-below for trivial or strictly sequential work, unavailable agents, and concurrency
-limits; avoid redundant delegation. Adversarial reviews must still follow their
-fresh-context rules.
+Default to delegation for bounded subtasks that can run alongside useful main-thread
+work, including unlisted work. No permission needed. Match actual work to the listed
+agent or closest suitable alternative, not keywords. Keep trivial or sequential
+work local; respect concurrency limits. If unavailable, proceed locally and briefly
+state the limitation.
 
 | Work pattern                                                                                                | Agent                  |
 | ----------------------------------------------------------------------------------------------------------- | ---------------------- |
@@ -130,45 +118,27 @@ fresh-context rules.
 | Retrieve or summarize information from connected systems such as Notion, Linear, GitHub, Forgejo, or Slack. | `external_reader`      |
 | Perform an adversarial review of correctness, assumptions, failure handling, or validation.                 | `adversarial_reviewer` |
 
-- Use the matching `agent_type` and its configured model and reasoning settings.
-  Agent definitions live in `agents/` and are registered in `config.toml`.
-- Split independent questions across agents when useful. Reuse an existing agent
-  for related follow-up work. Keep dependent steps sequential and respect the
-  available concurrency limit.
-- Give each agent the objective, relevant context, scope, constraints, and
-  expected output. Request concise findings with file references or source links
-  and unresolved questions.
-- For edits, assign explicit file ownership. Tell the agent it shares the
-  workspace, must preserve others' edits, and must accommodate concurrent
-  changes.
-- Continue separate useful work while the agent runs. Avoid duplicating its
-  investigation. Review its output and integrate the result before reporting
-  completion.
-- Keep trivial work and tasks with no independent parallel subtask in the main
-  thread. If the matching agent is unavailable, proceed locally and state the
-  limitation briefly.
-- Subagents inherit the context-mode routing rules, caveman lite style, and the
-  user's edit and approval boundaries. Delegation does not authorize publishing,
-  sending messages, or other actions beyond the user's request.
+- Use configured `agent_type`, model, and reasoning settings (`agents/`, `config.toml`).
+- Parallelize independent questions; keep dependencies sequential. Reuse agents for
+  related follow-ups except adversarial reviews.
+- Provide objective, context, scope, constraints, and expected output: concise
+  findings with references and unresolved questions.
+- Assign file ownership for edits; require preserving and accommodating others'
+  changes in the shared workspace.
+- Continue separate useful work, avoid duplication, and assess and integrate results
+  before reporting completion.
+- Agents inherit context-mode routing, concise style, and user edit/approval
+  boundaries. Delegation grants no additional publishing, messaging, or other authority.
 
 ### Adversarial reviews
 
-- Use `adversarial_reviewer` for adversarial review work; do not automatically
-  add a review after every task.
-- Always spawn a new instance with `fork_turns="none"`. Never reuse a reviewer,
-  including for a repeat review after fixes. This overrides the general
-  agent-reuse guidance.
-- Provide factual requirements, acceptance criteria, review scope, target paths
-  or revisions, and applicable operational constraints. Exclude conversation
-  history, previous findings, proposed conclusions, and implementation defenses.
-- Have the reviewer inspect the evidence independently. Require actionable
-  findings with severity, file references or source links, and concrete failure
-  scenarios. Reporting no findings is valid; do not invent defects to satisfy
-  the adversarial role.
-- Keep the review read-only and return findings to the main agent for
-  assessment. Explicitly include context-mode routing, caveman lite style, and
-  the user's edit and approval boundaries in the fresh task prompt.
-- A clean run means fresh conversation context, not an isolated checkout. Shared
-  workspace files remain visible. Do not consult prior review artifacts or
-  session memories to reconstruct excluded context. Fresh context reduces
-  inherited bias but does not guarantee an assumption-free review.
+- Do not add reviews automatically. Always use a new `adversarial_reviewer` with
+  `fork_turns="none"`, including after fixes.
+- Supply factual requirements, acceptance criteria, scope, paths/revisions, and
+  operational constraints. Explicitly include routing, style, and user boundaries.
+  Exclude history, prior findings, proposed conclusions, and implementation defenses;
+  never reconstruct them from review artifacts or memories.
+- Require independent, read-only inspection and actionable findings with severity,
+  references, and concrete failure scenarios. No findings is valid; never invent
+  defects. Return findings for main-agent assessment.
+- Fresh context does not isolate shared files or eliminate assumptions.
