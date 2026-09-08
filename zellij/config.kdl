@@ -6,6 +6,14 @@ keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
 
+        bind "Ctrl t" {
+            MessagePlugin "zellij-restore-mode" {
+                name "save"
+                payload "locked"
+            }
+            SwitchToMode "tab"
+        }
+
         bind "Ctrl L" { MoveFocus "Right"; }
         bind "Ctrl H" { MoveFocus "Left"; }
         bind "Ctrl J" { MoveFocus "Down"; }
@@ -60,6 +68,20 @@ keybinds clear-defaults=true {
         bind "x" { CloseTab; SwitchToMode "normal"; }
         bind "shift Left" { MoveTab "left"; }
         bind "shift Right" { MoveTab "right"; }
+        bind "enter" {
+            MessagePlugin "zellij-restore-mode" {
+                name "restore"
+            }
+        }
+    }
+    normal {
+        bind "Ctrl t" {
+            MessagePlugin "zellij-restore-mode" {
+                name "save"
+                payload "normal"
+            }
+            SwitchToMode "tab"
+        }
     }
     resize {
         bind "left" { Resize "Increase left"; }
@@ -127,6 +149,12 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
+        bind "g" {
+            LaunchOrFocusPlugin "worktree" {
+                floating true
+            }
+            SwitchToMode "normal"
+        }
         bind "w" {
             LaunchOrFocusPlugin "session-manager" {
                 floating true
@@ -173,7 +201,7 @@ keybinds clear-defaults=true {
     shared_except "locked" "scroll" "search" {
         bind "Ctrl s" { SwitchToMode "scroll"; }
     }
-    shared_except "tab" {
+    shared_except "tab" "normal" "locked" {
         bind "Ctrl t" { SwitchToMode "tab"; }
     }
     shared_except "locked" "pane" {
@@ -182,13 +210,13 @@ keybinds clear-defaults=true {
     shared_except "locked" "resize" {
         bind "Ctrl n" { SwitchToMode "resize"; }
     }
-    shared_except "normal" "locked" "entersearch" {
+    shared_except "normal" "locked" "entersearch" "tab" {
         bind "enter" { SwitchToMode "normal"; }
     }
     shared_except "normal" "locked" "entersearch" "renametab" "renamepane" {
         bind "esc" { SwitchToMode "normal"; }
     }
-    shared_among "pane" "tmux" {
+    shared_among "pane" {
         bind "x" { CloseFocus; SwitchToMode "normal"; }
     }
     shared_among "scroll" "search" {
@@ -237,7 +265,11 @@ plugins {
     filepicker location="zellij:strider" {
         cwd "/"
     }
+    worktree location="file:~/.config/zellij/plugins/zellij-worktree.wasm" {
+        worktree_root "dir:$HOME/.zellij/worktrees"
+    }
     plugin-manager location="zellij:plugin-manager"
+    zellij-restore-mode location="file:~/.config/zellij/plugins/zellij-restore-mode.wasm"
     session-manager location="zellij:session-manager"
     status-bar location="zellij:status-bar"
     strider location="zellij:strider"
@@ -251,6 +283,7 @@ plugins {
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
+    "zellij-restore-mode"
 }
  
 // Use a simplified UI without special fonts (arrow glyphs)
