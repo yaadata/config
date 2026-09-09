@@ -9,7 +9,7 @@ local opts = { -- Autoformat
         vim.b.disable_autoformat = not vim.b.disable_autoformat
 
         local status = vim.b.disable_autoformat and 'disabled' or 'enabled'
-        local scope = vim.g.disable_autoformat and ' for this buffer (global autoformat is still disabled)' or ' for this buffer'
+        local scope = vim.g.disable_autoformat and ' for this buffer (but globally disabled)' or ' for this buffer'
         vim.notify('Autoformat ' .. status .. scope)
       end,
       mode = '',
