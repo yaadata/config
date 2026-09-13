@@ -1,7 +1,7 @@
 local opt = {
   'esmuellert/codediff.nvim',
   dependencies = { 'MunifTanjim/nui.nvim' },
-  tag = 'v4.0.3',
+  tag = 'v4.0.5',
   cmd = 'CodeDiff',
   config = function()
     require('codediff').setup {
