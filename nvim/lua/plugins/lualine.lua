@@ -10,7 +10,14 @@ local opts = {
   },
   config = function()
     require('lualine').setup {
-      theme = 'palenight',
+      options = {
+        theme = 'palenight',
+        globalstatus = false,
+        disabled_filetypes = {
+          statusline = { 'atlas' },
+          winbar = {},
+        },
+      },
       sections = {
         lualine_a = { 'branch' },
         lualine_b = {
