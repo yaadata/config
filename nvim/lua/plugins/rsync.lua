@@ -12,42 +12,42 @@ local opts = {
   end,
   keys = {
     {
-      '<leader>rda',
+      '<leader>wrda',
       '<cmd>RsyncDown<cr>',
       desc = 'Download all files',
     },
     {
-      '<leader>rdf',
+      '<leader>wrdf',
       '<cmd>RsyncDownFile<cr>',
       desc = 'Download single file',
     },
     {
-      '<leader>rua',
+      '<leader>wrua',
       '<cmd>RsyncUp<cr>',
       desc = 'Upload all files',
     },
     {
-      '<leader>rdf',
+      '<leader>wrdf',
       '<cmd>RsyncUpFile<cr>',
       desc = 'Upload single file',
     },
     {
-      '<leader>rcs',
+      '<leader>wrcs',
       '<cmd>RsyncConfig<cr>',
       desc = 'View Rsync Config Setting',
     },
     {
-      '<leader>rcp',
+      '<leader>wrcp',
       '<cmd>RsyncProjectConfig show<cr>',
       desc = 'View Project Config',
     },
     {
-      '<leader>rcr',
+      '<leader>wrcr',
       '<cmd>RsyncProjectConfig reload<cr>',
       desc = 'Reload Project Config',
     },
     {
-      '<leader>rt',
+      '<leader>wrt',
       '<cmd>RsyncSaveSync<cr>',
       desc = 'Toggle Sync on Save',
     },

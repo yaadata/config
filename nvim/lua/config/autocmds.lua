@@ -49,6 +49,19 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  callback = function(args)
+    local filetype = vim.bo[args.buf].filetype
+    if filetype ~= 'atlas' and not vim.startswith(filetype, 'atlas.') then
+      return
+    end
+
+    for _, win in ipairs(vim.fn.win_findbuf(args.buf)) do
+      vim.api.nvim_set_option_value('spell', false, { win = win, scope = 'local' })
+    end
+  end,
+})
+
 vim.api.nvim_create_autocmd('TermOpen', {
   callback = function(args)
     if vim.bo[args.buf].buftype == 'terminal' then
@@ -69,5 +82,4 @@ end, {
 })
 
 vim.api.nvim_create_user_command('LazyGitToggle', require('utils.lazygit').toggle, {})
-vim.api.nvim_create_user_command('GHDashToggle', require('utils.gh_dash').toggle, {})
 vim.api.nvim_create_user_command('K9sToggle', require('utils.k9s').toggle, {})

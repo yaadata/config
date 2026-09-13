@@ -1,8 +1,11 @@
 ---@module 'atlas'
 
-return {
+local opts = {
   'yaadata/atlas.nvim',
   branch = 'next',
+  keys = {
+    { '<leader>apg', '<cmd>Atlas pulls github<cr>', desc = 'Atlas GitHub Pulls' },
+  },
   ---@type AtlasConfig
   opts = {
     providers = {
@@ -62,40 +65,45 @@ return {
           },
         },
       },
+      diff = {
+        open_cmd = 'CodeDiff',
+      },
     },
     keymaps = {
       ui = {
         comments = {
-          add = '<leader>ca',
-          reply = '<leader>cr',
-          edit = '<leader>ce',
-          react = '<leader>cR',
+          add = '<leader>aca',
+          reply = '<leader>acr',
+          edit = '<leader>ace',
+          react = '<leader>acR',
         },
       },
       pulls = {
         review = {
-          approve = '<leader>ra',
-          request_changes = '<leader>rb', -- block on request changes
-          submit_review = '<leader>rs',
-          add_task = '<leader>rt',
-          comment_templates = '<leader>rC',
+          approve = '<leader>ara',
+          request_changes = '<leader>arb', -- block on request changes
+          submit_review = '<leader>ars',
+          add_task = '<leader>art',
+          comment_templates = '<leader>arC',
           diff = {
-            add_comment = '<leader>rca',
-            submit_comment = '<leader>rcs',
-            add_suggestion = '<leader>rsa', -- change
-            submit_suggestion = '<leader>rss',
-            add_note = '<leader>rna',
-            toggle_resolved = '<leader>rx',
+            add_comment = '<leader>arca',
+            submit_comment = '<leader>arcs',
+            add_suggestion = '<leader>arsa', -- change
+            submit_suggestion = '<leader>arss',
+            add_note = '<leader>arn',
+            toggle_resolved = '<leader>arx',
           },
         },
       },
       issues = {
-        transition_issue = '<leader>it',
-        change_assignee = '<leader>ia',
-        change_reporter = '<leader>ir',
-        edit_issue = '<leader>ie',
-        create_issue = '<leader>ic',
+        transition_issue = '<leader>ait',
+        change_assignee = '<leader>aia',
+        change_reporter = '<leader>air',
+        edit_issue = '<leader>aie',
+        create_issue = '<leader>aic',
       },
     },
   },
 }
+
+return opts

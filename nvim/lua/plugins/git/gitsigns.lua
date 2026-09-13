@@ -28,22 +28,22 @@ local opts = {
       end, { desc = 'Jump to previous git [c]hange' })
 
       -- Actions
-      map('n', '<leader>ghs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
-      map('n', '<leader>ghr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
-      map('n', '<leader>ghS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
-      map('n', '<leader>ghu', gitsigns.undo_stage_hunk, { desc = 'git [u]ndo stage hunk' })
-      map('n', '<leader>ghR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
-      map('n', '<leader>ghp', gitsigns.preview_hunk_inline, { desc = 'git [p]review hunk' })
-      map('n', '<leader>gb', function()
+      map('n', '<leader>gds', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
+      map('n', '<leader>gdr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
+      map('n', '<leader>gdS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
+      map('n', '<leader>gdu', gitsigns.undo_stage_hunk, { desc = 'git [u]ndo stage hunk' })
+      map('n', '<leader>gdR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
+      map('n', '<leader>gdp', gitsigns.preview_hunk_inline, { desc = 'git [p]review hunk' })
+      map('n', '<leader>gdb', function()
         gitsigns.blame_line { full = true }
       end, { desc = 'git [b]lame line' })
-      map('n', '<leader>gB', gitsigns.blame, { desc = 'Show Blame' })
-      map('n', '<leader>gq', function()
+      map('n', '<leader>gdB', gitsigns.blame, { desc = 'Show Blame' })
+      map('n', '<leader>gdq', function()
         gitsigns.setqflist 'all'
       end, { desc = 'show all hunks in [Q]uickfix list' })
       -- Toggles
-      map('n', '<leader>gtb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
-      map('n', '<leader>gtD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
+      map('n', '<leader>gdtb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
+      map('n', '<leader>gdtD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
     end,
   },
 }

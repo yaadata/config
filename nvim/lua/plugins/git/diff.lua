@@ -1,7 +1,7 @@
 local opt = {
   'esmuellert/codediff.nvim',
   dependencies = { 'MunifTanjim/nui.nvim' },
-  tag = 'v2.43.15',
+  tag = 'v4.0.3',
   cmd = 'CodeDiff',
   config = function()
     require('codediff').setup {
@@ -69,6 +69,7 @@ local opt = {
         view = {
           quit = 'q', -- Close diff tab
           toggle_explorer = '<leader>b', -- Toggle explorer visibility (explorer mode only)
+          toggle_stage = '-', -- Stage/unstage selected file
           next_hunk = ']c', -- Jump to next change
           prev_hunk = '[c', -- Jump to previous change
           next_file = ']f', -- Next file in explorer mode
@@ -81,7 +82,6 @@ local opt = {
           hover = 'K', -- Show file diff preview
           refresh = 'R', -- Refresh git status
           toggle_view_mode = 'i', -- Toggle between 'list' and 'tree' views
-          toggle_stage = '-', -- Stage/unstage selected file
           stage_all = 'S', -- Stage all files
           unstage_all = 'U', -- Unstage all files
           restore = 'X', -- Discard changes (restore file)
