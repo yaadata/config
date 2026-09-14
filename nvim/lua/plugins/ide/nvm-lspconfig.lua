@@ -86,37 +86,37 @@ local opts = { -- LSP Configuration & Plugins
 
         -- Fuzzy find all the symbols in your current document.
         --  Symbols are things like variables, functions, types, etc.
-        map('<leadeer>ls', vim.lsp.buf.document_symbol, '[D]ocument [S]ymbols')
+        map('<leader>ls', vim.lsp.buf.document_symbol, '[D]ocument [S]ymbols')
 
         -- Fuzzy find all the symbols in your current workspace.
         --  Similar to document symbols, except searches over your entire project.
-        map('<leadeer>lws', vim.lsp.buf.workspace_symbol, '[W]orkspace symbols')
+        map('<leader>lws', vim.lsp.buf.workspace_symbol, '[W]orkspace symbols')
 
         -- Add folder to workspace folders list
-        map('<leadeer>lwa', vim.lsp.buf.add_workspace_folder, '[A]dd [W]orkspace Folder')
+        map('<leader>lwa', vim.lsp.buf.add_workspace_folder, '[A]dd [W]orkspace Folder')
 
         -- Remove folder to workspace folders list
-        map('<leadeer>lwr', vim.lsp.buf.remove_workspace_folder, '[R]emove [W]orkspace Folder')
+        map('<leader>lwr', vim.lsp.buf.remove_workspace_folder, '[R]emove [W]orkspace Folder')
 
-        map('<leadeer>lhi', '<cmd>Telescope hierarchy incoming_calls<cr>', '[I]ncoming Calls')
-        map('<leadeer>lho', '<cmd>Telescope hierarchy outgoing_calls<cr>', '[O]utgoing Calls')
+        map('<leader>lhi', '<cmd>Telescope hierarchy incoming_calls<cr>', '[I]ncoming Calls')
+        map('<leader>lho', '<cmd>Telescope hierarchy outgoing_calls<cr>', '[O]utgoing Calls')
 
         -- List workspace folders
-        map('<leadeer>lwl', vim.lsp.buf.list_workspace_folders, '[L]ist [W]orkspace folders')
+        map('<leader>lwl', vim.lsp.buf.list_workspace_folders, '[L]ist [W]orkspace folders')
 
         -- format buffer
-        map('<leadeer>lf', vim.lsp.buf.format, '[F]ormat')
+        map('<leader>lf', vim.lsp.buf.format, '[F]ormat')
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
-        map('<leadeer>lr', vim.lsp.buf.rename, '[R]e[n]ame')
+        map('<leader>lr', vim.lsp.buf.rename, '[R]e[n]ame')
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
-        map('<leadeer>la', vim.lsp.buf.code_action, '[C]ode [A]ction')
+        map('<leader>la', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
         -- Inlay hints
-        map('<leadeer>li', function()
+        map('<leader>li', function()
           vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         end, '[C]ode [I]nlay Hints')
 
