@@ -5,6 +5,7 @@ local opts = {
   branch = 'next',
   keys = {
     { '<leader>apg', '<cmd>Atlas pulls github<cr>', desc = 'Atlas GitHub Pulls' },
+    { '<leader>aij', '<cmd>Atlas issues jira<cr>', desc = 'Atlas Jira Issues' },
   },
   ---@type AtlasConfig
   opts = {
@@ -12,9 +13,15 @@ local opts = {
       github = {
         token = vim.env.GITHUB_TOKEN,
       },
-      forgejo = {
-        base_url = 'https://codeberg.org',
-        token = vim.env.FORGEJO_TOKEN,
+      ---@type AtlasJiraConfig
+      jira = {
+        base_url = 'https://mux1.atlassian.net',
+        email = vim.env.ATLASSIAN_USER,
+        --- See: https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
+        token = vim.env.ATLASSIAN_TOKEN,
+        auth_method = 'basic',
+        api_type = 'cloud',
+        cache_ttl = 300,
       },
     },
     pulls = {
@@ -24,49 +31,48 @@ local opts = {
             name = 'Authored',
             key = '1',
             layout = 'compact',
-            search = 'is:pr is:open author:@me archived:false sort:updated-desc',
+            search = ('org:%s is:pr is:open author:@me archived:false sort:updated-desc'):format(vim.env.GITHUB_ORG),
           },
           {
             name = 'Assigned',
             key = '2',
             layout = 'compact',
-            search = 'is:pr is:open assignee:@me draft:false archived:false sort:updated-desc',
+            search = ('org:%s is:pr is:open assignee:@me draft:false archived:false sort:updated-desc'):format(vim.env.GITHUB_ORG),
           },
           {
             name = 'Needs Review',
             key = '3',
             layout = 'compact',
-            search = 'is:pr is:open review-requested:@me draft:false archived:false sort:updated-desc',
-          },
-        },
-      },
-      forgejo = {
-        views = {
-          {
-            name = 'Authored',
-            key = '1',
-            layout = 'compact',
-            search = 'is:open',
-            extra_params = { created = true, sort = 'recentupdate' },
-          },
-          {
-            name = 'Assigned',
-            key = '2',
-            layout = 'compact',
-            search = 'is:open',
-            extra_params = { assigned = true, sort = 'recentupdate' },
-          },
-          {
-            name = 'Needs Review',
-            key = '3',
-            layout = 'compact',
-            search = 'is:open',
-            extra_params = { review_requested = true, sort = 'recentupdate' },
+            search = ('org:%s is:pr is:open review-requested:@me draft:false archived:false sort:updated-desc'):format(vim.env.GITHUB_ORG),
           },
         },
       },
       diff = {
         open_cmd = 'CodeDiff',
+      },
+    },
+    issues = {
+      jira = {
+        views = {
+          {
+            name = 'My Current Sprint',
+            key = '1',
+            layout = 'compact',
+            jql = 'sprint in openSprints() AND assignee = currentUser() ORDER BY status ASC',
+          },
+          {
+            name = 'Current Sprint',
+            key = '2',
+            layout = 'compact',
+            jql = 'project = DATA AND sprint in openSprints() ORDER BY assignee ASC, status ASC',
+          },
+          {
+            name = 'Current Epics',
+            key = '3',
+            layout = 'compact',
+            jql = 'project = DATA AND issuetype = Epic AND statusCategory != Done AND status != Backlog ORDER BY status ASC, assignee ASC',
+          },
+        },
       },
     },
     keymaps = {
