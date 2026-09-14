@@ -28,22 +28,28 @@ local opts = {
       github = {
         views = {
           {
-            name = 'Authored',
+            name = 'Needs Review',
             key = '1',
+            layout = 'compact',
+            search = ('org:%s is:pr is:open review-requested:@me draft:false archived:false sort:updated-desc'):format(vim.env.GITHUB_ORG),
+          },
+          {
+            name = 'Authored',
+            key = '2',
             layout = 'compact',
             search = ('org:%s is:pr is:open author:@me archived:false sort:updated-desc'):format(vim.env.GITHUB_ORG),
           },
           {
-            name = 'Assigned',
-            key = '2',
-            layout = 'compact',
-            search = ('org:%s is:pr is:open assignee:@me draft:false archived:false sort:updated-desc'):format(vim.env.GITHUB_ORG),
-          },
-          {
-            name = 'Needs Review',
+            name = 'Recently Merged',
             key = '3',
             layout = 'compact',
-            search = ('org:%s is:pr is:open review-requested:@me draft:false archived:false sort:updated-desc'):format(vim.env.GITHUB_ORG),
+            search = ('org:%s is:pr author:@me is:merged archived:false sort:updated-desc'):format(vim.env.GITHUB_ORG),
+          },
+          {
+            name = 'Assigned',
+            key = '4',
+            layout = 'compact',
+            search = ('org:%s is:pr is:open assignee:@me draft:false archived:false sort:updated-desc'):format(vim.env.GITHUB_ORG),
           },
         },
       },
