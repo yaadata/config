@@ -9,8 +9,6 @@ local opts = { -- Useful plugin to show you pending keybinds.
     wk.add {
       { '<leader>a', group = '[A]tlas', icon = '󰅩' },
       { '<leader>l', group = '[L]sp / Code', icon = '󰅩' },
-      { '<leader>ll', group = '[L]sp', icon = '󰅩' },
-      { '<leader>lo', group = '[O]pen AI Codex', mode = { 'n', 'v' }, icon = '' },
       { '<leader>lt', group = '[T]oggle', icon = '󰔢' },
       { '<leader>llw', group = '[W]orkspace', icon = '󱂬' },
       { '<leader>llh', group = '[H]ierarchy', icon = '󰓍' },
@@ -32,6 +30,7 @@ local opts = { -- Useful plugin to show you pending keybinds.
       { '<leader>st', group = '[T]odo', icon = '' },
       { '<leader>sc', group = '[C]ommands', icon = '' },
       { '<leader>w', group = '[W]orkspace', icon = '󱂬' },
+      { '<leader>wo', group = '[O]pen AI Codex', mode = { 'n', 'v' }, icon = '' },
       { '<leader>ws', group = '[s]ession', icon = '󰆔' },
       { '<leader>wm', group = '[m]anagement', icon = '' },
       { '<leader>wms', group = '[s]plit', icon = '󱤗' },

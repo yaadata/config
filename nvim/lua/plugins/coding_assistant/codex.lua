@@ -16,7 +16,7 @@ local opts = {
   },
   keys = {
     {
-      '<leader>lot',
+      '<leader>wot',
       function()
         require('codex').toggle()
       end,
@@ -32,7 +32,7 @@ local opts = {
       mode = { 'n', 'v' },
     },
     {
-      '<leader>loo',
+      '<leader>woo',
       function()
         require('codex').open(true)
       end,
@@ -40,7 +40,7 @@ local opts = {
       mode = { 'n', 'v' },
     },
     {
-      '<leader>lof',
+      '<leader>wof',
       function()
         require('codex').focus()
       end,
@@ -48,7 +48,7 @@ local opts = {
       mode = { 'n', 'v' },
     },
     {
-      '<leader>lox',
+      '<leader>wox',
       function()
         require('codex').close()
       end,
@@ -56,7 +56,7 @@ local opts = {
       mode = { 'n', 'v' },
     },
     {
-      '<leader>los',
+      '<leader>wos',
       function()
         require('codex').send_file()
       end,
@@ -64,7 +64,7 @@ local opts = {
       mode = 'n',
     },
     {
-      '<leader>los',
+      '<leader>wos',
       function()
         require('codex').send_selection()
       end,
@@ -72,7 +72,7 @@ local opts = {
       mode = 'x',
     },
     {
-      '<leader>lom',
+      '<leader>wom',
       function()
         local codex = require 'codex'
         codex.mention_file()
@@ -84,7 +84,7 @@ local opts = {
       mode = { 'n', 'v' },
     },
     {
-      '<leader>loM',
+      '<leader>woM',
       function()
         local codex = require 'codex'
         codex.mention_directory()
@@ -99,7 +99,7 @@ local opts = {
     },
 
     {
-      '<leader>loi',
+      '<leader>woi',
       function()
         require('codex').execute_slash_command { command = 'status' }
       end,
@@ -107,7 +107,7 @@ local opts = {
       mode = { 'n', 'v' },
     },
     {
-      '<leader>lor',
+      '<leader>wor',
       function()
         local codex = require 'codex'
         local ok, err = codex.send_selection()
@@ -122,7 +122,7 @@ local opts = {
       mode = { 'v' },
     },
     {
-      '<leader>lor',
+      '<leader>wor',
       function()
         require('codex').resume()
       end,
@@ -130,7 +130,7 @@ local opts = {
       mode = { 'n' },
     },
     {
-      '<leader>loc',
+      '<leader>woc',
       function()
         local codex = require 'codex'
         local ok, err = codex.send_selection()
@@ -148,7 +148,7 @@ local opts = {
       mode = { 'v' },
     },
     {
-      '<leader>loc',
+      '<leader>woc',
       function()
         local codex = require 'codex'
         codex.execute_slash_command { command = 'copy' }
