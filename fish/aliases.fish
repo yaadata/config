@@ -4,39 +4,38 @@ function naptime
     pmset sleepnow
 end
 
-function gitworktree-checkout-remote --description "Check out a remote branch as a git worktree"
-    set branch $argv[1]
+function gitworktree-create --description "Create a worktree for an existing or new branch"
+    if test (count $argv) -ne 1
+        echo "usage: gwt <branch>"
+        return 2
+    end
 
-    if test -z "$branch"
-        echo "usage: gwtr <remote-branch>"
+    set -l branch $argv[1]
+    set -l repo_root (git rev-parse --show-toplevel 2>/dev/null)
+
+    if test -z "$repo_root"
+        echo "Error: not inside a Git repository"
         return 1
     end
 
-    set org (gh repo view --json owner --jq .owner.login)
-    set repo (gh repo view --json name --jq .name)
-    set safe_branch (string replace -a / __ $branch)
-    set path "$HOME/.git-worktrees/$org/$repo/$safe_branch"
+    set -l repo_name (basename "$repo_root")
+    set -l safe_branch (string replace -a / _ -- (string replace -a '\\' _ -- "$branch"))
+    set -l path "$HOME/.zellij/worktrees/$repo_name/$safe_branch"
 
-    git fetch origin "$branch"
-    or return $status
-
-    git worktree add -b "$branch" "$path" "origin/$branch"
-end
-
-function gitworktree-create --description "Create a local branch as a git worktree"
-    set branch $argv[1]
-
-    if test -z "$branch"
-        echo "usage: gwtl <branch>"
+    if test -e "$path"
+        echo "Error: destination already exists: $path"
         return 1
     end
 
-    set org (gh repo view --json owner --jq .owner.login)
-    set repo (gh repo view --json name --jq .name)
-    set safe_branch (string replace -a / __ $branch)
-    set path "$HOME/.git-worktrees/$org/$repo/$safe_branch"
+    mkdir -p (dirname "$path")
 
-    git worktree add -b "$branch" "$path"
+    if git show-ref --verify --quiet "refs/heads/$branch"
+        git worktree add "$path" "$branch"
+    else if git show-ref --verify --quiet "refs/remotes/origin/$branch"
+        git worktree add --track -b "$branch" "$path" "origin/$branch"
+    else
+        git worktree add -b "$branch" "$path" HEAD
+    end
 end
 
 function git_town_toggle
@@ -84,7 +83,6 @@ abbr gtd "git-town down"
 abbr gtdel "git-town delete"
 
 
-abbr gwr gitworktree-checkout-remote
 abbr gwc gitworktree-create
 abbr gtt git_town_toggle
 abbr gl toggle_git_town_lineage
