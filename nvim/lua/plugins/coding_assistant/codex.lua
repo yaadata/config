@@ -109,7 +109,11 @@ local opts = {
       '<leader>woa',
       function()
         local codex = require 'codex'
-        codex.send 'adversally review your work and suggested solution '
+        local ok, err = codex.send 'adversally review your work and suggested solution'
+        if not ok then
+          vim.notify(('Codex: failed to send text%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
+        end
+        codex.unfocus()
         codex.submit_input()
       end,
       desc = 'Codex: Show status',
