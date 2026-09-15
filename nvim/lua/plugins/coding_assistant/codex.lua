@@ -1,6 +1,6 @@
 local opts = {
   'yaadata/codex.nvim',
-  version = '1.0.0',
+  version = '1.1.0',
   cmd = {
     'Codex',
     'CodexFocus',
@@ -8,6 +8,7 @@ local opts = {
     'CodexClearInput',
     'CodexSendSelection',
     'CodexSendFile',
+    'CodexSendSkill',
     'CodexMentionFile',
     'CodexMentionDirectory',
     'CodexResume',
@@ -103,6 +104,17 @@ local opts = {
       desc = 'Codex: Show status',
       mode = { 'n', 'v' },
     },
+
+    {
+      '<leader>woa',
+      function()
+        local codex = require 'codex'
+        codex.send 'adversally review your work and suggested solution '
+        codex.submit_input()
+      end,
+      desc = 'Codex: Show status',
+      mode = { 'n', 'v' },
+    },
     {
       '<leader>wor',
       function()
@@ -112,7 +124,7 @@ local opts = {
           vim.notify(('Codex: failed to collect selection%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
           return
         end
-        codex.send '$code-review the current selection '
+        codex.send ' adversally check this code block '
         codex.submit_input()
       end,
       desc = 'Codex: Review Code',
@@ -135,10 +147,14 @@ local opts = {
           vim.notify(('Codex: failed to collect selection%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
           return
         end
-        codex.send '$code-comment the current selection '
+        codex.send_skill {
+          plugin = 'code',
+          name = 'comment',
+        }
+        codex.send 'the current selection '
         codex.submit_input()
       end,
-      desc = 'Codex: Add Code Coment',
+      desc = 'Codex: Add Code Comment',
       mode = { 'v' },
     },
     {
