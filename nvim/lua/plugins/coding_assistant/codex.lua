@@ -1,7 +1,7 @@
 local opts = {
   'yaadata/codex.nvim',
-  version = '1.0.0',
-  dev = true,
+  version = '1.1.0',
+  dev = false,
   cmd = {
     'Codex',
     'CodexFocus',
@@ -214,7 +214,6 @@ local opts = {
     local km = require('codex.keymaps').builtins
     local wr = require 'utils.window_resize'
     opts.terminal.keymaps = {
-      ['<C-c>'] = { mode = { 't', 'n' }, action = km.toggle },
       ['<C-n>'] = {
         mode = { 't', 'n' },
         action = function()
