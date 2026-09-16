@@ -7,7 +7,6 @@ local opts = { -- Useful plugin to show you pending keybinds.
 
     -- Document existing key chains
     wk.add {
-      { '<leader>a', group = '[A]tlas', icon = '󰅩' },
       { '<leader>l', group = '[L]sp / Code', icon = '󰅩' },
       { '<leader>lt', group = '[T]oggle', icon = '󰔢' },
       { '<leader>lw', group = '[W]orkspace', icon = '󱂬' },
@@ -62,6 +61,28 @@ local opts = { -- Useful plugin to show you pending keybinds.
       { '<leader>v', group = '[v]isual motions', mode = { 'n', 'v' }, icon = '' },
       { '<leader>vt', group = '[t]reesitter', icon = '󱏒' },
     }
+
+    local function add_atlas_keymap_group(key, group)
+      wk.add {
+        {
+          key,
+          group = group,
+          cond = function()
+            return vim.bo.filetype == 'atlas' or vim.bo.filetype == 'codediff-explorer'
+          end,
+        },
+      }
+    end
+
+    add_atlas_keymap_group('<leader>c', 'Comment')
+    add_atlas_keymap_group('<leader>r', 'Review')
+    add_atlas_keymap_group('<leader>rc', 'Comment')
+    add_atlas_keymap_group('<leader>rf', 'Filter')
+    add_atlas_keymap_group('<leader>rs', 'Suggestion')
+    add_atlas_keymap_group('<leader>rt', 'Toggle')
+    add_atlas_keymap_group('<leader>i', 'Issue')
+    add_atlas_keymap_group('<leader>ic', 'Issue Change')
+    add_atlas_keymap_group('<leader>it', 'Toggle')
   end,
 }
 
