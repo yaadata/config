@@ -1,3 +1,5 @@
+local git = require 'utils.git'
+
 local opts = {
   'lewis6991/gitsigns.nvim',
   commit = '20ad4419564d6e22b189f6738116b38871082332',
@@ -37,6 +39,12 @@ local opts = {
       map('n', '<leader>gdb', function()
         gitsigns.blame_line { full = true }
       end, { desc = 'git [b]lame line' })
+      map('n', '<leader>gdo', function()
+        git.open_line_merge_commit(bufnr)
+      end, { desc = 'git [o]pen line merge commit' })
+      map('x', '<leader>gdo', function()
+        git.open_line_merge_commit(bufnr, vim.fn.line 'v')
+      end, { desc = 'git [o]pen selected line merge commit' })
       map('n', '<leader>gdB', gitsigns.blame, { desc = 'Show Blame' })
       map('n', '<leader>gdq', function()
         gitsigns.setqflist 'all'
