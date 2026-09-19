@@ -12,7 +12,7 @@ local opts = {
     require('lualine').setup {
       options = {
         theme = 'palenight',
-        globalstatus = false,
+        globalstatus = true,
         disabled_filetypes = {
           statusline = { 'atlas' },
           winbar = {},
