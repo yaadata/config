@@ -43,10 +43,12 @@ local opts = {
     vim.keymap.set({ 'x', 'o' }, 'ar', select_textobject '@assignment.rhs', { desc = 'Treesitter assignment rhs' })
     vim.keymap.set({ 'x', 'o' }, 'al', select_textobject '@assignment.lhs', { desc = 'Treesitter assignment lhs' })
 
+    vim.keymap.set({ 'n', 'x', 'o' }, ']f', move_textobject('goto_next_start', '@function.inner'), { desc = 'Treesitter next inner function' })
     vim.keymap.set({ 'n', 'x', 'o' }, ']m', move_textobject('goto_next_start', '@function.outer'), { desc = 'Treesitter next function start' })
     vim.keymap.set({ 'n', 'x', 'o' }, ']]', move_textobject('goto_next_start', '@class.outer'), { desc = 'Treesitter next class start' })
     vim.keymap.set({ 'n', 'x', 'o' }, ']M', move_textobject('goto_next_end', '@function.outer'), { desc = 'Treesitter next function end' })
     vim.keymap.set({ 'n', 'x', 'o' }, '][', move_textobject('goto_next_end', '@class.outer'), { desc = 'Treesitter next class end' })
+    vim.keymap.set({ 'n', 'x', 'o' }, '[f', move_textobject('goto_previous_start', '@function.inner'), { desc = 'Treesitter previous inner function' })
     vim.keymap.set({ 'n', 'x', 'o' }, '[m', move_textobject('goto_previous_start', '@function.outer'), { desc = 'Treesitter previous function start' })
     vim.keymap.set({ 'n', 'x', 'o' }, '[[', move_textobject('goto_previous_start', '@class.outer'), { desc = 'Treesitter previous class start' })
     vim.keymap.set({ 'n', 'x', 'o' }, '[M', move_textobject('goto_previous_end', '@function.outer'), { desc = 'Treesitter previous function end' })
