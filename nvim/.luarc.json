@@ -1,4 +1,19 @@
 {
+    "runtime.version": "LuaJIT",
+    "runtime.path": [
+        "lua/?.lua",
+        "lua/?/init.lua",
+        "?.lua",
+        "?/init.lua"
+    ],
+    "workspace.library": [
+        "${env:VIMRUNTIME}",
+        "${env:HOME}/.local/share/nvim/lazy"
+    ],
+    "workspace.checkThirdParty": false,
+    "diagnostics.globals": [
+        "vim"
+    ],
     "diagnostics.disable": [
         "missing-fields"
     ]
