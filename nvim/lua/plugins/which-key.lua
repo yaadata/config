@@ -9,6 +9,7 @@ local opts = { -- Useful plugin to show you pending keybinds.
     wk.add {
       { '<leader>a', group = '[A]tlas', icon = '󰅩' },
       { '<leader>l', group = '[L]sp / Code', icon = '󰅩' },
+      { '<leader>lo', group = '[O]bjects', icon = '󰅩' },
       { '<leader>lt', group = '[T]oggle', icon = '󰔢' },
       { '<leader>lw', group = '[W]orkspace', icon = '󱂬' },
       { '<leader>lh', group = '[H]ierarchy', icon = '󰓍' },

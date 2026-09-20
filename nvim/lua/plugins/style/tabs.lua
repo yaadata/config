@@ -20,8 +20,8 @@ local opts = {
     local options = { noremap = true, silent = true }
 
     -- Move to previous/next
-    map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', options)
-    map('n', '<A-.>', '<Cmd>BufferNext<CR>', options)
+    map('n', ']b', '<Cmd>BufferNext<CR>', options)
+    map('n', '[b', '<Cmd>BufferPrevious<CR>', options)
 
     -- Re-order to previous/next
     map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', options)
@@ -45,10 +45,8 @@ local opts = {
 
     -- Close buffer
     map('n', '<leader>bx', '<Cmd>BufferClose<CR>', options)
-    map('n', '<leader>bx', '<Cmd>BufferClose<CR>', options)
     map('n', 'X', '<Cmd>BufferClose<CR>', options)
-    map('n', '<leader>bX', '<Cmd>BufferCloseAllButCurrent<CR>', options)
-    map('n', '<leader>bax', '<Cmd>BufferCloseAllButCurrent<CR>', options)
+    map('n', '<leader>bax', '<Cmd>BufferCloseAllButVisible<CR>', options)
     -- Pin/unpin buffer
     map('n', '<leader>boP', '<Cmd>BufferPin<CR>', options)
     -- Wipeout buffer

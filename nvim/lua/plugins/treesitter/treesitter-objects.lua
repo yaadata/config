@@ -62,8 +62,8 @@ local opts = {
     vim.keymap.set({ 'n', 'x', 'o' }, '[r', move_textobject('goto_previous', '@assignment.rhs'), { desc = 'Treesitter previous assignment rhs' })
     vim.keymap.set({ 'n', 'x', 'o' }, '[l', move_textobject('goto_previous', '@assignment.lhs'), { desc = 'Treesitter previous assignment lhs' })
 
-    vim.keymap.set('n', '<leader>vta', swap_textobject('swap_next', '@parameter.inner'), { desc = 'Treesitter swap next parameter' })
-    vim.keymap.set('n', '<leader>vtA', swap_textobject('swap_previous', '@parameter.inner'), { desc = 'Treesitter swap previous parameter' })
+    vim.keymap.set('n', '<leader>loa', swap_textobject('swap_next', '@parameter.inner'), { desc = 'Treesitter swap next parameter' })
+    vim.keymap.set('n', '<leader>loA', swap_textobject('swap_previous', '@parameter.inner'), { desc = 'Treesitter swap previous parameter' })
   end,
 }
 
