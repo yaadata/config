@@ -20,8 +20,8 @@ local opts = {
     local options = { noremap = true, silent = true }
 
     -- Move to previous/next
-    map('n', ']b', '<Cmd>BufferNext<CR>', options)
-    map('n', '[b', '<Cmd>BufferPrevious<CR>', options)
+    map('n', '<A-.>', '<Cmd>BufferNext<CR>', options)
+    map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', options)
 
     -- Re-order to previous/next
     map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', options)
