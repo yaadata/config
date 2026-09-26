@@ -1,18 +1,6 @@
 local opts = {
-  'yaadata/codex.nvim',
-  version = '1.1.0',
-  cmd = {
-    'Codex',
-    'CodexFocus',
-    'CodexClose',
-    'CodexClearInput',
-    'CodexSendSelection',
-    'CodexSendFile',
-    'CodexSendSkill',
-    'CodexMentionFile',
-    'CodexMentionDirectory',
-    'CodexResume',
-  },
+  url = 'https://codeberg.org/yaadata/codex.nvim.git',
+  branch = 'v2',
   keys = {
     {
       '<leader>wot',
@@ -57,7 +45,9 @@ local opts = {
     {
       '<leader>wos',
       function()
-        require('codex').send_file()
+        local codex = require 'codex'
+        codex.prompt_builder.add_file()
+        codex.prompt_builder.send()
       end,
       desc = 'Codex: Add current buffer',
       mode = 'n',
@@ -65,7 +55,9 @@ local opts = {
     {
       '<leader>wos',
       function()
-        require('codex').send_selection()
+        local codex = require 'codex'
+        codex.prompt_builder.add_selection()
+        codex.prompt_builder.send()
       end,
       desc = 'Codex: Send selection',
       mode = 'x',
@@ -99,7 +91,9 @@ local opts = {
     {
       '<leader>woi',
       function()
-        require('codex').execute_slash_command { command = 'status' }
+        local codex = require 'codex'
+        codex.prompt_builder.add '/status'
+        codex.prompt_builder.submit()
       end,
       desc = 'Codex: Show status',
       mode = { 'n', 'v' },
@@ -123,13 +117,14 @@ local opts = {
       '<leader>wor',
       function()
         local codex = require 'codex'
-        local ok, err = codex.send_selection()
+        local ok, err = codex.prompt_builder.add_selection()
         if not ok then
           vim.notify(('Codex: failed to collect selection%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
           return
         end
-        codex.send ' adversally check this code block '
-        codex.submit_input()
+        codex.prompt_builder.add ' do an adversal review for MAJOR gaps in this implementation. Be balanced and quick'
+        codex.prompt_builder.send()
+        codex.focus()
       end,
       desc = 'Codex: Review Code',
       mode = { 'v' },
@@ -146,17 +141,16 @@ local opts = {
       '<leader>woc',
       function()
         local codex = require 'codex'
-        local ok, err = codex.send_selection()
+        local ok, err = codex.prompt_builder.add_selection()
         if not ok then
           vim.notify(('Codex: failed to collect selection%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
           return
         end
-        codex.send_skill {
+        codex.prompt_builder.add_skill {
           plugin = 'code',
           name = 'comment',
         }
-        codex.send 'the current selection '
-        codex.submit_input()
+        codex.prompt_builder.submit()
       end,
       desc = 'Codex: Add Code Comment',
       mode = { 'v' },
