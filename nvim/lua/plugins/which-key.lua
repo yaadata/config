@@ -67,18 +67,23 @@ local opts = { -- Useful plugin to show you pending keybinds.
           key,
           group = group,
           cond = function()
-            return vim.bo.filetype == 'atlas' or vim.bo.filetype == 'codediff-explorer'
+            return vim.bo.filetype == 'atlas' or vim.bo.filetype:match '^atlas%.' ~= nil or vim.bo.filetype == 'codediff-explorer'
           end,
         },
       }
     end
 
+    add_atlas_keymap_group('<leader>gd', 'Diff/Checkout')
+    add_atlas_keymap_group('<leader>gc', 'Comment')
+    add_atlas_keymap_group('<leader>gs', 'Suggestion')
+    add_atlas_keymap_group('<leader>gn', 'Note')
+    add_atlas_keymap_group('<leader>gl', 'Layout')
+    add_atlas_keymap_group('<leader>gp', 'Panel')
+    add_atlas_keymap_group('<leader>ge', 'Edit')
+    add_atlas_keymap_group('<leader>gr', 'Repository')
     add_atlas_keymap_group('<leader>c', 'Comment')
-    add_atlas_keymap_group('<leader>r', 'Review')
-    add_atlas_keymap_group('<leader>rc', 'Comment')
-    add_atlas_keymap_group('<leader>rf', 'Filter')
-    add_atlas_keymap_group('<leader>rs', 'Suggestion')
-    add_atlas_keymap_group('<leader>rt', 'Toggle')
+    add_atlas_keymap_group('<leader>f', 'Filter')
+    add_atlas_keymap_group('<leader>gr', 'Review')
     add_atlas_keymap_group('<leader>i', 'Issue')
     add_atlas_keymap_group('<leader>ic', 'Issue Change')
     add_atlas_keymap_group('<leader>it', 'Toggle')
