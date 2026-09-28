@@ -8,22 +8,108 @@ local opts = {
   event = { 'BufReadPost', 'BufNewFile' },
   cmd = 'Grapple',
   keys = {
-    { '<leader>ha', '<cmd>Grapple toggle<cr>', desc = 'Tag a file' },
-    { '<leader>ho', ':Telescope grapple tags<enter>', desc = 'Toggle tags menu' },
-
-    { '<leader>h1', '<cmd>Grapple select index=1<cr>', desc = 'Select first tag' },
-    { '<leader>h2', '<cmd>Grapple select index=2<cr>', desc = 'Select second tag' },
-    { '<leader>h3', '<cmd>Grapple select index=3<cr>', desc = 'Select third tag' },
-    { '<leader>h4', '<cmd>Grapple select index=4<cr>', desc = 'Select fourth tag' },
-
-    { '<leader>hp', '<cmd>Grapple cycle_tags next<cr>', desc = 'Go to next tag' },
-    { '<leader>hn', '<cmd>Grapple cycle_tags prev<cr>', desc = 'Go to previous tag' },
+    {
+      '<leader>ma',
+      function()
+        require('grapple').toggle()
+      end,
+      mode = 'n',
+      desc = 'Toggle file tag',
+    },
+    {
+      '<leader>mx',
+      function()
+        require('grapple').untag()
+      end,
+      mode = 'n',
+      desc = 'Untag a mark',
+    },
+    {
+      '<leader>mX',
+      function()
+        require('grapple').reset()
+      end,
+      mode = 'n',
+      desc = 'Reset/remove all tags',
+    },
+    {
+      '<leader>mt',
+      function()
+        require('telescope').extensions.grapple.tags()
+      end,
+      mode = 'n',
+      desc = 'Browse tags',
+    },
+    {
+      '<leader>sm',
+      function()
+        require('telescope').extensions.grapple.tags()
+      end,
+      mode = 'n',
+      desc = 'Browse tags',
+    },
+    {
+      '<leader>m1',
+      function()
+        require('grapple').select { index = 1 }
+      end,
+      mode = 'n',
+      desc = 'Select first tag',
+    },
+    {
+      '<leader>m2',
+      function()
+        require('grapple').select { index = 2 }
+      end,
+      mode = 'n',
+      desc = 'Select second tag',
+    },
+    {
+      '<leader>m3',
+      function()
+        require('grapple').select { index = 3 }
+      end,
+      mode = 'n',
+      desc = 'Select third tag',
+    },
+    {
+      '<leader>m4',
+      function()
+        require('grapple').select { index = 4 }
+      end,
+      mode = 'n',
+      desc = 'Select fourth tag',
+    },
+    {
+      '<leader>m5',
+      function()
+        require('grapple').select { index = 5 }
+      end,
+      mode = 'n',
+      desc = 'Select fifth tag',
+    },
+    {
+      ']m',
+      function()
+        require('grapple').cycle_tags 'next'
+      end,
+      mode = 'n',
+      desc = 'Go to next tag',
+    },
+    {
+      '[m',
+      function()
+        require('grapple').cycle_tags 'prev'
+      end,
+      mode = 'n',
+      desc = 'Go to previous tag',
+    },
   },
   config = function()
     require('grapple').setup {
       scope = 'git_branch', -- also try out "git_branch"
-      icons = false, -- setting to "true" requires "nvim-web-devicons"
-      status = false,
+      icons = true, -- setting to "true" requires "nvim-web-devicons"
+      status = true,
     }
     require('telescope').load_extension 'grapple'
   end,
