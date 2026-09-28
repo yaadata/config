@@ -112,7 +112,7 @@ abbr gm "git merge --no-ff"
 abbr gma "git merge --abort"
 abbr gmc "git merge --continue"
 abbr gp "git push"
-abbr gpfl "git push --force-with-lease"
+abbr gpfl "git push --force-with-lease --force-if-includes"
 abbr gpo "git push origin"
 abbr gplla git_pull_all
 abbr gpll "git pull --rebase"
