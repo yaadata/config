@@ -31,7 +31,7 @@ local opts = {
           },
         },
         lualine_c = {
-          { 'filename', path = 1 },
+          { 'filename', path = 1, color = { fg = '#f7a8d0', gui = 'NONE' } },
           'diff',
         },
         lualine_y = { 'location' },
