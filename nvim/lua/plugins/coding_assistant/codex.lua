@@ -106,7 +106,7 @@ local opts = {
       '<leader>woi',
       function()
         local codex = require 'codex'
-        codex.prompt_builder.add '/status'
+        codex.prompt_builder.add '/status '
         codex.prompt_builder.submit()
       end,
       desc = 'Codex: Show status',
