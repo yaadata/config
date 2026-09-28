@@ -1,8 +1,12 @@
 ---@module 'atlas'
 
 local opts = {
-  'yaadata/atlas.nvim',
-  branch = 'next',
+  'emrearmagan/atlas.nvim',
+  tag = '0.7.12',
+  dependencies = {
+    'MeanderingProgrammer/render-markdown.nvim', -- optional but recommended
+    'esmuellert/codediff.nvim', -- optional (PullRequest diff)
+  },
   keys = {
     { '<leader>apg', '<cmd>Atlas pulls github<cr>', desc = 'Atlas GitHub Pulls' },
   },
@@ -11,10 +15,6 @@ local opts = {
     providers = {
       github = {
         token = vim.env.GITHUB_TOKEN,
-      },
-      forgejo = {
-        base_url = 'https://codeberg.org',
-        token = vim.env.FORGEJO_TOKEN,
       },
     },
     pulls = {
@@ -81,10 +81,10 @@ local opts = {
         submit = '<C-s>',
         delete = 'dd',
         comments = {
-          add = 'aca',
-          reply = 'acr',
-          edit = 'ace',
-          react = 'acR',
+          add = '<leader>ca',
+          reply = '<leader>cr',
+          edit = '<leader>ce',
+          react = '<leader>cR',
         },
         toggle_panel = 'p',
         toggle_fold = 'za',
@@ -118,55 +118,58 @@ local opts = {
       },
       pulls = {
         review = {
-          open_diff = 'gd',
-          checkout = 'gc',
-          external_help = 'gA', -- Atlas help in external diff viewers
-          toggle_repo_panel = 'o',
-          toggle_repo_issue_state = 't',
-          edit_title = 'T',
-          edit_description = 'D',
-          edit_search = 'i',
-          focus_item = 'rf',
-          approve = 'ra',
-          request_changes = 'rS', -- block on request changes
-          submit_review = 'rr',
-          add_task = 'rt',
-          comment_templates = 'rC',
+          open_diff = '<leader>gdo',
+          checkout = '<leader>gdc',
+          external_help = '<leader>g?', -- Atlas help in external diff viewers
+          toggle_repo_panel = '<leader>grp',
+          toggle_repo_issue_state = '<leader>gri',
+          edit_title = '<leader>get',
+          edit_description = '<leader>ged',
+          edit_search = '<leader>ges',
+          focus_item = '<leader>gf',
+          approve = '<leader>gra',
+          request_changes = '<leader>grd', -- block on request changes
+          submit_review = '<leader>grc',
+          add_task = '<leader>grt',
+          comment_templates = '<leader>grc',
           diff = {
-            add_comment = 'rca',
-            submit_comment = 'rcs',
-            add_suggestion = 'rsa', -- change
-            submit_suggestion = 'rss',
-            add_note = 'rn',
-            toggle_resolved = 'rX',
+            lsp = {
+              enabled = true,
+            },
+            add_comment = '<leader>gce',
+            submit_comment = '<leader>gca',
+            add_suggestion = '<leader>gse', -- change
+            submit_suggestion = '<leader>gsa',
+            add_note = '<leader>gna',
+            toggle_resolved = '<leader>gcT',
 
-            toggle_layout = 't',
-            toggle_compact = 'gc',
-            next_hunk = ']h',
-            previous_hunk = '[h',
-            toggle_review_panel = 'gR',
-            toggle_detail_panel = 'gD',
-            toggle_comments = 'gH',
-            next_comment = ']c',
-            previous_comment = '[c',
+            toggle_layout = '<leader>glt',
+            toggle_compact = '<leader>glc',
+            next_hunk = ']c',
+            previous_hunk = '[c',
+            toggle_review_panel = '<leader>gpr',
+            toggle_detail_panel = '<leader>gpd',
+            toggle_comments = '<leader>gct',
+            next_comment = ']C',
+            previous_comment = '[C',
             next_note = ']n',
             previous_note = '[n',
           },
         },
         filters = {
-          open = 'gpo',
-          merged = 'gpm',
-          declined = 'gpd',
+          open = '<leader>fo',
+          merged = '<leader>fm',
+          declined = '<leader>fd',
         },
       },
       issues = {
-        transition_issue = 'gt',
-        change_assignee = 'ga',
-        change_reporter = 'gr',
-        edit_issue = 'ge',
-        create_issue = 'gc',
-        edit_search = 'i',
-        toggle_description_mode = 'm',
+        transition_issue = '<leader>ics',
+        change_assignee = '<leader>ica',
+        change_reporter = '<leader>icr',
+        edit_issue = '<leader>ice',
+        create_issue = '<leader>ia',
+        edit_search = '<leader>ie',
+        toggle_description_mode = '<leader>itd',
       },
     },
   },
