@@ -56,6 +56,16 @@ local opts = {
       mode = { 'n', 'v' },
     },
     {
+      '<leader>wov',
+      function()
+        local codex = require 'codex'
+        codex.prompt_builder.add '/voice'
+        codex.prompt_builder.submit()
+      end,
+      desc = 'Codex: Toggle voice mode',
+      mode = 'n',
+    },
+    {
       '<leader>wos',
       function()
         local codex = require 'codex'
