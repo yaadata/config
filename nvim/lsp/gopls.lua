@@ -2,8 +2,8 @@ local cfg = require('go.lsp').config()
 
 return vim.tbl_deep_extend('force', cfg, {
   cmd = { 'gopls', '--remote=auto' },
-  root_dir = function()
-    return vim.fn.getcwd()
+  root_dir = function(_, on_dir)
+    on_dir(vim.fn.getcwd())
   end,
   settings = {
     gopls = {
