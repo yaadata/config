@@ -110,7 +110,7 @@ vim.keymap.set('n', 'Q', '<cmd>q<CR>', { desc = '[q]uit current' })
 vim.keymap.set('n', '<leader>baQ', '<cmd>quitall!<CR>', { desc = '[q]uit' })
 -- yanks on buffers
 vim.keymap.set('n', '<leader>byp', function()
-  local filepath = vim.fn.expand '%'
+  local filepath = vim.fn.expand '%:.'
   vim.fn.setreg('+', filepath) -- write to clipboard register '+'
   vim.notify('Copied relative path: ' .. filepath, vim.log.levels.INFO)
 end, { desc = 'Relative [P]ath' })
