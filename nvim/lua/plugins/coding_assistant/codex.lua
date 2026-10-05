@@ -58,8 +58,18 @@ local opts = {
       '<leader>wov',
       function()
         local codex = require 'codex'
+        local is_focused = codex.session.is_focused()
+        if not is_focused then
+          codex.session.focus()
+        end
+        codex.prompt_builder.clear()
         codex.prompt_builder.add '/voice'
         codex.prompt_builder.submit()
+        vim.defer_fn(function()
+          if not is_focused then
+            codex.session.unfocus()
+          end
+        end, 250)
       end,
       desc = 'Codex: Toggle voice mode',
       mode = 'n',
@@ -68,8 +78,16 @@ local opts = {
       '<leader>wom',
       function()
         local codex = require 'codex'
-        codex.session.focus()
+        local is_focused = codex.session.is_focused()
+        if not is_focused then
+          codex.session.focus()
+        end
         codex.input.feedkey '<A-m>'
+        vim.defer_fn(function()
+          if not is_focused then
+            codex.session.unfocus()
+          end
+        end, 250)
       end,
       desc = 'Codex: Mute Voice Mode',
       mode = 'n',
