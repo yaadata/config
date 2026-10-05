@@ -1,11 +1,23 @@
 local opts = {
   url = 'https://codeberg.org/yaadata/codex.nvim.git',
-  branch = 'v2',
+  version = '2.0.0-alpha.1',
+  lazy = false,
+  dev = false,
+  cmd = {
+    'Codex',
+    'CodexFocus',
+    'CodexClose',
+    'CodexClearInput',
+    'CodexSendSelection',
+    'CodexSendFile',
+    'CodexMentionFile',
+    'CodexMentionDirectory',
+  },
   keys = {
     {
       '<leader>wot',
       function()
-        require('codex').toggle()
+        require('codex').session.toggle()
       end,
       desc = 'Codex: Toggle terminal',
       mode = { 'n', 'v' },
@@ -13,7 +25,7 @@ local opts = {
     {
       '<C-c>',
       function()
-        require('codex').toggle()
+        require('codex').session.toggle()
       end,
       desc = 'Codex: Toggle terminal',
       mode = { 'n', 'v' },
@@ -21,7 +33,7 @@ local opts = {
     {
       '<leader>woo',
       function()
-        require('codex').open(true)
+        require('codex').session.open(true)
       end,
       desc = 'Codex: Open and focus',
       mode = { 'n', 'v' },
@@ -29,7 +41,7 @@ local opts = {
     {
       '<leader>wof',
       function()
-        require('codex').focus()
+        require('codex').session.focus()
       end,
       desc = 'Codex: Focus terminal',
       mode = { 'n', 'v' },
@@ -37,7 +49,7 @@ local opts = {
     {
       '<leader>wox',
       function()
-        require('codex').close()
+        require('codex').session.close()
       end,
       desc = 'Codex: Close session',
       mode = { 'n', 'v' },
@@ -50,6 +62,16 @@ local opts = {
         codex.prompt_builder.submit()
       end,
       desc = 'Codex: Toggle voice mode',
+      mode = 'n',
+    },
+    {
+      '<leader>wom',
+      function()
+        local codex = require 'codex'
+        codex.session.focus()
+        codex.input.feedkey '<A-m>'
+      end,
+      desc = 'Codex: Mute Voice Mode',
       mode = 'n',
     },
     {
@@ -73,29 +95,16 @@ local opts = {
       mode = 'x',
     },
     {
-      '<leader>wom',
-      function()
-        local codex = require 'codex'
-        codex.mention_file()
-        vim.defer_fn(function()
-          codex.unfocus()
-        end, 350)
-      end,
-      desc = 'Codex: Mention current file',
-      mode = { 'n', 'v' },
-    },
-    {
       '<leader>woM',
       function()
         local codex = require 'codex'
-        codex.mention_directory()
+        local builtin = require 'codex.builtin'
+        builtin.mention_file()
         vim.defer_fn(function()
-          if codex.is_focused() then
-            codex.unfocus()
-          end
+          codex.session.unfocus()
         end, 350)
       end,
-      desc = 'Codex: Mention current directory',
+      desc = 'Codex: Mention current file',
       mode = { 'n', 'v' },
     },
     {
@@ -104,21 +113,6 @@ local opts = {
         local codex = require 'codex'
         codex.prompt_builder.add '/status '
         codex.prompt_builder.submit()
-      end,
-      desc = 'Codex: Show status',
-      mode = { 'n', 'v' },
-    },
-
-    {
-      '<leader>woa',
-      function()
-        local codex = require 'codex'
-        local ok, err = codex.send 'adversally review your work and suggested solution'
-        if not ok then
-          vim.notify(('Codex: failed to send text%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
-        end
-        codex.unfocus()
-        codex.submit_input()
       end,
       desc = 'Codex: Show status',
       mode = { 'n', 'v' },
@@ -134,7 +128,7 @@ local opts = {
         end
         codex.prompt_builder.add ' do an adversal review for MAJOR gaps in this implementation. Be balanced and quick'
         codex.prompt_builder.send()
-        codex.focus()
+        codex.session.focus()
       end,
       desc = 'Codex: Review Code',
       mode = { 'v' },
@@ -142,7 +136,7 @@ local opts = {
     {
       '<leader>wor',
       function()
-        require('codex').resume()
+        require('codex.builtin').resume()
       end,
       desc = 'Codex: Resume session',
       mode = { 'n' },
@@ -156,10 +150,16 @@ local opts = {
           vim.notify(('Codex: failed to collect selection%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
           return
         end
-        codex.prompt_builder.add_skill {
+        local builtin = require 'codex.builtin'
+        local skill, format_err = builtin.format_skill {
           plugin = 'code',
           name = 'comment',
         }
+        if format_err ~= nil then
+          vim.notify(('Codex: failed to format skill%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
+          return
+        end
+        codex.prompt_builder.add(skill)
         codex.prompt_builder.submit()
       end,
       desc = 'Codex: Add Code Comment',
@@ -168,11 +168,12 @@ local opts = {
     {
       '<leader>woc',
       function()
-        local codex = require 'codex'
-        codex.execute_slash_command { command = 'copy' }
+        local builtin = require 'codex.builtin'
+        builtin.execute_slash_command { command = 'copy' }
         vim.defer_fn(function()
-          if codex.is_focused() then
-            codex.unfocus()
+          local codex = require 'codex'
+          if codex.session.is_focused() then
+            codex.session.unfocus()
           end
         end, 300)
       end,
@@ -229,7 +230,7 @@ local opts = {
     },
   },
   config = function(_, opts)
-    local km = require('codex.keymaps').builtins
+    local km = require('codex.builtin').keymaps
     local wr = require 'utils.window_resize'
     opts.terminal.keymaps = {
       ['<C-c>'] = { mode = { 't', 'n' }, action = km.toggle },
