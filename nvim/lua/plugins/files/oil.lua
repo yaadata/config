@@ -32,6 +32,9 @@ local opts = {
         end,
       },
       silence_scp_warning = true,
+      lsp_file_methods = {
+        enabled = false,
+      },
       keymaps = {
         ['q'] = { 'actions.close', mode = 'n' },
         ['gp'] = {

@@ -85,8 +85,8 @@ vim.opt.spell = true
 vim.opt.spelllang = 'en_us'
 
 -- folds
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldmethod = 'manual'
+vim.opt.foldexpr = '0'
 vim.o.foldcolumn = '1'
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
