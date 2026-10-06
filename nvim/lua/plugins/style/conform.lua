@@ -25,18 +25,16 @@ local opts = { -- Autoformat
         stdin = false,
       },
     },
-    format_on_save = function(bufnr)
+    format_after_save = function(bufnr)
       -- Disable with a global or buffer-local variable
       if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
         return
       end
-      -- Disable "format_on_save lsp_fallback" for languages that don't
-      -- have a well standardized coding style. You can add additional
-      -- languages here or re-enable it for the disabled ones.
+      -- Keep LSP formatting disabled for C and C++.
       local disable_filetypes = { c = true, cpp = true }
       return {
         timeout_ms = 750,
-        lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+        lsp_format = disable_filetypes[vim.bo[bufnr].filetype] and 'never' or 'fallback',
       }
     end,
     formatters_by_ft = {
