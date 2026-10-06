@@ -1,26 +1,28 @@
-local cfg = require('go.lsp').config()
-
-return vim.tbl_deep_extend('force', cfg, {
+return {
   cmd = { 'gopls', '--remote=auto' },
-  root_dir = function(_, on_dir)
-    on_dir(vim.fn.getcwd())
+  filetypes = { 'go', 'gomod', 'gosum', 'gowork', 'gotmpl', 'gohtmltmpl', 'gotexttmpl' },
+  flags = { debounce_text_changes = 500 },
+  root_dir = function(bufnr, on_dir)
+    local path = vim.api.nvim_buf_get_name(bufnr)
+    on_dir(
+      vim.fs.root(path, 'go.work')
+        or vim.fs.root(path, 'go.mod')
+        or vim.fs.root(path, { 'MODULE.bazel', 'WORKSPACE.bazel', 'WORKSPACE' })
+        or vim.fs.root(path, '.git')
+        or vim.fs.dirname(path)
+    )
   end,
   settings = {
     gopls = {
-      workspaceFiles = {
-        '**/BUILD',
-        '**/WORKSPACE',
-        '**/*.{bzl,bazel}',
-      },
-      directoryFilters = {
-        '-bazel-bin',
-        '-bazel-out',
-        '-bazel-testlogs',
-        '-bazel-mux',
-      },
       gofumpt = true,
       matcher = 'fuzzy',
       symbolMatcher = 'fuzzy',
+      staticcheck = true,
+      diagnosticsTrigger = 'Save',
+      diagnosticsDelay = '250ms',
+      semanticTokens = false,
+      vulncheck = 'Imports',
+      directoryFilters = { '-**/node_modules', '-bazel-bin', '-bazel-out', '-bazel-testlogs', '-bazel-mux' },
       codelenses = {
         gc_details = true,
         generate = true,
@@ -43,10 +45,6 @@ return vim.tbl_deep_extend('force', cfg, {
         rangeVariableTypes = true,
       },
       verboseOutput = true,
-      buildFlags = { '-tags=integration,unit,endtoendtest,smoke' },
     },
   },
-  init_options = {
-    buildFlags = { '-tags=integration,unit,endtoendtest,smoke' },
-  },
-})
+}
