@@ -1,12 +1,12 @@
 local opts = {
   url = 'https://codeberg.org/yaadata/codex.nvim.git',
-  version = '2.0.0-alpha.3',
+  version = '2.0.0-alpha.5',
   lazy = false,
   dev = false,
   cmd = {
     'Codex',
     'CodexFocus',
-    'CodexClose',
+    'CodexTeardown',
     'CodexClearInput',
     'CodexSendSelection',
     'CodexSendFile',
