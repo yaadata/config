@@ -1,11 +1,11 @@
 local opts = {
   'yaadata/auto-session',
+  dependencies = { 'ibhagwan/fzf-lua' },
   lazy = false,
   init = function()
     vim.opt.sessionoptions:append 'globals'
   end,
   keys = {
-    -- Will use Telescope if installed or a vim.ui.select picker otherwise
     { '<leader>wss', '<cmd>AutoSession search<CR>', desc = 'Search' },
     { '<leader>wsr', '<cmd>AutoSession restore<CR>', desc = 'Restore' },
     { '<leader>wsw', '<cmd>AutoSession save<CR>', desc = 'Save' },
@@ -26,10 +26,8 @@ local opts = {
         vim.api.nvim_exec_autocmds('User', { pattern = 'SessionSavePre' })
       end,
     },
-    -- ⚠️ This will only work if Telescope.nvim is installed
-    -- The following are already the default values, no need to provide them if these are already the settings you want.
     session_lens = {
-      -- If load_on_setup is false, make sure you use `:SessionSearch` to open the picker as it will initialize everything first
+      picker = 'fzf',
       load_on_setup = true,
       previewer = false,
       mappings = {
@@ -38,14 +36,8 @@ local opts = {
         alternate_session = { 'i', '<C-S>' },
         copy_session = { 'i', '<C-Y>' },
       },
-      -- Can also set some Telescope picker options
-      -- For all options, see: https://github.com/nvim-telescope/telescope.nvim/blob/master/doc/telescope.txt#L112
-      theme_conf = {
-        border = true,
-        -- layout_config = {
-        --   width = 0.8, -- Can set width and height as percent of window
-        --   height = 0.5,
-        -- },
+      picker_opts = {
+        border = 'rounded',
       },
     },
   },

@@ -1,7 +1,5 @@
-local pickers = require 'telescope.pickers'
-local finders = require 'telescope.finders'
-local previewers = require 'telescope.previewers'
-local conf = require('telescope.config').values
+local fzf = require 'fzf-lua'
+local previewers = require 'fzf-lua.previewer.builtin'
 
 local shared = require 'utils.diff_picker.shared'
 
@@ -113,6 +111,12 @@ local function parse_sections(lines)
       return
     end
 
+    if section.page then
+      section.lnum = section.lnum or find_section_lnum(section.lines)
+      table.insert(results, section)
+      return
+    end
+
     section.page = '1/1'
     section.language = shared.preview_filetype_for_path(section.file)
     section.lnum = 1
@@ -136,7 +140,7 @@ local function parse_sections(lines)
 
     if file and page and language then
       if current ~= nil then
-        table.insert(sections, current)
+        finalize_unified_section(current, sections)
       end
 
       current = {
@@ -157,7 +161,7 @@ local function parse_sections(lines)
   end
 
   for _, section in ipairs(sections) do
-    if section.page then
+    if section.page and section.lnum == nil then
       section.lnum = find_section_lnum(section.lines)
     end
   end
@@ -213,32 +217,67 @@ function M.git_diff_parent_picker(opts)
     return
   end
 
-  pickers
-    .new(opts, {
-      prompt_title = 'Git Town Diff Parent',
-      finder = finders.new_table {
-        results = sections,
-        entry_maker = function(section)
-          return {
-            value = section,
-            ordinal = table.concat({ section.file, section.page, section.language }, ' '),
-            display = string.format('%s:%d (%s) [%s]', section.file, section.lnum, section.page, section.language),
-            filename = section.file,
-            lnum = section.lnum,
-            col = 1,
-          }
-        end,
-      },
-      sorter = conf.generic_sorter(opts),
-      previewer = previewers.new_buffer_previewer {
-        title = 'Diff Parent Preview',
-        define_preview = function(self, entry)
-          vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, entry.value.lines)
-          vim.bo[self.state.bufnr].filetype = shared.preview_filetype_for_section(entry.value)
-        end,
-      },
-    })
-    :find()
+  local entries = {}
+  for index, section in ipairs(sections) do
+    entries[index] = string.format('%d\t%s:%d (%s) [%s]', index, section.file, section.lnum, section.page, section.language)
+  end
+
+  local section_for_entry = function(entry)
+    local index = tonumber(shared.strip_ansi(entry):match '^(%d+)\t')
+    return sections[index]
+  end
+
+  local Previewer = previewers.buffer_or_file:extend()
+  function Previewer:populate_preview_buf(entry)
+    local section = section_for_entry(entry)
+    if not section then
+      return
+    end
+    local bufnr = vim.api.nvim_create_buf(false, true)
+    vim.bo[bufnr].bufhidden = 'wipe'
+    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, section.lines)
+    vim.bo[bufnr].filetype = shared.preview_filetype_for_section(section)
+    self:set_preview_buf(bufnr, true)
+    self.win:update_preview_title ' Diff Parent Preview '
+  end
+
+  local file_action = function(action)
+    return function(selected, action_opts)
+      local files = {}
+      for _, entry in ipairs(selected) do
+        local section = section_for_entry(entry)
+        if section then
+          files[#files + 1] = string.format('%s:%d:1:', section.file, section.lnum)
+        end
+      end
+      if #files > 0 then
+        action(files, action_opts)
+      end
+    end
+  end
+
+  local picker_opts = vim.tbl_deep_extend('force', {
+    prompt = 'Git Town Diff Parent> ',
+    cwd = vim.fn.getcwd(),
+    fzf_opts = {
+      ['--delimiter'] = '\t',
+      ['--with-nth'] = '2..',
+      ['--multi'] = true,
+    },
+    previewer = {
+      _ctor = function()
+        return Previewer
+      end,
+    },
+    actions = {
+      ['enter'] = file_action(fzf.actions.file_edit_or_qf),
+      ['ctrl-x'] = file_action(fzf.actions.file_split),
+      ['ctrl-v'] = file_action(fzf.actions.file_vsplit),
+      ['ctrl-t'] = file_action(fzf.actions.file_tabedit),
+      ['alt-q'] = file_action(fzf.actions.file_sel_to_qf),
+    },
+  }, opts)
+  fzf.fzf_exec(entries, picker_opts)
 end
 
 return M

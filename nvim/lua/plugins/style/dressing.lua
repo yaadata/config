@@ -1,6 +1,11 @@
 local opts = {
   'stevearc/dressing.nvim',
-  opts = {},
+  dependencies = { 'ibhagwan/fzf-lua' },
+  opts = {
+    select = {
+      backend = { 'fzf_lua', 'builtin' },
+    },
+  },
 }
 
 return opts

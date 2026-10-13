@@ -2,6 +2,7 @@ local opts = { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
   tag = 'v2.3.0',
   dependencies = {
+    'ibhagwan/fzf-lua',
     -- Automatically install LSPs and related tools to stdpath for Neovim
     { 'mason-org/mason.nvim', tag = 'v2.2.1', opts = {} },
     { 'mason-org/mason-lspconfig.nvim', tag = 'v2.1.0' },
@@ -38,7 +39,7 @@ local opts = { -- LSP Configuration & Plugins
     --    That is to say, every time a new file is opened that is associated with
     --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
     --    function will be executed to configure the current buffer
-    local builtin = require 'telescope.builtin'
+    local fzf = require 'fzf-lua'
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
@@ -53,7 +54,7 @@ local opts = { -- LSP Configuration & Plugins
 
         local function on_list(options)
           vim.fn.setqflist({}, ' ', options)
-          builtin.quickfix()
+          fzf.quickfix()
         end
         -- Jump to the definition of the word under your cursor.
         --  This is where a variable was first declared, or where a function is defined, etc.
