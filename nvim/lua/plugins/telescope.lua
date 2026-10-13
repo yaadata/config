@@ -65,23 +65,60 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
         toggle_ignore_flag = '--no-ignore-vcs',
         actions = {
           ['ctrl-f'] = {
+            prefix = 'deselect-all+select-all',
             fn = function(selected, opts)
               local files = {}
+              local path_bytes = 0
               for _, item in ipairs(selected) do
                 local file = fzf.path.entry_to_file(item, opts).path
                 if file and vim.fn.filereadable(file) == 1 then
                   files[#files + 1] = file
+                  path_bytes = path_bytes + #vim.fn.shellescape(file) + 1
                 end
               end
               if #files == 0 then
                 vim.notify('No files selected', vim.log.levels.INFO)
                 return
               end
-              fzf.grep_project {
+              local grep_opts = {
                 cwd = opts.cwd or opts._cwd,
-                search_paths = files,
-                prompt = 'Grep Selected Files> ',
+                search = '',
+                query = '',
+                prompt = 'Grep Filtered Files> ',
               }
+              -- Leave room for fzf-lua's command wrappers.
+              if path_bytes <= 32 * 1024 then
+                grep_opts.search_paths = files
+                return fzf.grep_project(grep_opts)
+              end
+              -- Read paths from a file so large searches fit the command limit.
+              local file_list = vim.fn.tempname()
+              local contents = table.concat(files, '\0') .. '\0'
+              local fd, err = vim.uv.fs_open(file_list, 'w', 384)
+              if not fd then
+                vim.notify(err, vim.log.levels.ERROR)
+                return
+              end
+              local written
+              written, err = vim.uv.fs_write(fd, contents, 0)
+              vim.uv.fs_close(fd)
+              if written ~= #contents then
+                vim.fn.delete(file_list)
+                vim.notify(err or 'Could not write grep file list', vim.log.levels.ERROR)
+                return
+              end
+              -- Keep the list for resume, then remove it when Neovim exits.
+              vim.api.nvim_create_autocmd('VimLeavePre', {
+                once = true,
+                callback = function()
+                  vim.fn.delete(file_list)
+                end,
+              })
+              -- Quote -0 so fzf-lua reads rg output as lines.
+              grep_opts.cmd = "xargs '-0' -n 128 rg --with-filename " .. fzf.config.globals.grep.rg_opts
+              grep_opts.filespec = '< ' .. vim.fn.shellescape(file_list)
+              grep_opts.rg_glob = false
+              fzf.grep_project(grep_opts)
             end,
             header = 'grep files',
           },
