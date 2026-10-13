@@ -59,7 +59,36 @@ local opts = { -- Fuzzy Finder (files, lsp, etc)
     fzf.setup {
       'telescope',
       files = {
-        cmd = "rg --files --hidden --no-ignore-vcs --glob '!**/.git/*' --glob '!**/node_modules/*'",
+        cmd = "rg --files --glob '!**/.git/*' --glob '!**/node_modules/*'",
+        hidden = true,
+        no_ignore = true,
+        toggle_ignore_flag = '--no-ignore-vcs',
+        actions = {
+          ['ctrl-f'] = {
+            fn = function(selected, opts)
+              local files = {}
+              for _, item in ipairs(selected) do
+                local file = fzf.path.entry_to_file(item, opts).path
+                if file and vim.fn.filereadable(file) == 1 then
+                  files[#files + 1] = file
+                end
+              end
+              if #files == 0 then
+                vim.notify('No files selected', vim.log.levels.INFO)
+                return
+              end
+              fzf.grep_project {
+                cwd = opts.cwd or opts._cwd,
+                search_paths = files,
+                prompt = 'Grep Selected Files> ',
+              }
+            end,
+            header = 'grep files',
+          },
+          ['alt-i'] = { fn = require('fzf-lua.actions').toggle_ignore, reuse = true },
+          ['alt-h'] = { fn = require('fzf-lua.actions').toggle_hidden, reuse = true },
+          ['alt-f'] = { fn = require('fzf-lua.actions').toggle_follow, reuse = true },
+        },
       },
       grep = {
         rg_opts = '--column --line-number --no-heading --color=always --smart-case --hidden --trim' .. " --glob '!**/.git/*' --glob '!**/node_modules/*' -e",
