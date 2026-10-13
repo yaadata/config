@@ -49,7 +49,7 @@ local opts = {
     {
       '<leader>wox',
       function()
-        require('codex').session.close()
+        require('codex').session.teardown()
       end,
       desc = 'Codex: Close session',
       mode = { 'n', 'v' },
@@ -57,19 +57,12 @@ local opts = {
     {
       '<leader>wov',
       function()
-        local codex = require 'codex'
-        local is_focused = codex.session.is_focused()
-        if not is_focused then
-          codex.session.focus()
-        end
-        codex.prompt_builder.clear()
-        codex.prompt_builder.add '/voice'
-        codex.prompt_builder.submit()
-        vim.defer_fn(function()
-          if not is_focused then
-            codex.session.unfocus()
-          end
-        end, 250)
+        require('codex.builtin').one_off(function()
+          local codex = require 'codex'
+          codex.prompt_builder.clear()
+          codex.prompt_builder.add '/voice'
+          codex.prompt_builder.submit()
+        end)
       end,
       desc = 'Codex: Toggle voice mode',
       mode = 'n',
@@ -77,17 +70,10 @@ local opts = {
     {
       '<leader>wom',
       function()
-        local codex = require 'codex'
-        local is_focused = codex.session.is_focused()
-        if not is_focused then
-          codex.session.focus()
-        end
-        codex.input.feedkey '<A-m>'
-        vim.defer_fn(function()
-          if not is_focused then
-            codex.session.unfocus()
-          end
-        end, 250)
+        require('codex.builtin').one_off(function()
+          local codex = require 'codex'
+          codex.input.feedkey '<A-m>'
+        end)
       end,
       desc = 'Codex: Mute Voice Mode',
       mode = 'n',
@@ -257,7 +243,7 @@ local opts = {
       },
       ['<M-BS>'] = { mode = { 't', 'n' }, action = km.clear_input },
       ['<C-G>'] = { mode = { 't', 'n' }, action = km.unfocus },
-      ['<C-x>'] = { mode = { 't', 'n' }, action = km.close },
+      ['<C-x>'] = { mode = { 't', 'n' }, action = km.teardown },
       ['<C-h>'] = { mode = { 't', 'n' }, action = km.nav_left },
       ['<C-j>'] = { mode = { 't', 'n' }, action = km.nav_down },
       ['<C-k>'] = { mode = { 't', 'n' }, action = km.nav_up },
