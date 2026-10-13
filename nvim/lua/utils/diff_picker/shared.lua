@@ -66,7 +66,7 @@ function M.is_difftastic_output(lines)
 
   local max_check = math.min(#lines, 40)
   for i = 1, max_check do
-    if lines[i]:match '^.+%s+%-%-%-%s+%d+/%d+%s+%-%-%-%s+.+$' then
+    if lines[i]:match '^%S.-%s+%-%-%-%s+.+$' then
       return true
     end
   end

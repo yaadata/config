@@ -3,7 +3,7 @@ local opts = {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'folke/trouble.nvim',
-    'nvim-telescope/telescope.nvim',
+    'ibhagwan/fzf-lua',
   },
   tag = 'v1.5.0',
   opts = {
@@ -14,7 +14,7 @@ local opts = {
   keys = {
     {
       '<leader>sta',
-      '<cmd>TodoTelescope cwd=./<CR>',
+      '<cmd>TodoFzfLua<CR>',
       '[S]earch [T]odo [A]ll',
     },
     {
