@@ -83,3 +83,4 @@ end, {
 
 vim.api.nvim_create_user_command('LazyGitToggle', require('utils.lazygit').toggle, {})
 vim.api.nvim_create_user_command('K9sToggle', require('utils.k9s').toggle, {})
+vim.api.nvim_create_user_command('TaskwarriorToggle', require('utils.taskwarrior').toggle, {})
