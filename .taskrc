@@ -1,0 +1,81 @@
+data.location=~/.task
+uda.taskwarrior-tui.keyconfig.quit=Q
+uda.taskwarrior-tui.keyconfig.refresh=r
+uda.taskwarrior-tui.keyconfig.go-to-bottom=G
+uda.taskwarrior-tui.keyconfig.go-to-top=g
+uda.taskwarrior-tui.keyconfig.down=j
+uda.taskwarrior-tui.keyconfig.up=k
+uda.taskwarrior-tui.keyconfig.page-down=J
+uda.taskwarrior-tui.keyconfig.page-up=K
+uda.taskwarrior-tui.keyconfig.delete=x
+uda.taskwarrior-tui.keyconfig.done=d
+uda.taskwarrior-tui.keyconfig.start-stop=s
+uda.taskwarrior-tui.keyconfig.quick-tag=t
+uda.taskwarrior-tui.keyconfig.undo=u
+uda.taskwarrior-tui.keyconfig.edit=e
+uda.taskwarrior-tui.keyconfig.duplicate=y
+uda.taskwarrior-tui.keyconfig.modify=m
+uda.taskwarrior-tui.keyconfig.shell=!
+uda.taskwarrior-tui.keyconfig.log=l
+uda.taskwarrior-tui.keyconfig.add=n
+uda.taskwarrior-tui.keyconfig.annotate=A
+uda.taskwarrior-tui.keyconfig.filter=/
+uda.taskwarrior-tui.keyconfig.zoom=z
+uda.taskwarrior-tui.keyconfig.context-menu=c
+uda.taskwarrior-tui.keyconfig.report-menu=R
+uda.taskwarrior-tui.keyconfig.next-tab=]
+uda.taskwarrior-tui.keyconfig.previous-tab=[
+
+# Catppuccin Mocha, using the nearest 256-color matches.
+# Yellow 223, green 151, teal and sky 116, sapphire 117, blue 111.
+# Lavender 147, peach 216, red 211, base 235, surface 0 237.
+color.active=bold color151 on color237
+color.overdue=color211
+color.due.today=bold color223
+color.due=color223
+color.blocked=color103
+color.blocking=color223
+color.tagged=color116
+color.tag.next=color151
+color.recurring=color147
+color.scheduled=color116
+color.completed=color151
+color.deleted=color103
+color.alternate=on color237
+color.uda.priority.H=bold color223
+color.uda.priority.M=color223
+color.uda.priority.L=color111
+
+# Taskwarrior TUI.
+# Navbar background approximates rgb(127, 132, 156).
+uda.taskwarrior-tui.style.navbar=color235 on color103
+uda.taskwarrior-tui.style.command=color147 on color237
+uda.taskwarrior-tui.style.command.error=bold color211
+uda.taskwarrior-tui.style.title=bold color223
+uda.taskwarrior-tui.style.title.border=color117
+uda.taskwarrior-tui.style.context.active=bold color235 on color216
+uda.taskwarrior-tui.style.report-menu.active=bold color235 on color216
+uda.taskwarrior-tui.style.report.selection=bold color235 on color223
+uda.taskwarrior-tui.task-report.info-show=true
+uda.taskwarrior-tui.task-report.info-location=right
+uda.taskwarrior-tui.style.report.scrollbar=color116
+uda.taskwarrior-tui.style.report.scrollbar.area=color237
+uda.taskwarrior-tui.style.report.completion-pane=color216 on color237
+uda.taskwarrior-tui.style.report.completion-pane-highlight=color235 on color216
+uda.taskwarrior-tui.style.calendar.title=bold color223
+uda.taskwarrior-tui.calendar.months-per-row=1
+uda.taskwarrior-tui.style.calendar.today=bold color235 on color111
+uda.taskwarrior-tui.style.help.gauge=color111
+
+# Reports available from the TUI report menu (R).
+report.pending.description=Pending tasks
+report.pending.columns=priority,project,tags,description.count
+report.pending.labels=Rank,Project,Tags,Description
+report.pending.sort=urgency-
+report.pending.filter=status:pending
+
+report.logs.description=Completed task logs, newest first
+report.logs.columns=end,project,tags,description.count
+report.logs.labels=Completed,Project,Tags,Description
+report.logs.sort=end-
+report.logs.filter=status:completed
