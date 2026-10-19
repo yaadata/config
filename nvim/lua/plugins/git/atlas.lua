@@ -2,7 +2,7 @@
 
 local opts = {
   'emrearmagan/atlas.nvim',
-  tag = '0.7.12',
+  tag = '0.8.5',
   dependencies = {
     'MeanderingProgrammer/render-markdown.nvim', -- optional but recommended
     'esmuellert/codediff.nvim', -- optional (PullRequest diff)
@@ -59,6 +59,9 @@ local opts = {
       },
       diff = {
         open_cmd = 'CodeDiff',
+        lsp = {
+          enabled = true,
+        },
       },
     },
     issues = {
@@ -124,6 +127,8 @@ local opts = {
         copy_url = 'Y',
         show_details = 'K',
         search = '?',
+        edit_search = { '<leader>ges', '<leader>ie' },
+        toggle_description_mode = '<leader>itd',
       },
       picker = {
         next_item = { '<Down>', '<C-n>', '<C-j>' },
@@ -133,43 +138,38 @@ local opts = {
         close = { 'q', '<Esc>' },
       },
       pulls = {
+        open_diff = '<leader>gdo',
+        checkout = '<leader>gdc',
+        open_repository = '<leader>grp',
+        edit_pr = { '<leader>get', '<leader>ged' },
         review = {
-          open_diff = '<leader>gdo',
-          checkout = '<leader>gdc',
-          external_help = '<leader>g?', -- Atlas help in external diff viewers
-          toggle_repo_panel = '<leader>grp',
-          toggle_repo_issue_state = '<leader>gri',
-          edit_title = '<leader>get',
-          edit_description = '<leader>ged',
-          edit_search = '<leader>ges',
-          focus_item = '<leader>gf',
+          toggle_file_reviewed = '<leader>grv',
           approve = '<leader>gra',
           request_changes = '<leader>grd', -- block on request changes
           submit_review = '<leader>grc',
           add_task = '<leader>grt',
-          comment_templates = '<leader>grc',
-          diff = {
-            lsp = {
-              enabled = true,
-            },
-            add_comment = '<leader>gce',
-            submit_comment = '<leader>gca',
-            add_suggestion = '<leader>gse', -- change
-            submit_suggestion = '<leader>gsa',
-            add_note = '<leader>gna',
-            toggle_resolved = '<leader>gcT',
-
-            toggle_layout = '<leader>glt',
-            toggle_compact = '<leader>glc',
-            next_hunk = ']c',
-            previous_hunk = '[c',
+          comment_templates = '<leader>grT',
+          add_comment = '<leader>gce',
+          submit_comment = '<leader>gca',
+          add_suggestion = '<leader>gse',
+          submit_suggestion = '<leader>gsa',
+          add_note = '<leader>gna',
+          toggle_resolved = '<leader>gcT',
+          next_comment = ']C',
+          prev_comment = '[C',
+          next_note = ']n',
+          prev_note = '[n',
+          view = {
+            external_help = '<leader>g?',
             toggle_review_panel = '<leader>gpr',
             toggle_detail_panel = '<leader>gpd',
             toggle_comments = '<leader>gct',
-            next_comment = ']C',
-            previous_comment = '[C',
-            next_note = ']n',
-            previous_note = '[n',
+          },
+          atlas = {
+            toggle_layout = '<leader>glt',
+            toggle_compact = '<leader>glc',
+            next_hunk = ']c',
+            prev_hunk = '[c',
           },
         },
         filters = {
@@ -184,8 +184,6 @@ local opts = {
         change_reporter = '<leader>icr',
         edit_issue = '<leader>ice',
         create_issue = '<leader>ia',
-        edit_search = '<leader>ie',
-        toggle_description_mode = '<leader>itd',
       },
     },
   },
