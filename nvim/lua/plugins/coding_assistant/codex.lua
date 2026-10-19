@@ -140,7 +140,9 @@ local opts = {
     {
       '<leader>wor',
       function()
-        require('codex.builtin').resume()
+        require('codex.builtin').resume {
+          harness = 'pi',
+        }
       end,
       desc = 'Codex: Resume session',
       mode = { 'n' },
@@ -187,7 +189,7 @@ local opts = {
   },
   opts = {
     launch = {
-      cmd = 'codex',
+      cmd = 'pi',
       args = {},
       env = {},
       auto_start = false,
