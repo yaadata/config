@@ -1,6 +1,7 @@
 git:
-  pagers:
-    - externalDiffCommand: difft --color=always
+  diffRenderers:
+    - command: difft --color=always
+      type: extDiff
 gui:
   nerdFontsVersion: "3"
 customCommands:
@@ -15,6 +16,7 @@ customCommands:
     description: "Git-Town Sync (syncing branch)"
     command: >-
       bash -c '
+
         current_branch="$1"
         target_branch="$2"
 
@@ -95,4 +97,24 @@ customCommands:
     description: "Git-Town GO aka:continue (continue after resolving merge conflicts)"
     command: "git-town continue"
     loadingText: "Continuing"
+    output: log
+  - key: 'd'
+    context: 'localBranches'
+    description: 'Delete branch and associated worktree'
+    prompts:
+      - type: 'menu'
+        title: "Delete '{{.SelectedLocalBranch.Name}}'"
+        key: 'DeleteAction'
+        options:
+          - name: 'Both local and remote'
+            value: 'both'
+          - name: 'Local branch'
+            value: 'local'
+          - name: 'Remote branch only'
+            value: 'remote'
+    command: >-
+      bash -c '
+        exec python3 "${XDG_CONFIG_HOME:-$HOME/.config}/lazygit/delete-branch-worktree.py" "$1" "$2"
+      ' _ {{.SelectedLocalBranch.Name | quote}} {{.Form.DeleteAction | quote}}
+    loadingText: 'Deleting branch'
     output: log
