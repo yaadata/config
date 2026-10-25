@@ -1,0 +1,36 @@
+{
+  "compress": {
+    "maxContextLimit": "75%",
+    "emergencyThresholdPercent": "95%",
+    "nudgeGrowthTokens": 30000
+  },
+  "providers": {
+    "https://api.meta.ai/v1": {
+      "models": {
+        "muse-wonder-1.0": {
+          "context": 450000,
+          "output": 131072,
+          "compress": {
+            "modelContextLimit": 450000,
+            "maxContextLimit": "93.75%",
+            "emergencyThresholdPercent": "99%",
+            "nudgeGrowthTokens": 30000,
+            "outputHeadroomMaxPct": "20%"
+          }
+        }
+      }
+    },
+    "https://openrouter.ai/api/v1": {
+      "models": {
+        "deepseek/deepseek-v4.1-flash-1017": {
+          "context": 1048576,
+          "compress": {
+            "maxContextLimit": "40%",
+            "nudgeGrowthTokens": 25000,
+            "modelContextLimit": 1048576
+          }
+        }
+      }
+    }
+  }
+}
