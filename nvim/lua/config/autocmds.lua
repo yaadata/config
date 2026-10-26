@@ -70,15 +70,17 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
-vim.api.nvim_create_user_command('CodexCopy', function()
-  local codex = require 'codex'
-  codex.execute_slash_command { command = 'copy' }
-  vim.defer_fn(function()
-    codex.unfocus()
-  end, 600)
-end, {
-  desc = 'Run Codex /copy in the active session',
-  nargs = 0,
+vim.api.nvim_create_autocmd('CmdlineChanged', {
+  callback = function()
+    local cmdline = vim.fn.getcmdline()
+    if vim.fn.getcmdtype() ~= ':' then
+      return
+    end
+    if not cmdline:match '^Obsidian[A-Za-z0-9]*$' then
+      return
+    end
+    vim.fn.wildtrigger()
+  end,
 })
 
 vim.api.nvim_create_user_command('LazyGitToggle', require('utils.lazygit').toggle, {})
