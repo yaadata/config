@@ -4,7 +4,7 @@ local opts = { -- LSP Configuration & Plugins
   dependencies = {
     'ibhagwan/fzf-lua',
     -- Automatically install LSPs and related tools to stdpath for Neovim
-    { 'mason-org/mason.nvim', tag = 'v2.2.1', opts = {} },
+    { 'mason-org/mason.nvim', tag = 'v2.3.1', opts = {} },
     { 'mason-org/mason-lspconfig.nvim', tag = 'v2.1.0' },
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'jmacadie/telescope-hierarchy.nvim', commit = '2ba4840d8ba9288ca85dc34b01cf946aee0b8fca' },
