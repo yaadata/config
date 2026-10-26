@@ -17,7 +17,3 @@ if type -q rbenv
 end
 fish_add_path "~/.cargo/bin"
 
-# yarn
-if type -q yarn
-    fish_add_path "$(yarn global bin)"
-end
