@@ -64,31 +64,20 @@ try:
     delete_remote = action is not Action.LOCAL and all(
         (remote, merge_ref, tracking_ref)
     )
-    expected_remote = None
+    remote_exists = False
     if delete_remote:
         if remote == "." or not merge_ref.startswith("refs/heads/"):
             fail("Upstream is not a branch on a remote")
         remote_urls = git("remote", "get-url", "--push", "--all", remote)
         if len(remote_urls.splitlines()) != 1:
             fail("Multiple push destinations are not supported")
-        probe = subprocess.run(
-            ["git", "rev-parse", "--verify", "--quiet", tracking_ref],
-            capture_output=True,
-            check=False,
+        # Query the push destination; local tracking refs may be stale or absent.
+        destination = os.fsdecode(remote_urls[:-1])
+        advertised = git("ls-remote", "--refs", "--", destination, merge_ref)
+        remote_exists = any(
+            line.split(b"\t", 1)[-1] == os.fsencode(merge_ref)
+            for line in advertised.splitlines()
         )
-        if probe.returncode == 0:
-            expected_remote = os.fsdecode(probe.stdout).strip()
-        else:
-            # Check the push destination, which may differ from the fetch URL.
-            destination = os.fsdecode(remote_urls[:-1])
-            advertised = git("ls-remote", "--refs", "--", destination, merge_ref)
-            if any(
-                line.split(b"\t", 1)[-1] == os.fsencode(merge_ref)
-                for line in advertised.splitlines()
-            ):
-                fail(
-                    "Remote branch exists but its tracking ref is missing. Fetch the remote first, then retry."
-                )
 
     path = None
     if delete_local:
@@ -120,10 +109,9 @@ try:
         if path:
             git("worktree", "remove", "--force", "--", path)
         git("branch", "-D", "--", branch)
-    if delete_remote and expected_remote is not None:
+    if delete_remote and remote_exists:
         git(
             "push",
-            "--force-with-lease=" + merge_ref + ":" + expected_remote,
             "--",
             remote,
             ":" + merge_ref,
