@@ -2,9 +2,26 @@
 
 local opts = {
   'emrearmagan/atlas.nvim',
-  tag = '0.8.5',
+  tag = '0.8.6',
   dependencies = {
-    'MeanderingProgrammer/render-markdown.nvim', -- optional but recommended
+    {
+      'MeanderingProgrammer/render-markdown.nvim', -- optional but recommended
+      -- render-markdown forces the window to conceallevel=3 while rendering,
+      -- which hides all of obsidian.nvim's concealed syntax (checkboxes,
+      -- callouts, bullets). Keep it out of the Omni vault and let
+      -- obsidian.nvim own rendering there.
+      -- See https://github.com/epwalsh/obsidian.nvim/issues/286
+      opts = {
+        ignore = function(buf)
+          local name = vim.api.nvim_buf_get_name(buf)
+          if name == '' then
+            return false
+          end
+          local vault = vim.fn.expand '~/repositories/yaadata/obsidian/omni'
+          return name:find(vault, 1, true) == 1
+        end,
+      },
+    },
     'esmuellert/codediff.nvim', -- optional (PullRequest diff)
   },
   keys = {
