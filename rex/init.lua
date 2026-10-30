@@ -1,10 +1,13 @@
+local close_other_tabs = require("close_other_tabs")
 local scratch_toggle = require("scratch")
+require("worktree")
+
+-- ACTIONS
 rex.action({
 	name = "scratch_toggle",
 	title = "Toggle Tab Scratch Terminal",
 	run = scratch_toggle,
 })
-rex.bind("alt+shift+f", "scratch_toggle")
 
 -- Run scratch events separately: rex do ~/.config/rex/scratch-events.lua --all --fail-fast
 
@@ -24,9 +27,7 @@ rex.action({
 		session_collapse_requested[key] = not session_collapse_requested[key] or nil
 	end,
 })
-rex.bind("cmd+shift+h", "session_toggle_collapse")
 
-local close_other_tabs = require("close_other_tabs")
 rex.action({
 	name = "close_other_tabs",
 	title = "Close Other Tabs",
@@ -35,4 +36,6 @@ rex.action({
 	run = close_other_tabs,
 })
 
-require("worktree")
+-- Keybindings
+rex.bind("alt+shift+f", "scratch_toggle")
+rex.bind("cmd+shift+h", "session_toggle_collapse")
