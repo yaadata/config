@@ -15,29 +15,54 @@ end
 
 local function pr_branch(repo, number)
   local base, owner, name = repo:gsub("%.git$", ""):match("^(https?://.-)/([^/]+)/([^/]+)$")
-  if not base then return nil end
+  if not base then return nil, "Unsupported PR repository URL" end
+
+  local failures = {}
+  local function failed(command, result, err)
+    local message = err
+    if result then
+      message = result.stderr ~= "" and result.stderr or "exit status " .. tostring(result.code)
+    end
+    message = tostring(message or "command failed"):match("[^\r\n]+") or "command failed"
+    failures[#failures + 1] = command .. ": " .. message:sub(1, 300)
+  end
 
   local url
   if base:lower():match("^https?://github%.com$") then
-    local result = rex.exec({ "gh", "pr", "view", repo .. "/pull/" .. number,
+    local result, err = rex.exec({ "gh", "pr", "view", repo .. "/pull/" .. number,
       "--json", "headRefName", "--jq", ".headRefName" },
-      { cwd = cwd, env = { GH_PROMPT_DISABLED = "1" } })
+      { cwd = cwd, env = {
+        GH_PROMPT_DISABLED = "1",
+        -- Rex's non-login terminals may not include Homebrew in PATH.
+        PATH = (os.getenv("PATH") or "/usr/bin:/bin") .. ":/opt/homebrew/bin:/usr/local/bin",
+      } })
     if result and result.ok then
       local branch = result.stdout:gsub("%s+$", "")
       if branch ~= "" then return branch end
+      failed("gh", nil, "empty branch name")
+    else
+      failed("gh", result, err)
     end
     url = "https://api.github.com/repos/" .. owner .. "/" .. name .. "/pulls/" .. number
   else
     url = base .. "/api/v1/repos/" .. owner .. "/" .. name .. "/pulls/" .. number
   end
 
-  local result = rex.exec({ "curl", "-fsSL", url }, { cwd = cwd })
-  if not result or not result.ok then return nil end
-  local ok, data = pcall(rex.json.decode, result.stdout)
-  if ok and type(data) == "table" and type(data.head) == "table"
-      and type(data.head.ref) == "string" and data.head.ref ~= "" then
-    return data.head.ref
+  local result, err = rex.exec({ "curl", "-fsSL", url }, { cwd = cwd })
+  if not result or not result.ok then
+    failed("curl", result, err)
+  else
+    local ok, data, decode_err = pcall(rex.json.decode, result.stdout)
+    if not ok or data == nil then
+      failed("PR response JSON", nil, (ok and decode_err or data) or "invalid JSON")
+    elseif type(data) == "table" and type(data.head) == "table"
+        and type(data.head.ref) == "string" and data.head.ref ~= "" then
+      return data.head.ref
+    else
+      failed("PR response", nil, "missing or empty head.ref")
+    end
   end
+  return nil, table.concat(failures, "; ")
 end
 
 local function prompt(label)
@@ -144,8 +169,9 @@ local function open_worktree(input)
     local cleaned, cleanup_err = pcall(git, { "update-ref", "-d", ref, commit })
     if not cleaned then print("Could not remove temporary ref " .. ref .. ": " .. tostring(cleanup_err)) end
     if not ok then error(failure, 0) end
-    local branch = pr_branch(repo, number)
+    local branch, lookup_err = pr_branch(repo, number)
     if not branch then
+      if lookup_err then print("PR branch lookup failed: " .. lookup_err) end
       branch = prompt("Unable to determine the PR branch; enter it for the window name (Enter for unknown): ")
       if not branch or branch == "" then branch = "unknown" end
     end
