@@ -219,6 +219,6 @@ rex.action({
 	title = "Toggle Tab Scratch Terminal",
 	run = toggle,
 })
-rex.bind("cmd+shift+c", "scratch_toggle")
+rex.bind("alt+shift+f", "scratch_toggle")
 
 require("worktree")
