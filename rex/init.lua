@@ -25,4 +25,13 @@ rex.action({
 })
 rex.bind("cmd+shift+h", "session_toggle_collapse")
 
+local close_other_tabs = require("close_other_tabs")
+rex.action({
+	name = "close_other_tabs",
+	title = "Close Other Tabs",
+	description = "Close the other tabs in this session and stop their running programs.",
+	category = "Tab",
+	run = close_other_tabs,
+})
+
 require("worktree")
