@@ -96,9 +96,20 @@ local function select_remote(matches)
 end
 
 local function open_tab(path, name)
-  local result, err = rex.session.new_window{
+  local prompt_block = os.getenv("REX_BLOCK")
+  local prompt, err = rex.session.describe_block{ block_id = prompt_block }
+  if not prompt then error(err, 0) end
+  local renamed, rename_err = rex.session.set_window_label{
     session_id = session_id,
-    window_label = #name <= 128 and name or nil,
+    window_id = prompt.block.window_id,
+    label = #name <= 128 and name or "",
+  }
+  if not renamed then error(rename_err, 0) end
+  local result, split_err = rex.session.new_split{
+    session_id = session_id,
+    anchor_id = prompt_block,
+    direction = "horizontal",
+    side = "after",
     focus = true,
     layout = rex.layout.block{
       flavor = "com.superlogical.terminal.shell",
@@ -106,7 +117,7 @@ local function open_tab(path, name)
     },
   }
   if not result then
-    error("Worktree is at " .. path .. ", but Rex could not open its tab: " .. tostring(err), 0)
+    error("Worktree is at " .. path .. ", but Rex could not open its shell: " .. tostring(split_err), 0)
   end
 end
 

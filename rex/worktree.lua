@@ -22,20 +22,23 @@ rex.action{
       home = process.home or os.getenv("HOME"),
       session_id = ctx.session_id,
     }
-    local layer, err = rex.session.new_layer{
+    local window, err = rex.session.new_window{
       session_id = ctx.session_id,
-      window_id = block.block.window_id,
-      bounds = { 0.1, 0.1, 0.8, 0.8 },
+      window_label = "New Worktree",
       focus = true,
       layout = rex.layout.block{
         flavor = "com.superlogical.terminal.shell",
         options = {
           shell = "none",
+          login = false,
           cwd = foreground.cwd,
           command = { "/usr/bin/env", "rex", "do", worker, "--args", args },
         },
       },
     }
-    if not layer then error(err, 0) end
+    if not window then error(err, 0) end
+    if ctx.client_id then
+      rex.client.queue("session.select", { session_id = ctx.session_id, window_id = window.window_id })
+    end
   end,
 }
