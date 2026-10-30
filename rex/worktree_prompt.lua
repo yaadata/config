@@ -13,6 +13,33 @@ local function git(argv, missing_ok)
   return run(argv, missing_ok)
 end
 
+local function pr_branch(repo, number)
+  local base, owner, name = repo:gsub("%.git$", ""):match("^(https?://.-)/([^/]+)/([^/]+)$")
+  if not base then return nil end
+
+  local url
+  if base:lower():match("^https?://github%.com$") then
+    local result = rex.exec({ "gh", "pr", "view", repo .. "/pull/" .. number,
+      "--json", "headRefName", "--jq", ".headRefName" },
+      { cwd = cwd, env = { GH_PROMPT_DISABLED = "1" } })
+    if result and result.ok then
+      local branch = result.stdout:gsub("%s+$", "")
+      if branch ~= "" then return branch end
+    end
+    url = "https://api.github.com/repos/" .. owner .. "/" .. name .. "/pulls/" .. number
+  else
+    url = base .. "/api/v1/repos/" .. owner .. "/" .. name .. "/pulls/" .. number
+  end
+
+  local result = rex.exec({ "curl", "-fsSL", url }, { cwd = cwd })
+  if not result or not result.ok then return nil end
+  local ok, data = pcall(rex.json.decode, result.stdout)
+  if ok and type(data) == "table" and type(data.head) == "table"
+      and type(data.head.ref) == "string" and data.head.ref ~= "" then
+    return data.head.ref
+  end
+end
+
 local function prompt(label)
   io.write(label)
   io.flush()
@@ -68,9 +95,10 @@ local function select_remote(matches)
   return item
 end
 
-local function open_tab(path)
+local function open_tab(path, name)
   local result, err = rex.session.new_window{
     session_id = session_id,
+    window_label = #name <= 128 and name or nil,
     focus = true,
     layout = rex.layout.block{
       flavor = "com.superlogical.terminal.shell",
@@ -105,13 +133,18 @@ local function open_worktree(input)
     local cleaned, cleanup_err = pcall(git, { "update-ref", "-d", ref, commit })
     if not cleaned then print("Could not remove temporary ref " .. ref .. ": " .. tostring(cleanup_err)) end
     if not ok then error(failure, 0) end
-    open_tab(path)
+    local branch = pr_branch(repo, number)
+    if not branch then
+      branch = prompt("Unable to determine the PR branch; enter it for the window name (Enter for unknown): ")
+      if not branch or branch == "" then branch = "unknown" end
+    end
+    open_tab(path, "PR#" .. number .. " (" .. branch .. ")")
     return
   end
 
   local branch = git({ "check-ref-format", "--branch", input }):gsub("\n$", "")
   for _, entry in ipairs(entries) do
-    if entry.branch == branch then open_tab(entry.path); return end
+    if entry.branch == branch then open_tab(entry.path, "Tree (" .. branch .. ")"); return end
   end
 
   local path = target_path(root, branch)
@@ -146,7 +179,7 @@ local function open_worktree(input)
   else
     git({ "worktree", "add", "-b", branch, path, "HEAD" })
   end
-  open_tab(path)
+  open_tab(path, "Tree (" .. branch .. ")")
 end
 
 while true do
