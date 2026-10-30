@@ -23,14 +23,6 @@ local opts = {
       mode = { 'n', 'v' },
     },
     {
-      '<C-c>',
-      function()
-        require('codex').session.toggle()
-      end,
-      desc = 'Codex: Toggle terminal',
-      mode = { 'n', 'v' },
-    },
-    {
       '<leader>woo',
       function()
         require('codex').session.open(true)
