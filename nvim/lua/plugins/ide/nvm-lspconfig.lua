@@ -112,9 +112,21 @@ local opts = { -- LSP Configuration & Plugins
         --  Most Language Servers support renaming across files, etc.
         map('<leader>lr', vim.lsp.buf.rename, '[R]e[n]ame')
 
-        -- Execute a code action, usually your cursor needs to be on top of an error
-        -- or a suggestion from your LSP for this to activate.
-        map('<leader>la', vim.lsp.buf.code_action, '[C]ode [A]ction')
+        -- Request fixes and optional refactorings at the cursor or over a selection.
+        -- Diagnostics are not required; available actions depend on the server and range.
+        -- Use the dedicated picker rather than Dressing's queued vim.ui.select wrapper.
+        vim.keymap.set({ 'n', 'x' }, '<leader>la', function()
+          fzf.lsp_code_actions { silent = true, jump1 = false }
+        end, {
+          buffer = event.buf,
+          desc = 'LSP: [C]ode [A]ction',
+        })
+
+        map('<leader>lc', function()
+          -- Code lenses use vim.ui.select; bypass Dressing's queued selector.
+          fzf.register_ui_select()
+          vim.lsp.codelens.run()
+        end, 'Run [C]ode Lens')
 
         -- Inlay hints
         map('<leader>li', function()
