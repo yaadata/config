@@ -12,7 +12,8 @@ rex.bind("alt+shift+f", "scratch_toggle")
 local session_collapse_requested = {}
 rex.action({
 	name = "session_toggle_collapse",
-	title = "Toggle Session Collapse",
+	title = "Session Collapse (Toggle)",
+	category = "Session",
 	run = function(ctx)
 		if not ctx.client_id or not ctx.session_id then
 			error("Cannot toggle a session without a client and session", 0)
