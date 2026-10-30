@@ -1,4 +1,5 @@
 abbr -a gt git-town
+abbr refish 'source ~/.config/fish/config.fish'
 
 function naptime
     pmset sleepnow
@@ -75,6 +76,7 @@ abbr gtb "git-town branch"
 abbr gth "git-town hack"
 abbr gtp "git-town propose"
 abbr gtsb "git-town switch"
+abbr gtsp "git-town set-parent"
 abbr gts "git-town sync"
 abbr gtss "git-town sync -s"
 abbr gtu "git-town up"
