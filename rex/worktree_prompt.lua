@@ -1,0 +1,158 @@
+local cwd, home, session_id = rex.args.cwd, rex.args.home, rex.args.session_id
+
+local function run(argv, missing_ok)
+  local result, err = rex.exec(argv, { cwd = cwd, env = { GIT_TERMINAL_PROMPT = "0" } })
+  if not result then error(err, 0) end
+  if result.ok then return result.stdout end
+  if missing_ok and result.code == 1 then return nil end
+  error(result.stderr ~= "" and result.stderr or argv[1] .. " failed", 0)
+end
+
+local function git(argv, missing_ok)
+  table.insert(argv, 1, "git")
+  return run(argv, missing_ok)
+end
+
+local function prompt(label)
+  io.write(label)
+  io.flush()
+  return io.read("*l")
+end
+
+local function worktrees()
+  local entries = {}
+  local list = git({ "worktree", "list", "--porcelain", "-z" })
+  for record in list:gmatch("(.-)%z%z") do
+    entries[#entries + 1] = {
+      path = record:match("^worktree ([^%z]+)"),
+      branch = record:match("%zbranch refs/heads/([^%z]+)"),
+    }
+  end
+  return entries
+end
+
+local function target_path(root, name)
+  home = home:gsub("/+$", "")
+  if home == "" then home = "/" end
+  local prefix = home == "/" and "/" or home .. "/"
+  local relative = ""
+  if root ~= home then
+    if root:sub(1, #prefix) ~= prefix then
+      error("The repository must be under " .. home, 0)
+    end
+    relative = root:sub(#prefix + 1)
+  end
+  local base = (home == "/" and "" or home) .. "/.rex-trees"
+  if relative ~= "" then base = base .. "/" .. relative end
+  return base .. "/" .. name
+end
+
+local function remote_branches(branch)
+  local matches = {}
+  for remote in git({ "remote" }):gmatch("[^\r\n]+") do
+    local ref = "refs/remotes/" .. remote .. "/" .. branch
+    if git({ "show-ref", "--verify", "--quiet", ref }, true) then
+      matches[#matches + 1] = { remote = remote, ref = ref }
+    end
+  end
+  return matches
+end
+
+local function select_remote(matches)
+  if #matches == 1 then return matches[1] end
+  for i, item in ipairs(matches) do print(i .. ") " .. item.remote) end
+  local answer = prompt("Choose a remote (Enter to cancel): ")
+  if not answer or answer == "" then return nil end
+  local item = matches[tonumber(answer)]
+  if not item then error("Invalid remote selection", 0) end
+  return item
+end
+
+local function open_tab(path)
+  local result, err = rex.session.new_window{
+    session_id = session_id,
+    focus = true,
+    layout = rex.layout.block{
+      flavor = "com.superlogical.terminal.shell",
+      options = { cwd = path },
+    },
+  }
+  if not result then
+    error("Worktree is at " .. path .. ", but Rex could not open its tab: " .. tostring(err), 0)
+  end
+end
+
+local function open_worktree(input)
+  local entries = worktrees()
+  local root = entries[1].path
+  local repo, number = input:match("^(https?://.-)/pull/(%d+)")
+  if not repo then repo, number = input:match("^(https?://.-)/pulls/(%d+)") end
+
+  if input:match("^https?://") then
+    if not repo then error("Enter a GitHub or Forgejo pull-request URL", 0) end
+    local path = target_path(root, "pr-" .. number)
+    print("Fetching pull request...")
+    io.flush()
+    local ref = "refs/rex-worktree/reviews/" .. run({ "uuidgen" }):gsub("%s+$", "")
+    git({ "fetch", "--no-write-fetch-head", "--no-tags", "--no-recurse-submodules",
+      "--refmap=", repo:gsub("%.git$", "") .. ".git",
+      "refs/pull/" .. number .. "/head:" .. ref })
+    local commit = git({ "rev-parse", "--verify", ref .. "^{commit}" }):gsub("\n$", "")
+    local ok, failure = pcall(function()
+      run({ "mkdir", "-p", path:match("^(.*)/[^/]+$") })
+      git({ "worktree", "add", "--detach", path, commit })
+    end)
+    local cleaned, cleanup_err = pcall(git, { "update-ref", "-d", ref, commit })
+    if not cleaned then print("Could not remove temporary ref " .. ref .. ": " .. tostring(cleanup_err)) end
+    if not ok then error(failure, 0) end
+    open_tab(path)
+    return
+  end
+
+  local branch = git({ "check-ref-format", "--branch", input }):gsub("\n$", "")
+  for _, entry in ipairs(entries) do
+    if entry.branch == branch then open_tab(entry.path); return end
+  end
+
+  local path = target_path(root, branch)
+  local local_branch = git({ "show-ref", "--verify", "--quiet", "refs/heads/" .. branch }, true)
+  local tracking
+  if not local_branch then
+    local matches = remote_branches(branch)
+    if #matches == 0 then
+      local answer = prompt("No matching branch. Enter: create from HEAD; f: fetch remotes; q: cancel: ")
+      if not answer or answer:lower() == "q" then return end
+      if answer:lower() == "f" then
+        print("Fetching remotes...")
+        io.flush()
+        git({ "fetch", "--all" })
+        matches = remote_branches(branch)
+        if #matches == 0 then error("No remote has branch " .. branch, 0) end
+      elseif answer ~= "" then
+        error("Choose Enter, f, or q", 0)
+      end
+    end
+    if #matches > 0 then
+      tracking = select_remote(matches)
+      if not tracking then return end
+    end
+  end
+
+  run({ "mkdir", "-p", path:match("^(.*)/[^/]+$") })
+  if local_branch then
+    git({ "worktree", "add", path, branch })
+  elseif tracking then
+    git({ "worktree", "add", "--track", "-b", branch, path, tracking.ref })
+  else
+    git({ "worktree", "add", "-b", branch, path, "HEAD" })
+  end
+  open_tab(path)
+end
+
+while true do
+  local input = prompt("Branch or pull-request URL (Enter to cancel): ")
+  if not input or input == "" then return end
+  local ok, err = pcall(open_worktree, input)
+  if ok then return end
+  print("Error: " .. tostring(err))
+end
