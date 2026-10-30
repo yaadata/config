@@ -84,3 +84,55 @@ end, {
 vim.api.nvim_create_user_command('LazyGitToggle', require('utils.lazygit').toggle, {})
 vim.api.nvim_create_user_command('K9sToggle', require('utils.k9s').toggle, {})
 vim.api.nvim_create_user_command('TaskwarriorToggle', require('utils.taskwarrior').toggle, {})
+
+-- Terminal Status Group
+--
+-- Used by emulator's such as Rex / Herdr
+-- Forward Pi's terminal status to Rex from Neovim's terminal buffer.
+if not vim.env.REX_BLOCK or vim.fn.has 'nvim-0.12' == 0 then
+  return
+end
+
+local osc = '\27]7501;'
+local st = '\27\\'
+local active = {}
+local terminalProgramStatusGroup = vim.api.nvim_create_augroup('TerminalProgramStatus', { clear = true })
+
+local function tty_ui()
+  local uis = vim.api.nvim_list_uis()
+  return #uis == 1 and uis[1].stdout_tty
+end
+
+local function id(buf)
+  return ('nvim%d-b%d'):format(vim.fn.getpid(), buf)
+end
+
+vim.api.nvim_create_autocmd('TermRequest', {
+  group = terminalProgramStatusGroup,
+  desc = 'Forward terminal program status to Rex',
+  callback = function(ev)
+    local seq = ev.data.sequence
+    if not tty_ui() or seq:sub(1, #osc) ~= osc then
+      return
+    end
+
+    if seq == osc .. '?' then
+      -- Pi checks whether its immediate terminal supports program status.
+      pcall(vim.api.nvim_chan_send, vim.bo[ev.buf].channel, osc .. '?' .. st)
+    else
+      active[ev.buf] = true
+      vim.api.nvim_ui_send(seq .. ':id=' .. id(ev.buf) .. st)
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ 'TermClose', 'BufWipeout' }, {
+  group = terminalProgramStatusGroup,
+  desc = 'Clear a terminal buffer’s Rex program status',
+  callback = function(ev)
+    if active[ev.buf] and tty_ui() then
+      vim.api.nvim_ui_send(osc .. 'state=clear:id=' .. id(ev.buf) .. st)
+      active[ev.buf] = nil
+    end
+  end,
+})
