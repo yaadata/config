@@ -1,6 +1,6 @@
 local opts = {
   'nvim-neotest/neotest',
-  version = 'v5.13.4',
+  version = 'v5.20.0',
   dependencies = {
     'nvim-neotest/nvim-nio',
     'nvim-lua/plenary.nvim',
@@ -10,7 +10,7 @@ local opts = {
     'nvim-neotest/neotest-python',
     {
       'fredrikaverpil/neotest-golang',
-      tag = 'v1.10.1',
+      tag = 'v2.10.0',
     },
     'nvim-neo-tree/neo-tree.nvim',
     'nvim-neotest/neotest-plenary',

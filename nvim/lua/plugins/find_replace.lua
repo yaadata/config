@@ -19,7 +19,7 @@ end
 
 local opts = {
   'MagicDuck/grug-far.nvim',
-  version = '1.6.67',
+  version = '1.6.80',
   opts = {},
   cmd = { 'GrugFar', 'GrugFarWithin' },
   keys = {
