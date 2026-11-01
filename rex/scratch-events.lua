@@ -120,7 +120,7 @@ local function update_focus(ctx)
 	end
 end
 
-rex.on("active_window_changed", update_focus)
+rex.on("session_view_changed", update_focus)
 rex.on("session_destroyed", function(_, ev)
 	if ev.session_id then
 		armed[ev.session_id] = nil
