@@ -2,14 +2,23 @@ local close_other_tabs = require("close_other_tabs")
 local scratch_toggle = require("scratch")
 require("worktree")
 
+local scratch_listener
+
 -- ACTIONS
 rex.action({
 	name = "scratch_toggle",
 	title = "Toggle Tab Scratch Terminal",
-	run = scratch_toggle,
+	run = function(ctx)
+		if not scratch_listener or not scratch_listener:running() then
+			scratch_listener = assert(rex.exec.start({
+				os.getenv("HOME") .. "/.local/bin/rex",
+				"do", os.getenv("HOME") .. "/.config/rex/scratch-events.lua",
+				"--all", "--fail-fast",
+			}, { detach = true }))
+		end
+		return scratch_toggle(ctx)
+	end,
 })
-
--- Run scratch events separately: rex do ~/.config/rex/scratch-events.lua --all --fail-fast
 
 -- Rex doesn't expose sidebar state, so remember the last request per client and session.
 local session_collapse_requested = {}
