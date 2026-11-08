@@ -12,3 +12,9 @@ end
 
 git-town completions fish | source
 rbenv init - | source
+
+# Keep the Homebrew inventory synchronized.
+set -gx HOMEBREW_BREWFILE "$HOME/.config/Brewfile"
+if test -f (brew --prefix)/etc/brew-wrap.fish
+    source (brew --prefix)/etc/brew-wrap.fish
+end

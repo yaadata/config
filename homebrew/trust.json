@@ -3,8 +3,11 @@
     "anomalyco/tap/opencode",
     "atlassian/acli/acli",
     "buildkite/buildkite/bk@3",
+    "cockroachdb/tap/cockroach",
     "derailed/k9s/k9s",
     "elixir-tools/tap/next-ls",
-    "hashicorp/tap/vault"
+    "hashicorp/tap/vault",
+    "pulumi/tap/pulumi",
+    "rcmdnk/file/brew-file"
   ]
 }
