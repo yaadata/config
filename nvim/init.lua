@@ -28,7 +28,7 @@ require('lazy').setup({
   { import = 'plugins.treesitter' },
   { import = 'plugins.style' },
   { import = 'plugins.ide' },
-  { import = 'plugins.agents' },
+  { import = 'plugins.agent' },
   { import = 'plugins.language' },
 }, {
   dev = {

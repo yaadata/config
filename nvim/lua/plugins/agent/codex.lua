@@ -1,6 +1,6 @@
 local opts = {
   url = 'https://codeberg.org/yaadata/codex.nvim.git',
-  version = '2.0.0-alpha.5',
+  version = '2.0.0-beta.1',
   lazy = false,
   dev = false,
   cmd = {
@@ -10,8 +10,6 @@ local opts = {
     'CodexClearInput',
     'CodexSendSelection',
     'CodexSendFile',
-    'CodexMentionFile',
-    'CodexMentionDirectory',
   },
   keys = {
     {
@@ -132,9 +130,7 @@ local opts = {
     {
       '<leader>wor',
       function()
-        require('codex.builtin').resume {
-          harness = 'pi',
-        }
+        require('codex.builtin').resume {}
       end,
       desc = 'Codex: Resume session',
       mode = { 'n' },
