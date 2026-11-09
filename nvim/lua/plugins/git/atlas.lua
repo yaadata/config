@@ -2,7 +2,7 @@
 
 local opts = {
   'emrearmagan/atlas.nvim',
-  tag = '0.8.9',
+  tag = '0.8.13',
   dependencies = {
     {
       'MeanderingProgrammer/render-markdown.nvim', -- optional but recommended
