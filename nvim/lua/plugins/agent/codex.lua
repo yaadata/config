@@ -1,6 +1,6 @@
 local opts = {
   url = 'https://codeberg.org/yaadata/codex.nvim.git',
-  version = '2.0.0-beta.1',
+  version = '2.0.0-beta.2',
   lazy = false,
   dev = false,
   cmd = {
