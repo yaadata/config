@@ -204,7 +204,7 @@ local opts = { -- LSP Configuration & Plugins
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     require('neodev').setup {
-      library = { plugins = { 'nvim-dap-ui' }, types = true },
+      library = { plugins = { 'nvim-dap-view' }, types = true },
     }
 
     require('mason-lspconfig').setup {

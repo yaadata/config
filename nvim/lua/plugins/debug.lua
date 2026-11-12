@@ -1,14 +1,11 @@
 local opts = {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  commit = '52302f02fea3a490e55475de52fa4deb8af2eb11',
+  commit = 'cfa2d58f4537aca6ca83e2de1a0d9f1491121264',
   -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
-    { 'rcarriga/nvim-dap-ui', commit = 'bc81f8d3440aede116f821114547a476b082b319' },
-
-    -- Required dependency for nvim-dap-ui
-    { 'nvim-neotest/nvim-nio' },
+    { 'igorlfs/nvim-dap-view', commit = 'bfaf50b3f513f78d8ab3e5fe02128dda05be4945' },
 
     -- Installs the debug adapters for you
     'mason-org/mason.nvim',
@@ -158,7 +155,18 @@ local opts = {
     {
       '<leader>tdr',
       function()
-        require('dap').repl.toggle()
+        local dap_view = require 'dap-view'
+        -- The REPL lives inside the dap-view window, so toggling means
+        -- closing the whole window when we are already in the REPL.
+        if vim.api.nvim_buf_get_name(0):match '%[dap%-repl%-%d+%]$' then
+          dap_view.close()
+          return
+        end
+        local buf = vim.fn.bufnr 'dap-view://main'
+        if buf == -1 or vim.fn.bufwinid(buf) == -1 then
+          dap_view.open()
+        end
+        dap_view.jump_to_view 'repl'
       end,
       desc = '[d]ebug [r]epl',
     },
@@ -186,7 +194,7 @@ local opts = {
     {
       '<leader>tdt',
       function()
-        require('dapui').toggle { reset = true }
+        require('dap-view').toggle()
       end,
       desc = '[d]ebug [t]oggle ui',
     },
@@ -194,21 +202,20 @@ local opts = {
     {
       '<leader>tde',
       function()
-        require('dapui').eval()
+        require('dap-view').hover()
       end,
-      desc = '[d]ebug [t]oggle ui',
+      desc = '[d]ebug [e]val',
     },
     {
       '<leader>tdw',
       function()
-        require('dap.ui.widgets').hover()
+        require('dap-view').add_expr()
       end,
-      desc = '[d]ebug [w]idgets',
+      desc = '[d]ebug add [w]atch',
     },
   },
   config = function()
     local dap = require 'dap'
-    local dapui = require 'dapui'
     -- golang
     dap.adapters.delve = function(callback, config)
       if config.mode == 'remote' and config.request == 'attach' then
@@ -272,39 +279,37 @@ local opts = {
       },
     }
 
-    -- Dap UI setup
-    -- For more information, see |:help nvim-dap-ui|
-    dapui.setup {
+    -- Dap view setup
+    -- For more information, see |:help dap-view|
+    require('dap-view').setup {
       -- Set icons to characters that are more likely to work in every terminal.
       --    Feel free to remove or use ones that you like more! :)
       --    Don't feel like these are good choices.
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-      controls = {
-        icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
-        },
+      icons = {
+        expanded = '▾ ',
+        collapsed = '▸ ',
+        pause = '⏸',
+        play = '▶',
+        step_into = '⏎',
+        step_over = '⏭',
+        step_out = '⏮',
+        step_back = 'b',
+        run_last = '▶▶',
+        terminate = '⏹',
+        disconnect = '⏏',
       },
+      winbar = {
+        -- Show the controls (play/pause, stepping, ...) in the winbar
+        controls = { enabled = true },
+      },
+      -- Open when a session starts, close when the last one finishes
+      auto_toggle = true,
     }
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    vim.keymap.set('n', '<C-b>l', dapui.toggle, { desc = 'Debug: See last session result.' })
-    dap.listeners.after.event_initialized['dapui_config'] = function()
-      dapui.open {}
-    end
-    dap.listeners.before.event_terminated['dapui_config'] = function()
-      dapui.close {}
-    end
-    dap.listeners.before.event_exited['dapui_config'] = function()
-      dapui.close {}
-    end
+    vim.keymap.set('n', '<C-b>l', function()
+      require('dap-view').toggle()
+    end, { desc = 'Debug: See last session result.' })
 
     -- Install golang specific config
     require('dap-go').setup {
@@ -385,7 +390,7 @@ local opts = {
     vim.fn.sign_define('DapStopped', { text = '󰁕 ', texthl = 'green', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
     vim.fn.sign_define('DapLogPoint', { text = '•>', texthl = 'yellow', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
     require('neodev').setup {
-      library = { plugins = { 'nvim-dap-ui' }, types = true },
+      library = { plugins = { 'nvim-dap-view' }, types = true },
     }
   end,
 }
