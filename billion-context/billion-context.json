@@ -25,7 +25,7 @@
         "deepseek/deepseek-v4.1-flash-1017": {
           "context": 1048576,
           "compress": {
-            "maxContextLimit": "40%",
+            "maxContextLimit": "45%",
             "nudgeGrowthTokens": 25000,
             "modelContextLimit": 1048576
           }
