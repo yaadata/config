@@ -35,3 +35,4 @@ uv/**
 erl_crash.dump
 bk.yaml
 .beads/
+vite-plus/**
