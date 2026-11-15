@@ -150,7 +150,7 @@ local opts = { -- LSP Configuration & Plugins
     local lsp_servers = {
       'gopls',
       'denols',
-      'ts_ls',
+      'tsc',
       'starpls',
       'taplo',
       'terraformls',
