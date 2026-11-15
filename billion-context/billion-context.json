@@ -32,5 +32,10 @@
         }
       }
     }
+  },
+  "pi": {
+    "subagents": {
+      "forceEnable": true
+    }
   }
 }
