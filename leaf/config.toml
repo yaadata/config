@@ -1,0 +1,2 @@
+watch = true
+editor = 'mise exec -- nvim +{$line} +"normal! zz"'

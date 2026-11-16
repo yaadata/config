@@ -130,17 +130,29 @@ vim.keymap.set('v', '<leader>b6e', "c<c-r>=system('base64',          @\")<cr><es
 vim.keymap.set('v', '<leader>b6d', "c<c-r>=system('base64 --decode', @\")<cr><esc>", { desc = 'base64 decode' })
 vim.keymap.set('v', '<leader>jq', ":%!jq '.' <enter>", { desc = 'pretty json' })
 
-vim.keymap.set('n', '<leader>bmt', function()
-  local bufpath = vim.api.nvim_buf_get_name(0)
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  callback = function(args)
+    vim.keymap.set('n', '<leader>bm', function()
+      local bufpath = vim.api.nvim_buf_get_name(0)
 
-  if bufpath == '' then
-    vim.notify('Buffer has no file path', vim.log.levels.WARN)
-    return
-  end
+      if bufpath == '' then
+        vim.notify('Buffer has no file path', vim.log.levels.WARN)
+        return
+      end
 
-  vim.cmd.write()
-  vim.system({ 'open', '-a', 'MarkText', bufpath }, { detach = true })
-end, { desc = 'Open in MarkText' })
+      if vim.fn.executable 'leaf' == 0 then
+        vim.notify('Leaf executable not found', vim.log.levels.WARN)
+        return
+      end
+
+      vim.cmd.write()
+      vim.cmd 'botright vnew'
+      vim.fn.jobstart({ 'leaf', bufpath }, { term = true })
+      vim.cmd.startinsert()
+    end, { buffer = args.buf, desc = 'Open in Leaf' })
+  end,
+})
 
 if vim.g.neovide then
   vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
