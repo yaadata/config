@@ -89,6 +89,18 @@ local opts = {
       mode = 'x',
     },
     {
+      '<leader>wol',
+      function()
+        local codex = require 'codex'
+        codex.prompt_builder.add_selection {
+          include_lines = true,
+        }
+        codex.prompt_builder.send()
+      end,
+      desc = 'Codex: Send selection with lines',
+      mode = 'x',
+    },
+    {
       '<leader>woM',
       function()
         local codex = require 'codex'
