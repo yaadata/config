@@ -1,5 +1,3 @@
-local worker = debug.getinfo(1, "S").source:gsub("^@", ""):gsub("worktree%.lua$", "worktree_prompt.lua")
-
 rex.action{
   name = "open_worktree_tab",
   title = "Open Worktree Tab",
@@ -17,9 +15,15 @@ rex.action{
       error("Open this action from a local terminal", 0)
     end
 
+    -- Actions can be loaded on another machine; resolve files on the terminal host.
+    local home = process.home
+    if type(home) ~= "string" or home == "" then
+      error("The terminal did not report its home directory", 0)
+    end
+    local worker = home:gsub("/+$", "") .. "/.config/rex/worktree_prompt.lua"
     local args = rex.json.encode{
       cwd = foreground.cwd,
-      home = process.home or os.getenv("HOME"),
+      home = home,
       session_id = ctx.session_id,
     }
     local window, err = rex.session.new_window{
