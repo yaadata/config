@@ -41,8 +41,5 @@ rex.action{
       },
     }
     if not window then error(err, 0) end
-    if ctx.client_id then
-      rex.client.queue("session.select", { session_id = ctx.session_id, window_id = window.window_id })
-    end
   end,
 }
