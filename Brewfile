@@ -159,6 +159,7 @@ cask '1password-cli'
 cask 'alacritty'
 cask 'bruno'
 cask 'chatgpt'
+cask 'codexbar'
 cask 'font-jetbrains-mono-nerd-font'
 cask 'gcloud-cli'
 cask 'ghostty'
@@ -188,6 +189,8 @@ tap 'pulumi/tap'
 tap 'rcmdnk/file'
 brew 'brew-file'
 
+tap 'steipete/tap'
+
 tap 'withgraphite/tap'
 
 # Other Homebrew packages
@@ -195,27 +198,12 @@ brew 'icu4c@75'
 brew 'openssl@1.1'
 
 # App Store applications
-mas 'Flow (5.0.0)', id: 1423210932
+mas 'Flow (5.1.0)', id: 1423210932
 mas 'GarageBand (10.4.14)', id: 682658836
 mas 'iMovie (10.4.5)', id: 408981434
 mas 'Keynote (14.5)', id: 409183694
-mas 'Linearity Curve (7.1.1)', id: 1219074514
-mas 'Magnet (3.0.7)', id: 441258766
+mas 'Linearity Curve (7.1.3)', id: 1219074514
 mas 'MKV2MP4 (1.5.2)', id: 585396074
 mas 'Numbers (14.5)', id: 409203825
 mas 'Pages (14.5)', id: 409201541
-mas 'Slack (4.53.280)', id: 803453959
-
-# Other commands
-#go "github.com/git-town/git-town/v23"
-#go "cmd/go"
-#go "cmd/gofmt"
-#go "golang.org/x/tools/gopls"
-#cargo "bob-nvim"
-#cargo "cargo-edit"
-#cargo "cargo-expand"
-#cargo "cargo-nextest"
-#cargo "cargo-watch"
-#cargo "diesel_cli"
-#cargo "sqlx-cli"
-#cargo "tree-sitter-cli"
+mas 'Slack (4.53.287)', id: 803453959

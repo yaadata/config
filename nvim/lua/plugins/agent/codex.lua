@@ -21,6 +21,20 @@ local opts = {
       mode = { 'n', 'v' },
     },
     {
+      '<leader>woe',
+      function()
+        local op = function()
+          local codex = require 'codex'
+          codex.prompt_builder.clear()
+          codex.prompt_builder.add '/readonly'
+          codex.prompt_builder.submit()
+        end
+        require('codex.builtin').one_off(op)
+      end,
+      desc = 'Codex: Toggle Read Only Mode',
+      mode = { 'n', 'v' },
+    },
+    {
       '<leader>woo',
       function()
         require('codex').session.open(true)
@@ -85,30 +99,19 @@ local opts = {
         codex.prompt_builder.add_selection()
         codex.prompt_builder.send()
       end,
-      desc = 'Codex: Send selection',
+      desc = 'Codex: Send selection range',
       mode = 'x',
     },
     {
-      '<leader>woM',
+      '<leader>wol',
       function()
         local codex = require 'codex'
-        local builtin = require 'codex.builtin'
-        builtin.mention_file()
-        vim.defer_fn(function()
-          codex.session.unfocus()
-        end, 350)
+        codex.prompt_builder.add_selection {
+          include_lines = true,
+        }
+        codex.prompt_builder.send()
       end,
-      desc = 'Codex: Mention current file',
-      mode = { 'n', 'v' },
-    },
-    {
-      '<leader>woi',
-      function()
-        local codex = require 'codex'
-        codex.prompt_builder.add '/status '
-        codex.prompt_builder.submit()
-      end,
-      desc = 'Codex: Show status',
+      desc = 'Codex: Send Selection',
       mode = { 'n', 'v' },
     },
     {
