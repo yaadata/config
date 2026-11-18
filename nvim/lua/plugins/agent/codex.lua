@@ -35,6 +35,17 @@ local opts = {
       mode = { 'n', 'v' },
     },
     {
+      '<leader>wop',
+      function()
+        local op = function()
+          require('codex').input.feedkey '<S-Tab>'
+        end
+        require('codex.builtin').one_off(op)
+      end,
+      desc = 'Codex: Toggle Plan Mode',
+      mode = { 'n', 'v' },
+    },
+    {
       '<leader>woo',
       function()
         require('codex').session.open(true)
