@@ -31,8 +31,27 @@ customCommands:
         git switch "$target_branch" || exit 1
         trap restore_branch EXIT
         git-town sync --push
-      ' _ "{{.CheckedOutBranch.Name}}" "{{.SelectedLocalBranch.Name}}"
+      ' _ {{.CheckedOutBranch.Name | quote}} {{.SelectedLocalBranch.Name | quote}}
     loadingText: "Syncing"
+    output: log
+  - key: "f"
+    context: "localBranches"
+    description: "Fetch Branch"
+    command: >-
+      bash -c '
+        target_branch="$1"
+        git fetch origin +"$target_branch":"$target_branch"
+      ' _ {{.SelectedLocalBranch.Name | quote}}
+    loadingText: "Fetching...."
+    output: log
+  - key: "o"
+    context: "localBranches"
+    description: "Open PR (creates one if none exists)"
+    command: >-
+      bash -c '
+        exec bash "${XDG_CONFIG_HOME:-$HOME/.config}/lazygit/open-pr.sh" "$1"
+      ' _ {{.SelectedLocalBranch.Name | quote}}
+    loadingText: "Opening pull request"
     output: log
   - key: "U"
     context: "global"
@@ -72,7 +91,7 @@ customCommands:
     output: log
   - key: "K"
     context: "localBranches"
-    description: "Git-Town Delete (deletes the current feature branch and sYnc)"
+    description: "Git-Town Delete (deletes the current feature branch and sync)"
     command: "git-town delete"
     prompts:
       - type: "confirm"
