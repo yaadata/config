@@ -17,6 +17,7 @@ local opts = {
       '<leader>wa1',
       function()
         require('codex').set_profile 'default'
+        vim.notify 'Agent Harness Profile = default (PI)'
       end,
       desc = 'Agent Harness: PI Harness',
       mode = { 'n', 'v' },
@@ -25,6 +26,7 @@ local opts = {
       '<leader>wa2',
       function()
         require('codex').set_profile 'codex'
+        vim.notify 'Agent Harness Profile = Codex'
       end,
       desc = 'Agent Harness: Openai Codex',
       mode = { 'n', 'v' },
@@ -33,6 +35,7 @@ local opts = {
       '<leader>wa3',
       function()
         require('codex').set_profile 'claude'
+        vim.notify 'Agent Harness Profile = Claude'
       end,
       desc = 'Agent Harness: Claude Code',
       mode = { 'n', 'v' },
@@ -347,6 +350,9 @@ local opts = {
             },
           },
         },
+      },
+      log = {
+        level = 'debug',
       },
     }
   end,
