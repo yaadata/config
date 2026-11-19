@@ -171,17 +171,53 @@ end, { desc = 'Insert text "assert"' })
 -- External Tools
 -- ============================================================================
 
-vim.keymap.set('n', '<leader>bmt', function()
-  local bufpath = vim.api.nvim_buf_get_name(0)
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  callback = function(args)
+    vim.keymap.set('n', '<leader>bvm', function()
+      local bufpath = vim.api.nvim_buf_get_name(0)
 
-  if bufpath == '' then
-    vim.notify('Buffer has no file path', vim.log.levels.WARN)
-    return
-  end
+      if bufpath == '' then
+        vim.notify('Buffer has no file path', vim.log.levels.WARN)
+        return
+      end
 
-  vim.cmd.write()
-  vim.system({ 'open', '-a', 'MarkText', bufpath }, { detach = true })
-end, { desc = 'Open in MarkText' })
+      if vim.fn.executable 'leaf' == 0 then
+        vim.notify('Leaf executable not found', vim.log.levels.WARN)
+        return
+      end
+
+      vim.cmd.write()
+      vim.cmd 'botright vnew'
+      vim.fn.jobstart({ 'leaf', bufpath }, { term = true })
+      vim.cmd.startinsert()
+    end, { buffer = args.buf, desc = 'Open in Leaf' })
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'pdf',
+  callback = function(args)
+    vim.keymap.set('n', '<leader>bvp', function()
+      local bufpath = vim.api.nvim_buf_get_name(0)
+
+      if bufpath == '' then
+        vim.notify('Buffer has no file path', vim.log.levels.WARN)
+        return
+      end
+
+      if vim.fn.executable 'bookokrat' == 0 then
+        vim.notify('Leaf executable not found', vim.log.levels.WARN)
+        return
+      end
+
+      vim.cmd.write()
+      vim.cmd 'botright vnew'
+      vim.fn.jobstart({ 'bookokrat', bufpath }, { term = true })
+      vim.cmd.startinsert()
+    end, { buffer = args.buf, desc = 'Open in bookokrat' })
+  end,
+})
 
 -- ============================================================================
 -- Neovide (GUI)
