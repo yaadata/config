@@ -1,3 +1,11 @@
+-- ============================================================================
+-- Keymaps
+-- ============================================================================
+
+-- ============================================================================
+-- Navigation
+-- ============================================================================
+
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
@@ -13,15 +21,26 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- ============================================================================
+-- Search
+-- ============================================================================
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- ============================================================================
+-- Integrations / Terminal Toggles
+-- ============================================================================
 
 -- git
 vim.keymap.set('n', '<leader>gg', '<cmd>LazyGitToggle<cr>', { desc = 'LazyGit' })
 vim.keymap.set('n', '<leader>pk', '<cmd>K9sToggle<cr>', { desc = 'K9s Terminal' })
 vim.keymap.set('n', '<leader>ww', '<cmd>TaskwarriorToggle<cr>', { desc = 'Taskwarrior Terminal' })
 
--- window management
+-- ============================================================================
+-- Window Management
+-- ============================================================================
+
 vim.keymap.set('n', '<leader>wmsv', '<C-w>v<CR>', { desc = 'split window vertical' })
 vim.keymap.set('n', '<leader>wmsh', '<C-w>s<CR>', { desc = 'split window horizontal' })
 
@@ -39,7 +58,10 @@ vim.keymap.set('n', '<C-S-Down>', function()
   wr.move_down(1)
 end, { desc = 'decrease size down' })
 
--- quickfix / location list
+-- ============================================================================
+-- Quickfix / Location List
+-- ============================================================================
+
 vim.keymap.set('n', '<leader>qo', '<cmd>copen<CR>', { desc = '[O]pen quickfix' })
 vim.keymap.set('n', '<leader>qq', '<cmd>cclose<CR>', { desc = '[C]lose quickfix' })
 vim.keymap.set('n', '<leader>qp', '<cmd>cprevious<CR>', { desc = '[P]revious quickfix item' })
@@ -49,8 +71,57 @@ vim.keymap.set('n', '<leader>qlx', '<cmd>lclose<CR>', { desc = '[C]lose location
 vim.keymap.set('n', '<leader>qlp', '<cmd>lprevious<CR>', { desc = '[P]revious location list' })
 vim.keymap.set('n', '<leader>qln', '<cmd>lnext<CR>', { desc = '[N]ext location list' })
 
--- testing
+-- ============================================================================
+-- Buffers
+-- ============================================================================
+
+vim.keymap.set('n', '<leader>bt', '<cmd>:tabnew<CR>', { desc = 'new [t]ab' })
+vim.keymap.set('n', '<leader>br', '<cmd>e! | noh<CR>', { desc = '[r]efresh' })
+vim.keymap.set('n', '<leader>bz', function()
+  vim.wo.spell = not vim.wo.spell
+  vim.notify('Spell ' .. (vim.wo.spell and 'enabled' or 'disabled'))
+end, { desc = 'toggle [s]pell' })
+vim.keymap.set('n', '<leader>bd', "<cmd>echo expand('% p')<CR>", { desc = 'view [d]irectory path' })
+vim.keymap.set('n', '<leader>bw', '<cmd>w<CR>', { desc = '[w]rite' })
+vim.keymap.set('n', '<leader>baw', '<cmd>wa<CR>', { desc = '[W]rite all buffers' })
+vim.keymap.set('n', '<leader>bQ', '<cmd>q<CR>', { desc = '[q]uit current' })
+vim.keymap.set('n', 'Q', '<cmd>q<CR>', { desc = '[q]uit current' })
+vim.keymap.set('n', '<leader>baQ', '<cmd>quitall!<CR>', { desc = '[q]uit' })
+
+-- ============================================================================
+-- Clipboard / Path Yanks
+-- ============================================================================
+
+vim.keymap.set('n', '<leader>byp', function()
+  local filepath = vim.fn.expand '%:.'
+  vim.fn.setreg('+', filepath) -- write to clipboard register '+'
+  vim.notify('Copied relative path: ' .. filepath, vim.log.levels.INFO)
+end, { desc = 'Relative [P]ath' })
+vim.keymap.set('n', '<leader>byP', function()
+  local filepath = vim.fn.expand '%:p'
+  vim.fn.setreg('+', filepath) -- write to clipboard register '+'
+  vim.notify('Copied absolute path: ' .. filepath, vim.log.levels.INFO)
+end, { desc = 'Absolute [P]ath' })
+vim.keymap.set('n', '<leader>byn', function()
+  local fn = vim.fn.expand '%:t'
+  vim.fn.setreg('+', fn) -- write to clipboard register '+'
+  vim.notify('Copied file name: ' .. fn, vim.log.levels.INFO)
+end, { desc = '[N]ame' })
+
+-- ============================================================================
+-- Visual Mode Utilities
+-- ============================================================================
+
 vim.keymap.set({ 'n', 'x' }, '<leader>bpl', '"0p', { desc = 'Paste last yank (after)' })
+
+-- base64
+vim.keymap.set('v', '<leader>b6e', "c<c-r>=system('base64',          @\")<cr><esc>", { desc = 'base64 encode' })
+vim.keymap.set('v', '<leader>b6d', "c<c-r>=system('base64 --decode', @\")<cr><esc>", { desc = 'base64 decode' })
+vim.keymap.set('v', '<leader>jq', ":%!jq '.' <enter>", { desc = 'pretty json' })
+
+-- ============================================================================
+-- Test Scenario Snippets
+-- ============================================================================
 
 vim.keymap.set('n', '<leader>bc0', function()
   local text = { 'SCENARIO:   ' }
@@ -96,40 +167,11 @@ vim.keymap.set('n', '<leader>bc3', function()
   vim.cmd 'normal gc'
 end, { desc = 'Insert text "assert"' })
 
--- navigating buffers
-vim.keymap.set('n', '<leader>bt', '<cmd>:tabnew<CR>', { desc = 'new [t]ab' })
-vim.keymap.set('n', '<leader>br', '<cmd>e! | noh<CR>', { desc = '[r]efresh' })
-vim.keymap.set('n', '<leader>bz', function()
-  vim.wo.spell = not vim.wo.spell
-  vim.notify('Spell ' .. (vim.wo.spell and 'enabled' or 'disabled'))
-end, { desc = 'toggle [s]pell' })
-vim.keymap.set('n', '<leader>bd', "<cmd>echo expand('% p')<CR>", { desc = 'view [d]irectory path' })
-vim.keymap.set('n', '<leader>bw', '<cmd>w<CR>', { desc = '[w]rite' })
-vim.keymap.set('n', '<leader>baw', '<cmd>wa<CR>', { desc = '[W]rite all buffers' })
-vim.keymap.set('n', '<leader>bQ', '<cmd>q<CR>', { desc = '[q]uit current' })
-vim.keymap.set('n', 'Q', '<cmd>q<CR>', { desc = '[q]uit current' })
-vim.keymap.set('n', '<leader>baQ', '<cmd>quitall!<CR>', { desc = '[q]uit' })
--- yanks on buffers
-vim.keymap.set('n', '<leader>byp', function()
-  local filepath = vim.fn.expand '%:.'
-  vim.fn.setreg('+', filepath) -- write to clipboard register '+'
-  vim.notify('Copied relative path: ' .. filepath, vim.log.levels.INFO)
-end, { desc = 'Relative [P]ath' })
-vim.keymap.set('n', '<leader>byP', function()
-  local filepath = vim.fn.expand '%:p'
-  vim.fn.setreg('+', filepath) -- write to clipboard register '+'
-  vim.notify('Copied absolute path: ' .. filepath, vim.log.levels.INFO)
-end, { desc = 'Absolute [P]ath' })
-vim.keymap.set('n', '<leader>byn', function()
-  local fn = vim.fn.expand '%:t'
-  vim.fn.setreg('+', fn) -- write to clipboard register '+'
-  vim.notify('Copied file name: ' .. fn, vim.log.levels.INFO)
-end, { desc = '[N]ame' })
--- base64
-vim.keymap.set('v', '<leader>b6e', "c<c-r>=system('base64',          @\")<cr><esc>", { desc = 'base64 encode' })
-vim.keymap.set('v', '<leader>b6d', "c<c-r>=system('base64 --decode', @\")<cr><esc>", { desc = 'base64 decode' })
-vim.keymap.set('v', '<leader>jq', ":%!jq '.' <enter>", { desc = 'pretty json' })
+-- ============================================================================
+-- Filetype-Specific Keymaps
+-- ============================================================================
 
+-- markdown: open current buffer in Leaf (terminal PDF/epub reader)
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'markdown',
   callback = function(args)
@@ -153,6 +195,10 @@ vim.api.nvim_create_autocmd('FileType', {
     end, { buffer = args.buf, desc = 'Open in Leaf' })
   end,
 })
+
+-- ============================================================================
+-- Neovide (GUI)
+-- ============================================================================
 
 if vim.g.neovide then
   vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
