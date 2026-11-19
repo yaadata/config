@@ -255,7 +255,7 @@ local opts = {
                 },
               },
               native = {
-                window = 'float',
+                window = 'vsplit',
                 vsplit = {
                   side = 'right', -- left | right
                   size_pct = 33, -- 10-90
