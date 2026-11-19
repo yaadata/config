@@ -1,6 +1,7 @@
 git:
-  pagers:
-    - externalDiffCommand: difft --color=always
+  diffRenderers:
+    - command: difft --color=always
+      type: extDiff
 gui:
   nerdFontsVersion: "3"
 customCommands:
@@ -10,6 +11,29 @@ customCommands:
     command: "git-town sync --all"
     loadingText: "Syncing"
     output: log
+  - key: "S"
+    context: "localBranches"
+    description: "Git-Town Sync (syncing branch)"
+    command: >-
+      bash -c '
+
+        current_branch="$1"
+        target_branch="$2"
+
+        if [ "$current_branch" = "$target_branch" ]; then
+          exec git-town sync --push
+        fi
+
+        restore_branch() {
+          git switch "$current_branch"
+        }
+
+        git switch "$target_branch" || exit 1
+        trap restore_branch EXIT
+        git-town sync --push
+      ' _ {{.CheckedOutBranch.Name | quote}} {{.SelectedLocalBranch.Name | quote}}
+    loadingText: "Syncing"
+    output: log
   - key: "f"
     context: "localBranches"
     description: "Fetch Branch"
@@ -17,8 +41,17 @@ customCommands:
       bash -c '
         target_branch="$1"
         git fetch origin +"$target_branch":"$target_branch"
-      ' _ "{{.SelectedLocalBranch.Name}}"
+      ' _ {{.SelectedLocalBranch.Name | quote}}
     loadingText: "Fetching...."
+    output: log
+  - key: "o"
+    context: "localBranches"
+    description: "Open PR (creates one if none exists)"
+    command: >-
+      bash -c '
+        exec bash "${XDG_CONFIG_HOME:-$HOME/.config}/lazygit/open-pr.sh" "$1"
+      ' _ {{.SelectedLocalBranch.Name | quote}}
+    loadingText: "Opening pull request"
     output: log
   - key: "U"
     context: "global"
@@ -64,19 +97,19 @@ customCommands:
       - type: "confirm"
         title: "Delete current feature branch"
         body: "Are you sure you want to delete the current feature branch?"
-    loadingText: "Deleting..."
+    loadingText: "Deleting Feature Branch"
     output: log
   - key: "p"
     context: "localBranches"
     description: "create github pull-request"
     command: "gh pr create -w"
-    loadingText: "Creating..."
+    loadingText: "Creating pull request"
     output: log
   - key: "P"
     context: "localBranches"
     description: "view github pull-request"
     command: "gh pr view -w"
-    loadingText: "Opening..."
+    loadingText: "Opening Pull-Request"
     output: log
   - key: "G"
     context: "files"
