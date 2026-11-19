@@ -171,11 +171,11 @@ end, { desc = 'Insert text "assert"' })
 -- Filetype-Specific Keymaps
 -- ============================================================================
 
--- markdown: open current buffer in Leaf (terminal PDF/epub reader)
+-- Markdown: view the current buffer in Leaf
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'markdown',
   callback = function(args)
-    vim.keymap.set('n', '<leader>bm', function()
+    vim.keymap.set('n', '<leader>bv', function()
       local bufpath = vim.api.nvim_buf_get_name(0)
 
       if bufpath == '' then
@@ -192,7 +192,42 @@ vim.api.nvim_create_autocmd('FileType', {
       vim.cmd 'botright vnew'
       vim.fn.jobstart({ 'leaf', bufpath }, { term = true })
       vim.cmd.startinsert()
-    end, { buffer = args.buf, desc = 'Open in Leaf' })
+    end, { buffer = args.buf, desc = 'View in Leaf' })
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'pdf',
+  callback = function(args)
+    vim.keymap.set('n', '<leader>bv', function()
+      local bufpath = vim.api.nvim_buf_get_name(0)
+
+      if bufpath == '' then
+        vim.notify('Buffer has no file path', vim.log.levels.WARN)
+        return
+      end
+
+      if vim.fn.executable 'bookokrat' == 0 then
+        vim.notify('bookokrat executable not found', vim.log.levels.WARN)
+        return
+      end
+
+      local script = string.format(
+        [[
+   rex.session.new_layer{
+     bounds = { 0.06, 0.06, 0.88, 0.88 },
+     focus  = true,
+     layout = rex.layout.block{
+       flavor  = "com.superlogical.terminal.shell",
+       label   = "bookokrat",
+       options = { command = { "bookokrat", %q } },
+     },
+   }
+   ]],
+        bufpath
+      )
+      vim.fn.system { 'rex', 'do', '-e', script }
+    end, { buffer = args.buf, desc = 'View in bookokrat' })
   end,
 })
 

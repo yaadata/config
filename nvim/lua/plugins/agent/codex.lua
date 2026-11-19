@@ -1,95 +1,107 @@
 local opts = {
   url = 'https://codeberg.org/yaadata/codex.nvim.git',
-  version = '2.0.0-beta.2',
+  -- version = '2.0.0-beta.2',
+  branch = 'config-profiles',
   lazy = false,
   dev = false,
-  cmd = {
-    'Codex',
-    'CodexFocus',
-    'CodexTeardown',
-    'CodexClearInput',
-    'CodexSendSelection',
-    'CodexSendFile',
-  },
   keys = {
     {
-      '<leader>wot',
+      '<leader>wat',
       function()
         require('codex').session.toggle()
       end,
-      desc = 'Codex: Toggle terminal',
+      desc = 'Agent Harness: Toggle terminal',
       mode = { 'n', 'v' },
     },
     {
-      '<leader>woo',
+      '<leader>wa1',
+      function()
+        require('codex').set_profile 'default'
+      end,
+      desc = 'Agent Harness: PI Harness',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>wa2',
+      function()
+        require('codex').set_profile 'codex'
+      end,
+      desc = 'Agent Harness: Openai Codex',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>wa3',
+      function()
+        require('codex').set_profile 'claude'
+      end,
+      desc = 'Agent Harness: Claude Code',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>wap',
+      function()
+        local op = function()
+          require('codex').input.feedkey '<S-Tab>'
+        end
+        require('codex.builtin').one_off(op)
+      end,
+      desc = 'Agent Harness: Toggle Plan Mode',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>wao',
       function()
         require('codex').session.open(true)
       end,
-      desc = 'Codex: Open and focus',
+      desc = 'Agent Harness: Open and focus',
       mode = { 'n', 'v' },
     },
     {
-      '<leader>wof',
+      '<leader>waf',
       function()
         require('codex').session.focus()
       end,
-      desc = 'Codex: Focus terminal',
+      desc = 'Agent Harness: Focus terminal',
       mode = { 'n', 'v' },
     },
     {
-      '<leader>wox',
+      '<leader>wax',
       function()
         require('codex').session.teardown()
       end,
-      desc = 'Codex: Close session',
+      desc = 'Agent Harness: teardown session',
       mode = { 'n', 'v' },
     },
     {
-      '<leader>wov',
+      '<leader>waX',
       function()
-        require('codex.builtin').one_off(function()
-          local codex = require 'codex'
-          codex.prompt_builder.clear()
-          codex.prompt_builder.add '/voice'
-          codex.prompt_builder.submit()
-        end)
+        require('codex').session.teardown_all()
       end,
-      desc = 'Codex: Toggle voice mode',
-      mode = 'n',
+      desc = 'Agent Harness: teardown all sessions',
+      mode = { 'n', 'v' },
     },
     {
-      '<leader>wom',
-      function()
-        require('codex.builtin').one_off(function()
-          local codex = require 'codex'
-          codex.input.feedkey '<A-m>'
-        end)
-      end,
-      desc = 'Codex: Mute Voice Mode',
-      mode = 'n',
-    },
-    {
-      '<leader>wos',
+      '<leader>was',
       function()
         local codex = require 'codex'
         codex.prompt_builder.add_file()
         codex.prompt_builder.send()
       end,
-      desc = 'Codex: Add current buffer',
+      desc = 'Agent Harness: Add current buffer',
       mode = 'n',
     },
     {
-      '<leader>wos',
+      '<leader>was',
       function()
         local codex = require 'codex'
         codex.prompt_builder.add_selection()
         codex.prompt_builder.send()
       end,
-      desc = 'Codex: Send selection',
+      desc = 'Agent Harness: Send selection range',
       mode = 'x',
     },
     {
-      '<leader>wol',
+      '<leader>wal',
       function()
         local codex = require 'codex'
         codex.prompt_builder.add_selection {
@@ -97,145 +109,23 @@ local opts = {
         }
         codex.prompt_builder.send()
       end,
-      desc = 'Codex: Send selection with lines',
-      mode = 'x',
-    },
-    {
-      '<leader>woM',
-      function()
-        local codex = require 'codex'
-        local builtin = require 'codex.builtin'
-        builtin.mention_file()
-        vim.defer_fn(function()
-          codex.session.unfocus()
-        end, 350)
-      end,
-      desc = 'Codex: Mention current file',
+      desc = 'Agent Harness: Send Selection',
       mode = { 'n', 'v' },
     },
     {
-      '<leader>woi',
-      function()
-        local codex = require 'codex'
-        codex.prompt_builder.add '/status '
-        codex.prompt_builder.submit()
-      end,
-      desc = 'Codex: Show status',
-      mode = { 'n', 'v' },
-    },
-    {
-      '<leader>wor',
-      function()
-        local codex = require 'codex'
-        local ok, err = codex.prompt_builder.add_selection()
-        if not ok then
-          vim.notify(('Codex: failed to collect selection%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
-          return
-        end
-        codex.prompt_builder.add ' do an adversal review for MAJOR gaps in this implementation. Be balanced and quick'
-        codex.prompt_builder.send()
-        codex.session.focus()
-      end,
-      desc = 'Codex: Review Code',
-      mode = { 'v' },
-    },
-    {
-      '<leader>wor',
+      '<leader>waR',
       function()
         require('codex.builtin').resume {}
       end,
-      desc = 'Codex: Resume session',
-      mode = { 'n' },
-    },
-    {
-      '<leader>woc',
-      function()
-        local codex = require 'codex'
-        local ok, err = codex.prompt_builder.add_selection()
-        if not ok then
-          vim.notify(('Codex: failed to collect selection%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
-          return
-        end
-        local builtin = require 'codex.builtin'
-        local skill, format_err = builtin.format_skill {
-          plugin = 'code',
-          name = 'comment',
-        }
-        if format_err ~= nil then
-          vim.notify(('Codex: failed to format skill%s'):format(err and (': ' .. err) or ''), vim.log.levels.ERROR)
-          return
-        end
-        codex.prompt_builder.add(skill)
-        codex.prompt_builder.submit()
-      end,
-      desc = 'Codex: Add Code Comment',
-      mode = { 'v' },
-    },
-    {
-      '<leader>woc',
-      function()
-        local codex = require 'codex'
-        codex.session.focus()
-        codex.prompt_builder.clear()
-        codex.prompt_builder.add '/copy'
-        codex.prompt_builder.submit()
-      end,
-      desc = 'Codex: Copy Latest Response',
+      desc = 'Agent Harness: Resume session',
       mode = { 'n' },
     },
   },
-  opts = {
-    launch = {
-      cmd = 'pi',
-      args = {},
-      env = {},
-      auto_start = false,
-      cwd = nil,
-    },
-    log = {
-      level = 'debug',
-      verbose = true,
-    },
-    terminal = {
-      provider = 'auto',
-      auto_close = true,
-      startup = {
-        timeout_ms = 2000, -- max time to wait for startup readiness before dropping queued sends
-        retry_interval_ms = 50, -- retry interval while waiting for startup readiness
-        grace_ms = 800, -- minimum delay after terminal open before first send
-      },
-      provider_opts = {
-        snacks = {
-          win = {
-            title = ' Openai Codex ',
-            position = 'right',
-            title_pos = 'center',
-            width = 0.30,
-            wo = {
-              winbar = ' Openai Codex ',
-            },
-            border = 'rounded',
-            footer_keys = true,
-          },
-        },
-        native = {
-          window = 'vsplit',
-          vsplit = {
-            side = 'right', -- left | right
-            size_pct = 33, -- 10-90
-          },
-          hsplit = {
-            side = 'bottom', -- top | bottom
-            size_pct = 30, -- 10-90
-          },
-        },
-      },
-    },
-  },
-  config = function(_, opts)
+  config = function()
+    local codex = require 'codex'
     local km = require('codex.builtin').keymaps
     local wr = require 'utils.window_resize'
-    opts.terminal.keymaps = {
+    local default_terminal_keys = {
       ['<C-n>'] = {
         mode = { 't', 'n' },
         action = function()
@@ -244,8 +134,7 @@ local opts = {
         desc = 'normal mode',
       },
       ['<M-BS>'] = { mode = { 't', 'n' }, action = km.clear_input },
-      ['<C-G>'] = { mode = { 't', 'n' }, action = km.unfocus },
-      ['<C-x>'] = { mode = { 't', 'n' }, action = km.teardown },
+      ['<C-x>'] = { mode = { 't', 'n' }, action = km.toggle },
       ['<C-h>'] = { mode = { 't', 'n' }, action = km.nav_left },
       ['<C-j>'] = { mode = { 't', 'n' }, action = km.nav_down },
       ['<C-k>'] = { mode = { 't', 'n' }, action = km.nav_up },
@@ -279,7 +168,187 @@ local opts = {
         desc = 'decrease size down',
       },
     }
-    require('codex').setup(opts)
+    codex.setup {
+      profiles = {
+        default = {
+          launch = {
+            cmd = { 'pi' },
+            env = {},
+            cwd = nil,
+          },
+          auto_start = false,
+          terminal = {
+            provider = 'auto',
+            auto_close = true,
+            startup = {
+              timeout_ms = 2000, -- max time to wait for startup readiness before dropping queued sends
+              retry_interval_ms = 50, -- retry interval while waiting for startup readiness
+              grace_ms = 800, -- minimum delay after terminal open before first send
+            },
+            keymaps = default_terminal_keys,
+            provider_opts = {
+              snacks = {
+                win = {
+                  title = ' PI Harness ',
+                  position = 'right',
+                  title_pos = 'center',
+                  width = 0.30,
+                  wo = {
+                    winbar = ' PI Harness ',
+                  },
+                  border = 'rounded',
+                  footer_keys = true,
+                },
+              },
+              native = {
+                window = 'vsplit',
+                vsplit = {
+                  side = 'right', -- left | right
+                  size_pct = 33, -- 10-90
+                },
+              },
+            },
+          },
+          keymaps = {
+            ['<leader>war'] = {
+              action = function()
+                local op = function()
+                  codex.prompt_builder.clear()
+                  codex.prompt_builder.add '/readonly'
+                  codex.prompt_builder.submit()
+                end
+                require('codex.builtin').one_off(op)
+              end,
+              desc = 'Agent Harness: Toggle Read Only Mode',
+              mode = { 'n', 'v' },
+            },
+          },
+        },
+        codex = {
+          launch = {
+            cmd = { 'codex' },
+            env = {},
+            cwd = nil,
+          },
+          auto_start = false,
+          terminal = {
+            provider = 'auto',
+            auto_close = true,
+            startup = {
+              timeout_ms = 2000, -- max time to wait for startup readiness before dropping queued sends
+              retry_interval_ms = 50, -- retry interval while waiting for startup readiness
+              grace_ms = 800, -- minimum delay after terminal open before first send
+            },
+            keymaps = default_terminal_keys,
+            provider_opts = {
+              snacks = {
+                win = {
+                  title = ' Openai Codex ',
+                  position = 'float',
+                  title_pos = 'center',
+                  width = 0.30,
+                  wo = {
+                    winbar = ' Openai Codex ',
+                  },
+                  border = 'rounded',
+                  footer_keys = true,
+                },
+              },
+              native = {
+                window = 'float',
+                vsplit = {
+                  side = 'right', -- left | right
+                  size_pct = 33, -- 10-90
+                },
+                float = {
+                  width_pct = 80,
+                  height_pct = 80,
+                  border = 'rounded',
+                  title = ' OpenAI Codex ',
+                  title_pos = 'center',
+                },
+              },
+            },
+          },
+          keymaps = {
+            ['<leader>wac'] = {
+              action = function()
+                local builtin = require 'codex.builtin'
+                builtin.execute_slash_command { command = 'copy' }
+                vim.defer_fn(function()
+                  if codex.session.is_focused() then
+                    codex.session.unfocus()
+                  end
+                end, 300)
+              end,
+              desc = 'Agent Harness: Copy Latest Response',
+              mode = { 'n' },
+            },
+            ['<leader>wav'] = {
+              action = function()
+                local op = function()
+                  codex.prompt_builder.clear()
+                  codex.prompt_builder.add '/voice'
+                  codex.prompt_builder.submit()
+                end
+                require('codex.builtin').one_off(op)
+              end,
+              desc = 'Agent Harness: Toggle voice mode',
+              mode = 'n',
+            },
+            ['<leader>wam'] = {
+              action = function()
+                require('codex.builtin').one_off(function()
+                  require('codex').input.feedkey '<A-m>'
+                end)
+              end,
+              desc = 'Agent Harness: Mute Voice Mode',
+              mode = 'n',
+            },
+          },
+        },
+        claude = {
+          launch = {
+            cmd = { 'claude' },
+            env = {},
+            cwd = nil,
+          },
+          auto_start = false,
+          terminal = {
+            provider = 'auto',
+            auto_close = true,
+            startup = {
+              timeout_ms = 2000, -- max time to wait for startup readiness before dropping queued sends
+              retry_interval_ms = 50, -- retry interval while waiting for startup readiness
+              grace_ms = 800, -- minimum delay after terminal open before first send
+            },
+            keymaps = default_terminal_keys,
+            provider_opts = {
+              snacks = {
+                win = {
+                  title = ' Claude Code ',
+                  position = 'right',
+                  title_pos = 'center',
+                  width = 0.30,
+                  wo = {
+                    winbar = ' Claude Code ',
+                  },
+                  border = 'rounded',
+                  footer_keys = true,
+                },
+              },
+              native = {
+                window = 'vsplit',
+                vsplit = {
+                  side = 'right', -- left | right
+                  size_pct = 33, -- 10-90
+                },
+              },
+            },
+          },
+        },
+      },
+    }
   end,
 }
 

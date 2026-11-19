@@ -8,7 +8,8 @@ local opts = {
     'esmuellert/codediff.nvim', -- optional (PullRequest diff)
   },
   keys = {
-    { '<leader>wap', '<cmd>Atlas pulls github<cr>', desc = 'Atlas GitHub Pulls' },
+    { '<leader>wgp', '<cmd>Atlas pulls github<cr>', desc = 'Atlas Git: GitHub Pulls' },
+    { '<leader>wpp', '<cmd>Atlas pulls github<cr>', desc = 'Atlas Git: GitHub Pulls' },
     { '<leader>wai', '<cmd>Atlas issues jira<cr>', desc = 'Atlas Jira Issues' },
   },
   ---@type AtlasConfig
