@@ -233,4 +233,3 @@ complete -c rex -n '__rex_clear_perform_completion_once_result'
 complete -c rex -n 'not __rex_requires_order_preservation && __rex_prepare_completions' -f -a '$__rex_comp_results'
 # otherwise we use the -k flag
 complete -k -c rex -n '__rex_requires_order_preservation && __rex_prepare_completions' -f -a '$__rex_comp_results'
-

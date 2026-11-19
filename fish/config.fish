@@ -15,6 +15,14 @@ rbenv init - | source
 
 # Keep the Homebrew inventory synchronized.
 set -gx HOMEBREW_BREWFILE "$HOME/.config/Brewfile"
-if test -f (brew --prefix)/etc/brew-wrap.fish
-    source (brew --prefix)/etc/brew-wrap.fish
+set -l brew_prefix "$HOMEBREW_PREFIX"
+if test -z "$brew_prefix"
+    if test -x /opt/homebrew/bin/brew
+        set brew_prefix /opt/homebrew
+    else if type -q brew
+        set brew_prefix (brew --prefix 2>/dev/null)
+    end
+end
+if test -n "$brew_prefix" -a -f "$brew_prefix/etc/brew-wrap.fish"
+    source "$brew_prefix/etc/brew-wrap.fish"
 end

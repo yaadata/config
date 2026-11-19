@@ -319,3 +319,5 @@ abbr vtl "vault token lookup"
 # starship
 abbr sst "toggle_starship_transience"
 abbr operations "toggle_starship_operations_profile"
+
+alias book bookokrat
