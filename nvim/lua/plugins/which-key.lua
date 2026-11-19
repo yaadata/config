@@ -10,6 +10,7 @@ local opts = { -- Useful plugin to show you pending keybinds.
       { '<leader>a', group = '[A]tlas', icon = '󰅩' },
       { '<leader>l', group = '[L]sp / Code', icon = '󰅩' },
       { '<leader>lo', group = '[O]bjects', icon = '󰅩' },
+      { '<leader>o', group = '[O]bsidian', icon = '󰅩' },
       { '<leader>lt', group = '[T]oggle', icon = '󰔢' },
       { '<leader>lw', group = '[W]orkspace', icon = '󱂬' },
       { '<leader>lh', group = '[H]ierarchy', icon = '󰓍' },
