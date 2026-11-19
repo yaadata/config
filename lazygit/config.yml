@@ -99,18 +99,6 @@ customCommands:
         body: "Are you sure you want to delete the current feature branch?"
     loadingText: "Deleting Feature Branch"
     output: log
-  - key: "p"
-    context: "localBranches"
-    description: "create github pull-request"
-    command: "gh pr create -w"
-    loadingText: "Creating pull request"
-    output: log
-  - key: "P"
-    context: "localBranches"
-    description: "view github pull-request"
-    command: "gh pr view -w"
-    loadingText: "Opening Pull-Request"
-    output: log
   - key: "G"
     context: "files"
     description: "Git-Town GO aka:continue (continue after resolving merge conflicts)"
