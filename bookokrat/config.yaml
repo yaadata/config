@@ -1,10 +1,10 @@
 version: 3
-theme: "Oceanic Next"
+theme: "Catppuccin Mocha"
 margin: 0
 transparent_background: false
 pdf_scale: 1
-pdf_pan_shift: 0
-pdf_render_mode: scroll
+pdf_pan_shift: 10
+pdf_render_mode: page
 pdf_show_link_underlines: false
 pdf_page_layout_mode: single
 epub_column_mode: single
@@ -80,3 +80,8 @@ book_sort_order: by_name
 #     base0E: "957FB8"    # Purple (keywords)
 #     base0F: "D27E99"    # Brown/Pink
 
+
+nav_panel_width: null
+lookup_command: null
+lookup_display: popup
+synctex_editor: null
