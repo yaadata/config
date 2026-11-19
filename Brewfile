@@ -8,6 +8,7 @@ brew 'apache-spark'
 brew 'autoconf'
 brew 'bat'
 brew 'blueutil'
+brew 'bookokrat'
 brew 'brotli'
 brew 'c-ares'
 brew 'ca-certificates'
@@ -198,11 +199,10 @@ brew 'icu4c@75'
 brew 'openssl@1.1'
 
 # App Store applications
-mas 'Flow (5.1.0)', id: 1423210932
-mas 'GarageBand (10.4.14)', id: 682658836
+mas 'GarageBand (10.4.15)', id: 682658836
 mas 'iMovie (10.4.5)', id: 408981434
 mas 'Keynote (14.5)', id: 409183694
-mas 'Linearity Curve (7.1.3)', id: 1219074514
+mas 'Linearity Curve (7.1.4)', id: 1219074514
 mas 'MKV2MP4 (1.5.2)', id: 585396074
 mas 'Numbers (14.5)', id: 409203825
 mas 'Pages (14.5)', id: 409201541
